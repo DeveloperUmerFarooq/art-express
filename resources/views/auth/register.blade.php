@@ -61,6 +61,27 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
+
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="role" id="role_admin" value="artist" required>
+                                    <label class="form-check-label" for="role_admin">
+                                        {{ __('Artist') }}
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="role" id="role_user" value="user" required>
+                                    <label class="form-check-label" for="role_user">
+                                        {{ __('User') }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
