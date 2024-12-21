@@ -11,38 +11,23 @@ class Role
     /**
      * Handle an incoming request.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  string  $role
+     * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $role)
     {
-        if (auth()->check()) {
-            $role = auth()->user()->getRoleNames()->first();
-            $dashboardRoute = $this->getDashboardRoute($role);
-            if ($dashboardRoute) {
-                return redirect()->route($dashboardRoute);
-            }
-
-            return redirect('/home');
+        if (!auth()->check()) {
+            return redirect()->route('login');
         }
 
-        return redirect()->route('login');
-    }
+        $userRole = auth()->user()->getRoleNames()->first();
 
-    /**
-     * Get the dashboard route based on user role.
-     *
-     * @param  string  $role
-     * @return string|null
-     */
-    private function getDashboardRoute($role)
-    {
-        $routes = [
-            'admin' => 'admin.dashboard',
-            'artist' => 'artist.dashboard',
-            'user' => 'user.dashboard',
-        ];
+        if ($userRole !== $role) {
+            return abort(403, 'Unauthorized action.');
+        }
 
-        // Return the route name if it exists
-        return $routes[$role] ?? null;
+        return $next($request);
     }
 }

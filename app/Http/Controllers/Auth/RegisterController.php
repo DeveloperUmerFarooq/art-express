@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo;
 
     /**
      * Create a new controller instance.
@@ -71,5 +72,16 @@ class RegisterController extends Controller
         ]);
         $user->assignRole($data['role']);
         return $user;
+    }
+
+    protected function redirectTo(){
+        $role = Auth::user()->getRoleNames()->first();
+        if ($role == 'admin') {
+            return '/admin/dashboard';
+        } elseif ($role == 'user') {
+            return '/user/dashboard';
+        } elseif($role== 'artist'){
+            return '/artist/dashboard';
+        }
     }
 }
