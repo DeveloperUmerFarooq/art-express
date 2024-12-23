@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Yrsa:ital,wght@0,300..700;1,300..700&display=swap');
+:root{
+    --primary:'#fff0dc';
+    --secondary:'#543a12';
+    --tertiary:'#131010'
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+    background-color: #fff0dc;
+    color: #131010;
+}
+
+.navbar{
+    background-color: #543a12;
+}
+
+.navbar a,.navbar-toggler-icon{
+    color: #fff0dc !important;
+}
+.navbar a:hover{
+    color: #fff0dc;
+}
+.navbar-toggle:focus{
+    border: none !important;
+    outline: none !important;
+}
+.res-title{
+    color: #543a12;
+    font-size: clamp(3rem,6vw,6rem);
+}
+.res-heading{
+    font-size: clamp(2rem,5vw,3rem);
+}
+.res-sub{
+    font-size: clamp(1rem,4vw,2rem) ;
+}
+.res-button-font{
+    font-size: clamp(1rem,4vw,1.5rem);
+}
+.btn-primary,.btn-secondary{
+    color: #fff0dc;
+    border: none;
+    outline: none;
+}
+.btn-primary{
+    background-color: #543a12;
+}
+.btn-primary:hover{
+    background-color:#131010 ;
+}
+
+.btn-secondary,.btn-secondary:hover{
+    background-color: #131010;
+}
+
+.modal-content{
+    background-color: #fff0dc;
+    color: #131010;
+}
+.validate:invalid:not(:placeholder-shown){
+    border: 1px solid red;
+}
+.validate:valid{
+    border: 1px solid greenyellow;
+}
+.check-box{
+    background-color: #fff0dc;
+}
+
+#features{
+    background-color: #543a12;
+    color: #fff0dc;
+}

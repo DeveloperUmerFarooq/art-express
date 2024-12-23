@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.LandingPageLayout.landing')
 
-@section('content')
-<div class="container">
+@section('page')
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card" >
                 <div class="card-header">{{ __('Confirm Password') }}</div>
 
                 <div class="card-body">
