@@ -2,7 +2,7 @@ var tl= gsap.timeline()
 let zoom = {
     scale:0,
     opacity:0,
-    duration:0.5
+    duration:0.3
 }
 gsap.from('.navbar-brand',zoom);
 
