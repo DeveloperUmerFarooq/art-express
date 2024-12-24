@@ -37,6 +37,13 @@ body{
 .res-heading{
     font-size: clamp(2rem,5vw,3rem);
 }
+.small-font{
+    font-size: 1px !important;
+    background-color: red;
+}
+.modal-title{
+    color: #543a12 !important;
+}
 .res-sub{
     font-size: clamp(1rem,4vw,2rem) ;
 }
