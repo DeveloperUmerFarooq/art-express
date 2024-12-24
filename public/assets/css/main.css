@@ -4,7 +4,6 @@
     --secondary:'#543a12';
     --tertiary:'#131010'
 }
-
 body{
     margin: 0;
     padding: 0;
@@ -14,6 +13,7 @@ body{
     font-style: normal;
     background-color: #fff0dc;
     color: #131010;
+    overflow-x: hidden;
 }
 .modal-title{
     color: #543a12;

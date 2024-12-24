@@ -9,7 +9,7 @@
             <h1 class="res-title">Art-Express</h1>
             <h3 class="res-sub text-center">Unleash Your Creativity</h3>
             <p class="res-sub text-center w-75">Dive into a world of breathtaking art and inspiring masterpieces. Explore and connect with creativity like never before.</p>
-            <center><button class="btn btn-primary res-button-font px-4">Get Started</button></center>
+            <center><button class="btn btn-primary res-button-font px-4" id="hero-button">Get Started</button></center>
         </div>
         <div class="container-fluid mt-2 mt-md-5 pb-3 pt-3 pb-md-5 pt-md-5 position-relative" id="features">
             <h1 class="text-center res-heading">Features we Provide</h1>
@@ -67,8 +67,8 @@
                 <button class="fs-1 d-block d-lg-none shadow" id="next"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff0dc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg></button>
             </div>
         </div>
-        <div class="container-fluid mt-2 mt-md-5 pt-3 pt-md-5">
-            <h1 class="text-center res-heading">Explore Masterpieces</h1>
+        <div class="container-fluid mt-2 mt-md-5" id="art-grid" style="height: 50rem">
+            <h1 class="text-center res-heading" id="art-grid-title">Explore Masterpieces</h1>
         </div>
     </section>
 @endsection
@@ -99,7 +99,7 @@
             1000:{
                 items:3.5,
                 autoplay:true,
-                autoplayTimeout:3000,
+                autoplayTimeout:2000,
                 mouseDrag:true,
                 touchDrag:true,
                 dots:true,
