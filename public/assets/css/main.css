@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Yrsa:ital,wght@0,300..700;1,300..700&display=swap');
 :root{
-    --primary:'#fff0dc';
-    --secondary:'#543a12';
-    --tertiary:'#131010'
+    --primary:#fff0dc;
+    --secondary:#543a12;
+    --tertiary:#131010;
 }
 body{
     margin: 0;
@@ -11,30 +11,30 @@ body{
     font-family: "Roboto";
     font-weight: 400;
     font-style: normal;
-    background-color: #fff0dc;
-    color: #131010;
+    background-color: var(--primary);
+    color: var(--tertiary);
     overflow-x: hidden;
 }
 .modal-title{
-    color: #543a12;
+    color: var(--secondary);
     font-weight: 1000;
 }
 .navbar{
-    background-color: #543a12;
+    background-color: var(--secondary);
 }
 
 .navbar a,.navbar-toggler-icon{
-    color: #fff0dc !important;
+    color: var(--primary) !important;
 }
 .navbar a:hover{
-    color: #fff0dc;
+    color: var(--primary);
 }
 .navbar-toggle:focus{
     border: none !important;
     outline: none !important;
 }
 .res-title{
-    color: #543a12;
+    color: var(--secondary);
     font-size: clamp(3rem,6vw,6rem);
 }
 .res-heading{
@@ -48,8 +48,8 @@ body{
 }
 
 #next,#prev{
-    background-color: #543a12;
-    color: #fff0dc;
+    background-color: var(--secondary);
+    color: var(--primary);
     outline: none;
     border: none;
     border-radius: 25%;
@@ -65,24 +65,24 @@ body{
     left: 0.5%;
 }
 .btn-primary,.btn-secondary{
-    color: #fff0dc;
+    color: var(--primary);
     border: none;
     outline: none;
 }
 .btn-primary{
-    background-color: #543a12;
+    background-color: var(--secondary);
 }
 .btn-primary:hover{
-    background-color:#131010 ;
+    background-color:var(--tertiary) ;
 }
 
 .btn-secondary,.btn-secondary:hover{
-    background-color: #131010;
+    background-color: var(--tertiary);
 }
 
 .modal-content{
-    background-color: #fff0dc;
-    color: #131010;
+    background-color: var(--primary);
+    color: var(--tertiary);
 }
 .validate:invalid:not(:placeholder-shown){
     border: 1px solid red;
@@ -102,12 +102,12 @@ body{
     transition: all ease-in-out 0.5s;
 }
 .check-box{
-    background-color: #fff0dc;
+    background-color: var(--primary);
 }
 
 #features{
-    background-color: #543a12;
-    color: #fff0dc;
+    background-color: var(--secondary);
+    color: var(--primary);
     height: max-content;
 }
 
@@ -115,14 +115,14 @@ body{
     aspect-ratio: 2/1;
 }
 .card{
-    background-color: #fff0dc;
-    color: #131010;
+    background-color: var(--primary);
+    color: var(--tertiary);
     height: 22rem;
     max-height: 22rem;
 }
 
 .card-title{
-    color: #543a12;
+    color: var(--secondary);
     font-weight: 700;
     font-size: clamp(1.5rem,1vw,2rem);
 }
