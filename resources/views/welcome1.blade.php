@@ -69,21 +69,19 @@
         </div>
         <div class="container-fluid mt-2 mt-md-5 mb-3" id="art-grid">
             <h1 class="text-center res-heading" id="art-grid-title">Explore Masterpieces</h1>
-            <div class="row container mx-auto row gap-2 gx-0" id="bento-grid">
-                <div class="col-lg d-flex gap-1">
+            <div class="row container mx-auto row gap-1 gx-0" id="bento-grid">
+                <div class="col-lg-5 d-flex gap-1">
                     <img class="portrait" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt="" style="border: 20px solid var(--secondary)">
                     <img class="portrait" src="{{asset('assets/images/IMG-20241222-WA0009.jpg')}}" alt="" style="border: 20px solid var(--secondary)">
 
                 </div>
                 <div class="col-lg-6">
-                    <img class="landscape" src="{{asset('assets/images/landscape1.png')}}">
+                    <img class="landscape mx-lg-1" src="{{asset('assets/images/landscape1.png')}}">
                 </div>
-            </div>
-            <div class="row container mx-auto row gap-1 gx-0 mt-1" id="bento-grid">
                 <div class="col-lg-6">
-                    <img class="landscape mx-0" src="{{asset('assets/images/landscape2.png')}}">
+                    <img class="landscape " src="{{asset('assets/images/landscape2.png')}}">
                 </div>
-                <div class="col-lg d-flex gap-1">
+                <div class="col-lg-5 d-flex gap-1">
                     <img class="portrait" src="{{asset('assets/images/IMG-20241222-WA0008.jpg')}}" alt="" style="border: 20px solid var(--secondary)">
                     <img class="portrait" src="{{asset('assets/images/IMG-20241222-WA0007.jpg')}}" alt="" style="border: 20px solid var(--secondary)">
 

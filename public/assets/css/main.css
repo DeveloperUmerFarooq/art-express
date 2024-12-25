@@ -130,12 +130,26 @@ body{
     border: 10px solid var(--secondary) !important;
     aspect-ratio: 1/1;
     width: 50%;
-    height: clamp(17rem, 30vw, 400px);
+    height:400px;
 
 }
 .landscape{
     border: 10px solid var(--secondary);
     aspect-ratio: 1/1;
     width: 100%;
-    height: clamp(17rem, 30vw, 400px);
+    height: 400px;
 }
+@media (min-width: 601px) {
+    .landscape,
+    .portrait {
+        height: 25rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .landscape,
+    .portrait {
+        height: 15rem;
+    }
+}
+
