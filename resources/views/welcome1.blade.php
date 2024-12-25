@@ -1,6 +1,6 @@
 @extends('layouts.LandingPageLayout.landing')
 @section('title')
-       Hello
+       Art-Express
 @endsection
 
 @section('page')
@@ -14,8 +14,8 @@
         <div class="container-fluid mt-2 mt-md-5 pb-3 pt-3 pb-md-5 pt-md-5 position-relative" id="features">
             <h1 class="text-center res-heading">Features we Provide</h1>
             <div class="container-fluid px-md-3 mt-md-5 mt-3">
-                <div class="owl-carousel py-2 py-md-3">
-                    <div class="slider-card pb-2 d-flex align-items-center justify-content-center">
+                <div class="owl-carousel py-md-2 py-md-3">
+                    <div class="slider-card pb-md-2 d-flex align-items-center justify-content-center">
                         <div class="card" >
                         <img src="{{asset('assets/images/images.jpeg')}}" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -72,16 +72,16 @@
             <div class="row container mx-auto row gap-2 gx-0" id="bento-grid">
                 <div class="col-lg d-flex gap-1">
                     <img class="portrait" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt="" style="border: 20px solid var(--secondary)">
-                    <img class="portrait" src="{{asset('assets/images/IMG-20241222-WA0004.jpg')}}" alt="" style="border: 20px solid var(--secondary)">
+                    <img class="portrait" src="{{asset('assets/images/IMG-20241222-WA0009.jpg')}}" alt="" style="border: 20px solid var(--secondary)">
 
                 </div>
                 <div class="col-lg-6">
-                    <img class="landscape" src="{{asset('assets/images/IMG-20241222-WA0002.jpg')}}">
+                    <img class="landscape" src="{{asset('assets/images/landscape1.png')}}">
                 </div>
             </div>
             <div class="row container mx-auto row gap-1 gx-0 mt-1" id="bento-grid">
                 <div class="col-lg-6">
-                    <img class="landscape mx-0" src="{{asset('assets/images/IMG-20241222-WA0003.jpg')}}">
+                    <img class="landscape mx-0" src="{{asset('assets/images/landscape2.png')}}">
                 </div>
                 <div class="col-lg d-flex gap-1">
                     <img class="portrait" src="{{asset('assets/images/IMG-20241222-WA0008.jpg')}}" alt="" style="border: 20px solid var(--secondary)">
