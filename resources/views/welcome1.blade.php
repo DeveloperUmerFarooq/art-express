@@ -107,7 +107,7 @@
               mouseDrag:true,
             },
             600: {
-              items: 2.5,
+              items: 2,
               autoplay:true,
               dots:true,
               autoplayTimeout:3000,
@@ -115,7 +115,7 @@
               touchDrag:true
             },
             1000:{
-                items:3.5,
+                items:3,
                 autoplay:true,
                 autoplayTimeout:2000,
                 mouseDrag:true,
@@ -124,12 +124,12 @@
                 loop:true
             },
             1300:{
-                items:4.5,
-                autoplay:true,
-                autoplayTimeout:1000,
+                items:4,
+                loop:true,
                 mouseDrag:true,
                 touchDrag:true,
-                dots:true,
+                autoplay:true,
+                autoplayTimeout:2000,
             },
             1600:{
                 items:5
