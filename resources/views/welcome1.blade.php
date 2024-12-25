@@ -123,7 +123,15 @@
                 dots:true,
                 loop:true
             },
-            1500:{
+            1300:{
+                items:4.5,
+                autoplay:true,
+                autoplayTimeout:1000,
+                mouseDrag:true,
+                touchDrag:true,
+                dots:true,
+            },
+            1600:{
                 items:5
             }
           }
