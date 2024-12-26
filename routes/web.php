@@ -7,9 +7,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(function () {
-    Route::get('/dashboard', function () {
-        dd("admin dashboard");
-    })->name('dashboard');
+    Route::get('/dashboard',function(){
+        return view('admin.dashboard');
+    });
 });
 
 Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(function () {
