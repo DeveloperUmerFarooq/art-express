@@ -27,20 +27,19 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle no-togggle-icon fs-6" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="rounded-circle" src="{{auth()->user()->image?asset('storage/'.auth()->user()->image):'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name)}}" alt="{{auth()->user()->name}}" height="30">
+                <img class="rounded-circle" src="{{auth()->user()->profile->profile_image}}" alt="{{auth()->user()->name}}" height="30">
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
+              <abbr title="View Profile">
               <li><center>
-                <a class="d-flex flex-column text-decoration-none">
+                <a class="d-flex flex-column text-decoration-none gap-1 pb-0" href="{{route('admin.profile')}}">
                     <div class="profile-image rounded-full">
-                    <img class="rounded-circle" src="{{auth()->user()->image?asset('storage/'.auth()->user()->image):'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name)}}" alt="{{auth()->user()->name}}">
+                    <img class="rounded-circle" src="{{auth()->user()->profile->profile_image}}" alt="{{auth()->user()->name}}">
                     </div>
                     <p class="text-wrap" style="color:var(--primary)">{{auth()->user()->name}}</p>
                 </a>
-            </center></li>
-              <li><a class="dropdown-item fs-6" href="#">View Profile</a></li>
-              <li><a class="dropdown-item fs-6" href="#">Edit Profile</a></li>
-              <li><a class="dropdown-item fs-6" href="{{ route('logout') }}"
+            </center></li></abbr>
+              <li><a class="dropdown-item fs-6 text-center" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();">
                  <span class="text-danger">Logout</span>

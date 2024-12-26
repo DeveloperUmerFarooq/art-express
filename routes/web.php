@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome1');
@@ -9,6 +10,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(function () {
     Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
+    Route::get('/profile',[ProfileController::class,'index'])->name('profile');
 });
 
 Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(function () {

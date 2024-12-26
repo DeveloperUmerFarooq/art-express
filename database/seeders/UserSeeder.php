@@ -30,6 +30,9 @@ class UserSeeder extends Seeder
         //     'password'=>Hash::make('user1122')
         // ]);
         $admin->assignRole('admin');
+        $admin->profile()->create([
+            'profile_image' => 'https://ui-avatars.com/api/?name=' . urlencode($admin->name),
+        ]);
         // $artist->assignRole('artist');
         // $user->assignRole('user');
 
