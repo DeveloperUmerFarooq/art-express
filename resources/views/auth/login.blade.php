@@ -17,7 +17,7 @@
                 </div>
                 <div>
                     <label for="Password" class="form-label">Password:</label>
-                    <input type="password" minlength="6" name="password" class="form-control shadow bg-transparent validate" placeholder="Password" value="{{ old('passord') }}" required autocomplete="current-password" autofocus>
+                    <input type="password" minlength="8" name="password" class="form-control shadow bg-transparent validate" placeholder="Password" value="{{ old('passord') }}" required autocomplete="current-password" autofocus>
                     @error('password')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
