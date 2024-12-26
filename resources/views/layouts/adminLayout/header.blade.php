@@ -6,16 +6,16 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto gap-2 text-center">
-          <li class="nav-item">
-            <a class="nav-link fs-6 active" aria-current="page" href="#">Dashboard</a>
+          <li class="nav-item pt-1">
+            <a class="nav-link fs-6 active" aria-current="page" href="{{route('admin.dashboard')}}">Dashboard</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item pt-1">
             <a class="nav-link fs-6" href="#">Products</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item pt-1">
             <a class="nav-link fs-6" href="#">Orders</a>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown pt-1">
             <a class="nav-link dropdown-toggle fs-6" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Management
             </a>
@@ -25,8 +25,8 @@
               <li><a class="dropdown-item fs-6" href="#">Roles & Permissions</a></li>
             </ul>
           </li>
-          <li class="nav-item dropdown position-relative">
-            <a class="nav-link dropdown-toggle no-togggle-icon position-absolute fs-6" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle no-togggle-icon fs-6" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img class="rounded-circle" src="{{auth()->user()->image?asset('storage/'.auth()->user()->image):'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name)}}" alt="{{auth()->user()->name}}" height="30">
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
