@@ -15,13 +15,17 @@ body{
     color: var(--tertiary);
     overflow-x: hidden;
 }
+.profile-image:hover{
+    background-color: transparent;
+}
 .modal-title{
     color: var(--secondary);
     font-weight: 1000;
 }
-.navbar{
-    background-color: var(--secondary);
+.navbar,.dropdown-menu{
+    background-color: var(--secondary) !important;
 }
+
 
 .navbar a,.navbar-toggler-icon{
     color: var(--primary) !important;
@@ -29,9 +33,15 @@ body{
 .navbar a:hover{
     color: var(--primary);
 }
+.dropdown-menu .dropdown-item:hover{
+    background-color: transparent;
+}
 .navbar-toggle:focus{
     border: none !important;
     outline: none !important;
+}
+.no-togggle-icon::after {
+    display: none !important;
 }
 .res-title{
     color: var(--secondary);
