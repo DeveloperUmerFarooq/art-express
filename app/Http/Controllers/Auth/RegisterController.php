@@ -71,6 +71,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         $user->assignRole($data['role']);
+        $user->profile()->create([
+            'profile_image'=>'https://ui-avatars.com/api/?name=' . urlencode($user->name)
+        ]);
         return $user;
     }
 
