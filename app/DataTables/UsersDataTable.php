@@ -6,10 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class UsersDataTable extends DataTable
@@ -22,13 +19,19 @@ class UsersDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('actions', function($query){
-                return view('admin.user-management.actions')->with('id',$query->id);
+            ->addColumn('actions', function ($query) {
+                return view('admin.user-management.actions', [
+                    'id' => $query->id,
+                    'user' => $query,
+                ]);
             })
-            ->addColumn('created_at',function($query){
+            ->addColumn('user',function ($query){
+                    return view('admin.user-management.user-column',['user'=>$query]);
+            })
+            ->addColumn('created_at', function ($query) {
                 return $query->created_at->format('d-m-Y H:i:s');
             })
-            ->addColumn('updated_at',function($query){
+            ->addColumn('updated_at', function ($query) {
                 return $query->updated_at->format('d-m-Y H:i:s');
             });
     }
@@ -38,8 +41,7 @@ class UsersDataTable extends DataTable
      */
     public function query(): QueryBuilder
     {
-        $model=User::role('user');
-        return $model->newQuery();
+        return User::role('user')->with('profile');
     }
 
     /**
@@ -49,11 +51,10 @@ class UsersDataTable extends DataTable
     {
         return $this->builder()
                     ->setTableId('users-table')
-                    ->setTableAttribute('class','table table-success')
+                    ->setTableAttribute('class', 'table table-success')
                     ->setTableAttribute('data-responsive-wrapper', 'true')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    // ->dom('Bfrtip')
                     ->orderBy(1)
                     ->ordering(false)
                     ->selectStyleSingle();
@@ -65,13 +66,7 @@ class UsersDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            // Column::computed('action')
-            //       ->exportable(false)
-            //       ->printable(false)
-            //       ->width(60)
-            //       ->addClass('text-center'),
-            // Column::make('Sr#'),
-            Column::make('name'),
+            Column::make('user'),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::make('actions')

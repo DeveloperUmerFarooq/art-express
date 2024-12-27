@@ -14,8 +14,10 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
     Route::name('management.')->group(function(){
         Route::get('/users',[UserCrud::class,'user'])->name('user');
         Route::get('/artist',[UserCrud::class,'artist'])->name('artist');
-        Route::get('/user/{id}',[UserCrud::class,'delete'])->name('user.delete');
+        Route::get('/delete/{id}',[UserCrud::class,'delete'])->name('user.delete');
         Route::post('/add/artist',[UserCrud::class,'addArtist'])->name('artist.add');
+        Route::post('/add/user',[UserCrud::class,'addUser'])->name('user.add');
+        Route::post('/edit/user',[UserCrud::class,'editUsers'])->name('user.edit');
     });
     Route::get('/profile',[ProfileController::class,'index'])->name('profile');
 });

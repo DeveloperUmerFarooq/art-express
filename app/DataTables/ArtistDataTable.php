@@ -24,8 +24,14 @@ class ArtistDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('actions', function($query){
-                return view('admin.user-management.actions')->with('id',$query->id);
+                return view('admin.user-management.actions', [
+                    'id' => $query->id,
+                    'user' => $query
+                ]);
             })
+            ->addColumn('user',function ($query){
+                return view('admin.user-management.user-column',['user'=>$query]);
+        })
             ->addColumn('created_at',function($query){
                 return $query->created_at->format('d-m-Y H:i:s');
             })
@@ -39,8 +45,7 @@ class ArtistDataTable extends DataTable
      */
     public function query(): QueryBuilder
     {
-        $model=User::role('artist');
-        return $model->newQuery();
+        return User::role('artist')->with('profile');
     }
 
     /**
@@ -72,7 +77,7 @@ class ArtistDataTable extends DataTable
             //       ->width(60)
             //       ->addClass('text-center'),
             // Column::make('Sr#'),
-            Column::make('name'),
+            Column::make('user'),
             Column::make('email'),
             Column::make('created_at'),
             Column::make('updated_at'),

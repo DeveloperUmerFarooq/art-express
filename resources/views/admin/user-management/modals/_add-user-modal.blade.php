@@ -1,12 +1,12 @@
-<div class="modal fade" id="Add-Artist" tabindex="-1" aria-labelledby="Add-Artist" aria-hidden="true">
+<div class="modal fade" id="Add-User" tabindex="-1" aria-labelledby="Add-User" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header border-none outline-none d-flex justify-between">
-          <h1 class="modal-title fs-3 " id="Label">Add Artist</h1>
+          <h1 class="modal-title fs-3 " id="Label">Add User</h1>
           <button type="button" class="btn ms-auto" data-bs-dismiss="modal" aria-label="Close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#131010" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
         </div>
         <div class="modal-body">
-            <form action="{{route('admin.management.artist.add')}}" class="d-flex flex-column gap-2" method="POST" id="Add-Artist">
+            <form action="{{route('admin.management.artist.add')}}" class="d-flex flex-column gap-2" method="POST" id="Add-User">
                 @csrf
                 <div>
                     <label for="name" class="form-label">Name:</label>
@@ -24,7 +24,7 @@
                 </div>
                 <div>
                     <label for="Password" class="form-label">Password:</label>
-                    <input type="password" id="password" id="password" minlength="8" name="password" class="form-control shadow bg-transparent validate" placeholder="Password" value="{{ old('password') }}" required autocomplete="current-password" autofocus>
+                    <input type="password" id="password" minlength="8" name="password" class="form-control shadow bg-transparent validate" placeholder="Password" value="{{ old('password') }}" required autocomplete="current-password" autofocus>
                     @error('password')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror

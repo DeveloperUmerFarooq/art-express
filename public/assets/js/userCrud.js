@@ -5,31 +5,28 @@ toggle.addEventListener('change',()=>{
     pass.type=toggle.checked?'text':'password'
     confirmPass.type=toggle.checked?'text':'password'
 })
-function addArtist(){
-    const formData = {
-        _token: $('meta[name="csrf-token"]').attr('content'),
-        name:$('#name').val(),
-        email:$('#email').val(),
-        password:$('#name').val(),
-        password_confirmation:$('#confirm-password').val(),
-    };
-    $('#Add-Artist').modal('hide');
-    $.ajax({
-        type: "POST",
-        url: "/admin/add/artist",
-        data: formData,
-        success: function (response) {
-            $('#artists-table').DataTable().ajax.reload();
-            Swal.fire({
-                title: 'Error!',
-                text: 'Do you want to continue',
-                icon: 'error',
-                confirmButtonText: 'Cool'
-              })
-        },
-        error: function (xhr, status, error) {
-            console.error("Error:", xhr.responseText);
-            alert("Failed to add artist. Check console for details.");
+function deleteUser(id,e){
+    console.log(id);
+    Swal.fire({
+        title: "Do you want to delete the artist?",
+        showDenyButton: true,
+        icon:'question',
+        confirmButtonText: "Yes",
+        confirmButtonColor:"green",
+        denyButtonText: `No`
+      }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = `/admin/delete/${id}`;
+        } else if (result.isDenied) {
+
         }
-    });
+      });
+}
+
+function editUser(user){
+    console.log(user['id'])
+    $('#img').attr('src',user['profile']['profile_image'])
+    $('#id').val(user['id'])
+    $('#Name').val(user['name'])
+    $('#Email').val(user['email'])
 }

@@ -13,6 +13,7 @@
     </div>
 </div>
 @include('admin.user-management.modals._add-artist-modal')
+@include('admin.user-management.modals._edit-user-modal')
 @endsection
 @push('scripts')
     {{ $dataTable->scripts() }}
