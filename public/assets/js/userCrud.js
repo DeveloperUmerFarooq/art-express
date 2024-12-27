@@ -24,7 +24,6 @@ function deleteUser(id,e){
 }
 
 function editUser(user){
-    console.log(user['id'])
     $('#img').attr('src',user['profile']['profile_image'])
     $('#id').val(user['id'])
     $('#Name').val(user['name'])

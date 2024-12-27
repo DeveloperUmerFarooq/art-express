@@ -7,6 +7,7 @@ use App\DataTables\UsersDataTable;
 use App\Models\User;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserCrud extends Controller
 {
@@ -26,7 +27,7 @@ class UserCrud extends Controller
         $user=User::create([
             'name'=>$req->name,
             'email'=>$req->email,
-            'password'=>$req->password,
+            'password'=>Hash::make($req->password),
         ]);
         $user->assignRole('artist');
         $user->profile()->create([
@@ -44,7 +45,7 @@ class UserCrud extends Controller
         $user=User::create([
             'name'=>$req->name,
             'email'=>$req->email,
-            'password'=>$req->password,
+            'password'=>Hash::make($req->password),
         ]);
         $user->assignRole('user');
         $user->profile()->create([
@@ -54,10 +55,12 @@ class UserCrud extends Controller
         return redirect()->back();
     }
     public function editUsers(Request $req){
-            $user=User::find($req->id);
+        $user=User::find($req->id);
 
             $user->name=$req->name??$req->name;
-            
-            dd($user->toArray());
+            $user->email=$req->email??$req->email;
+            $user->password=$req->password??Hash::make($req->password);
+            $user->save();
+            return redirect()->back();
     }
 }
