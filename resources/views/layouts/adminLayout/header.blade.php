@@ -21,7 +21,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item fs-6" href="{{route('admin.management.user')}}">User Management</a></li>
-              <li><a class="dropdown-item fs-6" href="#">Artist Management</a></li>
+              <li><a class="dropdown-item fs-6" href="{{route('admin.management.artist')}}">Artist Management</a></li>
               <li><a class="dropdown-item fs-6" href="#">Roles & Permissions</a></li>
             </ul>
           </li>

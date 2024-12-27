@@ -12,7 +12,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(function () {
     Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
     Route::name('management.')->group(function(){
-        Route::get('/users',[UserCrud::class,'index'])->name('user');
+        Route::get('/users',[UserCrud::class,'user'])->name('user');
+        Route::get('/artist',[UserCrud::class,'artist'])->name('artist');
+        Route::get('/user/{id}',[UserCrud::class,'delete'])->name('user.delete');
+        Route::post('/add/artist',[UserCrud::class,'addArtist'])->name('artist.add');
     });
     Route::get('/profile',[ProfileController::class,'index'])->name('profile');
 });

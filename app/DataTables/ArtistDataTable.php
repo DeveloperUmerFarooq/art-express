@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Models\Artist;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
@@ -12,7 +13,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class UsersDataTable extends DataTable
+class ArtistDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -38,7 +39,7 @@ class UsersDataTable extends DataTable
      */
     public function query(): QueryBuilder
     {
-        $model=User::role('user');
+        $model=User::role('artist');
         return $model->newQuery();
     }
 
@@ -48,7 +49,7 @@ class UsersDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('users-table')
+                    ->setTableId('artists-table')
                     ->setTableAttribute('class','table table-success')
                     ->setTableAttribute('data-responsive-wrapper', 'true')
                     ->columns($this->getColumns())
@@ -72,6 +73,7 @@ class UsersDataTable extends DataTable
             //       ->addClass('text-center'),
             // Column::make('Sr#'),
             Column::make('name'),
+            Column::make('email'),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::make('actions')
@@ -83,6 +85,6 @@ class UsersDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Users_' . date('YmdHis');
+        return 'Artist_' . date('YmdHis');
     }
 }

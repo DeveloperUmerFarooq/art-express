@@ -9,7 +9,4 @@ class Role extends Model
 {
     /** @use HasFactory<\Database\Factories\RoleFactory> */
     use HasFactory;
-    public function user(){
-        return $this->hasOne(User::class);
-    }
 }
