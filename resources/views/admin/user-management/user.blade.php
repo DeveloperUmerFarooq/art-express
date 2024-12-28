@@ -7,8 +7,7 @@
             <button class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#Add-User">Add User</button>
         </div>
         <hr>
-        <div class="table-responsive">
-            <input type="text" id="customSearch" class="form-control mb-3 bg-transparent shadow ms-auto" style="width:20rem" placeholder="Search...">
+        <div class="table-responsive overflow-hidden">
             {{ $dataTable->table() }}
         </div>
     </div>

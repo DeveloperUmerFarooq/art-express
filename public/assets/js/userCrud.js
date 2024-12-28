@@ -29,7 +29,3 @@ function editUser(user){
     $('#Name').val(user['name'])
     $('#Email').val(user['email'])
 }
-
-$('#customSearch').on('keyup', function () {
-    $('#users-table').dataTable().search(this.value).draw();
-});

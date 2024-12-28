@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ArtistDataTable;
-use App\DataTables\UsersDataTable;
+use App\DataTables\UserDataTable;
 use App\Models\User;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Exception;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserCrud extends Controller
 {
-    public function user(UsersDataTable $datatable){
+    public function user(UserDataTable $datatable){
             return $datatable->render('admin.user-management.user');
     }
 

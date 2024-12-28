@@ -43,9 +43,9 @@ class ArtistDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(): QueryBuilder
+    public function query(User $model): QueryBuilder
     {
-        return User::role('artist')->with('profile');
+        return $model->role('artist')->with('profile')->newQuery()->orderBy('created_at', 'desc');;
     }
 
     /**
@@ -59,7 +59,7 @@ class ArtistDataTable extends DataTable
                     ->setTableAttribute('data-responsive-wrapper', 'true')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('rtip')
+                    // ->dom('Bfrtip')
                     ->pageLength(25)
                     ->orderBy(1)
                     ->ordering(false)
@@ -72,13 +72,8 @@ class ArtistDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            // Column::computed('action')
-            //       ->exportable(false)
-            //       ->printable(false)
-            //       ->width(60)
-            //       ->addClass('text-center'),
-            // Column::make('Sr#'),
             Column::make('user'),
+            Column::make('name')->visible(false),
             Column::make('email'),
             Column::make('created_at'),
             Column::make('updated_at'),
@@ -91,6 +86,6 @@ class ArtistDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Artist_' . date('YmdHis');
+        return 'Users_' . date('YmdHis');
     }
 }
