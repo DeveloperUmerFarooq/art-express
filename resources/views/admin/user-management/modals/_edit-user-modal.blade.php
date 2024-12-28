@@ -10,7 +10,7 @@
                 @csrf
                 <div class="container">
                     <div class="d-flex flex-column align-items-center justify-content-center gap-2">
-                        <div class="rounded shadow w-25 h-25">
+                        <div class="rounded shadow bg-dark w-25 h-25">
                             <img id="img" width="100%" alt="">
                         </div>
                         <div>
@@ -35,7 +35,7 @@
                 </div>
                 <div>
                     <label for="Password" class="form-label">Password:</label>
-                    <input type="password" id="Password" id="password" minlength="8" name="password" class="form-control shadow bg-transparent validate" placeholder="Password" value="{{ old('password') }}" '' autocomplete="current-password" autofocus>
+                    <input type="password" id="Password" id="password" minlength="8" name="password" class="form-control shadow bg-transparent validate" placeholder="Password" value="{{ old('password') }}" autocomplete="current-password">
                     @error('password')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
