@@ -1,12 +1,12 @@
-const pass=document.getElementById('password');
-const confirmPass= document.getElementById('confirm-password');
-const toggle=document.getElementById('password-show')
-toggle.addEventListener('change',()=>{
+document.getElementById('password-show').addEventListener('change',showPass)
+function showPass(){
+    let toggle=document.getElementById('password-show')
+    let pass=document.getElementById('password');
+    let confirmPass= document.getElementById('confirm-password');
     pass.type=toggle.checked?'text':'password'
     confirmPass.type=toggle.checked?'text':'password'
-})
+}
 function deleteUser(id,e){
-    console.log(id);
     Swal.fire({
         title: "Do you want to delete the artist?",
         showDenyButton: true,
@@ -29,3 +29,7 @@ function editUser(user){
     $('#Name').val(user['name'])
     $('#Email').val(user['email'])
 }
+
+$('#customSearch').on('keyup', function () {
+    $('#users-table').dataTable().search(this.value).draw();
+});

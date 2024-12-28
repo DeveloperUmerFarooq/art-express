@@ -30,17 +30,3 @@
 {{-- Register modal --}}
   @include('auth.register')
 
-
-
-  @push('scripts')
-        <script>
-            const pass=document.getElementById('password');
-            const confirmPass= document.getElementById('confirm-password');
-            const toggle=document.getElementById('password-show')
-            toggle.addEventListener('change',()=>{
-                pass.type=toggle.checked?'text':'password'
-                confirmPass.type=toggle.checked?'text':'password'
-            })
-        </script>
-        @endpush
-

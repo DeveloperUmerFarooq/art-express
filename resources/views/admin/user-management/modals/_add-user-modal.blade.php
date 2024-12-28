@@ -40,7 +40,7 @@
                     <input class="form-check bg-transparent shadow" type="checkbox" id="password-show">
                     <label for="password-show"><small> Show Password</small></label>
                 </div>
-                <center><button id="submit" class="btn-primary btn">Add User</button></center>
+                <center><button class="btn-primary btn">Add User</button></center>
             </form>
         </div>
       </div>

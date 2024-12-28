@@ -19,6 +19,7 @@
     <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
 
     <script src="{{asset('assets/js/gsap.js')}}"></script>
+    <script src="{{asset('assets/js/userCrud.js')}}"></script>
     @stack('scripts')
 </body>
 </html>

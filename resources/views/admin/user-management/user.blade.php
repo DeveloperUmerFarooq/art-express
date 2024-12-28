@@ -8,6 +8,7 @@
         </div>
         <hr>
         <div class="table-responsive">
+            <input type="text" id="customSearch" class="form-control mb-3 bg-transparent shadow ms-auto" style="width:20rem" placeholder="Search...">
             {{ $dataTable->table() }}
         </div>
     </div>

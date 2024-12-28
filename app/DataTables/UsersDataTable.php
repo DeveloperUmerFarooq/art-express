@@ -29,10 +29,10 @@ class UsersDataTable extends DataTable
                     return view('admin.user-management.user-column',['user'=>$query]);
             })
             ->addColumn('created_at', function ($query) {
-                return $query->created_at->format('d-m-Y H:i:s');
+                return $query->created_at->format('d/m/Y');
             })
             ->addColumn('updated_at', function ($query) {
-                return $query->updated_at->format('d-m-Y H:i:s');
+                return $query->updated_at->format('d/m/Y');
             });
     }
 
@@ -55,6 +55,8 @@ class UsersDataTable extends DataTable
                     ->setTableAttribute('data-responsive-wrapper', 'true')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
+                    ->dom('rtip')
+                    ->pageLength(25)
                     ->orderBy(1)
                     ->ordering(false)
                     ->selectStyleSingle();

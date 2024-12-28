@@ -35,16 +35,12 @@
                 </div>
                 <div>
                     <label for="Password" class="form-label">Password:</label>
-                    <input type="password" id="Password" id="password" minlength="8" name="password" class="form-control shadow bg-transparent validate" placeholder="Password" value="{{ old('password') }}" autocomplete="current-password">
+                    <input type="password" id="password" minlength="8" name="password" class="form-control shadow bg-transparent validate" placeholder="Password" value="{{ old('password') }}" autocomplete="current-password">
                     @error('password')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
                 </div>
-                <div class="d-flex gap-1">
-                    <input class="form-check bg-transparent shadow" type="checkbox" id="password-show">
-                    <label for="password-show"><small> Show Password</small></label>
-                </div>
-                <center><button id="submit" class="btn-primary btn">Submit</button></center>
+                <center><button class="btn-primary btn">Submit</button></center>
             </form>
         </div>
       </div>

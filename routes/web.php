@@ -20,6 +20,7 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
         Route::post('/edit/user',[UserCrud::class,'editUsers'])->name('user.edit');
     });
     Route::get('/profile',[ProfileController::class,'index'])->name('profile');
+    Route::post('/profile/avatar',[ProfileController::class,'updateAvatar'])->name('avatar');
 });
 
 Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(function () {
