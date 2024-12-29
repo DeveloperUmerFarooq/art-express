@@ -57,10 +57,10 @@
             </center>
             <hr>
         </div>
-        <div>
+        <div class="container">
             <form action="{{}}" method="POST">
                 @csrf
-                
+               
             </form>
         </div>
     </div>

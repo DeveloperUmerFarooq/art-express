@@ -83,7 +83,9 @@ body{
 .btn-primary:hover{
     background-color:var(--tertiary) ;
 }
-
+.btn-primary:active{
+    background-color: var(--secondary) !important;
+}
 .btn-secondary,.btn-secondary:hover{
     background-color: var(--tertiary);
 }
@@ -161,6 +163,9 @@ th{
 }
 td{
     font-size: clamp(10px, 2vw, 15px);
+}
+input:disabled{
+    background-color: transparent !important;
 }
 @media (min-width: 601px) {
     .landscape,
