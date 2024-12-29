@@ -57,6 +57,12 @@
             </center>
             <hr>
         </div>
+        <div>
+            <form action="{{}}" method="POST">
+                @csrf
+                
+            </form>
+        </div>
     </div>
 </div>
 @endsection
