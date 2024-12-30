@@ -34,11 +34,15 @@
                     @enderror
                 </div>
                 <div>
-                    <label for="Password" class="form-label">Password:</label>
-                    <input type="password" id="password" minlength="8" name="password" class="form-control shadow bg-transparent validate" placeholder="Password" value="{{ old('password') }}" autocomplete="current-password">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" id="password" minlength="8" name="password" class="form-control password shadow bg-transparent validate" placeholder="Password" value="{{ old('password') }}" autocomplete="current-password">
                     @error('password')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
+                </div>
+                <div class="d-flex gap-1">
+                    <input class="form-check-input shadow" type="checkbox" id="show-password">
+                    <label for="password-show"><small> Show Password</small></label>
                 </div>
                 <center><button class="btn-primary btn">Submit</button></center>
             </form>
@@ -46,6 +50,6 @@
       </div>
     </div>
   </div>
-@push('scripts')
-<script src="{{asset('assets/js/userCrud.js')}}"></script>
-@endpush
+  @push('scripts')
+  <script src="{{asset('assets/js/userCrud.js')}}"></script>
+  @endpush

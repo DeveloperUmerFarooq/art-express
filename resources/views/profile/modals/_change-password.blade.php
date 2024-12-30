@@ -11,21 +11,21 @@
                 <input type="hidden" name="id" value="{{auth()->user()->id}}">
                 <div>
                     <label for="current-password" class="form-label">Current Password:</label>
-                    <input type="password" minlength="8" name="current-password" class="form-control bg-transparent shadow validate" placeholder="Current Password" value="{{ old('current-password') }}">
+                    <input type="password" minlength="8" name="current-password" class="form-control password bg-transparent shadow validate" placeholder="Current Password" value="{{ old('current-password') }}">
                     @error('current-password')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
                 </div>
                 <div>
                     <label for="password" class="form-label">New Password:</label>
-                    <input type="password" minlength="8" id="password" name="password" class="form-control bg-transparent shadow validate" placeholder="New Password" value="{{ old('password') }}">
+                    <input type="password" minlength="8" id="password" name="password" class="form-control password bg-transparent shadow validate" placeholder="New Password" value="{{ old('password') }}">
                     @error('password')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
                 </div>
                 <div>
                     <label for="confirm-password" class="form-label">Confirm Password:</label>
-                    <input type="password" minlength="8" id="confirm-password" id="password_confirmation" name="password_confirmation" class="form-control shadow bg-transparent validate" placeholder="Confirm Password">
+                    <input type="password" minlength="8" id="confirm-password" id="password_confirmation" name="password_confirmation" class="form-control password shadow bg-transparent validate" placeholder="Confirm Password">
                     @error('twitter')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror

@@ -1,10 +1,13 @@
-document.getElementById('password-show').addEventListener('change',showPass)
+$(document).ready(function(){
+    $('#show-password,#password-show').each(function(){
+        $(this).on('change',showPass)
+    })
+})
 function showPass(){
-    let toggle=document.getElementById('password-show')
-    let pass=document.getElementById('password');
-    let confirmPass= document.getElementById('confirm-password');
-    pass.type=toggle.checked?'text':'password'
-    confirmPass.type=toggle.checked?'text':'password'
+    let toggleType = $(this).is(':checked') ? 'text' : 'password';
+    $(".password").each(function(){
+        $(this).attr('type',toggleType)
+    })
 }
 function reloadDataTable(){
     $('#user-table').DataTable().ajax.reload();

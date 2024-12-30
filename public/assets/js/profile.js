@@ -8,7 +8,7 @@ $(document).ready(function(){
     })
     $('#password-show').on('change',function(){
         let toggleType = $(this).is(':checked') ? 'text' : 'password';
-        $("input[type='password'], input[type='text']").each(function(){
+        $(".password").each(function(){
             $(this).attr('type',toggleType)
         })
     })

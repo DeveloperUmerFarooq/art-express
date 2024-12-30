@@ -24,20 +24,20 @@
                 </div>
                 <div>
                     <label for="Password" class="form-label">Password:</label>
-                    <input type="password" id="password" id="password" minlength="8" name="password" class="form-control shadow bg-transparent validate" placeholder="Password" value="{{ old('password') }}" required autocomplete="current-password" autofocus>
+                    <input type="password" minlength="8" name="password" class="form-control password shadow bg-transparent validate" placeholder="Password" value="{{ old('password') }}" required autocomplete="current-password" autofocus>
                     @error('password')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
                 </div>
                 <div>
                     <label for="Confirm-Password" class="form-label">Confirm Password:</label>
-                    <input type="password" id="confirm-password" minlength="8" name="password_confirmation" class="form-control shadow bg-transparent validate" placeholder="Confirm Password" value="{{ old('password_confirmation') }}" required autocomplete="current-password" autofocus>
+                    <input type="password" id="confirm-password" minlength="8" name="password_confirmation" class="form-control password shadow bg-transparent validate" placeholder="Confirm Password" value="{{ old('password_confirmation') }}" required autocomplete="current-password" autofocus>
                     @error('password')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
                 </div>
                 <div class="d-flex gap-1">
-                    <input class="form-check-input bg-transparent shadow" type="checkbox" id="password-show">
+                    <input class="form-check-input shadow" type="checkbox" id="password-show">
                     <label for="password-show"><small> Show Password</small></label>
                 </div>
                 <center><button class="btn-primary btn">Add Artist</button></center>
