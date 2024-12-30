@@ -18,21 +18,21 @@
                 </div>
                 <div>
                     <label for="instagram" class="form-label">Instagram:</label>
-                    <input type="url" id="instagram" name="instagram" class="form-control bg-transparent shadow validate" placeholder="Instagram Link" value="{{ old('instagram') }}">
+                    <input type="url" name="instagram" class="form-control bg-transparent shadow validate" placeholder="Instagram Link" value="{{ old('instagram') }}">
                     @error('instagram')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
                 </div>
                 <div>
                     <label for="twitter" class="form-label">Twitter:</label>
-                    <input type="url" id="twitter" id="twitter" name="twitter" class="form-control shadow bg-transparent validate" placeholder="Twitter Link" value="{{ old('twitter') }}">
+                    <input type="url" name="twitter" class="form-control shadow bg-transparent validate" placeholder="Twitter Link" value="{{ old('twitter') }}">
                     @error('twitter')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
                 </div>
                 <div>
                     <label for="linkedin" class="form-label">Linked In:</label>
-                    <input type="url" id="linkedin" name="linkedin" class="form-control shadow bg-transparent validate" placeholder="Linked In Link" value="{{ old('linkedin') }}">
+                    <input type="url" name="linkedin" class="form-control shadow bg-transparent validate" placeholder="Linked In Link" value="{{ old('linkedin') }}">
                     @error('linkedin')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror

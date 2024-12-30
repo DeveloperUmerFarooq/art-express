@@ -77,10 +77,10 @@
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Edit Details</a>
+                        <a class="nav-link" id="edit-details" href="#">Edit Details</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Change Password</a>
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#Change-Password">Change Password</a>
                       </li>
                     </ul>
                   </div>
@@ -88,7 +88,7 @@
               </nav>
         </div>
         <div class="container mt-1 mt-md-3 mt-lg-3">
-            <form method="POST" class="ps-1">
+            <form method="POST" class="ps-1" id="profile">
                 @csrf
                 <div class="row">
                     <div class="input-group col-md row align-items-center">
@@ -129,7 +129,7 @@
                     </div>
                 </div>
                 <center>
-                    <button type="submit" class="btn btn-primary mt-2 d-none">Submit</button>
+                    <button id="profile-submit" type="submit" class="btn btn-primary mt-2 d-none">Submit</button>
                 </center>
             </form>
         </div>
@@ -138,5 +138,7 @@
 @endsection
 @include('profile.modals._add-links')
 @include('profile.modals._edit-links')
+@include('profile.modals._change-password')
 @push('scripts')
+<script src="{{asset('assets/js/profile.js')}}"></script>
 @endpush

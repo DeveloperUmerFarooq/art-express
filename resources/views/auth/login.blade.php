@@ -23,8 +23,8 @@
                     @enderror
                 </div>
                 <div class="d-flex gap-1">
-                    <input class="form-check bg-transparent shadow" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                    <label for="form-check-label"><small>Remember Me</small></label>
+                    <input class="form-check-input bg-transparent shadow" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                    <label for="form-check-input-label"><small>Remember Me</small></label>
                 </div>
                 <a class="btn btn-link" href="{{ route('password.request') }}">
                     {{ __('Forgot Your Password?') }}

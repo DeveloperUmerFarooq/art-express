@@ -37,7 +37,7 @@
                     @enderror
                 </div>
                 <div class="d-flex gap-1">
-                    <input class="form-check bg-transparent shadow" type="checkbox" id="password-show">
+                    <input class="form-check-input bg-transparent shadow" type="checkbox" id="password-show">
                     <label for="password-show"><small> Show Password</small></label>
                 </div>
                 <center><button class="btn-primary btn">Add Artist</button></center>

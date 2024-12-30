@@ -37,21 +37,21 @@
                     @enderror
                 </div>
                 <div class="d-flex gap-1">
-                    <input class="form-check bg-transparent shadow" type="checkbox" id="password-show">
+                    <input class="form-check-input bg-transparent shadow" type="checkbox" id="password-show">
                     <label for="password-show"><small> Show Password</small></label>
                 </div>
                 <div class="d-flex gap-3 align-items-center">
                     <label for="role">Choose Role:</label>
                     <div class="col-md-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="role" id="role_admin" value="artist" required>
-                            <label class="form-check-label" for="role_admin">
+                        <div class="form-check-input">
+                            <input class="form-check-input-input" type="radio" name="role" id="role_admin" value="artist" required>
+                            <label class="form-check-input-label" for="role_admin">
                                 {{ __('Artist') }}
                             </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="role" id="role_user" value="user" required>
-                            <label class="form-check-label" for="role_user">
+                        <div class="form-check-input">
+                            <input class="form-check-input-input" type="radio" name="role" id="role_user" value="user" required>
+                            <label class="form-check-input-label" for="role_user">
                                 {{ __('User') }}
                             </label>
                         </div>
