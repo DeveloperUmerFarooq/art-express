@@ -22,10 +22,10 @@ class UserCrud extends Controller
     public function delete($id){
         try{
             User::find($id)->delete();
-            toastr()->success('User Deleted!');
+            toastr()->success('Deleted Successfully!');
         }
         catch(Exception $error){
-            toastr()->error('Operation Failed');
+            toastr()->error('Operation Failed!');
         }
         return redirect()->back();
     }
@@ -71,7 +71,7 @@ class UserCrud extends Controller
             toastr()->success('New User Created');
         }
         catch(Exception $error){
-            toastr()->error("User Creation Failed!");
+            toastr()->error('User Creation Failed');
         }
         return redirect()->back();
     }
@@ -113,6 +113,6 @@ class UserCrud extends Controller
         catch(Exception $error){
             toastr()->error("Failed Updating User!");
         }
-            return redirect()->back();
+        return redirect()->back();
     }
 }

@@ -54,7 +54,7 @@ class ArtistDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('artists-table')
+                    ->setTableId('user-table')
                     ->setTableAttribute('class','table table-success')
                     ->setTableAttribute('data-responsive-wrapper', 'true')
                     ->columns($this->getColumns())

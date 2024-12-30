@@ -47,6 +47,7 @@ class ProfileController extends Controller
         $profile->linkedin_link = $req->linkedin ?? $profile->linkedin_link;
         $profile->save();
         toastr()->info('Profile Links Updated!');
+        toastr()->success('Profile Links Updated Successfully!');
         return redirect()->back();
     }
 

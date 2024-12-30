@@ -6,9 +6,14 @@ function showPass(){
     pass.type=toggle.checked?'text':'password'
     confirmPass.type=toggle.checked?'text':'password'
 }
-function deleteUser(id,e){
+function reloadDataTable(){
+    $('#user-table').DataTable().ajax.reload();
+}
+
+function deleteUser(id){
     Swal.fire({
-        title: "Do you want to delete the artist?",
+        title: "Delete Selected!",
+        text:"Are you sure you want to delete this user?",
         showDenyButton: true,
         icon:'question',
         confirmButtonText: "Yes",
@@ -16,9 +21,9 @@ function deleteUser(id,e){
         denyButtonText: `No`
       }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = `/admin/delete/${id}`;
+            window.location.href=`/admin/delete/${id}`
         } else if (result.isDenied) {
-
+            toastr.info('User deletion stopped!')
         }
       });
 }
