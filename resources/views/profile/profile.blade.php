@@ -68,12 +68,69 @@
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Add-Social-Links">Add Social Links</button>
                 @endif
             </center>
-            <hr>
+            <nav class="navbar navbar-expand-lg bg-transparent mt-1">
+                <div class="container-fluid">
+                  <span class="navbar-brand text-white">Personal Details</span>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff0cd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-justify"><path d="M3 12h18"/><path d="M3 18h18"/><path d="M3 6h18"/></svg>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Edit Details</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Change Password</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
         </div>
-        <div class="container">
-            <form action="{{}}" method="POST">
+        <div class="container mt-1 mt-md-3 mt-lg-3">
+            <form method="POST" class="ps-1">
                 @csrf
-
+                <div class="row">
+                    <div class="input-group col-md row align-items-center">
+                        <label for="" class="form-label col-3 col-md-4 col-lg-3 mt-2">Name:</label>
+                        <input type="text" name="name" id="name" class="validate form-control bg-transparent col" placeholder="username" value="{{auth()->user()->name}}" disabled>
+                    </div>
+                    <div class="input-group col-md row align-items-center">
+                        <label for="" class="form-label col-md-4 col-lg-3 col-3 mt-2">Email:</label>
+                        <input type="email" name="email" id="email" class="validate form-control bg-transparent col" placeholder="email" value="{{auth()->user()->email}}" disabled>
+                    </div>
+                    <div class="input-group col-md row">
+                        <label for="" class="form-label col-3 col-md-4 col-lg-3 mt-2">Phone:</label>
+                        <input type="text" name="phone_number" id="phone-number" class="validate form-control bg-transparent col" placeholder="phone#" value="{{$profile->phone_number}}" disabled>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="input-group col-md row align-items-center">
+                        <label for="" class="form-label col-md-4 col-lg-3 col-3 mt-2">CNIC:</label>
+                        <input type="text" name="cnic" id="cnic" class="validate form-control bg-transparent col" placeholder="CNIC" value="{{$profile->cnic}}" disabled>
+                    </div>
+                    <div class="input-group col-md row align-items-center">
+                        <label for="" class="form-label col-md-4 col-lg-3 col-3 mt-2">Country:</label>
+                        <input type="text" id="country" name="country" class="validate form-control bg-transparent col" placeholder="country" value="{{$profile->country}}" disabled>
+                    </div>
+                    <div class="input-group col-md row align-items-center">
+                        <label for="" class="form-label col-md-4 col-lg-3 col-3 mt-2">City</label>
+                        <input type="text" id="city" name="city" class="validate form-control bg-transparent col" placeholder="city" value="{{$profile->city}}" disabled>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="input-group col-md row">
+                        <label for="" class="form-label col-3 col-lg-2 mt-2">Bio:</label>
+                        <textarea rows="4" name="bio" id="bio" class="validate form-control bg-transparent col" placeholder="bio" disabled>{{$profile->bio}}</textarea>
+                    </div>
+                    <div class="input-group col-md row">
+                        <label for="" class="form-label col-3 col-lg-2 mt-2">Address:</label>
+                        <textarea id="address" name="address" rows="4" class="validate form-control bg-transparent col" placeholder="address" disabled>{{$profile->address}}</textarea>
+                    </div>
+                </div>
+                <center>
+                    <button type="submit" class="btn btn-primary mt-2 d-none">Submit</button>
+                </center>
             </form>
         </div>
     </div>
