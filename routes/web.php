@@ -20,6 +20,8 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
         Route::post('/edit/user',[UserCrud::class,'editUsers'])->name('user.edit');
     });
     Route::get('/profile',[ProfileController::class,'index'])->name('profile');
+    Route::post('/profile/links',[ProfileController::class,'addSocialLinks'])->name('profile.links');
+    Route::post('/profile/links/update',[ProfileController::class,'editSocailLinks'])->name('profile.links.update');
     Route::post('/profile/avatar',[ProfileController::class,'updateAvatar'])->name('avatar');
 });
 

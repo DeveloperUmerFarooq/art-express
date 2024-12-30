@@ -10,7 +10,7 @@
                 @csrf
                 <div>
                     <label for="name" class="form-label">Name:</label>
-                    <input type="text" id="name" name="name" class="form-control bg-transparent shadow validate" placeholder="Name" value="{{ old('name') }}" required autocomplete="email" autofocus>
+                    <input type="text" id="name" name="name" class="form-control bg-transparent shadow validate" placeholder="Name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                     @error('name')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror

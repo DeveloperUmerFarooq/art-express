@@ -21,7 +21,7 @@
                 <div>
                     <input type="hidden" name="id" id="id">
                     <label for="name" class="form-label">Name:</label>
-                    <input type="text" id="Name" name="name" class="form-control bg-transparent shadow validate" placeholder="Name" value="{{ old('name') }}" '' autocomplete="email" autofocus>
+                    <input type="text" id="Name" name="name" class="form-control bg-transparent shadow validate" placeholder="Name" value="{{ old('name') }}" '' autocomplete="name" autofocus>
                     @error('name')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
