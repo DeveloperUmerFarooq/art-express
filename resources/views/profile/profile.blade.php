@@ -88,9 +88,9 @@
               </nav>
         </div>
         <div class="container mt-1 mt-md-3 mt-lg-3 mb-1">
-            <form action="{{route('admin.details.update')}}" method="POST" class="ps-1" id="profile">
-                @csrf
-                <input type="hidden" name="id" value="{{auth()->user()->id}}">
+            <form action="{{route('admin.details')}}" method="POST" class="ps-1" id="profile">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" disabled>
+                <input type="hidden" name="id" value="{{auth()->user()->id}}" disabled>
                 <div class="row">
                     <div class="input-group col-md row align-items-center">
                         <label for="" class="form-label col-3 col-md-4 col-lg-3 mt-2">Name:</label>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="input-group col-md row">
                         <label for="" class="form-label col-3 col-md-4 col-lg-3 mt-2">Phone:</label>
-                        <input type="text" name="phone_number" id="phone-number" class="validate form-control bg-transparent col" placeholder="phone#" value="{{$profile->phone_number}}" disabled>
+                        <input type="text" name="phone_number" min="10" max="15" id="phone-number" class="validate form-control bg-transparent col" placeholder="phone#" value="{{$profile->phone_number}}" disabled>
                         @error('phone_number')
                         <p class="text-danger ms-1">{{$message}}</p>
                         @enderror
@@ -117,7 +117,7 @@
                 <div class="row mt-2">
                     <div class="input-group col-md row align-items-center">
                         <label for="" class="form-label col-md-4 col-lg-3 col-3 mt-2">CNIC:</label>
-                        <input type="text" name="cnic" id="cnic" class="validate form-control bg-transparent col" placeholder="CNIC" value="{{$profile->cnic}}" disabled>
+                        <input type="text" min="13" max="14" name="cnic" id="cnic" class="validate form-control bg-transparent col" placeholder="CNIC" value="{{$profile->cnic}}" disabled>
                         @error('cnic')
                         <p class="text-danger ms-1">{{$message}}</p>
                         @enderror
@@ -140,24 +140,24 @@
                 <div class="row mt-2">
                     <div class="input-group col-md row">
                         <label for="" class="form-label col-3 col-lg-2 mt-2">Bio:</label>
-                        <textarea rows="4" name="bio" id="bio" class="validate form-control bg-transparent col" placeholder="bio" disabled>{{$profile->bio}}</textarea>
+                        <textarea rows="2" name="bio" id="bio" class="validate form-control bg-transparent col" placeholder="bio" disabled>{{$profile->bio}}</textarea>
                         @error('bio')
                         <p class="text-danger ms-1">{{$message}}</p>
                         @enderror
                     </div>
                     <div class="input-group col-md row">
                         <label for="" class="form-label col-3 col-lg-2 mt-2">Address:</label>
-                        <textarea id="address" name="address" rows="4" class="validate form-control bg-transparent col" placeholder="address" disabled>{{$profile->address}}</textarea>
+                        <textarea id="address" name="address" rows="2" class="validate form-control bg-transparent col" placeholder="address" disabled>{{$profile->address}}</textarea>
                         @error('address')
                         <p class="text-danger ms-1">{{$message}}</p>
                         @enderror
                     </div>
                 </div>
+                <center>
+                    <button id="profile-submit" type="submit" class="btn btn-primary mt-2">Submit</button>
+                    <button id="cancel" class="btn btn-danger mt-2">Cancel</button>
+                </center>
             </form>
-            <center>
-                <button id="profile-submit" type="submit" class="btn btn-primary mt-2">Submit</button>
-                <button id="cancel" class="btn btn-danger mt-2">Cancel</button>
-            </center>
         </div>
     </div>
 </div>

@@ -80,7 +80,31 @@ class ProfileController extends Controller
         }
         return redirect()->back();
     }
-    public function addPersonalDetails(Request $req){
-            dd($req);
+    public function updateDetails(Request $req){
+            $req->validate([
+                'email'=>'email|required',
+                'name'=>'required',
+                'cnic'=>'required',
+                'phone_number' => 'required|min:10|max:15',
+                'address'=>'required',
+                'city'=>'required',
+                'country'=>'required'
+                ]);
+            $user=User::find($req->id);
+            $profile=$user->profile;
+            $user->update([
+                'name'=>$req->name??$user->name,
+                'email'=>$req->email??$user->email,
+            ]);
+            $user->profile()->update([
+                'bio'=>$req->bio??$profile->bio,
+                'cnic'=>$req->cnic??$profile->cnic,
+                'city'=>$req->city??$profile->city,
+                'country'=>$req->country??$profile->country,
+                'address'=>$req->address??$profile->address,
+                'phone_number'=>$req->phone_number??$profile->phone_number
+            ]);
+            toastr()->success("Details Updated Successfully");
+            return redirect()->back();
     }
 }

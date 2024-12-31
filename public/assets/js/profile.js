@@ -23,7 +23,4 @@ $(document).ready(function(){
             $('#cancel').hide();
         })
     })
-    $('#profile-submit').on('click',function(){
-        document.getElementById('profile').submit();
-    });
 })

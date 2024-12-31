@@ -24,7 +24,7 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
         Route::post('/links',[ProfileController::class,'addSocialLinks'])->name('profile.links');
         Route::post('/links/update',[ProfileController::class,'editSocailLinks'])->name('profile.links.update');
         Route::post('/avatar',[ProfileController::class,'updateAvatar'])->name('avatar');
-        Route::post('/details/update',[ProfileController::class,'addPersonalDetails'])->name('details.update');
+        Route::post('/details/update',[ProfileController::class,'updateDetails'])->name('details');
     });
 });
 
