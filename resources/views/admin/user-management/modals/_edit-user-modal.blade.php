@@ -14,28 +14,28 @@
                             <img id="img" width="100%" alt="">
                         </div>
                         <div>
-                            <input class="form-control bg-transparent" type="file" name="image" id="image" value="{{old('image')}}">
+                            <input class="form-control" type="file" name="image" id="image" value="{{old('image')}}">
                         </div>
                     </div>
                 </div>
                 <div>
                     <input type="hidden" name="id" id="id">
                     <label for="name" class="form-label">Name:</label>
-                    <input type="text" id="Name" name="name" class="form-control bg-transparent shadow validate" placeholder="Name" value="{{ old('name') }}" '' autocomplete="name" autofocus>
+                    <input type="text" id="Name" name="name" class="form-control shadow validate" placeholder="Name" value="{{ old('name') }}" '' autocomplete="name" autofocus>
                     @error('name')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
                 </div>
                 <div>
                     <label for="email" class="form-label">Email:</label>
-                    <input type="email" id="Email" name="email" class="form-control bg-transparent shadow validate" placeholder="Email" value="{{ old('email') }}" '' autocomplete="email" autofocus>
+                    <input type="email" id="Email" name="email" class="form-control shadow validate" placeholder="Email" value="{{ old('email') }}" '' autocomplete="email" autofocus>
                     @error('email')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
                 </div>
                 <div>
                     <label for="password" class="form-label">Password:</label>
-                    <input type="password" id="password" minlength="8" name="password" class="form-control password shadow bg-transparent validate" placeholder="Password" value="{{ old('password') }}" autocomplete="current-password">
+                    <input type="password" id="password" minlength="8" name="password" class="form-control password shadow validate" placeholder="Password" value="{{ old('password') }}" autocomplete="current-password">
                     @error('password')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror

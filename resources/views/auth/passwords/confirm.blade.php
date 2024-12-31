@@ -17,7 +17,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control validate bg-transparent @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control validate @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Enter Password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">

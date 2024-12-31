@@ -10,14 +10,14 @@
                 @csrf
                 <div>
                     <label for="email" class="form-label">Email:</label>
-                    <input type="email" name="email" class="form-control bg-transparent shadow validate" placeholder="Email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    <input type="email" name="email" class="form-control shadow validate" placeholder="Email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                     @error('email')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
                 </div>
                 <div>
                     <label for="Password" class="form-label">Password:</label>
-                    <input type="password" minlength="8" name="password" class="form-control shadow bg-transparent validate" placeholder="Password" value="{{ old('passord') }}" required autocomplete="current-password" autofocus>
+                    <input type="password" minlength="8" name="password" class="form-control shadow validate" placeholder="Password" value="{{ old('passord') }}" required autocomplete="current-password" autofocus>
                     @error('password')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
