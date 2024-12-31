@@ -42,10 +42,10 @@ class ProfileController extends Controller
         ]);
         $user=User::find($req->id);
         $profile=$user->profile;
-        $profile->facebook_link = $req->facebook ?? $profile->facebook_link;
-        $profile->instagram_link = $req->instagram ?? $profile->instagram_link;
-        $profile->twitter_link = $req->twitter ?? $profile->twitter_link;
-        $profile->linkedin_link = $req->linkedin ?? $profile->linkedin_link;
+        $profile->facebook_link = $req->facebook;
+        $profile->instagram_link = $req->instagram;
+        $profile->twitter_link = $req->twitter;
+        $profile->linkedin_link = $req->linkedin;
         $profile->save();
         toastr()->info('Profile Links Updated!');
         toastr()->success('Profile Links Updated Successfully!');

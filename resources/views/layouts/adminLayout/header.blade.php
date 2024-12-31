@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-      <a class="navbar-brand fs-3" href="#">Art-Express</a>
+      <a class="navbar-brand fs-3" href="/">Art-Express</a>
       <a href="{{route('admin.profile')}}" class="nav-link dropdown-toggle no-togggle-icon fs-6 ms-auto mx-1 d-md-none">
           <img class="rounded-circle" src="{{auth()->user()->profile->profile_image}}" alt="{{auth()->user()->name}}" height="30">
       </a>
