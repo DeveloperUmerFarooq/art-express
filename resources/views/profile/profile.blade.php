@@ -87,51 +87,77 @@
                 </div>
               </nav>
         </div>
-        <div class="container mt-1 mt-md-3 mt-lg-3">
-            <form method="POST" class="ps-1" id="profile">
+        <div class="container mt-1 mt-md-3 mt-lg-3 mb-1">
+            <form action="{{route('admin.details.update')}}" method="POST" class="ps-1" id="profile">
                 @csrf
+                <input type="hidden" name="id" value="{{auth()->user()->id}}">
                 <div class="row">
                     <div class="input-group col-md row align-items-center">
                         <label for="" class="form-label col-3 col-md-4 col-lg-3 mt-2">Name:</label>
                         <input type="text" name="name" id="name" class="validate form-control bg-transparent col" placeholder="username" value="{{auth()->user()->name}}" disabled>
+                        @error('name')
+                        <p class="text-danger ms-1">{{$message}}</p>
+                        @enderror
                     </div>
                     <div class="input-group col-md row align-items-center">
                         <label for="" class="form-label col-md-4 col-lg-3 col-3 mt-2">Email:</label>
                         <input type="email" name="email" id="email" class="validate form-control bg-transparent col" placeholder="email" value="{{auth()->user()->email}}" disabled>
+                        @error('email')
+                        <p class="text-danger ms-1">{{$message}}</p>
+                        @enderror
                     </div>
                     <div class="input-group col-md row">
                         <label for="" class="form-label col-3 col-md-4 col-lg-3 mt-2">Phone:</label>
                         <input type="text" name="phone_number" id="phone-number" class="validate form-control bg-transparent col" placeholder="phone#" value="{{$profile->phone_number}}" disabled>
+                        @error('phone_number')
+                        <p class="text-danger ms-1">{{$message}}</p>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="input-group col-md row align-items-center">
                         <label for="" class="form-label col-md-4 col-lg-3 col-3 mt-2">CNIC:</label>
                         <input type="text" name="cnic" id="cnic" class="validate form-control bg-transparent col" placeholder="CNIC" value="{{$profile->cnic}}" disabled>
+                        @error('cnic')
+                        <p class="text-danger ms-1">{{$message}}</p>
+                        @enderror
                     </div>
                     <div class="input-group col-md row align-items-center">
                         <label for="" class="form-label col-md-4 col-lg-3 col-3 mt-2">Country:</label>
                         <input type="text" id="country" name="country" class="validate form-control bg-transparent col" placeholder="country" value="{{$profile->country}}" disabled>
+                        @error('country')
+                        <p class="text-danger ms-1">{{$message}}</p>
+                        @enderror
                     </div>
                     <div class="input-group col-md row align-items-center">
                         <label for="" class="form-label col-md-4 col-lg-3 col-3 mt-2">City</label>
                         <input type="text" id="city" name="city" class="validate form-control bg-transparent col" placeholder="city" value="{{$profile->city}}" disabled>
+                        @error('city')
+                        <p class="text-danger ms-1">{{$message}}</p>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="input-group col-md row">
                         <label for="" class="form-label col-3 col-lg-2 mt-2">Bio:</label>
                         <textarea rows="4" name="bio" id="bio" class="validate form-control bg-transparent col" placeholder="bio" disabled>{{$profile->bio}}</textarea>
+                        @error('bio')
+                        <p class="text-danger ms-1">{{$message}}</p>
+                        @enderror
                     </div>
                     <div class="input-group col-md row">
                         <label for="" class="form-label col-3 col-lg-2 mt-2">Address:</label>
                         <textarea id="address" name="address" rows="4" class="validate form-control bg-transparent col" placeholder="address" disabled>{{$profile->address}}</textarea>
+                        @error('address')
+                        <p class="text-danger ms-1">{{$message}}</p>
+                        @enderror
                     </div>
                 </div>
-                <center>
-                    <button id="profile-submit" type="submit" class="btn btn-primary mt-2 d-none">Submit</button>
-                </center>
             </form>
+            <center>
+                <button id="profile-submit" type="submit" class="btn btn-primary mt-2">Submit</button>
+                <button id="cancel" class="btn btn-danger mt-2">Cancel</button>
+            </center>
         </div>
     </div>
 </div>

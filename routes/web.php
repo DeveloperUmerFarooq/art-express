@@ -19,10 +19,13 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
         Route::post('/add/user',[UserCrud::class,'addUser'])->name('user.add');
         Route::post('/edit/user',[UserCrud::class,'editUsers'])->name('user.edit');
     });
-    Route::get('/profile',[ProfileController::class,'index'])->name('profile');
-    Route::post('/profile/links',[ProfileController::class,'addSocialLinks'])->name('profile.links');
-    Route::post('/profile/links/update',[ProfileController::class,'editSocailLinks'])->name('profile.links.update');
-    Route::post('/profile/avatar',[ProfileController::class,'updateAvatar'])->name('avatar');
+    Route::prefix('/profile')->group(function(){
+        Route::get('/',[ProfileController::class,'index'])->name('profile');
+        Route::post('/links',[ProfileController::class,'addSocialLinks'])->name('profile.links');
+        Route::post('/links/update',[ProfileController::class,'editSocailLinks'])->name('profile.links.update');
+        Route::post('/avatar',[ProfileController::class,'updateAvatar'])->name('avatar');
+        Route::post('/details/update',[ProfileController::class,'addPersonalDetails'])->name('details.update');
+    });
 });
 
 Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(function () {

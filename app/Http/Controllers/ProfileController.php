@@ -80,4 +80,7 @@ class ProfileController extends Controller
         }
         return redirect()->back();
     }
+    public function addPersonalDetails(Request $req){
+            dd($req);
+    }
 }
