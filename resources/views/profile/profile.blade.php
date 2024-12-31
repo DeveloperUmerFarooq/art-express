@@ -88,7 +88,7 @@
               </nav>
         </div>
         <div class="container mt-1 mt-md-3 mt-lg-3 mb-1">
-            <form action="{{route('admin.details')}}" method="POST" class="ps-1" id="profile">
+            <form action="{{route('admin.details.update')}}" method="POST" class="ps-1" id="profile">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" disabled>
                 <input type="hidden" name="id" value="{{auth()->user()->id}}" disabled>
                 <div class="row">

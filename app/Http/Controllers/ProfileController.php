@@ -6,6 +6,7 @@ use App\Models\User;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -106,5 +107,21 @@ class ProfileController extends Controller
             ]);
             toastr()->success("Details Updated Successfully");
             return redirect()->back();
+    }
+    public function updatePassword(Request $req){
+        $req->validate([
+            'current_password'=>'required',
+            'password'=>'required|confirmed'
+        ]);
+        $user=User::find($req->id);
+        if(!Hash::check($req->current_password, $user->password)){
+            toastr()->error("Current Passowrd is incorrect!");
+            return redirect()->back();
+        }
+        $user->update([
+            'password'=>$req->password
+        ]);
+        toastr()->success("Password Updated Successfully!");
+        return redirect()->back();
     }
 }
