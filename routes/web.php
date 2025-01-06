@@ -5,7 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserCrud;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome1');
+Route::view('/', 'welcome');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
