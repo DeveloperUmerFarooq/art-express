@@ -127,8 +127,7 @@ body{
 .card{
     background-color: var(--primary);
     color: var(--tertiary);
-    height: 22rem;
-    max-height: 22rem;
+    height: 21rem;
 }
 
 .card-title{

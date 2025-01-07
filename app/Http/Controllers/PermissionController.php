@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\DataTables\PermissionDataTable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -12,10 +12,9 @@ class PermissionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(PermissionDataTable $datatable)
     {
-        $roles=Role::all();
-        return view('admin.permission-management.permissions')->with('roles', $roles);
+        return $datatable->render('admin.permission-management.permissions');
     }
 
     /**
