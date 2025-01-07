@@ -18,6 +18,9 @@ body{
     flex-direction: column;
     min-height: 100vh;
 }
+.custom-popup{
+    background-color: var(--primary) !important;
+}
 main{
     flex: 1 ;
 }
@@ -39,6 +42,9 @@ main{
 }
 .dropdown-menu,#logout:hover{
     background-color: transparent;
+}
+#logout{
+    cursor: pointer;
 }
 .dropdown-item{
     transition: all .4s ease-out;
@@ -175,12 +181,6 @@ footer a{
 th,td{
     background-color:transparent !important;
     vertical-align: middle;
-}
-th{
-    font-size: clamp(11px, 2vw, 16px);
-}
-td{
-    font-size: clamp(10px, 2vw, 15px);
 }
 @media (min-width: 601px) {
     .landscape,

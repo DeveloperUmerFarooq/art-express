@@ -21,7 +21,10 @@ function deleteUser(id){
         icon:'question',
         confirmButtonText: "Yes",
         confirmButtonColor:"green",
-        denyButtonText: `No`
+        denyButtonText: `No`,
+        customClass: {
+            popup: 'custom-popup'
+          }
       }).then((result) => {
         if (result.isConfirmed) {
             window.location.href=`/admin/delete/${id}`

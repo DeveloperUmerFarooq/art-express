@@ -7,7 +7,7 @@
             <button class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#Add-User">Add User</button>
         </div>
         <hr>
-        <div class="table-responsive overflow-hidden">
+        <div class="table-responsive">
             {{ $dataTable->table() }}
         </div>
     </div>
