@@ -10,7 +10,7 @@ Role-Management
             <div class="col-md-4 mb-4">
                 <div class="card" style="height:max-content">
                     <div class="card-header text-center" style="background-color: var(--secondary);color:var(--primary)">
-                        <h3>{{ $role->name }}</h3>
+                        <h3>Role: {{ $role->name }}</h3>
                     </div>
                     <div class="card-body">
                         <h6>Permissions:</h6>
