@@ -28,12 +28,14 @@ class RolePermissionSeeder extends Seeder
         $artistPermissions = [
             'create art',
             'edit art',
+            'delete art',
             'view art'
         ];
 
         // Create permissions for 'user'
         $userPermissions = [
-            'view art'
+            'view art',
+            'buy art'
         ];
 
         // Loop through the permission arrays and create permissions if they don't exist
@@ -51,12 +53,12 @@ class RolePermissionSeeder extends Seeder
 
         // Create roles and assign permissions
         $adminRole = Role::create(['name' => 'admin']);
-        $adminRole->givePermissionTo($adminPermissions);
+        $adminRole->syncPermissions($adminPermissions);
 
         $artistRole = Role::create(['name' => 'artist']);
-        $artistRole->givePermissionTo($artistPermissions);
+        $artistRole->syncPermissions($artistPermissions);
 
         $userRole = Role::create(['name' => 'user']);
-        $userRole->givePermissionTo($userPermissions);
+        $userRole->syncPermissions($userPermissions);
     }
 }
