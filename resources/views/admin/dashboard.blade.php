@@ -2,7 +2,6 @@
 @section('title')
 Dashboard-Admin
 @endsection
-
 @section('page')
 <div class="container mt-5">
     <div class="row">
@@ -81,12 +80,12 @@ Dashboard-Admin
 // Users Chart
 const usersCtx = document.getElementById('usersChart').getContext('2d');
 const usersChart = new Chart(usersCtx, {
-    type: 'bar',  // Bar chart to visualize user count per month
+    type: 'bar',
     data: {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
         datasets: [{
             label: 'New Users',
-            data: [50, 75, 100, 120, 130, 150, 180],  // Example number of new users per month
+            data: [50, 75, 100, 120, 130, 150, 180],
             backgroundColor: 'rgba(255, 159, 64, 0.6)',
             borderColor: 'rgba(255, 159, 64, 1)',
             borderWidth: 1,
@@ -112,87 +111,44 @@ const usersChart = new Chart(usersCtx, {
     }
 });
 
- // Get the context of the canvas element
-const ctx = document.getElementById('salesChart').getContext('2d');
-
-// Create a linear gradient for the chart's line fill
-const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-gradient.addColorStop(0, 'rgba(75, 192, 192, 0.4)');  // Start with a lighter color
-gradient.addColorStop(1, 'rgba(75, 192, 192, 1)');    // End with a stronger color
-
-const salesChart = new Chart(ctx, {
-    type: 'line', // Line chart type
+// Sales Chart
+const salesCtx = document.getElementById('salesChart').getContext('2d');
+const salesChart = new Chart(salesCtx, {
+    type: 'line',
     data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'], // Monthly labels
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
         datasets: [{
             label: 'Monthly Sales ($)',
-            data: [1200, 1500, 1700, 1400, 1600, 1800, 2000], // Sales data points
-            borderColor: 'rgba(75, 192, 192, 1)',   // Line color
-            backgroundColor: gradient,              // Gradient background
-            fill: true,                              // Fill the area below the line
-            tension: 0.4,                            // Smooth the curve of the line
-            pointBackgroundColor: 'rgba(75, 192, 192, 1)', // Points color
-            pointRadius: 5,                         // Size of the points
-            pointHoverBackgroundColor: 'rgba(0, 123, 255, 1)', // Hover color for points
-            borderWidth: 2,                         // Line thickness
+            data: [1200, 1500, 1700, 1400, 1600, 1800, 2000],
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+            pointRadius: 5,
+            pointHoverBackgroundColor: 'rgba(0, 123, 255, 1)',
+            borderWidth: 2,
         }]
     },
     options: {
-        responsive: true, // Make the chart responsive
+        responsive: true,
         scales: {
             y: {
-                beginAtZero: true,           // Ensure the Y-axis starts from 0
-                grid: {
-                    borderColor: 'rgba(0,0,0,0.1)', // Grid lines color
-                    borderWidth: 1,
-                },
-                ticks: {
-                    font: {
-                        size: 14,          // Font size for Y-axis labels
-                    },
-                },
-            },
-            x: {
-                grid: {
-                    borderColor: 'rgba(0,0,0,0.1)', // Grid lines color
-                    borderWidth: 1,
-                },
-                ticks: {
-                    font: {
-                        size: 14,          // Font size for X-axis labels
-                    },
-                },
-            },
+                beginAtZero: true,
+            }
         },
         plugins: {
-            legend: {
-                position: 'top',            // Position of the legend
-                labels: {
-                    font: {
-                        size: 16,            // Font size for legend
-                    },
-                },
-            },
             tooltip: {
-                enabled: true,
-                backgroundColor: 'rgba(0,0,0,0.7)',  // Tooltip background color
-                titleColor: '#fff',                   // Title text color in tooltip
-                bodyColor: '#fff',                    // Body text color in tooltip
-                footerColor: '#fff',                  // Footer text color in tooltip
-                borderColor: 'rgba(0,0,0,0.3)',      // Tooltip border color
-                borderWidth: 1,                       // Tooltip border width
-                caretSize: 8,                         // Size of the caret (the little triangle)
-            },
+                backgroundColor: 'rgba(0,0,0,0.7)',
+                titleColor: '#fff',
+                bodyColor: '#fff',
+                footerColor: '#fff',
+                borderColor: 'rgba(0,0,0,0.3)',
+                borderWidth: 1,
+            }
         },
-        animation: {
-            duration: 1500,  // Duration for the chart animation
-            easing: 'easeOutQuart',  // Animation easing effect
-        }
     }
 });
-
-
 </script>
 @endpush
-
 @endsection
