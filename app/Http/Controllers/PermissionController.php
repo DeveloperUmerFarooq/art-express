@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
+
+use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class PermissionController extends Controller
 {
@@ -13,7 +15,7 @@ class PermissionController extends Controller
     public function index()
     {
         $roles=Role::all();
-        return view('admin.permission-management.permissions')->with('roles', $roles);;
+        return view('admin.permission-management.permissions')->with('roles', $roles);
     }
 
     /**
