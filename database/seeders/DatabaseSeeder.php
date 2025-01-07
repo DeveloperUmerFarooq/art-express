@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         //     'password'=>Hash::make('pubg1122')
         // ]);
-        // $this->call([RolePermissionSeeder::class,]);
+        $this->call([RolePermissionSeeder::class,]);
         $this->call([UserSeeder::class,]);
     }
 }
