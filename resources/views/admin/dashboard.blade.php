@@ -86,8 +86,8 @@ const usersChart = new Chart(usersCtx, {
         datasets: [{
             label: 'New Users',
             data: [50, 75, 100, 120, 130, 150, 180],
-            backgroundColor: 'rgba(255, 159, 64, 0.6)',
-            borderColor: 'rgba(255, 159, 64, 1)',
+            backgroundColor: 'rgba(75, 192, 75, 0.6)',
+            borderColor: 'rgba(75, 192, 75, 1)',
             borderWidth: 1,
         }]
     },

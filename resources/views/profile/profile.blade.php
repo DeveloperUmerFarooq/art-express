@@ -87,7 +87,7 @@
                 </div>
               </nav>
         </div>
-        <div class="container mt-1 mt-md-3 mt-lg-3 mb-1">
+        <div class="container mt-1 mt-md-3 mt-lg-3">
             <form action="{{route('admin.details.update')}}" method="POST" class="ps-1" id="profile">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" disabled>
                 <input type="hidden" name="id" value="{{auth()->user()->id}}" disabled>
@@ -158,6 +158,9 @@
                     <button id="cancel" class="btn btn-danger mt-2">Cancel</button>
                 </center>
             </form>
+            <center>
+                <button class="btn btn-danger" onclick="document.getElementById('logout-form').submit();">Logout</button>
+            </center>
         </div>
     </div>
 </div>

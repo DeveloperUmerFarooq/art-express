@@ -9,7 +9,17 @@
             <h1 class="res-title">Art-Express</h1>
             <h3 class="res-sub text-center">Unleash Your Creativity</h3>
             <p class="res-sub text-center w-75">Dive into a world of breathtaking art and inspiring masterpieces. Explore and connect with creativity like never before.</p>
-            <center><button class="btn btn-primary res-button-font px-4" id="hero-button">Get Started</button></center>
+            @if (auth()->user())
+            <center>
+                <a href="{{route(auth()->user()->getRoleNames()->first().'.dashboard')}}">
+                    <button class="btn btn-primary res-button-font px-4" id="hero-button">Get Started</button>
+                </a>
+            </center>
+            @else
+            <center>
+                <button class="btn btn-primary res-button-font px-4" id="hero-button" data-bs-toggle="modal" data-bs-target="#Sign-Up">Get Started</button>
+            </center>
+            @endif
         </div>
         <div class="container-fluid mt-2 mt-md-5 pb-3 pt-3 pb-md-5 pt-md-5 position-relative" id="features">
             <h1 class="text-center res-heading">Features we Provide</h1>

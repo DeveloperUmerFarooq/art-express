@@ -14,6 +14,12 @@ body{
     background-color: var(--primary);
     color: var(--tertiary);
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main{
+    flex: 1 ;
 }
 .profile-image:hover{
     background-color: transparent;
@@ -31,8 +37,14 @@ body{
 .navbar a:hover{
     color: var(--primary);
 }
-.dropdown-menu .dropdown-item:hover{
+.dropdown-menu,#logout:hover{
     background-color: transparent;
+}
+.dropdown-item{
+    transition: all .4s ease-out;
+}
+.dropdown-item:hover{
+    background-color:#198654 ;
 }
 .navbar-toggle:focus{
     border: none !important;
@@ -53,6 +65,14 @@ body{
 }
 .res-button-font{
     font-size: clamp(1rem,4vw,1.5rem);
+}
+footer{
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+footer a{
+    text-decoration: none;
+    color: var(--primary);
 }
 #next,#prev{
     background-color: var(--secondary);

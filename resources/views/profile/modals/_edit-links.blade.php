@@ -15,6 +15,9 @@
                     @error('facebook')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
+                    <label for="clearFacebook" class="mt-1" style="font-size: 0.8rem">
+                        <input id="clearFacebook" class="form-check-input mark-null" data-target="#facebook" type="checkbox" /><span class="ms-1 text-dark-emphasis"><small>Remove Link</small></span>
+                    </label>
                 </div>
                 <div>
                     <label for="instagram" class="form-label">Instagram:</label>
@@ -22,6 +25,9 @@
                     @error('instagram')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
+                    <label for="clearInstagram" class="mt-1" style="font-size: 0.8rem">
+                        <input id="clearInstagram" class="form-check-input mark-null" data-target="#instagram" type="checkbox" /><span class="ms-1 text-dark-emphasis"><small>Remove Link</small></span>
+                    </label>
                 </div>
                 <div>
                     <label for="twitter" class="form-label">Twitter:</label>
@@ -29,6 +35,9 @@
                     @error('twitter')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
+                    <label for="clearTwitter" class="mt-1" style="font-size: 0.8rem">
+                        <input id="clearTwitter" class="form-check-input mark-null" data-target="#twitter" type="checkbox" /><span class="ms-1 text-dark-emphasis"><small>Remove Link</small></span>
+                    </label>
                 </div>
                 <div>
                     <label for="linkedin" class="form-label">Linked In:</label>
@@ -36,6 +45,9 @@
                     @error('linkedin')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
+                    <label for="clearLinkedin" class="mt-1" style="font-size: 0.8rem">
+                        <input id="clearLinkedin" class="form-check-input mark-null" data-target="#linkedin" type="checkbox" /><span class="ms-1 text-dark-emphasis"><small>Remove Link</small></span>
+                    </label>
                 </div>
                 <center><button class="btn-primary btn">Update</button></center>
             </form>

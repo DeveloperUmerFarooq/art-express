@@ -57,10 +57,7 @@
                         </div>
                     </div>
                 </div>
-
-                <a class="btn btn-link" href="{{ route('password.request') }}">
-                    {{ __('Forgot Your Password?') }}
-                </a>
+                <p>By Clicking on register, you agrees to our <a href="/">privacy policies!</a> </p>
                 <center><button type="submit" class="btn-primary btn">Register</button></center>
             </form>
         </div>
