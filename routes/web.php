@@ -20,8 +20,15 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
         Route::post('/add/artist',[UserCrud::class,'addArtist'])->name('artist.add');
         Route::post('/add/user',[UserCrud::class,'addUser'])->name('user.add');
         Route::post('/edit/user',[UserCrud::class,'editUsers'])->name('user.edit');
+
         Route::get('/roles',[RolePermissionController::class,'index'])->name('role');
-        Route::resource('permission', PermissionController::class)->names('permissions');
+
+        Route::name('permission.')->prefix('/permission')->group(function(){
+            Route::get('/',[PermissionController::class,'index'])->name('index');
+            Route::get('/delete/{id}',[PermissionController::class,'delete'])->name('delete');
+            Route::post('/store',[PermissionController::class,'store'])->name('store');
+
+        });
     });
     Route::prefix('/profile')->group(function(){
         Route::get('/',[ProfileController::class,'index'])->name('profile');

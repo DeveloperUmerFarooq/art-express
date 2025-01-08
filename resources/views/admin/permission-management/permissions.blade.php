@@ -12,7 +12,9 @@
         </div>
     </div>
 </div>
+@include('admin.permission-management.modals._add-permission-modal')
 @endsection
 @push('scripts')
     {{ $dataTable->scripts() }}
+    <script src="{{asset('assets/js/permission.js')}}"></script>
 @endpush

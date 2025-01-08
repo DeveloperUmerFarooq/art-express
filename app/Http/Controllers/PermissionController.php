@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\DataTables\PermissionDataTable;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+
+use function Flasher\Toastr\Prime\toastr;
 
 class PermissionController extends Controller
 {
@@ -28,40 +32,22 @@ class PermissionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        $req->validate([
+            'name'=>'required'
+        ]);
+        $permission = Permission::firstOrCreate(['name' => strtolower($req->name)]);
+        $permission->wasRecentlyCreated?toastr()->success("New Permission Created!"):toastr()->info("Permission Already Exist!");
+        return redirect()->back();
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+    public function delete($id){
+        try{
+            Permission::findById($id)->delete();
+            toastr()->success("Permission Deleted Successfully!");
+        }catch(Exception $e){
+            toastr()->error("Operation Failed!");
+        }
+        return redirect()->back();
     }
 }

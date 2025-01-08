@@ -24,7 +24,7 @@
                   Management
                 </a>
                 <ul class="dropdown-menu position-absolute">
-                    <li><a class="dropdown-item fs-6" href="{{route('admin.management.permissions.index')}}">Permission Management</a></li>
+                    <li><a class="dropdown-item fs-6" href="{{route('admin.management.permission.index')}}">Permission Management</a></li>
                     <li><a class="dropdown-item fs-6" href="{{route('admin.management.role')}}">Roles & Permissions</a></li>
                     <li><a class="dropdown-item fs-6" href="{{route('admin.management.artist')}}">Artist Management</a></li>
                   <li><a class="dropdown-item fs-6" href="{{route('admin.management.user')}}">User Management</a></li>
