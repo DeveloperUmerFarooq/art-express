@@ -18,3 +18,7 @@ function deletePermission(id){
         }
       });
 }
+function editPermission(user){
+    $('#permission-id').val(user['id'])
+    $('#name').val(user['name'])
+}

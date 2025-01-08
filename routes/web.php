@@ -27,7 +27,7 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
             Route::get('/',[PermissionController::class,'index'])->name('index');
             Route::get('/delete/{id}',[PermissionController::class,'delete'])->name('delete');
             Route::post('/store',[PermissionController::class,'store'])->name('store');
-
+            Route::post('/update',[PermissionController::class,'update'])->name('update');
         });
     });
     Route::prefix('/profile')->group(function(){

@@ -13,6 +13,7 @@
     </div>
 </div>
 @include('admin.permission-management.modals._add-permission-modal')
+@include('admin.permission-management.modals._edit-permission-modal')
 @endsection
 @push('scripts')
     {{ $dataTable->scripts() }}

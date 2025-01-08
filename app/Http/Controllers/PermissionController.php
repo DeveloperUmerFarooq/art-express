@@ -50,4 +50,17 @@ class PermissionController extends Controller
         }
         return redirect()->back();
     }
+    public function update(Request $req){
+            $req->validate([
+                'name'=>'required'
+            ]);
+            $permission=Permission::findById($req->id);
+            try{
+                $permission->update(["name"=>$req->name]);
+                toastr()->success("Permission Updated!");
+            }catch(Exception $e){
+                toastr()->error("Operation Failed");
+            }
+            return redirect()->back();
+    }
 }
