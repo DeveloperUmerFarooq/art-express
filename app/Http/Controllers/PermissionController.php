@@ -35,10 +35,18 @@ class PermissionController extends Controller
     public function store(Request $req)
     {
         $req->validate([
-            'name'=>'required'
+            'name'=>'required',
+            'roles'=>'required'
         ]);
         $permission = Permission::firstOrCreate(['name' => strtolower($req->name)]);
-        $permission->wasRecentlyCreated?toastr()->success("New Permission Created!"):toastr()->info("Permission Already Exist!");
+        if($permission->wasRecentlyCreated){
+            toastr()->success("New Permission Created!");
+            foreach($req->roles as $role){
+                Role::findByName($role)->givePermissionTo($permission->name);
+            }
+        }else{
+            toastr()->info("Permission Already Exist!");
+        }
         return redirect()->back();
     }
     public function delete($id){

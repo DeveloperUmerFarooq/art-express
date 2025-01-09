@@ -15,6 +15,23 @@
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
                 </div>
+                <div class="mb-3">
+                    <label class="form-label">Add Permission to Roles:</label>
+                    <div class="d-flex align-items-center justify-content-center gap-3">
+                        <label for="admin">
+                            <input type="checkbox" id="admin" name="roles[]" value="admin" class="form-check-input">
+                        <small>Admin</small></label>
+                        <label for="artist">
+                            <input type="checkbox" id="artist" value="artist" name="roles[]" class="form-check-input">
+                        <small>Artist</small></label>
+                        <label for="user">
+                            <input type="checkbox" id="user" value="user" name="roles[]" class="form-check-input">
+                        <small>User</small></label>
+                    </div>
+                    @error('roles')
+                    <p class="text-danger mx-1">{{$message}}</p>
+                    @enderror
+                </div>
                 <center><button type="submit" class="btn btn-primary">Add Permission</button></center>
             </form>
         </div>
