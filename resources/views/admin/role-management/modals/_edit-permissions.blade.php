@@ -11,10 +11,13 @@
                 <input type="hidden" id="role-id" name="id">
                 <div class="mb-3">
                     <label class="form-label">Edit Permission to Role:</label>
-                    <div class="d-flex flex-wrap align-items-center justify-content-center gap-3">
+                    @if ($errors->any())
+                        <p class="text-danger ms-1">Please check at least one permission</p>
+                    @endif
+                    <div class="row align-items-center justify-content-center">
                         @foreach ($permissions as $permission)
-                        <label for="admin">
-                            <input type="checkbox" name="permissions[]" value="{{$permission->name}}" class="form-check-input permission-check">
+                        <label for="{{$permission->id}}" class="col-6 col-md-4">
+                            <input type="checkbox" id="{{$permission->id}}" name="permissions[]" value="{{$permission->name}}" class="form-check-input permission-check">
                         <small>{{$permission->name}}</small></label>
                         @endforeach
                     </div>

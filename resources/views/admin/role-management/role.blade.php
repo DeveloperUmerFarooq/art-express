@@ -19,7 +19,9 @@ Role-Management
                                 <li class="list-group-item bg-transparent">{{ $permission->name }}</li>
                             @endforeach
                         </ul>
-                        <button class="btn btn-primary btn-sm mt-md-3 mt-2 mx-auto" data-bs-toggle="modal" data-bs-target="#Edit-Permission-Role" onclick="CheckPermissions({{$role->permissions}},{{$role->id}})">Edit Permissions</button>
+                        <center>
+                            <button class="btn btn-primary mt-md-3 mt-2" data-bs-toggle="modal" data-bs-target="#Edit-Permission-Role" onclick="CheckPermissions({{$role->permissions}},{{$role->id}})"> Edit Permissions</button>
+                        </center>
                     </div>
                 </div>
             </div>
