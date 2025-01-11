@@ -22,6 +22,7 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
         Route::post('/edit/user',[UserCrud::class,'editUsers'])->name('user.edit');
 
         Route::get('/roles',[RolePermissionController::class,'index'])->name('role');
+        Route::post('/roles/permissions/update',[RolePermissionController::class,'update'])->name('role.update');
 
         Route::name('permission.')->prefix('/permission')->group(function(){
             Route::get('/',[PermissionController::class,'index'])->name('index');

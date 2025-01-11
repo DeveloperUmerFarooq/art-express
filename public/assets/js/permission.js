@@ -22,3 +22,11 @@ function editPermission(user){
     $('#permission-id').val(user['id'])
     $('#name').val(user['name'])
 }
+function CheckPermissions(permissions, id) {
+    $('#role-id').val(id);
+    const permissionNames = new Set(permissions.map(permission => permission.name));
+    $('.permission-check').each(function () {
+        $(this).prop('checked', permissionNames.has($(this).val()));
+    });
+}
+
