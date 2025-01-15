@@ -9,4 +9,10 @@ class SubCategories extends Model
 {
     /** @use HasFactory<\Database\Factories\SubCategoriesFactory> */
     use HasFactory;
+    public function category(){
+        return $this->hasOne(Categories::class);
+    }
+    public function products(){
+        return $this->hasMany(Products::class);
+    }
 }

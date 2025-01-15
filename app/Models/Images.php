@@ -9,4 +9,7 @@ class Images extends Model
 {
     /** @use HasFactory<\Database\Factories\ImagesFactory> */
     use HasFactory;
+    public function artist(){
+        return $this->hasOne(User::class);
+    }
 }
