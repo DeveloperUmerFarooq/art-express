@@ -21,7 +21,6 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('sub_categories')->onDelete('cascade')->onUpdate('cascade');
             $table->text('description');
             $table->decimal('price',10,2);
-            $table->json('materials')->nullable();
             $table->timestamps();
         });
     }
