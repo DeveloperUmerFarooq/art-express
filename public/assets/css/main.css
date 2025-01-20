@@ -182,6 +182,70 @@ th,td{
     background-color:transparent !important;
     vertical-align: middle;
 }
+
+.portrait {
+    height: 26rem !important ;
+    width: 15rem;
+    border: 1px solid #ccc !important;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.landscape{
+    width: 15rem;
+    height: 27rem !important;
+    border: 1px solid #ccc !important;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.portrait .card-img-top {
+    background-color: var(--secondary);
+    height: 150px;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.landscape .card-img-top {
+    background-color: var(--secondary);
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.portrait .card-title, .landscape .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.portrait .card-text,.landscape .card-text {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.portrait .card-price,.landscape .card-price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #2ecc71;
+}
+
+.magnifier {
+    display: none;
+    position: absolute;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-size: 200%;
+    z-index: 10;
+    top: 0;
+    left: 0;
+}
+
 @media (min-width: 601px) {
     .landscape,
     .portrait {

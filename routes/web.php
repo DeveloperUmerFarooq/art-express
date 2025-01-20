@@ -30,7 +30,12 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
             Route::post('/store',[PermissionController::class,'store'])->name('store');
             Route::post('/update',[PermissionController::class,'update'])->name('update');
         });
+
+
     });
+    Route::get('/products',function(){
+        return view('products.store');
+    })->name('products');
     Route::prefix('/profile')->group(function(){
         Route::get('/',[ProfileController::class,'index'])->name('profile');
         Route::post('/links',[ProfileController::class,'addSocialLinks'])->name('profile.links');
