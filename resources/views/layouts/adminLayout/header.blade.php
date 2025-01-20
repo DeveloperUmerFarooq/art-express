@@ -14,7 +14,7 @@
                 <a class="nav-link fs-6 active" aria-current="page" href="{{route('admin.dashboard')}}">Dashboard</a>
               </li>
               <li class="nav-item pt-1">
-                <a class="nav-link fs-6" href="{{route('admin.products')}}">Products</a>
+                <a class="nav-link fs-6" href="{{route('admin.store')}}">Products</a>
               </li>
               <li class="nav-item pt-1">
                 <a class="nav-link fs-6" href="#">Orders</a>

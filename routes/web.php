@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UserCrud;
 use Illuminate\Support\Facades\Route;
 
@@ -33,9 +34,8 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
 
 
     });
-    Route::get('/products',function(){
-        return view('products.store');
-    })->name('products');
+    Route::get('/products',[StoreController::class,'index'])->name('store');
+    Route::get('/products/{id}',[StoreController::class,'products'])->name('products');
     Route::prefix('/profile')->group(function(){
         Route::get('/',[ProfileController::class,'index'])->name('profile');
         Route::post('/links',[ProfileController::class,'addSocialLinks'])->name('profile.links');

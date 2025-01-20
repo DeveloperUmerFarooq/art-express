@@ -10,7 +10,7 @@ class SubCategories extends Model
     /** @use HasFactory<\Database\Factories\SubCategoriesFactory> */
     use HasFactory;
     public function category(){
-        return $this->hasOne(Categories::class);
+        return $this->belongsTo(Categories::class,'category_id');
     }
     public function products(){
         return $this->hasMany(Products::class);
