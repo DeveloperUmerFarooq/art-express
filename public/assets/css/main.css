@@ -183,45 +183,48 @@ th,td{
     vertical-align: middle;
 }
 
-.portrait {
-    max-height: 26rem !important ;
-    width: 15rem;
+.product-card {
+    height: 26rem !important;
+    max-height: 27rem !important ;
+    width: auto;
     border: 1px solid #ccc !important;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.portrait .card-img-top {
+.product-card .card-img-top {
     background-color: var(--secondary);
     height: 150px;
     max-height: 400px;
     object-fit: contain;
 }
 
-.portrait .card-title {
-    font-size: 1.25rem;
+.product-card .card-title {
+    font-size: clamp(1rem, 5vw, 1.25rem);
     font-weight: bold;
 }
 
-.portrait .card-text {
-    font-size: 0.9rem;
+.product-card .card-text {
+    font-size: clamp(0.75rem, 4vw, 0.9rem);
     color: #666;
 }
 
-.portrait .card-price {
-    font-size: 1.1rem;
+.product-card .card-price {
+    font-size: clamp(1rem, 4.5vw, 1.1rem);
     font-weight: bold;
     color: #2ecc71;
 }
-
+.seller{
+    font-size: clamp(0.75rem,4vw,1.25rem) !important;
+}
 .magnifier {
     display: none;
     position: absolute;
     border: 2px solid #000;
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 6rem;
+    height:6rem;
     pointer-events: none;
     background-repeat: no-repeat;
     background-size: 200%;
@@ -229,7 +232,9 @@ th,td{
     top: 0;
     left: 0;
 }
-
+.browse{
+    font-size: clamp(0.5rem, 4vw, 1rem) !important;
+}
 @media (min-width: 601px) {
     .landscape,
     .portrait {
@@ -241,6 +246,15 @@ th,td{
     .landscape,
     .portrait {
         height: 15rem;
+    }
+    .product-card{
+        height: 25.4rem !important ;
+    }
+}
+
+@media (max-width: 320px) {
+    .product-card {
+        height: 24.3rem !important;
     }
 }
 
