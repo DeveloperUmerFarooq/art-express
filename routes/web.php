@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
@@ -38,6 +39,9 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
     Route::get('/product/{id}/blog',function(){
         return view('blogs.index');
     })->name('blogs');
+
+    Route::get('/orders',[OrderController::class,'index'])->name('order');
+
     Route::prefix('/profile')->group(function(){
         Route::get('/',[ProfileController::class,'index'])->name('profile');
         Route::post('/links',[ProfileController::class,'addSocialLinks'])->name('profile.links');

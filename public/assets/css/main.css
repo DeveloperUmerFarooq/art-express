@@ -248,6 +248,10 @@ th,td{
 .blog-card{
     height: max-content !important;
 }
+.order-card{
+    width: 23rem !important;
+    height: max-content;
+}
 @media (min-width: 601px) {
     .landscape,
     .portrait {
