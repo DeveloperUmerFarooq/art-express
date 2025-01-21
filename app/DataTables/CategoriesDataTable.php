@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Category;
+use App\Models\Categories;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -22,14 +22,30 @@ class CategoriesDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'categories.action')
-            ->setRowId('id');
+        ->addColumn('actions', function($query){
+            return view('admin.categories.actions.actions', [
+                'id' => $query->id,
+                'category' => $query
+            ]);
+        })
+        ->addColumn('sub_categories',function($query){
+            return view('admin.categories.actions.view-action',[
+                'id'=>$query->id
+            ]);
+        })
+        ->addColumn('created_at',function($query){
+            return $query->created_at->format('d/m/Y');
+        })
+        ->addColumn('updated_at',function($query){
+            return $query->updated_at->format('d/m/Y');
+        })
+        ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Category $model): QueryBuilder
+    public function query(Categories $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -62,13 +78,7 @@ class CategoriesDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
+            Column::make('name'),
             Column::make('created_at'),
             Column::make('updated_at'),
         ];
