@@ -18,7 +18,7 @@
 
     <div class="row mt-4 mx-2 align-items-center justify-content-center">
         @for ($i = 0; $i < 12; $i++)
-        <div class="col-md-4 mb-4">
+        <div class="col-md-6 col-lg-3 mb-4">
                 <center>
                 <div class="card mt-5 product-card">
                     <div class="image-container">
