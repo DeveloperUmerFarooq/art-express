@@ -22,7 +22,7 @@
 
 
         <p class="text-muted">
-            Posted by <span class="font-weight-bold">John Doe</span>
+            Posted by <span class="font-weight-bold">Muhammad Umer Farooq</span>
             on January 21, 2025
         </p>
     </div>
@@ -49,24 +49,22 @@
                     style="width: 50px; height: 50px;"
                 />
                 <div>
-                    <h6 class="font-weight-bold mb-1">Alice Brown</h6>
+                    <h6 class="font-weight-bold mb-1">Muhammad Ismail</h6>
                     <p class="text-muted small mb-1">January 20, 2025</p>
-                    <p class="text-secondary">
-                        This artwork is absolutely stunning! The colors and composition are so calming and beautiful.
-                    </p>
+                    <pre class="text-secondary">This artwork is absolutely stunning! The colors and composition are so calming and beautiful.</pre>
                 </div>
             </div>
 
 
             <div class="d-flex">
                 <img
-                    src="{{ asset('images/user2.png') }}"
+                    src=""
                     alt="User Icon"
                     class="rounded-circle me-3"
                     style="width: 50px; height: 50px;"
                 />
                 <div>
-                    <h6 class="font-weight-bold mb-1">Mark Johnson</h6>
+                    <h6 class="font-weight-bold mb-1">Muhammad Umer</h6>
                     <p class="text-muted small mb-1">January 19, 2025</p>
                     <p class="text-secondary">
                         The details in this piece are breathtaking. Amazing work by the artist!

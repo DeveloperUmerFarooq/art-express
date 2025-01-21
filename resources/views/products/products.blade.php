@@ -3,6 +3,7 @@
     <h1 class="mt-3 mx-2">{{ $category->name }}</h1>
     <div class="d-flex flex-wrap mx-2">
         <h5>Browse by Subcategory</h5>
+        <h5><a class="ms-3" href="">ask AI about current subcategory</a></h5>
         <form method="GET" action="" class="d-flex flex-wrap ms-auto gap-2">
             <div class="list-group">
                 <select name="subcategories[]" class="form-select">

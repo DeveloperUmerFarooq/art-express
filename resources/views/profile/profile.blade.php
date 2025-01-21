@@ -1,4 +1,4 @@
-@extends('layouts.adminLayout.layout')
+@extends('layouts.' . auth()->user()->getRoleNames()->first() . 'Layout.layout')
 @section('page')
 <div class="container-fluid">
     <div class="d-flex flex-column mt-3">

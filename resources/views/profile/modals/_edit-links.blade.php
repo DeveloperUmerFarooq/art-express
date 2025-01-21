@@ -11,7 +11,7 @@
                 <input type="hidden" name="id" value="{{auth()->user()->id}}">
                 <div>
                     <label for="facebook" class="form-label">Facebook:</label>
-                    <input type="url" id="facebook" name="facebook" class="form-control shadow validate" placeholder="Facebook Link" value="{{ old('facebook',$profile->facebook_link) }}">
+                    <input type="url" id="facebook" name="facebook" class="form-control shadow validate" placeholder="Facebook Link" value="{{$profile->facebook_link}}">
                     @error('facebook')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
@@ -21,7 +21,7 @@
                 </div>
                 <div>
                     <label for="instagram" class="form-label">Instagram:</label>
-                    <input type="url" id="instagram" name="instagram" class="form-control shadow validate" placeholder="Instagram Link" value="{{ old('instagram',$profile->instagaram_link) }}">
+                    <input type="url" id="instagram" name="instagram" class="form-control shadow validate" placeholder="Instagram Link" value="{{ $profile->instagram_link }}">
                     @error('instagram')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
@@ -31,7 +31,7 @@
                 </div>
                 <div>
                     <label for="twitter" class="form-label">Twitter:</label>
-                    <input type="url" id="twitter" id="twitter" name="twitter" class="form-control shadow validate" placeholder="Twitter Link" value="{{ old('twitter',$profile->twitter_link) }}">
+                    <input type="url" id="twitter" id="twitter" name="twitter" class="form-control shadow validate" placeholder="Twitter Link" value="{{$profile->twitter_link}}">
                     @error('twitter')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
@@ -41,7 +41,7 @@
                 </div>
                 <div>
                     <label for="linkedin" class="form-label">Linked In:</label>
-                    <input type="url" id="linkedin" name="linkedin" class="form-control shadow validate" placeholder="Linked In Link" value="{{ old('linkedin',$profile->linkedin_link) }}">
+                    <input type="url" id="linkedin" name="linkedin" class="form-control shadow validate" placeholder="Linked In Link" value="{{$profile->linkedin_link}}">
                     @error('linkedin')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror

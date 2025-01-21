@@ -41,7 +41,7 @@
                                 <p class="card-price">Price: $120</p>
                                 <div class="d-flex justify-content-center gap-1">
                                     <a href="#" class="btn btn-primary">Buy Now</a>
-                                    <a href="#" class="btn btn-outline-success">Read Blog</a>
+                                    <a href="{{route('admin.blogs',1)}}" class="btn btn-outline-success">Read Blog</a>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                                 <p class="card-price">Price: $120</p>
                                 <div class="d-flex justify-content-center gap-1">
                                     <a href="#" class="btn btn-primary">Buy Now</a>
-                                    <a href="#" class="btn btn-outline-success">Read Blog</a>
+                                    <a href="{{route('admin.blogs',1)}}" class="btn btn-outline-success">Read Blog</a>
                                 </div>
                             </div>
                         </div>
