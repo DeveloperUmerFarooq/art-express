@@ -45,38 +45,4 @@
     </div>
 @endsection
 @push('scripts')
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Initialize magnifier functionality
-            const imageContainers = document.querySelectorAll(".image-container");
-
-            imageContainers.forEach((container) => {
-                const img = container.querySelector(".card-img-top");
-                const magnifier = document.createElement("div");
-                magnifier.className = "magnifier";
-                container.appendChild(magnifier);
-
-                container.addEventListener("mousemove", function(e) {
-                    const {
-                        left,
-                        top,
-                        width,
-                        height
-                    } = img.getBoundingClientRect();
-                    const x = e.clientX - left;
-                    const y = e.clientY - top;
-                    magnifier.style.display = "block";
-                    magnifier.style.left = `${x - magnifier.offsetWidth / 4}px`;
-                    magnifier.style.top = `${y - magnifier.offsetHeight / 4}px`;
-                    magnifier.style.backgroundImage = `url(${img.src})`;
-                    magnifier.style.backgroundPosition =
-                        `${-x * 2 + magnifier.offsetWidth / 2}px ${-y * 2 + magnifier.offsetHeight / 2}px`;
-                });
-
-                container.addEventListener("mouseleave", function() {
-                    magnifier.style.display = "none";
-                });
-            });
-        });
-    </script>
 @endpush
