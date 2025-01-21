@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(function () {
     Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
@@ -36,6 +35,9 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
     });
     Route::get('/products',[StoreController::class,'index'])->name('store');
     Route::get('/products/{id}',[StoreController::class,'products'])->name('products');
+    Route::get('/product/{id}/blog',function(){
+        return view('blogs.index');
+    })->name('blogs');
     Route::prefix('/profile')->group(function(){
         Route::get('/',[ProfileController::class,'index'])->name('profile');
         Route::post('/links',[ProfileController::class,'addSocialLinks'])->name('profile.links');

@@ -245,6 +245,9 @@ th,td{
 .browse{
     font-size: clamp(0.5rem, 4vw, 1rem) !important;
 }
+.blog-card{
+    height: max-content !important;
+}
 @media (min-width: 601px) {
     .landscape,
     .portrait {

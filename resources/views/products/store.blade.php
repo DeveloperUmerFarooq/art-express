@@ -1,4 +1,5 @@
-@extends('layouts.adminLayout.layout')
+@extends('layouts.' . auth()->user()->getRoleNames()->first() . 'Layout.layout')
+
 @section('page')
 <div class="container mt-3 mb-3 mb-md-5">
     <input type="text" class="form-control" placeholder="search art-work...">
