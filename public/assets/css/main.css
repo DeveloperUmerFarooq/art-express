@@ -186,7 +186,7 @@ th,td{
 .product-card {
     height: 26rem !important;
     max-height: 27rem !important ;
-    width: auto;
+    width: 18rem;
     border: 1px solid #ccc !important;
     border-radius: 8px;
     overflow: hidden;
@@ -216,7 +216,7 @@ th,td{
     color: #2ecc71;
 }
 .seller{
-    font-size: clamp(0.75rem,4vw,1.25rem) !important;
+    font-size: clamp(0.75rem,4vw,1rem) !important;
 }
 .magnifier {
     display: none;

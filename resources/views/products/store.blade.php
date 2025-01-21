@@ -26,42 +26,46 @@
             <div class="owl-carousel slider-{{$key}}">
                 @for ($i = 0; $i < 5; $i++)
                 <div class="slider-card">
-                    <div class="card mt-5 product-card">
-                        <div class="image-container">
-                            <img src="{{ asset('assets/images/landscape2.png') }}" class="card-img-top object-fit-contain"
-                                alt="Portrait Painting">
-                            <div class="magnifier" id="magnifier"></div>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Beautiful Portrait Painting</h5>
-                            <p class="seller"><b>By:M. Umer Farooq</b></p>
-                            <p class="card-text">A stunning hand-painted portrait that captures every detail with elegance and creativity.</p>
-                            <p class="card-price">Price: $120</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-primary">Buy Now</a>
-                                <a href="#" class="btn btn-outline-success">Read Blog</a>
+                    <center>
+                        <div class="card mt-5 product-card">
+                            <div class="image-container">
+                                <img src="{{ asset('assets/images/landscape2.png') }}" class="card-img-top object-fit-contain"
+                                    alt="Portrait Painting">
+                                <div class="magnifier" id="magnifier"></div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Beautiful Portrait Painting</h5>
+                                <p class="seller"><b>By:M. Umer Farooq</b></p>
+                                <p class="card-text">A stunning hand-painted portrait that captures every detail with elegance and creativity.</p>
+                                <p class="card-price">Price: $120</p>
+                                <div class="d-flex justify-content-center gap-1">
+                                    <a href="#" class="btn btn-primary">Buy Now</a>
+                                    <a href="#" class="btn btn-outline-success">Read Blog</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </center>
                 </div>
                 <div class="slider-card">
-                    <div class="card mt-5 product-card">
-                        <div class="image-container">
-                            <img src="{{ asset('assets/images/IMG-20241222-WA0007.jpg') }}" class="card-img-top object-fit-contain"
-                                alt="Portrait Painting">
-                            <div class="magnifier" id="magnifier"></div>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Beautiful Portrait Painting</h5>
-                            <p class="seller"><b>By:M. Umer Farooq</b></p>
-                            <p class="card-text">A stunning hand-painted portrait that captures every detail with elegance and creativity.</p>
-                            <p class="card-price">Price: $120</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-primary">Buy Now</a>
-                                <a href="#" class="btn btn-outline-success">Read Blog</a>
+                    <center>
+                        <div class="card mt-5 product-card">
+                            <div class="image-container">
+                                <img src="{{ asset('assets/images/IMG-20241222-WA0007.jpg') }}" class="card-img-top object-fit-contain"
+                                    alt="Portrait Painting">
+                                <div class="magnifier" id="magnifier"></div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Beautiful Portrait Painting</h5>
+                                <p class="seller"><b>By:M. Umer Farooq</b></p>
+                                <p class="card-text">A stunning hand-painted portrait that captures every detail with elegance and creativity.</p>
+                                <p class="card-price">Price: $120</p>
+                                <div class="d-flex justify-content-center gap-1">
+                                    <a href="#" class="btn btn-primary">Buy Now</a>
+                                    <a href="#" class="btn btn-outline-success">Read Blog</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </center>
                 </div>
                 @endfor
                 </div>
