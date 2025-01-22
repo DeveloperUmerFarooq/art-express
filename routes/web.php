@@ -12,10 +12,12 @@ use App\Http\Controllers\UserCrud;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
+Route::redirect('/home','/');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(function () {
     Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
+
     Route::name('management.')->group(function(){
         Route::get('/users',[UserCrud::class,'user'])->name('user');
         Route::get('/artist',[UserCrud::class,'artist'])->name('artist');
