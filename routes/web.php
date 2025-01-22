@@ -35,6 +35,9 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
 
             Route::name('sub.')->prefix('/subcategory')->group(function(){
                 Route::get('/{id}',[CategoriesController::class,'sub'])->name('index');
+                Route::post('/store',[CategoriesController::class,'subStore'])->name('store');
+                Route::get('/delete/{id}',[CategoriesController::class,'subDelete'])->name('delete');
+                Route::post('/update',[CategoriesController::class,'subUpdate'])->name('update');
             });
         });
 

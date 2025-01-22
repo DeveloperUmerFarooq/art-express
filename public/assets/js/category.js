@@ -37,7 +37,33 @@ function deleteCategory(id){
       });
 }
 
+function deleteSub(id){
+    Swal.fire({
+        title: "Delete Selected!",
+        text:"Are you sure you want to delete this permission?",
+        showDenyButton: true,
+        icon:'question',
+        confirmButtonText: "Yes",
+        confirmButtonColor:"green",
+        denyButtonText: `No`,
+        customClass: {
+            popup: 'custom-popup'
+          }
+      }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href=`/admin/category/subcategory/delete/${id}`
+        } else if (result.isDenied) {
+            toastr.info('Permission deletion stopped!')
+        }
+      });
+}
+
 function editCategory(category){
     $('#category-id').val(category['id'])
     $('#name').val(category['name'])
+}
+
+function editSub(subcategory){
+    $('#sub-category-id').val(subcategory['id'])
+    $('#Name').val(subcategory['name'])
 }
