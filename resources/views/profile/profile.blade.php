@@ -14,7 +14,7 @@
                             <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/>
                             <path d="m15 5 4 4"/>
                         </svg>
-                        <form action="{{route('admin.avatar')}}" method="POST" class="d-none" id="avatar-form" enctype="multipart/form-data">
+                        <form action="{{route(auth()->user()->getRoleNames()->first().'.avatar')}}" method="POST" class="d-none" id="avatar-form" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="id" value="{{auth()->user()->id}}">
                             <input type="file" name="avatar" id="fileInput" accept="images/*" onchange="document.getElementById('avatar-form').submit();">
@@ -88,7 +88,7 @@
               </nav>
         </div>
         <div class="container mt-1 mt-md-3 mt-lg-3">
-            <form action="{{route('admin.details.update')}}" method="POST" class="ps-1" id="profile">
+            <form action="{{route(auth()->user()->getRoleNames()->first().'.details.update')}}" method="POST" class="ps-1" id="profile">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" disabled>
                 <input type="hidden" name="id" value="{{auth()->user()->id}}" disabled>
                 <div class="row">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
@@ -69,13 +70,44 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
 });
 
 Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(function () {
-    Route::get('/dashboard', function () {
-        dd("artist dashboard");
-    })->name('dashboard');
+    Route::get('/dashboard',[ArtistController::class,'index'])->name('dashboard');
+
+    Route::get('/products',[StoreController::class,'index'])->name('store');
+    Route::get('/products/{id}',[StoreController::class,'products'])->name('products');
+    Route::get('/product/{id}/blog',function(){
+        return view('blogs.index');
+    })->name('blogs');
+
+    Route::get('/orders',[OrderController::class,'index'])->name('order');
+
+    Route::prefix('/profile')->group(function(){
+        Route::get('/',[ProfileController::class,'index'])->name('profile');
+        Route::post('/links',[ProfileController::class,'addSocialLinks'])->name('profile.links');
+        Route::post('/links/update',[ProfileController::class,'editSocailLinks'])->name('profile.links.update');
+        Route::post('/avatar',[ProfileController::class,'updateAvatar'])->name('avatar');
+        Route::post('/details/update',[ProfileController::class,'updateDetails'])->name('details.update');
+        Route::post('/password/update',[ProfileController::class,'updatePassword'])->name('password.update');
+    });
 });
 
 Route::prefix('/user')->name('user.')->middleware(['role:user'])->group(function () {
-    Route::get('/dashboard', function () {
-        dd("user dashboard");
-    })->name('dashboard');
+
+    Route::redirect('/dashboard','/user/products')->name('dashboard');
+
+    Route::get('/products',[StoreController::class,'index'])->name('store');
+    Route::get('/products/{id}',[StoreController::class,'products'])->name('products');
+    Route::get('/product/{id}/blog',function(){
+        return view('blogs.index');
+    })->name('blogs');
+
+    Route::get('/orders',[OrderController::class,'index'])->name('order');
+
+    Route::prefix('/profile')->group(function(){
+        Route::get('/',[ProfileController::class,'index'])->name('profile');
+        Route::post('/links',[ProfileController::class,'addSocialLinks'])->name('profile.links');
+        Route::post('/links/update',[ProfileController::class,'editSocailLinks'])->name('profile.links.update');
+        Route::post('/avatar',[ProfileController::class,'updateAvatar'])->name('avatar');
+        Route::post('/details/update',[ProfileController::class,'updateDetails'])->name('details.update');
+        Route::post('/password/update',[ProfileController::class,'updatePassword'])->name('password.update');
+    });
 });

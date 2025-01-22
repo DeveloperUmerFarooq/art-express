@@ -3,7 +3,7 @@
     <h1 class="mt-3 mx-2">{{ $category->name }}</h1>
     <div class="d-flex flex-wrap mx-2">
         <h5>Browse by Subcategory</h5>
-        <h5><a class="ms-3" href="">ask AI about current subcategory</a></h5>
+        <h7><a class="ms-3" href="">ask AI about current subcategory</a></h7>
         <form method="GET" action="" class="d-flex flex-wrap ms-auto gap-2">
             <div class="list-group">
                 <select name="subcategories[]" class="form-select">
@@ -35,7 +35,7 @@
                         <p class="card-price">Price: $120</p>
                         <div class="d-flex justify-content-center gap-1">
                             <a href="#" class="btn btn-primary">Buy Now</a>
-                            <a href="{{route('admin.blogs',1)}}" class="btn btn-outline-success">Read Blog</a>
+                            <a href="{{route(auth()->user()->getRoleNames()->first().'.blogs',1)}}" class="btn btn-outline-success">Read Blog</a>
                         </div>
                     </div>
                 </div>

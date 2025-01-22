@@ -1,4 +1,4 @@
-@extends('layouts.adminLayout.layout')
+@extends('layouts.artistLayout.layout')
 @section('title')
 Dashboard-Admin
 @endsection
@@ -18,25 +18,15 @@ Dashboard-Admin
 
         <!-- Number of Artists Card -->
         <div class="col-md-3">
-            <div class="card text-white bg-primary bg-gradient mb-3" style="height: max-content">
-                <div class="card-header">Artists</div>
+            <div class="card text-white bg-danger bg-gradient mb-3" style="height: max-content">
+                <div class="card-header">Likes</div>
                 <div class="card-body">
                     <h5 class="card-title text-center" style="color:var(--primary)">50</h5>
-                    <p class="card-text">Total artists on the platform</p>
+                    <p class="card-text">Total likes on platform</p>
                 </div>
             </div>
         </div>
 
-        <!-- Number of Users Card -->
-        <div class="col-md-3">
-            <div class="card text-white bg-success bg-gradient mb-3" style="height: max-content">
-                <div class="card-header">Users</div>
-                <div class="card-body">
-                    <h5 class="card-title text-center" style="color:var(--primary);">50</h5>
-                    <p class="card-text">Total Users on the platform</p>
-                </div>
-            </div>
-        </div>
 
         <!-- Number of Products Card -->
         <div class="col-md-3">
@@ -61,56 +51,14 @@ Dashboard-Admin
         </div>
     </div>
 </div>
-<div class="container mt-5">
-    <div class="row">
-        <!-- Sales Chart -->
-        <div class="col-md-6">
-            <canvas id="salesChart"></canvas>
-        </div>
-
-        <!-- Users Chart -->
-        <div class="col-md-6">
-            <canvas id="usersChart"></canvas>
-        </div>
+<center>
+    <div class="container mt-5">
+        <canvas id="salesChart"></canvas>
     </div>
-</div>
+</center>
 
 @push('scripts')
 <script>
-// Users Chart
-const usersCtx = document.getElementById('usersChart').getContext('2d');
-const usersChart = new Chart(usersCtx, {
-    type: 'bar',
-    data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-        datasets: [{
-            label: 'New Users',
-            data: [50, 75, 100, 120, 130, 150, 180],
-            backgroundColor: 'rgba(75, 192, 75, 0.6)',
-            borderColor: 'rgba(75, 192, 75, 1)',
-            borderWidth: 1,
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            y: {
-                beginAtZero: true,
-            }
-        },
-        plugins: {
-            tooltip: {
-                backgroundColor: 'rgba(0,0,0,0.7)',
-                titleColor: '#fff',
-                bodyColor: '#fff',
-                footerColor: '#fff',
-                borderColor: 'rgba(0,0,0,0.3)',
-                borderWidth: 1,
-            }
-        },
-    }
-});
-
 // Sales Chart
 const salesCtx = document.getElementById('salesChart').getContext('2d');
 const salesChart = new Chart(salesCtx, {
