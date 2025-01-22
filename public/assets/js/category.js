@@ -37,7 +37,7 @@ function deleteCategory(id){
       });
 }
 
-function editPermission(category){
+function editCategory(category){
     $('#category-id').val(category['id'])
     $('#name').val(category['name'])
 }

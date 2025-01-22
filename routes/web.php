@@ -32,6 +32,10 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
             Route::post('/store',[CategoriesController::class,'store'])->name('store');
             Route::get('/delete/{id}',[CategoriesController::class,'delete'])->name('delete');
             Route::post('/update',[CategoriesController::class,'update'])->name('update');
+
+            Route::name('sub.')->prefix('/subcategory')->group(function(){
+                Route::get('/{id}',[CategoriesController::class,'sub'])->name('index');
+            });
         });
 
         Route::name('permission.')->prefix('/permission')->group(function(){

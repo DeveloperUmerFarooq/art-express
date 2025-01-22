@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\CategoriesDataTable;
+use App\DataTables\SubCategoriesDataTable;
 use App\Models\Categories;
 use Exception;
 use Illuminate\Http\Request;
@@ -11,6 +12,10 @@ class CategoriesController extends Controller
 {
     public function index(CategoriesDataTable $datatable){
         return $datatable->render('admin.categories.categories');
+    }
+
+    public function sub(SubCategoriesDataTable $datatable,$id){
+        return $datatable->subCategories($id)->render('admin.categories.subcategories');
     }
 
     public function store(Request $req){

@@ -2,7 +2,8 @@
 
 namespace App\DataTables;
 
-use App\Models\Categories;
+use App\Models\SubCategories;
+use App\Models\SubCategory;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,8 +13,16 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CategoriesDataTable extends DataTable
+class SubCategoriesDataTable extends DataTable
 {
+
+    protected $id;
+
+
+    public function subCategories($id){
+        $this->id=$id;
+        return $this;
+    }
     /**
      * Build the DataTable class.
      *
@@ -23,34 +32,26 @@ class CategoriesDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
         ->addColumn('actions', function($query){
-            return view('admin.categories.actions.actions', [
+            return view('admin.categories.actions.subactions', [
                 'id' => $query->id,
                 'category' => $query
             ]);
         })
-        ->addColumn('subCategories_count',function($query){
-            return $query->subCatagories()->count();
-        })
-        ->addColumn('sub_categories',function($query){
-            return view('admin.categories.actions.view-action',[
-                'id'=>$query->id
-            ]);
-        })
-        ->addColumn('created_at',function($query){
-            return $query->created_at->format('d/m/Y');
-        })
-        ->addColumn('updated_at',function($query){
-            return $query->updated_at->format('d/m/Y');
-        })
-        ->setRowId('id');
+            ->addColumn('created_at',function($query){
+                return $query->created_at->format('d/m/Y');
+            })
+            ->addColumn('updated_at',function($query){
+                return $query->updated_at->format('d/m/Y');
+            })
+            ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Categories $model): QueryBuilder
+    public function query(SubCategories $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->where('category_id',$this->id)->newQuery();
     }
 
     /**
@@ -59,12 +60,12 @@ class CategoriesDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('categories-table')
+                    ->setTableId('subcategories-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
                     ->ordering(false)
+                    ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -83,8 +84,6 @@ class CategoriesDataTable extends DataTable
     {
         return [
             Column::make('name'),
-            Column::make('subCategories_count')->addClass('text-center'),
-            Column::make('sub_categories')->addClass('text-center'),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::make('actions')
@@ -96,6 +95,6 @@ class CategoriesDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Categories_' . date('YmdHis');
+        return 'SubCategories_' . date('YmdHis');
     }
 }
