@@ -28,6 +28,9 @@ class CategoriesDataTable extends DataTable
                 'category' => $query
             ]);
         })
+        ->addColumn('subCategories_count',function($query){
+            return $query->subCatagories()->count();
+        })
         ->addColumn('sub_categories',function($query){
             return view('admin.categories.actions.view-action',[
                 'id'=>$query->id
@@ -61,6 +64,7 @@ class CategoriesDataTable extends DataTable
                     ->minifiedAjax()
                     //->dom('Bfrtip')
                     ->orderBy(1)
+                    ->ordering(false)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -79,8 +83,10 @@ class CategoriesDataTable extends DataTable
     {
         return [
             Column::make('name'),
+            Column::make('subCategories_count')->addClass('text-center'),
             Column::make('created_at'),
             Column::make('updated_at'),
+            Column::make('actions')
         ];
     }
 

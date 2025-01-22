@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
@@ -24,6 +25,14 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
 
         Route::get('/roles',[RolePermissionController::class,'index'])->name('role');
         Route::post('/roles/permissions/update',[RolePermissionController::class,'update'])->name('role.update');
+
+
+        Route::name('catergory.')->prefix('/category')->group(function(){
+            Route::get('/',[CategoriesController::class,'index'])->name('index');
+            Route::post('/store',[CategoriesController::class,'store'])->name('store');
+            Route::get('/delete/{id}',[CategoriesController::class,'delete'])->name('delete');
+            Route::post('/update',[CategoriesController::class,'update'])->name('update');
+        });
 
         Route::name('permission.')->prefix('/permission')->group(function(){
             Route::get('/',[PermissionController::class,'index'])->name('index');

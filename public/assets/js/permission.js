@@ -18,9 +18,9 @@ function deletePermission(id){
         }
       });
 }
-function editPermission(user){
-    $('#permission-id').val(user['id'])
-    $('#name').val(user['name'])
+function editPermission(permission){
+    $('#permission-id').val(permission['id'])
+    $('#name').val(permission['name'])
 }
 function CheckPermissions(permissions, id) {
     $('#role-id').val(id);
