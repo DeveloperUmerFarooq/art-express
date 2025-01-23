@@ -194,21 +194,22 @@ th,td{
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .product-card .card-body{
+    opacity: 0;
     transition: all 0.5s linear;
 }
 .product-card .card-img-top {
     background-color: var(--secondary);
-    height: 150px;
+    height: 100vh;
     max-height: 400px;
     object-fit: contain;
     transition: all 0.5s ease-in-out;
 }
-.product-card .image-container:hover >.card-img-top{
-    height: 100vh;
+.product-card:hover .image-container>.card-img-top{
+    height: 150px;
     transition: all .4s ease-in;
 }
-.product-card .image-container:hover + .card-body{
-    opacity:0;
+.product-card:hover .image-container+.card-body{
+    opacity:1;
 }
 .product-card .card-title {
     font-size: clamp(1rem, 5vw, 1.25rem);
