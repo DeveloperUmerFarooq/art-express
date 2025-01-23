@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Products;
 use App\Models\User;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Exception;
@@ -123,5 +124,11 @@ class ProfileController extends Controller
         ]);
         toastr()->success("Password Updated Successfully!");
         return redirect()->back();
+    }
+
+    public function portfolio(){
+        $user=User::with('images')->with(['products.image'])->find(auth()->user()->id);
+        $images=$user->images;
+        dd($images->toArray());
     }
 }

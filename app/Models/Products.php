@@ -16,7 +16,7 @@ class Products extends Model
         return $this->hasOne(SubCategories::class);
     }
     public function image(){
-        return  $this->hasOne(Images::class);
+        return  $this->hasOne(Images::class,'product_id');
     }
     public function artist(){
         return $this->hasOne(User::class);

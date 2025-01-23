@@ -78,6 +78,7 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
 
     Route::get('/products',[ProductsController::class,'index'])->name('product');
 
+
     Route::get('/store',[StoreController::class,'index'])->name('store');
     Route::get('/products/{id}',[StoreController::class,'products'])->name('products');
     Route::get('/product/{id}/blog',function(){
@@ -87,6 +88,7 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
     Route::get('/orders',[OrderController::class,'index'])->name('order');
 
     Route::prefix('/profile')->group(function(){
+        Route::get('/portfolio',[ProfileController::class,'portfolio'])->name('index');
         Route::get('/',[ProfileController::class,'index'])->name('profile');
         Route::post('/links',[ProfileController::class,'addSocialLinks'])->name('profile.links');
         Route::post('/links/update',[ProfileController::class,'editSocailLinks'])->name('profile.links.update');
