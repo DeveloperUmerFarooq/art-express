@@ -35,7 +35,7 @@
                 <ul class="dropdown-menu dropdown-menu-end">
                   <abbr title="View Profile">
                   <li><center>
-                    <a class="d-flex flex-column text-decoration-none gap-1 pb-0" href="{{route('artist.profile')}}">
+                    <a class="d-flex flex-column text-decoration-none gap-1 pb-0" href="{{route('artist.profile.index')}}">
                         <div class="profile-image rounded-full">
                         <img class="rounded-circle" src="{{auth()->user()->profile->profile_image}}" style="height: 4rem" alt="{{auth()->user()->name}}">
                         </div>

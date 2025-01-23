@@ -254,6 +254,29 @@ th,td{
     width: 23rem !important;
     height: max-content;
 }
+.portfolio{
+    padding: 1rem;
+    columns: 9rem;
+    column-gap: 0.3rem;
+}
+.portfolio img {
+    width: 100%;
+    object-fit: contain;
+    margin-top: .3rem;
+    break-inside: avoid;
+    transition: all 0.7s ease-in;
+}
+
+.portfolio a{
+    display: none;
+    transition: all 0.4s ease-in;
+}
+.portfolio a:hover{
+    display: block;
+}
+.portfolio img:hover + a{
+    display: block;
+}
 @media (min-width: 601px) {
     .landscape,
     .portrait {

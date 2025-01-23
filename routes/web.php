@@ -5,6 +5,7 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
@@ -88,7 +89,9 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
     Route::get('/orders',[OrderController::class,'index'])->name('order');
 
     Route::prefix('/profile')->group(function(){
-        Route::get('/portfolio',[ProfileController::class,'portfolio'])->name('index');
+        Route::get('/portfolio',[PortfolioController::class,'index'])->name('profile.index');
+        Route::post('/portfolio/image',[PortfolioController::class,'addImage'])->name('profile.image');
+        Route::get('/portfolio/image/{id}',[PortfolioController::class,'deleteImage'])->name('profile.image.delete');
         Route::get('/',[ProfileController::class,'index'])->name('profile');
         Route::post('/links',[ProfileController::class,'addSocialLinks'])->name('profile.links');
         Route::post('/links/update',[ProfileController::class,'editSocailLinks'])->name('profile.links.update');

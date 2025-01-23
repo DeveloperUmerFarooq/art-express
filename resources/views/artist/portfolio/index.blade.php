@@ -6,20 +6,6 @@
             <center>
                 <div class="position-relative overflow-hidden" style="width: clamp(10rem,15vw,20rem); height: clamp(10rem,15vw,20rem)">
                     <img class="rounded-circle w-100 h-100" src="{{$profile->profile_image}}" alt="Profile Image" style="object-fit: cover;">
-                    <div class="position-absolute bg-dark d-flex align-items-center justify-content-center rounded-circle shadow-lg"
-                         style="z-index: 5; bottom: 10px; right:10%; width: clamp(2rem,1vw,3rem); height: clamp(2rem,1vw,3rem); cursor:pointer"
-                         onclick="document.getElementById('fileInput').click();">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                             stroke="#fff0dc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil">
-                            <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/>
-                            <path d="m15 5 4 4"/>
-                        </svg>
-                        <form action="{{route(auth()->user()->getRoleNames()->first().'.avatar')}}" method="POST" class="d-none" id="avatar-form" enctype="multipart/form-data">
-                            @csrf
-                            <input type="hidden" name="id" value="{{auth()->user()->id}}">
-                            <input type="file" name="avatar" id="fileInput" accept="images/*" onchange="document.getElementById('avatar-form').submit();">
-                        </form>
-                    </div>
                 </div>
                 <div class="fs-3 mt-1" style="vertical-align: middle">
                     <span><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#023222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg></span>
@@ -58,121 +44,76 @@
                             </svg>
                     </a>
                     @endif
-                    <abbr title="Edit Social Links">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#Edit-Social-Links">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#131010" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-pen-line"><path d="m18 5-2.414-2.414A2 2 0 0 0 14.172 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2"/><path d="M21.378 12.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><path d="M8 18h1"/></svg>
-                        </a>
-                    </abbr>
                 </div>
-                @else
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Add-Social-Links">Add Social Links</button>
                 @endif
             </center>
-            <nav class="navbar navbar-expand-lg bg-transparent mt-1">
+            <nav class="navbar navbar-expand-lg bg-transparent mt-2">
                 <div class="container-fluid">
-                  <span class="navbar-brand text-white">Personal Details</span>
+                  <span class="navbar-brand text-white">Artworks</span>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff0cd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-justify"><path d="M3 12h18"/><path d="M3 18h18"/><path d="M3 6h18"/></svg>
                   </button>
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    @if (auth()->user()->hasRole('artist'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('artist.profile.index')}}">Portfolio</a>
-                    </li>
-                    @endif
                       <li class="nav-item">
-                        <a class="nav-link" id="edit-details" href="#">Edit Details</a>
+                        <a class="nav-link" href="{{route('artist.profile')}}">View Profile</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#Change-Password">Change Password</a>
+                        <a class="nav-link" href="#" onclick="document.getElementById('imageInput').click();">Add Images</a>
                       </li>
                     </ul>
                   </div>
                 </div>
               </nav>
-        </div>
-        <div class="container mt-1 mt-md-3 mt-lg-3">
-            <form action="{{route(auth()->user()->getRoleNames()->first().'.details.update')}}" method="POST" class="ps-1" id="profile">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}" disabled>
-                <input type="hidden" name="id" value="{{auth()->user()->id}}" disabled>
-                <div class="row">
-                    <div class="input-group col-md row align-items-center">
-                        <label for="" class="form-label col-3 col-md-4 col-lg-3 mt-2">Name:</label>
-                        <input type="text" name="name" id="name" class="validate form-control col" placeholder="username" value="{{auth()->user()->name}}" disabled>
-                        @error('name')
-                        <p class="text-danger ms-1">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="input-group col-md row align-items-center">
-                        <label for="" class="form-label col-md-4 col-lg-3 col-3 mt-2">Email:</label>
-                        <input type="email" name="email" id="email" class="validate form-control col" placeholder="email" value="{{auth()->user()->email}}" disabled>
-                        @error('email')
-                        <p class="text-danger ms-1">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="input-group col-md row">
-                        <label for="" class="form-label col-3 col-md-4 col-lg-3 mt-2">Phone:</label>
-                        <input type="text" name="phone_number" min="10" max="15" id="phone-number" class="validate form-control col" placeholder="phone#" value="{{$profile->phone_number}}" disabled>
-                        @error('phone_number')
-                        <p class="text-danger ms-1">{{$message}}</p>
-                        @enderror
-                    </div>
-                </div>
-                <div class="row mt-2">
-                    <div class="input-group col-md row align-items-center">
-                        <label for="" class="form-label col-md-4 col-lg-3 col-3 mt-2">CNIC:</label>
-                        <input type="text" min="13" max="14" name="cnic" id="cnic" class="validate form-control col" placeholder="CNIC" value="{{$profile->cnic}}" disabled>
-                        @error('cnic')
-                        <p class="text-danger ms-1">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="input-group col-md row align-items-center">
-                        <label for="" class="form-label col-md-4 col-lg-3 col-3 mt-2">Country:</label>
-                        <input type="text" id="country" name="country" class="validate form-control col" placeholder="country" value="{{$profile->country}}" disabled>
-                        @error('country')
-                        <p class="text-danger ms-1">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="input-group col-md row align-items-center">
-                        <label for="" class="form-label col-md-4 col-lg-3 col-3 mt-2">City</label>
-                        <input type="text" id="city" name="city" class="validate form-control col" placeholder="city" value="{{$profile->city}}" disabled>
-                        @error('city')
-                        <p class="text-danger ms-1">{{$message}}</p>
-                        @enderror
-                    </div>
-                </div>
-                <div class="row mt-2">
-                    <div class="input-group col-md row">
-                        <label for="" class="form-label col-3 col-lg-2 mt-2">Bio:</label>
-                        <textarea rows="2" name="bio" id="bio" class="validate form-control col" placeholder="bio" disabled>{{$profile->bio}}</textarea>
-                        @error('bio')
-                        <p class="text-danger ms-1">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="input-group col-md row">
-                        <label for="" class="form-label col-3 col-lg-2 mt-2">Address:</label>
-                        <textarea id="address" name="address" rows="2" class="validate form-control col" placeholder="address" disabled>{{$profile->address}}</textarea>
-                        @error('address')
-                        <p class="text-danger ms-1">{{$message}}</p>
-                        @enderror
-                    </div>
-                </div>
-                <center>
-                    <button id="profile-submit" type="submit" class="btn btn-primary mt-2">Submit</button>
-                    <button id="cancel" class="btn btn-danger mt-2">Cancel</button>
-                </center>
+              <form action="{{route('artist.profile.image')}}" method="POST" class="d-none" id="image-form" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="id" value="{{auth()->user()->id}}">
+                <input type="file" name="image" id="imageInput" accept="images/*" onchange="document.getElementById('image-form').submit();">
             </form>
-            <center>
-                <button class="btn btn-danger" onclick="document.getElementById('logout-form').submit();">Logout</button>
-            </center>
+        </div>
+        <div class="container">
+            <div class="portfolio">
+                @foreach ($images as $image)
+                <div class="position-relative" class="img">
+                    <img src="{{asset($image->image_src)}}" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-url="{{asset($image->image_src)}}" alt="">
+                    <a href="{{route('artist.profile.image.delete',$image->id)}}" class="position-absolute top-0 end-0 mt-2 me-1 btn btn-danger p-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f4ebd9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                    </a>
+                </div>
+                @endforeach
+            </div>
         </div>
     </div>
 </div>
+
+{{-- preview modal --}}
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="modalImage" src="" alt="Preview" class="img-fluid" style="height: 25rem; object-fit:contain">
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
-@include('profile.modals._add-links')
-@include('profile.modals._edit-links')
-@include('profile.modals._change-password')
 @push('scripts')
-<script src="{{asset('assets/js/profile.js')}}"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const modalImage = document.getElementById('modalImage');
+        const viewImageButtons = document.querySelectorAll('img');
+
+        viewImageButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const imageUrl = this.getAttribute('data-image-url');
+                modalImage.src = imageUrl;
+            });
+        });
+    });
+</script>
 @endpush
