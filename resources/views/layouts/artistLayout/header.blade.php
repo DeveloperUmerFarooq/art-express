@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container">
           <a class="navbar-brand fs-3" href="/">Art-Express</a>
-          <a href="{{route('admin.profile')}}" class="nav-link dropdown-toggle no-togggle-icon fs-6 ms-auto mx-1 d-md-none">
+          <a href="{{route('admin.profile')}}" class="nav-link dropdown-toggle no-togggle-icon fs-6 ms-auto mx-1 d-lg-none">
               <img class="rounded-circle" src="{{auth()->user()->profile->profile_image}}" alt="{{auth()->user()->name}}" height="30">
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,7 +14,10 @@
                 <a class="nav-link fs-6 active" aria-current="page" href="{{route('artist.dashboard')}}">Dashboard</a>
               </li>
               <li class="nav-item pt-1">
-                <a class="nav-link fs-6" href="{{route('artist.store')}}">Products</a>
+                <a class="nav-link fs-6" href="{{route('artist.store')}}">Store</a>
+              </li>
+              <li class="nav-item pt-1">
+                <a class="nav-link fs-6" href="{{route('artist.product')}}">Products</a>
               </li>
               <li class="nav-item pt-1">
                 <a class="nav-link fs-6" href="{{route('artist.order')}}">Orders</a>
@@ -25,7 +28,7 @@
               <li class="nav-item pt-1">
                 <a class="nav-link fs-6" href="">Auctions</a>
               </li>
-              <li class="nav-item dropdown d-none d-md-block">
+              <li class="nav-item dropdown d-none d-lg-block">
                 <a class="nav-link dropdown-toggle no-togggle-icon fs-6" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img class="rounded-circle" src="{{auth()->user()->profile->profile_image}}" alt="{{auth()->user()->name}}" height="30">
                 </a>

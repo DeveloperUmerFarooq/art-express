@@ -18,8 +18,8 @@
                         <div class="col-auto">
                             <label for="sub-category-count" class="form-label">Subcategories Count:</label>
                         </div>
-                        <div class="col">
-                            <input type="number" name="count" id="sub-category-count" class="form-control shadow" placeholder="Enter number of subcategories" min="0">
+                        <div class="col-3 ms-auto">
+                            <input type="number" name="count" id="sub-category-count" class="form-control shadow" placeholder="Count" min="0">
                         </div>
                         <div class="col-12">
                             <p class="text-info mt-1"><small>Leave blank if no subcategories are needed.</small></p>

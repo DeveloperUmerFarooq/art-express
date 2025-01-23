@@ -5,6 +5,7 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\StoreController;
@@ -74,7 +75,10 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
 Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(function () {
     Route::get('/dashboard',[ArtistController::class,'index'])->name('dashboard');
 
-    Route::get('/products',[StoreController::class,'index'])->name('store');
+
+    Route::get('/products',[ProductsController::class,'index'])->name('product');
+
+    Route::get('/store',[StoreController::class,'index'])->name('store');
     Route::get('/products/{id}',[StoreController::class,'products'])->name('products');
     Route::get('/product/{id}/blog',function(){
         return view('blogs.index');
@@ -94,9 +98,9 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
 
 Route::prefix('/user')->name('user.')->middleware(['role:user'])->group(function () {
 
-    Route::redirect('/dashboard','/user/products')->name('dashboard');
+    Route::redirect('/dashboard','/user/store')->name('dashboard');
 
-    Route::get('/products',[StoreController::class,'index'])->name('store');
+    Route::get('/store',[StoreController::class,'index'])->name('store');
     Route::get('/products/{id}',[StoreController::class,'products'])->name('products');
     Route::get('/product/{id}/blog',function(){
         return view('blogs.index');
