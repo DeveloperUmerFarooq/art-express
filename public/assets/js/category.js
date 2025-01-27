@@ -19,7 +19,7 @@ $(document).ready(function(){
 function deleteCategory(id){
     Swal.fire({
         title: "Delete Selected!",
-        text:"Are you sure you want to delete this permission?",
+        text:"Are you sure you want to delete this category?",
         showDenyButton: true,
         icon:'question',
         confirmButtonText: "Yes",
@@ -32,7 +32,7 @@ function deleteCategory(id){
         if (result.isConfirmed) {
             window.location.href=`/admin/category/delete/${id}`
         } else if (result.isDenied) {
-            toastr.info('Permission deletion stopped!')
+            toastr.info('Category deletion stopped!')
         }
       });
 }
@@ -40,7 +40,7 @@ function deleteCategory(id){
 function deleteSub(id){
     Swal.fire({
         title: "Delete Selected!",
-        text:"Are you sure you want to delete this permission?",
+        text:"Are you sure you want to delete this sub-category?",
         showDenyButton: true,
         icon:'question',
         confirmButtonText: "Yes",
@@ -53,7 +53,7 @@ function deleteSub(id){
         if (result.isConfirmed) {
             window.location.href=`/admin/category/subcategory/delete/${id}`
         } else if (result.isDenied) {
-            toastr.info('Permission deletion stopped!')
+            toastr.info('Sub-Category deletion stopped!')
         }
       });
 }
