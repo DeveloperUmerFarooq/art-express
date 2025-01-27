@@ -9,4 +9,8 @@ class Blogs extends Model
 {
     /** @use HasFactory<\Database\Factories\BlogsFactory> */
     use HasFactory;
+    protected $guarded=[];
+    public function product(){
+        return $this->belongsTo(Products::class,'product_id');
+    }
 }

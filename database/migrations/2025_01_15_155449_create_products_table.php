@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->enum('status',['Sold','Unsold']);
-            $table->foreignId('blog_id')->nullable()->constrained('blogs')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('artist_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('category_id')->constrained('sub_categories')->onDelete('cascade')->onUpdate('cascade');
             $table->text('description');

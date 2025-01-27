@@ -1,7 +1,12 @@
 @extends('layouts.' . auth()->user()->getRoleNames()->first() . 'Layout.layout')
 @section('page')
-<div class="row mt-4 mx-2 align-items-center justify-content-center">
-    @for ($i = 0; $i < 12; $i++)
+<div class="d-flex container mt-3">
+    <h3>Manage Products</h3>
+    <button class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#productModal">Add Product</button>
+</div>
+<div class="row mx-2 align-items-center justify-content-center">
+
+    @foreach ($products as $product)
     <div class="col-md-6 col-lg-3 mb-4">
             <center>
             <div class="card mt-5 product-card position-relative">
@@ -11,26 +16,62 @@
                     <button class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
                 </div>
                 <div class="image-container">
-                    <img src="{{ asset('assets/images/IMG-20241222-WA0007.jpg') }}" class="card-img-top object-fit-contain"
+                    <img src="{{ asset($product->image->image_src) }}" class="card-img-top object-fit-contain"
                         alt="Portrait Painting">
                     <div class="magnifier" id="magnifier"></div>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Beautiful Portrait Painting</h5>
-                    <p class="seller"><b>By:M. Umer Farooq</b></p>
-                    <p class="card-text">A stunning hand-painted portrait that captures every detail with elegance and
-                        creativity.</p>
-                    <p class="card-price">Price: $120</p>
-                    <div class="d-flex justify-content-center gap-1">
-                        <a href="{{route(auth()->user()->getRoleNames()->first().'.blogs',1)}}" class="btn btn-outline-success">Read Blog</a>
+                    <h5 class="card-title">{{$product->title}}</h5>
+                    <p class="seller"><b>By: {{$product->artist->name}}</b></p>
+                    <p class="card-text">{{$product->description}}</p>
+                    <p class="card-price">Price: {{$product->price}} Rs</p>
+                    <div class="d-flex justify-content-center gap-1 mt-auto">
+                        <a href="{{route(auth()->user()->getRoleNames()->first().'.blogs',$product->blog->id)}}" class="btn btn-outline-success">Read Blog</a>
                     </div>
                 </div>
             </div>
         </center>
         </div>
-        @endfor
-
+    @endforeach
+@include('artist.products.modals._Add-Product')
 </div>
 @endsection
 @push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const addBlogCheckbox = document.getElementById('addBlog');
+    const blogContent = document.getElementById('blogContent');
+    const categorySelect = document.getElementById('category');
+    const subcategoryContainer = document.getElementById('subcategoryContainer');
+    const subcategorySelect = document.getElementById('subcategory');
+
+    if(addBlogCheckbox.checked){
+        blogContent.classList.remove('d-none');
+    }
+    // Toggle blog content field
+    addBlogCheckbox.addEventListener('change', function () {
+        blogContent.classList.toggle('d-none', !this.checked);
+    });
+
+    // Fetch subcategories based on category selection
+    categorySelect.addEventListener('change', function () {
+        const categoryId = this.value;
+        if (categoryId) {
+            fetch(`/artist/categories/${categoryId}/subcategories`)
+                .then(response => response.json())
+                .then(data => {
+                    subcategoryContainer.classList.remove('d-none');
+                    subcategorySelect.innerHTML = '<option value="">Select a Subcategory</option>';
+                    data.forEach(subcategory => {
+                        subcategorySelect.innerHTML += `<option value="${subcategory.id}">${subcategory.name}</option>`;
+                    });
+                });
+        } else {
+            subcategoryContainer.classList.add('d-none');
+            subcategorySelect.innerHTML = '<option value="">Select a Subcategory</option>';
+        }
+    });
+});
+
+</script>
 @endpush

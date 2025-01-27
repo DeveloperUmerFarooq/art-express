@@ -20,14 +20,14 @@
         </h1>
 
         <p class="text-muted">
-            Posted by <span class="font-weight-bold">Muhammad Umer Farooq</span>
-            on January 21, 2025
+            Posted by <span class="font-weight-bold">{{$blog->product->artist->name}}</span>
+            on {{ $blog->created_at->format('F j, Y') }}
         </p>
     </div>
 
     <div class="mt-4">
         <p class="text-justify text-secondary text-black">
-            This mesmerizing artwork captures the serene beauty of a sunset by the lake. The vibrant colors and delicate brushstrokes bring to life the tranquility and charm of nature, making it a perfect addition to any art collection.
+            {{$blog->content}}
         </p>
     </div>
 

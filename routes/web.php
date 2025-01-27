@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
@@ -78,13 +79,12 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
 
 
     Route::get('/products',[ProductsController::class,'index'])->name('product');
-
+    Route::post('/product',[ProductsController::class,'store'])->name('add');
+    Route::get('/categories/{id}/subcategories',[ProductsController::class,'getCategory'])->name('getcategory');
 
     Route::get('/store',[StoreController::class,'index'])->name('store');
     Route::get('/products/{id}',[StoreController::class,'products'])->name('products');
-    Route::get('/product/{id}/blog',function(){
-        return view('blogs.index');
-    })->name('blogs');
+    Route::get('/product/{id}/blog',[BlogsController::class,'index'])->name('blogs');
 
     Route::get('/orders',[OrderController::class,'index'])->name('order');
 
