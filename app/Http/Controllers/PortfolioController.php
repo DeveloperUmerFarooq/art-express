@@ -58,7 +58,6 @@ class PortfolioController extends Controller
             $image = Images::findOrFail($id);
             $relativePath = str_replace('/storage/', '', $image->image_src);
             if (Storage::disk('public')->exists($relativePath)) {
-                // dd($relativePath);
                 Storage::disk('public')->delete($relativePath);
             }
             $image->delete();

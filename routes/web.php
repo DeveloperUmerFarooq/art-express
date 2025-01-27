@@ -80,6 +80,7 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
 
     Route::get('/products',[ProductsController::class,'index'])->name('product');
     Route::post('/product',[ProductsController::class,'store'])->name('add');
+    Route::post('/product/update',[ProductsController::class,'update'])->name('product.update');
     Route::get('/categories/{id}/subcategories',[ProductsController::class,'getCategory'])->name('getcategory');
 
     Route::get('/store',[StoreController::class,'index'])->name('store');
