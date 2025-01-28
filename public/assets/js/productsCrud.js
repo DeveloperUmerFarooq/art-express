@@ -28,5 +28,25 @@ function edit(product,src){
     $('#product-description').val(product.description)
     $('#product-price').val(product.price)
     $('#product-id').val(product.id)
-    console.log(product,src);
+}
+
+function deleteProduct(url){
+    Swal.fire({
+        title: "Delete Selected!",
+        text:"Are you sure you want to delete this product?",
+        showDenyButton: true,
+        icon:'question',
+        confirmButtonText: "Yes",
+        confirmButtonColor:"green",
+        denyButtonText: `No`,
+        customClass: {
+            popup: 'custom-popup'
+          }
+      }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href=`${url}`
+        } else if (result.isDenied) {
+            toastr.info('Product deletion stopped!')
+        }
+      });
 }

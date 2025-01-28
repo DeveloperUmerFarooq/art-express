@@ -5,7 +5,7 @@
 
     <div class="text-center mb-4">
         <img
-            src="{{ asset('assets/images/IMG-20241222-WA0007.jpg') }}"
+            src="{{ asset($blog->product->image->image_src) }}"
             alt="Beautiful Artwork"
             class="img-fluid"
             height="400"
@@ -16,7 +16,7 @@
 
     <div class="text-center">
         <h1 class="h3 font-weight-bold text-dark">
-            Stunning Sunset by the Lake
+            {{$blog->title}}
         </h1>
 
         <p class="text-muted">
@@ -24,6 +24,15 @@
             on {{ $blog->created_at->format('F j, Y') }}
         </p>
     </div>
+
+    {{-- Edit and delete actions --}}
+
+    <center>
+        <div class="d-flex gap-2 justify-content-center">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editPostModal" onclick="editPost({{$blog}})">Edit</button>
+            <button class="btn btn-danger">Delete</button>
+        </div>
+    </center>
 
     <div class="mt-4">
         <p class="text-justify text-secondary text-black">
@@ -107,4 +116,8 @@
         </div>
     </div>
 </div>
+@include('blogs.modals._Edit-Post')
 @endsection
+@push('scripts')
+    <script src="{{asset('assets/js/blogCrud.js')}}"></script>
+@endpush

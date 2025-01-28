@@ -90,7 +90,7 @@ class ProductsController extends Controller
             'price' => 'required',
             'image' => 'nullable|mimes:peg,png,jpg,gif|max:2048'
         ]);
-        try{
+        try {
             $product = Products::find($req->id);
             $product->update([
                 'name' => $req->title ?? $product->name,
@@ -105,25 +105,43 @@ class ProductsController extends Controller
                     Storage::disk('public')->delete($relativePath);
                 }
                 $image = $req->file('image');
-                    $filename = now()->timestamp . '_' . uniqid() . '.' . $image->extension();
-                    $image = ImageManager::gd()->read($image);
-                    $image->text("By: ".$product->artist->name, $image->width() / 2, $image->height() / 2, function ($font) {
-                        $font->file(public_path('font.ttf'));
-                        $font->size(70);
-                        $font->color('#495057');
-                        $font->stroke('#f8f9fa', 1);
-                        $font->align('center');
-                        $font->lineHeight(1.6);
-                    });
-                    $path='portfolio/'.$filename;
-                    Storage::disk('public')->put($path, (string) $image->encode());
-                    $src=Storage::url($path);
-                    $product->image()->update([
-                        'image_src'=>$src
-                    ]);
+                $filename = now()->timestamp . '_' . uniqid() . '.' . $image->extension();
+                $image = ImageManager::gd()->read($image);
+                $image->text("By: " . $product->artist->name, $image->width() / 2, $image->height() / 2, function ($font) {
+                    $font->file(public_path('font.ttf'));
+                    $font->size(70);
+                    $font->color('#495057');
+                    $font->stroke('#f8f9fa', 1);
+                    $font->align('center');
+                    $font->lineHeight(1.6);
+                });
+                $path = 'portfolio/' . $filename;
+                Storage::disk('public')->put($path, (string) $image->encode());
+                $src = Storage::url($path);
+                $product->image()->update([
+                    'image_src' => $src
+                ]);
             }
             toastr()->success("Product Updated!");
-        }catch (Exception $e) {
+        } catch (Exception $e) {
+            toastr()->error("Operation Failed!");
+        }
+        return redirect()->back();
+    }
+
+    function delete($id)
+    {
+        try{
+            $product = Products::find($id);
+            $image = $product->image;
+            $relativePath = str_replace('/storage/', '', $image->image_src);
+            if (Storage::disk('public')->exists($relativePath)) {
+                Storage::disk('public')->delete($relativePath);
+            }
+            $product->delete();
+            toastr()->success("Product Deleted Successfully!");
+        }
+        catch(Exception $e){
             toastr()->error("Operation Failed!");
         }
         return redirect()->back();

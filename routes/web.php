@@ -77,11 +77,14 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
 Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(function () {
     Route::get('/dashboard',[ArtistController::class,'index'])->name('dashboard');
 
+    Route::get('/categories/{id}/subcategories',[ProductsController::class,'getCategory'])->name('getcategory');
 
     Route::get('/products',[ProductsController::class,'index'])->name('product');
     Route::post('/product',[ProductsController::class,'store'])->name('add');
     Route::post('/product/update',[ProductsController::class,'update'])->name('product.update');
-    Route::get('/categories/{id}/subcategories',[ProductsController::class,'getCategory'])->name('getcategory');
+    Route::get('/product/{id}/delete',[ProductsController::class,'delete'])->name('product.delete');
+
+    Route::post('/blog/{id}/update',[BlogsController::class,'update'])->name('blog.update');
 
     Route::get('/store',[StoreController::class,'index'])->name('store');
     Route::get('/products/{id}',[StoreController::class,'products'])->name('products');
