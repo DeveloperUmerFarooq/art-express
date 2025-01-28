@@ -84,7 +84,12 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
     Route::post('/product/update',[ProductsController::class,'update'])->name('product.update');
     Route::get('/product/{id}/delete',[ProductsController::class,'delete'])->name('product.delete');
 
+    Route::post('/blog/add',[BlogsController::class,'store'])->name('blog.add');
     Route::post('/blog/{id}/update',[BlogsController::class,'update'])->name('blog.update');
+    Route::get('/blog/{id}/delete',[BlogsController::class,'delete'])->name('blog.delete');
+
+    Route::post('/blog/{id}/comment',[BlogsController::class,'comment'])->name('blog.comment');
+    Route::post('/blog/{id}/like',[BlogsController::class,'like'])->name('blog.like');
 
     Route::get('/store',[StoreController::class,'index'])->name('store');
     Route::get('/products/{id}',[StoreController::class,'products'])->name('products');

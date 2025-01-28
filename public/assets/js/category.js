@@ -16,7 +16,7 @@ $(document).ready(function(){
     })
 })
 
-function deleteCategory(id){
+function deleteCategory(url){
     Swal.fire({
         title: "Delete Selected!",
         text:"Are you sure you want to delete this category?",
@@ -30,14 +30,14 @@ function deleteCategory(id){
           }
       }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href=`/admin/category/delete/${id}`
+            window.location.href=`${url}`
         } else if (result.isDenied) {
             toastr.info('Category deletion stopped!')
         }
       });
 }
 
-function deleteSub(id){
+function deleteSub(url){
     Swal.fire({
         title: "Delete Selected!",
         text:"Are you sure you want to delete this sub-category?",
@@ -51,7 +51,7 @@ function deleteSub(id){
           }
       }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href=`/admin/category/subcategory/delete/${id}`
+            window.location.href=`${url}`
         } else if (result.isDenied) {
             toastr.info('Sub-Category deletion stopped!')
         }

@@ -43,10 +43,14 @@
                                 <p class="seller"><b>By: {{ $product->artist->name }}</b></p>
                                 <p class="card-text">{{ $product->description }}</p>
                                 <p class="card-price">Price: {{ $product->price }} Rs</p>
+                                @if ($product->blog)
                                 <div class="d-flex justify-content-center gap-1 mt-auto">
                                     <a href="{{ route(auth()->user()->getRoleNames()->first() . '.blogs', $product->blog->id) }}"
                                         class="btn btn-outline-success">Read Blog</a>
                                 </div>
+                                @else
+                                <button class="btn btn-primary" onclick="addPost({{$product->id}})"  data-bs-toggle="modal" data-bs-target="#addPostModal">Add Blog</button>
+                                @endif
                             </div>
                         </div>
                     </center>
@@ -68,6 +72,7 @@
     </div>
     @include('artist.products.modals._Add-Product')
     @include('artist.products.modals._Edit-Product')
+    @include('blogs.modals._Add-Post')
 @endsection
 @push('scripts')
     <script src="{{ asset('assets/js/productsCrud.js') }}"></script>

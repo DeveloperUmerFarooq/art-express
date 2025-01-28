@@ -13,7 +13,7 @@ function reloadDataTable(){
     $('#user-table').DataTable().ajax.reload();
 }
 
-function deleteUser(id){
+function deleteUser(url){
     Swal.fire({
         title: "Delete Selected!",
         text:"Are you sure you want to delete this user?",
@@ -27,7 +27,7 @@ function deleteUser(id){
           }
       }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href=`/admin/delete/${id}`
+            window.location.href=`${url}`
         } else if (result.isDenied) {
             toastr.info('User deletion stopped!')
         }

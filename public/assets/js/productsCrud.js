@@ -50,3 +50,8 @@ function deleteProduct(url){
         }
       });
 }
+
+function addPost(id){
+    $('#productId').val(id);
+    console.log($('#productId').val());
+}
