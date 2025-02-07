@@ -141,6 +141,9 @@ Route::prefix('/user')->name('user.')->middleware(['role:user'])->group(function
 
     Route::get('/rankings',[RankController::class,'index'])->name('ranking');
 
+
+    Route::post('/order',[OrderController::class,'store'])->name('order.store');
+
     Route::prefix('/profile')->group(function(){
         Route::get('/',[ProfileController::class,'index'])->name('profile');
         Route::post('/links',[ProfileController::class,'addSocialLinks'])->name('profile.links');

@@ -9,4 +9,8 @@ class OrderController extends Controller
     public function index(){
         return view('Orders.index');
     }
+
+    public function store(Request $req){
+        dd($req->toArray());
+    }
 }

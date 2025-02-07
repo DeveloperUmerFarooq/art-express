@@ -44,7 +44,7 @@
                             <p class="card-price">Price: {{$product->price}} Rs</p>
                             <div class="d-flex justify-content-center gap-1">
                             @can("buy art")
-                            <a href="#" class="btn btn-primary">Buy Now</a>
+                            <a href="#" class="btn btn-primary" id="buy" data-bs-toggle="modal" data-bs-target="#buyProductModal">Buy Now</a>
                             @endcan
                             @can("manage store")
                             <button class="btn btn-primary" data-bs-toggle="modal"
@@ -53,9 +53,6 @@
                             @endcan
                             <a href="{{route(auth()->user()->getRoleNames()->first().'.blogs',$product->id)}}" class="btn btn-outline-success">Read Blog</a>
                             @can("manage store")
-                            {{-- <button class="btn btn-dark opacity-50" data-bs-toggle="modal"
-                            data-bs-target="#editProductModal"
-                            onclick="edit({{ $product }},'{{ asset($product->image->image_src) }}')"></button> --}}
                         <button class="btn btn-danger position-absolute top-0 end-0" onclick="deleteProduct()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20"
                                 height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -72,11 +69,12 @@
                 </div>
         @endforeach
     </div>
+@include('products.modals._buy-modal')
 @endsection
 @if (!auth()->user()->hasRole('user'))
 @include('artist.products.modals._Edit-Product')
 @endif
 @push('scripts')
 <script src="{{ asset('assets/js/productsCrud.js') }}"></script>
-<script src="{{ asset('assets/js/products.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/products.js') }}"></script> --}}
 @endpush

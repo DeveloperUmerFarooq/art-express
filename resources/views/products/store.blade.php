@@ -45,7 +45,10 @@
                                 <p class="card-price">Price: {{$product->price}} Rs</p>
                                 <div class="d-flex justify-content-center gap-1">
                                 @can("buy art")
-                                <a href="#" class="btn btn-primary">Buy Now</a>
+                                <a href="#" class="btn btn-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#buyProductModal"
+                                onclick="buy({{$product}})">Buy Now</a>
                                 @endcan
                                 @can("manage store")
                                 <button class="btn btn-primary" data-bs-toggle="modal"
@@ -77,10 +80,16 @@
             @if (!auth()->user()->hasRole('user'))
             @include('artist.products.modals._Edit-Product')
             @endif
+            @include('products.modals._buy-modal')
 @endsection
 @push('scripts')
-    <script src="{{ asset('assets/js/productsCrud.js') }}"></script>
-    <script src="{{ asset('assets/js/products.js') }}"></script>
+@if (!auth()->user()->hasRole('user'))
+<script src="{{ asset('assets/js/productsCrud.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/products.js') }}"></script> --}}
+@endif
+@if (!auth()->user()->hasRole('admin'))
+<script src="{{asset('assets/js/order.js')}}"></script>
+@endif
     <script>
         @foreach ($categories as $key => $category)
             const slider{{ $key }} = $(`.slider-{{ $key }}`).owlCarousel({
