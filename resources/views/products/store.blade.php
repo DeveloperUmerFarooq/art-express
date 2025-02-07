@@ -8,7 +8,7 @@
     </form>
 </div>
     @foreach ($categories as $key=> $category)
-    @if (count($category->products)>0))
+    @if (count($category->products)>0)
         <div class="caontainer-fluid px-md-5 px-2">
             <div class="d-flex flex-wrap align-items-center justify-content-between">
                 <h1 class="product-title" style="color: var(--secondary);">{{ $category->name }}</h1>
@@ -34,7 +34,7 @@
                     <center>
                         <div class="card mt-5 product-card position-relative">
                             <div class="image-container">
-                                <img src="{{ asset('assets/images/landscape2.png') }}" class="card-img-top object-fit-contain"
+                                <img src="{{ asset($product->image->image_src) }}" class="card-img-top object-fit-contain"
                                     alt="Portrait Painting">
                                 <div class="magnifier" id="magnifier"></div>
                             </div>
@@ -42,7 +42,7 @@
                                 <h5 class="card-title">{{$product->name}}</h5>
                                 <p class="seller"><b>By:{{$product->artist->name}}</b></p>
                                 <p class="card-text" style="height: 75px; overflow: hidden; align-content:center">{{$product->description}}</p>
-                                <p class="card-price">{{$product->price}}</p>
+                                <p class="card-price">Price: {{$product->price}} Rs</p>
                                 <div class="d-flex justify-content-center gap-1">
                                 @can("buy art")
                                 <a href="#" class="btn btn-primary">Buy Now</a>

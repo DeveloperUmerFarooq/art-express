@@ -6,7 +6,7 @@
                 <h5 class="modal-title" id="editPostModalLabel">Edit Post</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="editPostForm" method="POST" action="{{route('artist.blog.update',$blog->id)}}">
+            <form id="editPostForm" method="POST" action="{{route(auth()->user()->getRoleNames()->first().'.blog.update',$blog->id)}}">
                 @csrf
                 @method('POST')
                 <div class="modal-body">

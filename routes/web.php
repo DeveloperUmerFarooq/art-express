@@ -58,9 +58,14 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
     });
     Route::get('/products',[StoreController::class,'index'])->name('store');
     Route::get('/products/{id}',[StoreController::class,'products'])->name('products');
-    Route::get('/product/{id}/blog',function(){
-        return view('blogs.index');
-    })->name('blogs');
+    Route::get('/product/{id}/delete',[ProductsController::class,'delete'])->name('product.delete');
+
+    Route::get('/product/{id}/blog',[BlogsController::class,'index'])->name('blogs');
+    Route::post('/blog/add',[BlogsController::class,'store'])->name('blog.add');
+    Route::post('/blog/{id}/update',[BlogsController::class,'update'])->name('blog.update');
+    Route::get('/blog/{id}/delete',[BlogsController::class,'delete'])->name('blog.delete');
+    Route::post('/blog/{id}/comment',[BlogsController::class,'comment'])->name('blog.comment');
+    Route::post('/blog/{id}/like',[BlogsController::class,'like'])->name('blog.like');
 
     Route::get('/orders',[OrderController::class,'index'])->name('order');
 
@@ -116,9 +121,11 @@ Route::prefix('/user')->name('user.')->middleware(['role:user'])->group(function
 
     Route::get('/store',[StoreController::class,'index'])->name('store');
     Route::get('/products/{id}',[StoreController::class,'products'])->name('products');
-    Route::get('/product/{id}/blog',function(){
-        return view('blogs.index');
-    })->name('blogs');
+
+    Route::get('/product/{id}/blog',[BlogsController::class,'index'])->name('blogs');
+    Route::post('/blog/{id}/comment',[BlogsController::class,'comment'])->name('blog.comment');
+    Route::post('/blog/{id}/like',[BlogsController::class,'like'])->name('blog.like');
+
 
     Route::get('/orders',[OrderController::class,'index'])->name('order');
 
@@ -129,5 +136,6 @@ Route::prefix('/user')->name('user.')->middleware(['role:user'])->group(function
         Route::post('/avatar',[ProfileController::class,'updateAvatar'])->name('avatar');
         Route::post('/details/update',[ProfileController::class,'updateDetails'])->name('details.update');
         Route::post('/password/update',[ProfileController::class,'updatePassword'])->name('password.update');
+
     });
 });

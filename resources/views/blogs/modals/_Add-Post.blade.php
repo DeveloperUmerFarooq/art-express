@@ -7,7 +7,7 @@
           <h5 class="modal-title" id="addPostModalLabel">Add New Post</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="{{ route('artist.blog.add') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route(auth()->user()->getRoleNames()->first().'.blog.add') }}" method="POST" enctype="multipart/form-data">
           @csrf
           <input type="hidden" name="id" id="productId">
           <div class="modal-body">

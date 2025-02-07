@@ -12,7 +12,7 @@ class StoreController extends Controller
         return view('products.store')->with('categories',$categories);
     }
     public function products($id){
-        $category=Categories::with('subCategories.products')->find($id);
+        $category=Categories::with('subCategories.products','products')->find($id);
         $subCategories=$category->subCategories;
         return view('products.products')->with(['category'=>$category,'subCategories'=>$subCategories]);
     }
