@@ -106,7 +106,9 @@
         </div>
     </div>
 </div>
+@if (!auth()->user()->hasRole('user')   )
 @include('blogs.modals._Edit-Post')
+@endif
 @endsection
 @push('scripts')
     <script src="{{asset('assets/js/blogCrud.js')}}"></script>

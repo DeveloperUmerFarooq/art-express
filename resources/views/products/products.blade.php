@@ -47,7 +47,9 @@
                             <a href="#" class="btn btn-primary">Buy Now</a>
                             @endcan
                             @can("manage store")
-                            <button class="btn btn-primary">Edit Product</button>
+                            <button class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#editProductModal"
+                            onclick="edit({{ $product }},'{{ asset($product->image->image_src) }}')">Edit Product</button>
                             @endcan
                             <a href="{{route(auth()->user()->getRoleNames()->first().'.blogs',$product->id)}}" class="btn btn-outline-success">Read Blog</a>
                             @can("manage store")
@@ -71,5 +73,10 @@
         @endforeach
     </div>
 @endsection
+@if (!auth()->user()->hasRole('user'))
+@include('artist.products.modals._Edit-Product')
+@endif
 @push('scripts')
+<script src="{{ asset('assets/js/productsCrud.js') }}"></script>
+<script src="{{ asset('assets/js/products.js') }}"></script>
 @endpush

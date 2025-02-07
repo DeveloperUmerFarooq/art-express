@@ -17,16 +17,16 @@
                 <a class="nav-link fs-6" href="{{route('user.order')}}">Orders</a>
               </li>
               <li class="nav-item pt-1">
-                <a class="nav-link fs-6" href="">Top Artists</a>
+                <a class="nav-link fs-6" href="{{route('user.ranking')}}">Top Artists</a>
               </li>
               <li class="nav-item pt-1">
                 <a class="nav-link fs-6" href="">Artists</a>
               </li>
               <li class="nav-item pt-1">
-                <a class="nav-link fs-6" href="">Messages</a>
+                <a class="nav-link fs-6" href="{{route('user.inbox')}}">Messages</a>
               </li>
               <li class="nav-item pt-1">
-                <a class="nav-link fs-6" href="">Auctions</a>
+                <a class="nav-link fs-6" href="{{route('user.auction')}}">Auctions</a>
               </li>
               <li class="nav-item dropdown d-none d-md-block">
                 <a class="nav-link dropdown-toggle no-togggle-icon fs-6" role="button" data-bs-toggle="dropdown" aria-expanded="false">

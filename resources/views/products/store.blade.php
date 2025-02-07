@@ -48,14 +48,13 @@
                                 <a href="#" class="btn btn-primary">Buy Now</a>
                                 @endcan
                                 @can("manage store")
-                                <button class="btn btn-primary">Edit Product</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#editProductModal"
+                                onclick="edit({{ $product }},'{{ asset($product->image->image_src) }}')">Edit Product</button>
                                 @endcan
                                 <a href="{{route(auth()->user()->getRoleNames()->first().'.blogs',$product->id)}}" class="btn btn-outline-success">Read Blog</a>
                                 @can("manage store")
-                                {{-- <button class="btn btn-dark opacity-50" data-bs-toggle="modal"
-                                data-bs-target="#editProductModal"
-                                onclick="edit({{ $product }},'{{ asset($product->image->image_src) }}')"></button> --}}
-                            <button class="btn btn-danger position-absolute top-0 end-0" onclick="deleteProduct()">
+                            <button class="btn btn-danger position-absolute top-0 end-0" onclick="deleteProduct('{{route(auth()->user()->getRoleNames()->first().'.product.delete',$product->id)}}')">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20"
                                     height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -75,29 +74,34 @@
             </div>
             @endif
             @endforeach
-    @push('scripts')
-    <script>
-            @foreach ($categories as $key => $category)
-                const slider{{ $key }} = $(`.slider-{{ $key }}`).owlCarousel({
-                    mouseDrag: true,
-                    touchDrag: true,
-                    margin:10,
-                    responsive: {
-                        0: { items: 1.2 },
-                        600: { items: 2 },
-                        1000: { items: 3 },
-                        1300: { items: 4 },
-                        1600: { items: 5 }
-                    }
-                });
-
-                $(`#prev-{{ $key }}`).click(function () {
-                    slider{{ $key }}.trigger('prev.owl.carousel');
-                });
-                $(`#next-{{ $key }}`).click(function () {
-                    slider{{ $key }}.trigger('next.owl.carousel');
-                });
-            @endforeach
-    </script>
-    @endpush
+            @if (!auth()->user()->hasRole('user'))
+            @include('artist.products.modals._Edit-Product')
+            @endif
 @endsection
+@push('scripts')
+    <script src="{{ asset('assets/js/productsCrud.js') }}"></script>
+    <script src="{{ asset('assets/js/products.js') }}"></script>
+    <script>
+        @foreach ($categories as $key => $category)
+            const slider{{ $key }} = $(`.slider-{{ $key }}`).owlCarousel({
+                mouseDrag: true,
+                touchDrag: true,
+                margin:10,
+                responsive: {
+                    0: { items: 1.2 },
+                    600: { items: 2 },
+                    1000: { items: 3 },
+                    1300: { items: 4 },
+                    1600: { items: 5 }
+                }
+            });
+
+            $(`#prev-{{ $key }}`).click(function () {
+                slider{{ $key }}.trigger('prev.owl.carousel');
+            });
+            $(`#next-{{ $key }}`).click(function () {
+                slider{{ $key }}.trigger('next.owl.carousel');
+            });
+        @endforeach
+</script>
+@endpush

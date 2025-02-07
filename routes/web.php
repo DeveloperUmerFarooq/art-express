@@ -2,13 +2,16 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\AuctionController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RankController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UserCrud;
@@ -58,6 +61,7 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
     });
     Route::get('/products',[StoreController::class,'index'])->name('store');
     Route::get('/products/{id}',[StoreController::class,'products'])->name('products');
+    Route::post('/product/update',[ProductsController::class,'update'])->name('product.update');
     Route::get('/product/{id}/delete',[ProductsController::class,'delete'])->name('product.delete');
 
     Route::get('/product/{id}/blog',[BlogsController::class,'index'])->name('blogs');
@@ -128,6 +132,13 @@ Route::prefix('/user')->name('user.')->middleware(['role:user'])->group(function
 
 
     Route::get('/orders',[OrderController::class,'index'])->name('order');
+
+    Route::get('/auction',[AuctionController::class,'index'])->name('auction');
+
+    Route::get('/inbox',[ChatController::class,'inbox'])->name('inbox');
+
+
+    Route::get('/rankings',[RankController::class,'index'])->name('ranking');
 
     Route::prefix('/profile')->group(function(){
         Route::get('/',[ProfileController::class,'index'])->name('profile');

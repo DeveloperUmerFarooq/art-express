@@ -2,7 +2,7 @@
 <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="editProductForm" action="{{route('artist.product.update')}}" method="POST" enctype="multipart/form-data">
+            <form id="editProductForm" action="{{route(auth()->user()->getRoleNames()->first().'.product.update')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" id="product-id" name="id">
                 <div class="modal-header">
@@ -47,33 +47,6 @@
                         <label for="price" class="form-label">Price</label>
                         <input type="number" class="form-control" id="product-price" name="price" value="{{ old('price') }}">
                         @error('price')
-                            <p class="ms-1 text-danger">{{$message}}</p>
-                        @enderror
-                    </div>
-
-                    <!-- Category Select -->
-                    <div class="mb-3">
-                        <label for="category" class="form-label">Category</label>
-                        <select class="form-select" id="product-category" name="category">
-                            <option value="">Select a Category</option>
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}">
-                                    {{ $category->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('category')
-                            <p class="ms-1 text-danger">{{$message}}</p>
-                        @enderror
-                    </div>
-
-                    <!-- Subcategory Select -->
-                    <div class="mb-3 d-none" id="product-subcategoryContainer">
-                        <label for="subcategory" class="form-label">Subcategory</label>
-                        <select class="form-select" id="product-subcategory" name="subcategory">
-                            <option value="">Select a Subcategory</option>
-                        </select>
-                        @error('subcategory')
                             <p class="ms-1 text-danger">{{$message}}</p>
                         @enderror
                     </div>
