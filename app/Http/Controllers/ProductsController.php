@@ -45,7 +45,8 @@ class ProductsController extends Controller
                 'name' => $req->title,
                 'status' => 'Unsold',
                 'artist_id' => auth()->user()->id,
-                'category_id' => $req->subcategory,
+                'category_id'=>$req->category,
+                'sub_category_id' => $req->subcategory,
                 'description' => $req->description,
                 'price' => $req->price,
             ]);

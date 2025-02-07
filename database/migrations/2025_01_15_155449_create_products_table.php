@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->enum('status',['Sold','Unsold']);
             $table->foreignId('artist_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('category_id')->constrained('sub_categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('sub_category_id')->constrained('sub_categories')->onDelete('cascade')->onUpdate('cascade');
             $table->text('description');
             $table->decimal('price',10,2);
             $table->timestamps();

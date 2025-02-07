@@ -14,7 +14,11 @@ class Products extends Model
         return $this->hasOne(Blogs::class,'product_id');
     }
     public function category(){
-        return $this->hasOne(SubCategories::class);
+        return $this->hasOne(Categories::class,'category_id');
+    }
+    public function subCategory()
+    {   
+        return $this->belongsTo(SubCategories::class, 'sub_category_id');
     }
     public function image(){
         return  $this->hasOne(Images::class,'product_id');

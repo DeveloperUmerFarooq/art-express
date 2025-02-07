@@ -1,5 +1,12 @@
 @extends('layouts.' . auth()->user()->getRoleNames()->first() . 'Layout.layout')
 @section('page')
+<div class="container mt-3 mb-3 mb-md-5">
+    <form action="" class="d-flex gap-1">
+        <input type="search" class="form-control" placeholder="search art-work...">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+<div class="px-2">
     <h1 class="mt-3 mx-2">{{ $category->name }}</h1>
     <div class="d-flex flex-wrap mx-2">
         <h5>Browse by Subcategory</h5>
@@ -15,6 +22,7 @@
             <button type="submit" class="btn btn-primary">Apply Filter</button>
         </form>
     </div>
+</div>
 
     <div class="row mt-4 mx-2 align-items-center justify-content-center">
         @for ($i = 0; $i < 12; $i++)
@@ -29,10 +37,10 @@
                     <div class="card-body">
                         <h5 class="card-title">Beautiful Portrait Painting</h5>
                         <p class="seller"><b>By:M. Umer Farooq</b></p>
-                        <p class="card-text">A stunning hand-painted portrait that captures every detail with elegance and
+                        <p class="card-text" style="max-height: 75px; overflow: hidden;">A stunning hand-painted portrait that captures every detail with elegance and
                             creativity.</p>
                         <p class="card-price">Price: $120</p>
-                        <div class="d-flex justify-content-center gap-1">
+                        <div class="d-flex justify-content-center gap-1 align-self-baseline">
                             <a href="#" class="btn btn-primary">Buy Now</a>
                             <a href="{{route(auth()->user()->getRoleNames()->first().'.blogs',1)}}" class="btn btn-outline-success">Read Blog</a>
                         </div>

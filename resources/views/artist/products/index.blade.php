@@ -41,7 +41,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $product->name }}</h5>
                                 <p class="seller"><b>By: {{ $product->artist->name }}</b></p>
-                                <p class="card-text">{{ $product->description }}</p>
+                                <p class="card-text" style="height: 75px; overflow: hidden; align-content:center">{{ $product->description }}</p>
                                 <p class="card-price">Price: {{ $product->price }} Rs</p>
                                 @if ($product->blog)
                                 <div class="d-flex justify-content-center gap-1 mt-auto">

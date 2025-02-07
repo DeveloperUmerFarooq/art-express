@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 class StoreController extends Controller
 {
     public function index(){
-        $categories=Categories::all();
+        $categories=Categories::with('products')->get();
         return view('products.store')->with('categories',$categories);
     }
     public function products($id){
-        $category=Categories::with('subCatagories')->find($id);
-        $subCategories=$category->subCatagories;
+        $category=Categories::with('subCategories.products')->find($id);
+        $subCategories=$category->subCategories;
         return view('products.products')->with(['category'=>$category,'subCategories'=>$subCategories]);
     }
 }
