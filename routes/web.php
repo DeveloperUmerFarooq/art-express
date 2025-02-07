@@ -137,6 +137,7 @@ Route::prefix('/user')->name('user.')->middleware(['role:user'])->group(function
 
     Route::get('/inbox',[ChatController::class,'inbox'])->name('inbox');
 
+    Route::get('/artists',[ArtistController::class,'artist'])->name('artist');
 
     Route::get('/rankings',[RankController::class,'index'])->name('ranking');
 

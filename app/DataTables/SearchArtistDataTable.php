@@ -2,7 +2,6 @@
 
 namespace App\DataTables;
 
-use App\Models\Artist;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
@@ -13,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ArtistDataTable extends DataTable
+class SearchArtistDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,21 +22,13 @@ class ArtistDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('actions', function($query){
-                return view('admin.user-management.actions', [
-                    'id' => $query->id,
-                    'user' => $query
-                ]);
+            ->addColumn('action',function($query) {
+                return view('messages.actions.action')->with('id',$query->id);
             })
             ->addColumn('user',function ($query){
                 return view('admin.user-management.user-column',['user'=>$query]);
             })
-            ->addColumn('created_at',function($query){
-                return $query->created_at->format('d/m/Y');
-            })
-            ->addColumn('updated_at',function($query){
-                return $query->updated_at->format('d/m/Y');
-            });
+            ->setRowId('id');
     }
 
     /**
@@ -45,7 +36,7 @@ class ArtistDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return $model->role('artist')->with('profile')->newQuery()->orderBy('created_at', 'desc');;
+        return $model->role('artist')->newQuery();
     }
 
     /**
@@ -54,15 +45,14 @@ class ArtistDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('user-table')
-                    ->setTableAttribute('class','table table-success')
-                    ->setTableAttribute('data-responsive-wrapper', 'true')
+                    ->setTableId('searchartist-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    // ->dom('Bfrtip')
-                    ->pageLength(25)
+                    ->dom(
+                        "<'row'<'col-12' t>>" .
+                        "<'row'<'col-sm-6 d-flex align-items-center' i><'col-sm-6 d-flex justify-content-end' p>>"
+                    )
                     ->orderBy(1)
-                    ->ordering(false)
                     ->selectStyleSingle();
     }
 
@@ -74,10 +64,8 @@ class ArtistDataTable extends DataTable
         return [
             Column::make('user'),
             Column::make('name')->visible(false),
-            Column::make('email'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
-            Column::make('actions')
+            Column::make('email')->visible(false),
+            Column::make('action')->width(25)
         ];
     }
 
@@ -86,6 +74,6 @@ class ArtistDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Users_' . date('YmdHis');
+        return 'SearchArtist_' . date('YmdHis');
     }
 }

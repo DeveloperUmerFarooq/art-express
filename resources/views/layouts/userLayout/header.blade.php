@@ -20,7 +20,7 @@
                 <a class="nav-link fs-6" href="{{route('user.ranking')}}">Top Artists</a>
               </li>
               <li class="nav-item pt-1">
-                <a class="nav-link fs-6" href="">Artists</a>
+                <a class="nav-link fs-6" href="{{route('user.artist')}}">Artists</a>
               </li>
               <li class="nav-item pt-1">
                 <a class="nav-link fs-6" href="{{route('user.inbox')}}">Messages</a>
