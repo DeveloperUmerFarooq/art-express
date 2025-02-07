@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('order_date');
             $table->enum('status', ['Processing', 'Completed'])->default('Processing');
             $table->integer('quantity');
+            $table->text('address');
             $table->decimal('total_price', 10, 2);
             $table->timestamps();
         });
