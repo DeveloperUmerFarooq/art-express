@@ -2,7 +2,7 @@
 
 @section('page')
 <div class="container-fluid mt-2">
-    <div class="bg-white shadow-lg rounded" style="height: 100vh; display: flex; flex-direction: column;">
+    <div class="bg-transparent shadow-lg rounded" style="height: 100vh; display: flex; flex-direction: column;">
         <!-- Chat Header -->
         <div class="bg-success text-white p-3 d-flex justify-content-between align-items-center rounded-top shadow-sm">
             <div class="d-flex align-items-center gap-3">
