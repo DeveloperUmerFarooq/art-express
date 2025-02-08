@@ -1,7 +1,10 @@
 <header>
     <nav class="navbar navbar-expand-lg" id="navbar">
         <div class="container">
-          <a class="navbar-brand fs-3" href="/">Art-Express</a>
+            <a class="navbar-brand fs-3 d-flex align-items-center gap-1" href="/">
+                <img src="{{asset('assets/images/icon.svg')}}" height="50" alt="" style="filter: drop-shadow(1px 1px 10px var(--primary))">
+                <span>Art-Express</span>
+            </a>
           <button class="navbar-toggler border-none outline-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff0cd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-justify"><path d="M3 12h18"/><path d="M3 18h18"/><path d="M3 6h18"/></svg>
           </button>
