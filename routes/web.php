@@ -37,6 +37,8 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
         Route::post('/roles/permissions/update',[RolePermissionController::class,'update'])->name('role.update');
 
 
+
+
         Route::name('catergory.')->prefix('/category')->group(function(){
             Route::get('/',[CategoriesController::class,'index'])->name('index');
             Route::post('/store',[CategoriesController::class,'store'])->name('store');
@@ -74,6 +76,10 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
 
     Route::get('/orders',[OrderController::class,'index'])->name('order');
 
+    Route::get('/artist/{id}',[ProfileController::class,'portfolio'])->name('profile.view');
+
+    Route::get('/user/{id}',[ProfileController::class,'profile'])->name('profile.details.view');
+
     Route::prefix('/profile')->group(function(){
         Route::get('/',[ProfileController::class,'index'])->name('profile');
         Route::post('/links',[ProfileController::class,'addSocialLinks'])->name('profile.links');
@@ -107,6 +113,8 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
 
     Route::get('/orders',[OrderController::class,'index'])->name('order');
 
+    Route::get('/artist/{id}',[ProfileController::class,'portfolio'])->name('profile.view');
+
     Route::prefix('/profile')->group(function(){
         Route::get('/portfolio',[PortfolioController::class,'index'])->name('profile.index');
         Route::post('/portfolio/image',[PortfolioController::class,'addImage'])->name('profile.image');
@@ -131,6 +139,7 @@ Route::prefix('/user')->name('user.')->middleware(['role:user'])->group(function
     Route::post('/blog/{id}/comment',[BlogsController::class,'comment'])->name('blog.comment');
     Route::post('/blog/{id}/like',[BlogsController::class,'like'])->name('blog.like');
 
+    Route::get('/artist/{id}',[ProfileController::class,'portfolio'])->name('profile.view');
 
     Route::get('/orders',[OrderController::class,'index'])->name('order');
 

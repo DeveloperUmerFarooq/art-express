@@ -8,6 +8,7 @@
         <center>
             <div class="col-12 bg-success p-4 rounded-3 d-flex justify-content-center w-75">
                 <div class="d-flex gap-3 align-items-center text-white">
+                    {{-- {{$profile}} --}}
                     <img src="{{ asset($profile->profile_image) }}" height="100" class="rounded-circle" alt="Profile Image">
                     <div>
                         <h1 class="text-start">{{ $profile->user->name }}</h1>
@@ -49,73 +50,72 @@
                     </a>
                     @endif
                 </div>
-
-            @endif
+                @endif
 
         </div>
         <nav>
             <nav class="navbar navbar-expand-lg bg-transparent mt-2">
                 <div class="container-fluid">
-                  <span class="navbar-brand text-white">Artworks</span>
+                  <span class="navbar-brand text-white">Profile</span>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff0cd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-justify"><path d="M3 12h18"/><path d="M3 18h18"/><path d="M3 6h18"/></svg>
                   </button>
                   @if (auth()->user()->hasRole('admin'))
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    @if($profile->user->hasRole('artist'))
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                          <a class="nav-link" href="{{route('admin.profile.details.view',$profile->user->id)}}">View Profile</a>
+                          <a class="nav-link" href="{{route('admin.profile.view',$profile->user->id)}}">View Portfolio</a>
                         </li>
                     </ul>
+                    @endif
                 </div>
                 @endif
                 </div>
               </nav>
         </nav>
-        <div class="container-fluid">
-            <div class="portfolio">
-                @foreach ($images as $image)
-                <div class="position-relative" class="img">
-                    <img src="{{asset($image->image_src)}}" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-url="{{asset($image->image_src)}}" alt="">
+        <div class="container mt-1 mt-md-3 mt-lg-3">
+            <div>
+                <div class="row">
+                    <div class="input-group col-md row align-items-center">
+                        <label for="" class="form-label col-3 col-md-4 col-lg-3 mt-2">Name:</label>
+                        <input type="text" name="name" id="name" class="validate form-control col" placeholder="username" value="{{$profile->user->name}}" disabled>
+                    </div>
+                    <div class="input-group col-md row align-items-center">
+                        <label for="" class="form-label col-md-4 col-lg-3 col-3 mt-2">Email:</label>
+                        <input type="email" name="email" id="email" class="validate form-control col" placeholder="email" value="{{$profile->user->email}}" disabled>
+                    </div>
+                    <div class="input-group col-md row">
+                        <label for="" class="form-label col-3 col-md-4 col-lg-3 mt-2">Phone:</label>
+                        <input type="text" name="phone_number" min="10" max="15" id="phone-number" class="validate form-control col" placeholder="phone#" value="{{$profile->phone_number}}" disabled>
+                    </div>
                 </div>
-                @endforeach
+                <div class="row mt-2">
+                    <div class="input-group col-md row align-items-center">
+                        <label for="" class="form-label col-md-4 col-lg-3 col-3 mt-2">CNIC:</label>
+                        <input type="text" min="13" max="14" name="cnic" id="cnic" class="validate form-control col" placeholder="CNIC" value="{{$profile->cnic}}" disabled>
+                    </div>
+                    <div class="input-group col-md row align-items-center">
+                        <label for="" class="form-label col-md-4 col-lg-3 col-3 mt-2">Country:</label>
+                        <input type="text" id="country" name="country" class="validate form-control col" placeholder="country" value="{{$profile->country}}" disabled>
+                    </div>
+                    <div class="input-group col-md row align-items-center">
+                        <label for="" class="form-label col-md-4 col-lg-3 col-3 mt-2">City</label>
+                        <input type="text" id="city" name="city" class="validate form-control col" placeholder="city" value="{{$profile->city}}" disabled>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="input-group col-md row">
+                        <label for="" class="form-label col-3 col-lg-2 mt-2">Bio:</label>
+                        <textarea rows="2" name="bio" id="bio" class="validate form-control col" placeholder="bio" disabled>{{$profile->bio}}</textarea>
+                    </div>
+                    <div class="input-group col-md row">
+                        <label for="" class="form-label col-3 col-lg-2 mt-2">Address:</label>
+                        <textarea id="address" name="address" rows="2" class="validate form-control col" placeholder="address" disabled>{{$profile->address}}</textarea>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-{{-- preview modal --}}
-<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <img id="modalImage" src="" alt="Preview" class="img-fluid" style="height: 25rem; object-fit:contain">
-            </div>
-        </div>
-    </div>
-</div>
-
-
 @endsection
-@push('scripts')
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const modalImage = document.getElementById('modalImage');
-        const viewImageButtons = document.querySelectorAll('img');
-
-        viewImageButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const imageUrl = this.getAttribute('data-image-url');
-                modalImage.src = imageUrl;
-            });
-        });
-    });
-    </script>
-@endpush

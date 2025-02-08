@@ -15,6 +15,18 @@ class ProfileController extends Controller
         return view('profile.profile')->with('profile',$profile);
     }
 
+
+    public function portfolio($id){
+        $user=User::with('profile','images')->find($id);
+        $profile=$user->profile;
+        $images=$user->images;
+        return view('artist.portfolio.portfolio')->with(['profile'=>$profile,'images'=>$images]);
+    }
+    public function profile($id){
+        $user=User::with('profile','images')->find($id);
+        $profile=$user->profile;
+        return view('profile.view')->with(['profile'=>$profile]);
+    }
     public function addSocialLinks(Request $req){
         $req->validate([
             'facebook'=>'nullable|url',
