@@ -6,7 +6,8 @@
 @section('page')
     <section>
         <div class="container d-flex flex-column align-items-center mt-2 mt-md-5 pt-3">
-            <center><img src="{{asset('assets/images/logo.svg')}}" height="150" alt="" style="filter:drop-shadow(1px 1px 10px #131010)"></center>
+            <center><img src="{{asset('assets/images/logo.svg')}}" id="logo"
+                 height="150" alt="" style="filter:drop-shadow(1px 1px 10px #131010)"></center>
             <h1 class="res-title">Art-Express</h1>
             <h3 class="res-sub text-center">Get the Art you Desire</h3>
             <p class="res-sub text-center w-75">Dive into a world of breathtaking art and inspiring masterpieces. Explore and connect with creativity like never before.</p>

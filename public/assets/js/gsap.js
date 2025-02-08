@@ -13,7 +13,12 @@ gsap.from('.nav-link',{
     duration:0.6,
     delay:0.3
 })
-
+tl.from('#logo',{
+    scale:0,
+    opacity:0,
+    y:10,
+    delay:0.5
+})
 tl.from('.res-title',zoom)
 tl.from('.res-sub',{
     y:50,
