@@ -45,7 +45,7 @@
                 <input type="hidden" name="reciever_id" value="{{$reciever->id}}">
                 <input type="hidden" name="sender_id" value="{{auth()->user()->id}}">
                 <input type="file" id="image-input" class="form-control mr-2" style="display:none" accept="image/*">
-                <abbr title="Choose a file">
+                <abbr title="Choose a file" style="cursor: pointer">
                     <span class="me-2 border border-1 p-2" onclick="document.getElementById('image-input').click();"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span>
                 </abbr>
                 <input type="text" id="message" class="form-control" placeholder="Type a message..." required>
