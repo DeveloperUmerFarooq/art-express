@@ -5,7 +5,7 @@
 
 @section('page')
     <section>
-        <div class="container d-flex flex-column align-items-center mt-2 mt-md-5 pt-3">
+        <div class="container d-flex flex-column align-items-center mt-2 mt-md-3 pt-3">
             <center><img src="{{asset('assets/images/logo.svg')}}" id="logo"
                  height="150" alt="" style="filter:drop-shadow(1px 1px 10px #131010)"></center>
             <h1 class="res-title">Art-Express</h1>
