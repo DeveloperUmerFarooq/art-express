@@ -6,26 +6,8 @@
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
 </div>
-<div class="px-2">
-    <h1 class="mt-3 mx-2">{{ $category->name }}</h1>
-    <div class="d-flex flex-wrap mx-2">
-        <h5>Browse by Subcategory</h5>
-        <h7><a class="ms-3" href="">ask AI about current subcategory</a></h7>
-        <form method="GET" action="{{route(auth()->user()->getRoleNames()->first().'.filter',$category->id)}}" id="filter" class="d-flex flex-wrap ms-auto gap-2">
-            <div class="list-group">
-                <select name="subcategory" id="subId" class="form-select">
-                    @foreach ($subCategories as $subcategory)
-                    <option value="{{ $subcategory->id }}"  @isset($subId)
-                        @if ($subcategory->id == $subId) selected @endif
-                    @endisset>{{ $subcategory->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </form>
-    </div>
-</div>
 
-    <div class="row mt-4 mx-2 align-items-center justify-content-center">
+<div class="row mt-4 mx-2 align-items-center justify-content-center">
     @if (count($products)>0)
         @foreach ($products as $product)
             <div class="col-md-6 col-lg-3 mb-4">
@@ -81,11 +63,8 @@
     </div>
     @endif
     </div>
-@include('products.modals._buy-modal')
+    @include('products.modals._buy-modal')
 @endsection
-@if (!auth()->user()->hasRole('user'))
-@include('artist.products.modals._Edit-Product')
-@endif
 @push('scripts')
 @if (auth()->user()->hasRole('admin'))
 <script src="{{ asset('assets/js/productsCrud.js') }}"></script>
@@ -100,4 +79,3 @@
     })
 </script>
 @endpush
-

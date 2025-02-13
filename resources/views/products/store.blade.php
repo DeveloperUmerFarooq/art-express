@@ -2,8 +2,8 @@
 
 @section('page')
 <div class="container mt-3 mb-3 mb-md-5">
-    <form action="" class="d-flex gap-1">
-        <input type="search" class="form-control" placeholder="search art-work...">
+    <form action="{{route(auth()->user()->getRoleNames()->first().'.search')}}" method="GET" class="d-flex gap-1">
+        <input type="search" name="name" id="name" class="form-control" placeholder="search art-work...">
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
 </div>
