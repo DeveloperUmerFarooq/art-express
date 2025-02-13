@@ -11,24 +11,23 @@
     <div class="d-flex flex-wrap mx-2">
         <h5>Browse by Subcategory</h5>
         <h7><a class="ms-3" href="">ask AI about current subcategory</a></h7>
-        <form method="GET" action="" class="d-flex flex-wrap ms-auto gap-2">
+        <form method="GET" action="{{route(auth()->user()->getRoleNames()->first().'.filter',$category->id)}}" id="filter" class="d-flex flex-wrap ms-auto gap-2">
             <div class="list-group">
-                <select name="subcategories[]" class="form-select">
+                <select name="subcategory" id="subId" class="form-select">
                     @foreach ($subCategories as $subcategory)
-                    @if (count($subcategory->products)>0)
-                    <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
-                    @endif
+                    <option value="{{ $subcategory->id }}"  @isset($subId)
+                        @if ($subcategory->id == $subId) selected @endif
+                    @endisset>{{ $subcategory->name }}</option>
                     @endforeach
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Apply Filter</button>
         </form>
     </div>
 </div>
 
     <div class="row mt-4 mx-2 align-items-center justify-content-center">
-
-        @foreach ($category->products as $product)
+    @if (count($products)>0)
+        @foreach ($products as $product)
             <div class="col-md-6 col-lg-3 mb-4">
                     <center>
                     <div class="card mt-5 product-card position-relative">
@@ -73,6 +72,14 @@
                 </center>
                 </div>
         @endforeach
+    @else
+    <div class="card shadow-sm mt-2 container" style="height: max-content !important">
+        <div class="card-body text-center">
+            <h5 class="card-title">No Products Added</h5>
+            <p class="card-text">It looks like there are no products avaialable for the current subcategory!</p>
+        </div>
+    </div>
+    @endif
     </div>
 @include('products.modals._buy-modal')
 @endsection
@@ -80,11 +87,17 @@
 @include('artist.products.modals._Edit-Product')
 @endif
 @push('scripts')
-@if (!auth()->user()->hasRole('user'))
+@if (auth()->user()->hasRole('admin'))
 <script src="{{ asset('assets/js/productsCrud.js') }}"></script>
 {{-- <script src="{{ asset('assets/js/products.js') }}"></script> --}}
 @endif
 @if (!auth()->user()->hasRole('admin'))
 <script src="{{asset('assets/js/order.js')}}"></script>
 @endif
+<script>
+    $('#subId').on('change',function(){
+        $('#filter').submit()
+    })
+</script>
 @endpush
+

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categories;
+use App\Models\SubCategories;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
@@ -14,6 +15,14 @@ class StoreController extends Controller
     public function products($id){
         $category=Categories::with('subCategories.products','products')->find($id);
         $subCategories=$category->subCategories;
-        return view('products.products')->with(['category'=>$category,'subCategories'=>$subCategories]);
+        $products=$category->products;
+        return view('products.products')->with(['category'=>$category,'subCategories'=>$subCategories,'products'=>$products]);
+    }
+    public function filtered($id, Request $req){
+        $category=Categories::find($id);
+        $subCategories=$category->subCategories;
+        $sub=SubCategories::find($req->subcategory);
+        $products=$sub->products;
+        return view('products.products')->with(['category'=>$category,'subCategories'=>$subCategories,'products'=>$products,'subId'=>$sub->id]);
     }
 }

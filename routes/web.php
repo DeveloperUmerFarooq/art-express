@@ -64,6 +64,7 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
     });
     Route::get('/products',[StoreController::class,'index'])->name('store');
     Route::get('/products/{id}',[StoreController::class,'products'])->name('products');
+    Route::get('/products/{id}/sub',[StoreController::class,'filtered'])->name('filter');
     Route::post('/product/update',[ProductsController::class,'update'])->name('product.update');
     Route::get('/product/{id}/delete',[ProductsController::class,'delete'])->name('product.delete');
 
@@ -109,6 +110,7 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
 
     Route::get('/store',[StoreController::class,'index'])->name('store');
     Route::get('/products/{id}',[StoreController::class,'products'])->name('products');
+    Route::get('/products/{id}/sub',[StoreController::class,'filtered'])->name('filter');
     Route::get('/product/{id}/blog',[BlogsController::class,'index'])->name('blogs');
 
     Route::get('/orders',[OrderController::class,'index'])->name('order');
@@ -134,6 +136,7 @@ Route::prefix('/user')->name('user.')->middleware(['role:user'])->group(function
 
     Route::get('/store',[StoreController::class,'index'])->name('store');
     Route::get('/products/{id}',[StoreController::class,'products'])->name('products');
+    Route::get('/products/{id}/sub',[StoreController::class,'filtered'])->name('filter');
 
     Route::get('/product/{id}/blog',[BlogsController::class,'index'])->name('blogs');
     Route::post('/blog/{id}/comment',[BlogsController::class,'comment'])->name('blog.comment');
