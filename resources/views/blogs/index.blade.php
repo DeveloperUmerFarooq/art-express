@@ -45,13 +45,13 @@
 
     <div class="mt-3 d-flex justify-content-between align-items-center">
         <div>
-            <form action="{{ route(auth()->user()->getRoleNames()->first().'.blog.like', $blog->id) }}" method="POST">
-                @csrf
-                <button class="btn btn-outline-primary d-flex align-items-center gap-2">
+            {{-- <form action="{{ route(auth()->user()->getRoleNames()->first().'.blog.like', $blog->id) }}" method="POST">
+                @csrf --}}
+                <button class="btn btn-outline-primary d-flex align-items-center gap-2" onclick="like()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-thumbs-up"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg>
                     <span>Like</span>
                 </button>
-            </form>
+            {{-- </form> --}}
         </div>
         <div>
             <span class="text-muted me-4">
@@ -69,7 +69,7 @@
         <h2 class="h5 font-weight-bold text-dark mb-4">Comments</h2>
 
         <div class="mb-4">
-            @if ($blog->comments->count())
+            @if ($blog->comments->count()>0)
             @foreach ($blog->comments as $comment )
             <div class="mb-4">
                 <p class="text-muted">{{ $comment->content }}</p>
@@ -112,4 +112,15 @@
 @endsection
 @push('scripts')
     <script src="{{asset('assets/js/blogCrud.js')}}"></script>
+    <script>
+        function like(){
+            $.ajax({
+                type: "GET",
+                url: "{{route(auth()->user()->getRoleNames()->first().'.blog.like', $blog->id)}}",
+                success: function (response) {
+                    document.getElementById('like-count').innerText=response;
+                }
+            });
+        }
+    </script>
 @endpush

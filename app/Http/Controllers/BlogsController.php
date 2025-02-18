@@ -78,7 +78,7 @@ class BlogsController extends Controller
                 ]);
             }
 
-            return redirect()->back();
+            return $post->likes()->count();
     }
 
     public function delete($id){
