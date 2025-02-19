@@ -29,7 +29,7 @@ class CategoriesDataTable extends DataTable
             ]);
         })
         ->addColumn('subCategories_count',function($query){
-            return $query->subCatagories()->count();
+            return $query->subCategories()->count();
         })
         ->addColumn('sub_categories',function($query){
             return view('admin.categories.actions.view-action',[
