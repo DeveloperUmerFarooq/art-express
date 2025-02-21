@@ -76,6 +76,7 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
     Route::post('/blog/{id}/update',[BlogsController::class,'update'])->name('blog.update');
     Route::get('/blog/{id}/delete',[BlogsController::class,'delete'])->name('blog.delete');
     Route::post('/blog/{id}/comment',[BlogsController::class,'comment'])->name('blog.comment');
+    Route::get('/blog/comment/{id}/delete',[BlogsController::class,'deleteComment'])->name('blog.comment.delete');
     Route::get('/blog/{id}/like',[BlogsController::class,'like'])->name('blog.like');
 
     Route::get('/orders',[OrderController::class,'index'])->name('order');
@@ -156,6 +157,7 @@ Route::prefix('/user')->name('user.')->middleware(['role:user'])->group(function
 
     Route::get('/product/{id}/blog',[BlogsController::class,'index'])->name('blogs');
     Route::post('/blog/{id}/comment',[BlogsController::class,'comment'])->name('blog.comment');
+    Route::get('/blog/comment/{id}/delete',[BlogsController::class,'deleteComment'])->name('blog.comment.delete');
     Route::get('/blog/{id}/like',[BlogsController::class,'like'])->name('blog.like');
 
     Route::get('/artist/{id}',[ProfileController::class,'portfolio'])->name('profile.view');
