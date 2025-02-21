@@ -29,7 +29,7 @@
 
     <center>
         <div class="d-flex gap-2 justify-content-center">
-            @if(auth()->user()->hasRole('admin') || (auth()->user()->hasRole('artist') && auth()->user()->id == $blog->artist_id))
+            @if(auth()->user()->hasRole('admin') || (auth()->user()->hasRole('artist') && auth()->user()->id == $blog->product->artist_id))
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editPostModal" onclick="editPost({{ $blog }})">Edit</button>
                 <button class="btn btn-danger" onclick="deletePost('{{ route('artist.blog.delete', $blog->id) }}')">Delete</button>
             @endif
@@ -38,20 +38,15 @@
 
 
     <div class="mt-4">
-        <p class="text-justify text-secondary text-black">
-            {{$blog->content}}
-        </p>
+        <pre class="text-justify">{{$blog->content}}</pre>
     </div>
 
     <div class="mt-3 d-flex justify-content-between align-items-center">
         <div>
-            {{-- <form action="{{ route(auth()->user()->getRoleNames()->first().'.blog.like', $blog->id) }}" method="POST">
-                @csrf --}}
-                <button class="btn btn-outline-primary d-flex align-items-center gap-2" onclick="like()">
+                <button class="btn {{$blog->likes->contains('user_id', auth()->user()->id)?'btn-success':'btn-outline-success'}} d-flex align-items-center gap-2" id="like-btn" onclick="like()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-thumbs-up"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg>
                     <span>Like</span>
                 </button>
-            {{-- </form> --}}
         </div>
         <div>
             <span class="text-muted me-4">
@@ -67,15 +62,17 @@
 
     <div class="mt-5">
         <h2 class="h5 font-weight-bold text-dark mb-4">Comments</h2>
-
         <div class="mb-4">
             @if ($blog->comments->count()>0)
             @foreach ($blog->comments as $comment )
-            <div class="mb-4">
-                <p class="text-muted">{{ $comment->content }}</p>
-                <span class="text-secondary small">
-                    - {{ $comment->user->name }} • {{ $comment->created_at->diffForHumans() }}
-                </span>
+            <div class="d-flex gap-3">
+                <img src="{{$comment->user->profile->profile_image}}" class="rounded-circle" height="40" width="40" alt="">
+                <div class="mb-4">
+                    <span class="text-secondary small">
+                        - {{ $comment->user->name }} • {{ $comment->created_at->diffForHumans() }}
+                    </span>
+                    <p class="text-muted">{{ $comment->content }}</p>
+                </div>
             </div>
             @endforeach
             @else
@@ -85,8 +82,6 @@
 
         <div class="mt-4">
             <h2 class="h5 font-weight-bold text-dark mb-3">Leave a Comment</h2>
-            <form action="{{route(auth()->user()->getRoleNames()->first().'.blog.comment',$blog->id)}}" method="POST">
-                @csrf
                 <div class="form-group">
                     <textarea
                         name="comment"
@@ -99,10 +94,10 @@
                 <button
                     type="submit"
                     class="btn btn-primary mt-3"
+                    onclick="comment()"
                 >
                     Post Comment
                 </button>
-            </form>
         </div>
     </div>
 </div>
@@ -114,11 +109,28 @@
     <script src="{{asset('assets/js/blogCrud.js')}}"></script>
     <script>
         function like(){
+            $('#like-btn').toggleClass('btn-outline-success');
+            $('#like-btn').toggleClass('btn-success');
             $.ajax({
                 type: "GET",
                 url: "{{route(auth()->user()->getRoleNames()->first().'.blog.like', $blog->id)}}",
                 success: function (response) {
                     document.getElementById('like-count').innerText=response;
+                }
+            });
+        }
+        function comment(){
+            $.ajax({
+                type: "POST",
+                url: "{{route(auth()->user()->getRoleNames()->first().'.blog.comment',$blog->id)}}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    comment: $('textarea[name="comment"]').val()
+                },
+                success: function (response) {
+                    toastr.success('Comment Posted')
+                    // document.getElementById('comment-count').innerText=response;
+                    // window.location.reload();
                 }
             });
         }

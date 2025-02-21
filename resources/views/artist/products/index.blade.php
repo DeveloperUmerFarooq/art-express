@@ -11,19 +11,6 @@
                     <center>
                         <div class="card mt-5 product-card position-relative">
                             <div class="d-flex gap-1 position-absolute top-0 end-0">
-                                <button class="btn btn-dark opacity-50" data-bs-toggle="modal"
-                                    data-bs-target="#editProductModal"
-                                    onclick="edit({{ $product }},'{{ asset($product->image->image_src) }}')"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="lucide lucide-file-pen-line">
-                                        <path
-                                            d="m18 5-2.414-2.414A2 2 0 0 0 14.172 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2" />
-                                        <path
-                                            d="M21.378 12.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
-                                        <path d="M8 18h1" />
-                                    </svg></button>
-
                                 <button class="btn btn-danger" onclick="deleteProduct('{{route('artist.product.delete',$product->id)}}')">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20"
                                         height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -45,6 +32,9 @@
                                 <p class="card-price">Price: {{ $product->price }} Rs</p>
                                 @if ($product->blog)
                                 <div class="d-flex justify-content-center gap-1 mt-auto">
+                                    <button class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#editProductModal"
+                                    onclick="edit({{ $product }},'{{ asset($product->image->image_src) }}')">Edit Product</button>
                                     <a href="{{ route(auth()->user()->getRoleNames()->first() . '.blogs', $product->blog->id) }}"
                                         class="btn btn-outline-success">Read Blog</a>
                                 </div>
