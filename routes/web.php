@@ -109,6 +109,7 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
     Route::get('/blog/{id}/delete',[BlogsController::class,'delete'])->name('blog.delete');
 
     Route::post('/blog/{id}/comment',[BlogsController::class,'comment'])->name('blog.comment');
+    Route::get('/blog/comment/{id}/delete',[BlogsController::class,'deleteComment'])->name('blog.comment.delete');
     Route::get('/blog/{id}/like',[BlogsController::class,'like'])->name('blog.like');
 
     Route::get('/store',[StoreController::class,'index'])->name('store');

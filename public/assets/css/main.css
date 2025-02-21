@@ -31,7 +31,7 @@ main{
     color: var(--secondary);
     font-weight: 1000;
 }
-.navbar,.dropdown-menu{
+.navbar,.navbar .dropdown-menu{
     background-color: var(--secondary) !important;
 }
 .navbar a,.navbar-toggler-icon{
@@ -40,16 +40,16 @@ main{
 .navbar a:hover{
     color: var(--primary);
 }
-.dropdown-menu,#logout:hover{
+.navbar .dropdown-menu,#logout:hover{
     background-color: transparent;
 }
 #logout{
     cursor: pointer;
 }
-.dropdown-item{
+.navbar .dropdown-menu .dropdown-item{
     transition: all .4s ease-out;
 }
-.dropdown-item:hover{
+.navbar .dropdown-menu .dropdown-item:hover{
     background-color:#198654 ;
 }
 .navbar-toggle:focus{

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blogs;
+use App\Models\Comment;
 use App\Models\Products;
 use Exception;
 use Illuminate\Http\Request;
@@ -89,5 +90,15 @@ class BlogsController extends Controller
             toastr()->error('Operation Failed!');
         }
         return redirect()->route('artist.product');
+    }
+
+    public function deleteComment($id){
+        try{
+            Comment::find($id)->delete();
+            toastr()->success('Comment deleted');
+        }catch(Exception $e){
+            toastr()->error('Operation Failed!');
+        }
+        return redirect()->back();
     }
 }
