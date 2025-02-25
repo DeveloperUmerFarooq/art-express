@@ -157,17 +157,20 @@
         }
 
         function comment() {
-            $.ajax({
-                type: "POST",
-                url: "{{ route(auth()->user()->getRoleNames()->first() . '.blog.comment.delete', $blog->id) }}",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    comment: $('textarea[name="comment"]').val()
-                },
-                success: function(response) {
-                    toastr.success('Comment Posted')
-                }
-            });
+            console.log('comment posted');
+            if($('textarea[name="comment"]').val()!=""||$('textarea[name="comment"]').val()!=null){
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route(auth()->user()->getRoleNames()->first() . '.blog.comment', $blog->id) }}",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        comment: $('textarea[name="comment"]').val()
+                    },
+                    success: function(response) {
+                        toastr.success('Comment Posted')
+                    }
+                });
+            }
         }
 
         function deleteComment(url) {
