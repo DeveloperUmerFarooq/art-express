@@ -50,14 +50,14 @@
               </li>
               <li class="nav-item dropdown d-none d-md-block">
                 <a class="nav-link dropdown-toggle no-togggle-icon fs-6" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img class="rounded-circle" src="{{asset('storage/users-avatar/'.auth()->user()->avatar)}}" alt="{{auth()->user()->name}}" height="30">
+                    <img class="rounded-circle" src="{{asset('storage/users-avatar/'.auth()->user()->avatar)}}" alt="{{auth()->user()->name}}" height="30" width="30">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                   <abbr title="View Profile">
                   <li><center>
                     <a class="d-flex flex-column text-decoration-none gap-1 pb-0" href="{{route('user.profile')}}">
                         <div class="profile-image rounded-full">
-                        <img class="rounded-circle" src="{{asset('storage/users-avatar/'.auth()->user()->avatar)}}" style="height: 4rem" alt="{{auth()->user()->name}}">
+                        <img class="rounded-circle" src="{{asset('storage/users-avatar/'.auth()->user()->avatar)}}" style="height: 4rem; width: 4rem" alt="{{auth()->user()->name}}">
                         </div>
                         <p class="text-wrap" style="color:var(--primary)">{{auth()->user()->name}}</p>
                     </a>

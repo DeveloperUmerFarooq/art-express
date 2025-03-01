@@ -50,7 +50,7 @@
               </li>
               <li class="nav-item dropdown d-none d-lg-block">
                 <a class="nav-link dropdown-toggle no-togggle-icon fs-6" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img class="rounded-circle" src="{{asset('storage/users-avatar/'.auth()->user()->avatar)}}" alt="{{auth()->user()->name}}" height="35" width="35">
+                    <img class="rounded-circle" src="{{asset('storage/users-avatar/'.auth()->user()->avatar)}}" alt="{{auth()->user()->name}}" height="30" width="30">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                   <abbr title="View Profile">
