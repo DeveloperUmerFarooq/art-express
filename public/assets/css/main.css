@@ -200,14 +200,16 @@ th,td{
 }
 .product-card .card-img-top {
     background-color: var(--secondary);
-    height: 100vh;
+    height: 150px;
+    transform: scale(2.7);
+    transform-origin: top;
     max-height: 400px;
     object-fit: contain;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 .product-card:hover .image-container>.card-img-top{
-    height: 150px;
-    transition: all .4s ease-in;
+    transform: scaleY(1);
+    transition: all .3s ease-in;
 }
 .product-card:hover .image-container+.card-body{
     opacity:1;
