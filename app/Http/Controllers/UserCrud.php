@@ -9,6 +9,7 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserCrud extends Controller
 {
@@ -88,20 +89,14 @@ class UserCrud extends Controller
                     $user->password=Hash::make($req->password);
                 }
                 if($req->hasFile('image')){
-                    if($user->profile->cloudinary_public_id){
-                        Cloudinary::destroy($user->profile->cloudinary_public_id);
+                    if (Storage::disk('public')->exists('users-avatar/'.$user->avatar)) {
+                        Storage::disk('public')->delete('users-avatar/' . $user->avatar);
                     }
-                    $path=Cloudinary::upload($req->file('image'),[
-                        'folder'=>'avatars',
-                        'transformation'=>[
-                            'width'=>500,
-                            'height'=>500,
-                            'corp'=>'fill'
-                        ]
-                    ]);
-                    $publicId=$path->getPublicId();
-                    $path=$path->getSecurePath();
-                    $user->profile()->update(['profile_image' => $path, 'cloudinary_public_id' => $publicId]);
+                    $avatar = $req->file('image');
+                    $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
+                    $avatar->storeAs('users-avatar', $avatarName,'public');
+                    $user->avatar=$avatarName;
+                    $user->save();
                 }
                 $user->save();
                 toastr()->success("User Updated Successfully!");

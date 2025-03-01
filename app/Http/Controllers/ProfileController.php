@@ -85,18 +85,6 @@ class ProfileController extends Controller
                 $avatar = $req->file('avatar');
                 $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
                 $avatar->storeAs('users-avatar', $avatarName,'public');
-                // $path = Cloudinary::upload($req->file('avatar'), [
-                //     'folder' => 'avatars',
-                //     'transformation' => [
-                //         'width' => 500,
-                //         'height' => 500,
-                //         'corp' => 'fill'
-                //     ]
-                // ]);
-                // $publicId = $path->getPublicId();
-                // $path = $path->getSecurePath();
-                // $user->profile()->update(['profile_image' => $path, 'cloudinary_public_id' => $publicId]);
-                // dd($avatarName);
                 $user->avatar=$avatarName;
                 $user->save();
                 toastr()->success('Profile Successfully Updated!');

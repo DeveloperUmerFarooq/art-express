@@ -35,7 +35,7 @@ function deleteUser(url){
 }
 
 function editUser(user){
-    $('#img').attr('src',user['profile']['profile_image'])
+    $('#img').attr('src',userAvatarUrl+'/'+user['avatar'])
     $('#id').val(user['id'])
     $('#Name').val(user['name'])
     $('#Email').val(user['email'])

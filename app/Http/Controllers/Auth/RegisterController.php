@@ -68,12 +68,10 @@ class RegisterController extends Controller
         $user= User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'avatar'=>'avatar.png',
             'password' => Hash::make($data['password']),
         ]);
         $user->assignRole($data['role']);
-        $user->profile()->create([
-            'profile_image'=>'https://ui-avatars.com/api/?name=' . urlencode($user->name)
-        ]);
         return $user;
     }
 

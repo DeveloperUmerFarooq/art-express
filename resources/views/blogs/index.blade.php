@@ -83,7 +83,7 @@
                 @if ($blog->comments->count() > 0)
                     @foreach ($blog->comments as $comment)
                         <div class="d-flex gap-3">
-                            <img src="{{ $comment->user->profile->profile_image }}" class="rounded-circle" height="40"
+                            <img src="{{asset('storage/users-avatar'.$comment->user->avatar)}}" class="rounded-circle" height="40"
                                 width="40" alt="">
                             <div class="mb-4">
                                 <span class="text-secondary small">

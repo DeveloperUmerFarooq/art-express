@@ -30,6 +30,9 @@
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
     <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var userAvatarUrl = "{{ asset('storage/users-avatar/') }}";
+    </script>
     @stack('scripts')
 </body>
 </html>

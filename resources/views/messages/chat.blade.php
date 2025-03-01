@@ -6,7 +6,7 @@
         <!-- Chat Header -->
         <div class="bg-success text-white p-3 d-flex justify-content-between align-items-center rounded-top shadow-sm">
             <div class="d-flex align-items-center gap-3">
-                <img src="{{ asset($reciever->profile->profile_image) }}" height="45" class="rounded-circle border border-light p-1" alt="Profile Image" style="transition: transform 0.3s;">
+                <img src="{{ asset($reciever->avatar) }}" height="45" class="rounded-circle border border-light p-1" alt="Profile Image" style="transition: transform 0.3s;">
 
                 <div class="d-flex flex-column">
                     <h5 class="mb-0 text-light">{{ $reciever->name }}</h5>
