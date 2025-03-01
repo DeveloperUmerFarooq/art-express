@@ -27,10 +27,12 @@
                             <p class="card-price">Price: {{$product->price}} Rs</p>
                             <div class="d-flex justify-content-center gap-1">
                             @can("buy art")
+                            @if (!auth()->user()->products()->where('id', $product->id)->exists())
                             <a href="#" class="btn btn-primary"
                             data-bs-toggle="modal"
                             data-bs-target="#buyProductModal"
                             onclick="buy({{$product}})">Buy Now</a>
+                            @endif
                             @endcan
                             @can("manage store")
                             <button class="btn btn-primary" data-bs-toggle="modal"
