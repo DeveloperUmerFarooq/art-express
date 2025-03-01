@@ -17,30 +17,23 @@ class UserSeeder extends Seeder
         $admin=User::create([
             'name'=>'admin',
             'email'=>'admin@test.com',
+            'avatar'=>'avatar.png',
             'password'=>Hash::make('admin1122')
         ]);
         $artist=User::create([
             'name'=>'artist',
             'email'=>'artist@text.com',
+            'avatar'=>'avatar.png',
             'password'=>Hash::make('artist1122')
         ]);
         $user=User::create([
             'name'=>'user',
             'email'=>'user@text.com',
+            'avatar'=>'avatar.png',
             'password'=>Hash::make('user1122')
         ]);
         $admin->assignRole('admin');
-        $admin->profile()->create([
-            'profile_image' => 'https://ui-avatars.com/api/?name=' . urlencode($admin->name),
-        ]);
         $artist->assignRole('artist');
-        $artist->profile()->create([
-            'profile_image' => 'https://ui-avatars.com/api/?name=' . urlencode($artist->name),
-        ]);
         $user->assignRole('user');
-        $user->profile()->create([
-            'profile_image' => 'https://ui-avatars.com/api/?name=' . urlencode($user->name),
-        ]);
-
     }
 }
