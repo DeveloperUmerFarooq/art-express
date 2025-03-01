@@ -126,9 +126,6 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
     Route::get('/artist/{id}',[ProfileController::class,'portfolio'])->name('profile.view');
 
 
-    Route::get('/inbox',[ChatController::class,'inbox'])->name('inbox');
-    Route::get('/messages/{id}',[ChatController::class,'index'])->name('message.index');
-
 
     Route::get('/auction',[AuctionController::class,'index'])->name('auction');
 
@@ -166,8 +163,6 @@ Route::prefix('/user')->name('user.')->middleware(['role:user'])->group(function
 
     Route::get('/auction',[AuctionController::class,'index'])->name('auction');
 
-    Route::get('/inbox',[ChatController::class,'inbox'])->name('inbox');
-    Route::get('/messages/{id}',[ChatController::class,'index'])->name('message.index');
 
     Route::get('/artists',[ArtistController::class,'artist'])->name('artist');
 
