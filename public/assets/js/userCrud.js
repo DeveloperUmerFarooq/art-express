@@ -40,3 +40,13 @@ function editUser(user){
     $('#Name').val(user['name'])
     $('#Email').val(user['email'])
 }
+ function preview(event){
+    const file=event.target.files[0];
+    if(file){
+        const reader=new FileReader();
+        reader.onload=function(e){
+            $('#img').attr('src',e.target.result);
+        }
+        reader.readAsDataURL(file);
+    }
+ }

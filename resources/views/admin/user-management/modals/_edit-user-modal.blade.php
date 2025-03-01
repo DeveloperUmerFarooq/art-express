@@ -14,7 +14,7 @@
                             <img id="img" width="100%" style="height: 7rem" alt="">
                         </div>
                         <div>
-                            <input class="form-control" type="file" name="image" id="image" value="{{old('image')}}">
+                            <input class="form-control" type="file" name="image" id="image" value="{{old('image')}}" onchange="preview(event)">
                         </div>
                     </div>
                 </div>
