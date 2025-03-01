@@ -26,7 +26,24 @@
                 <a class="nav-link fs-6" href="{{route('artist.order')}}">Orders</a>
               </li>
               <li class="nav-item pt-1">
-                <a class="nav-link fs-6" href="{{route('messenger')}}">Messages</a>
+                <a class="nav-link fs-6" href="{{route('messenger')}}">
+                @php
+                    if (auth()->check()){
+                        $unreadCount = App\Models\ChMessage::where('to_id', auth()->id())
+                                                    ->where('seen', 0)
+                                                    ->count();
+                    }
+                    else{
+                        $unreadCount=0;
+                    }
+                @endphp
+                @if ($unreadCount>0)
+                <span class="bg-danger p-2 rounded-pill text-white fw-bold d-inline-flex align-items-center justify-content-center" style="min-width: 20px; height: 24px; font-size: 0.8rem;">
+                    {{$unreadCount}}
+                </span>
+                @endif
+                Messages
+                </a>
               </li>
               <li class="nav-item pt-1">
                 <a class="nav-link fs-6" href="{{route('artist.auction')}}">Auctions</a>
