@@ -9,7 +9,7 @@
             <div class="col-12 bg-success p-4 rounded-3 d-flex justify-content-center w-75">
                 <div class="d-flex gap-3 align-items-center text-white">
                     {{-- {{$profile}} --}}
-                    <img src="{{ asset('storage/users-avatar/'.$profile->user->avatar) }}" height="100" class="rounded-circle" alt="Profile Image">
+                    <img src="{{ asset('storage/users-avatar/'.$profile->user->avatar) }}" height="100" width="100" class="rounded-circle" alt="Profile Image">
                     <div>
                         <h1 class="text-start">{{ $profile->user->name }}</h1>
                         <h5>{{ $profile->user->email }}</h5>
