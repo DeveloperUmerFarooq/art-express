@@ -79,7 +79,6 @@ class ProfileController extends Controller
         if ($req->hasFile('avatar')) {
             try {
                 if (Storage::disk('public')->exists('users-avatar/'.$user->avatar)) {
-                    // dd('File exists:', 'users-avatar/'.$user->avatar);
                     Storage::disk('public')->delete('users-avatar/' . $user->avatar);
                 }
                 $avatar = $req->file('avatar');
