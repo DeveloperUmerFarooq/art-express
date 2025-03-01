@@ -297,13 +297,13 @@ th,td{
         height: 15rem;
     }
     .product-card{
-        height: 25.4rem !important ;
+        height: 26rem !important ;
     }
 }
 
 @media (max-width: 320px) {
     .product-card {
-        height: 24.3rem !important;
+        height: 25.1rem !important;
     }
 }
 
