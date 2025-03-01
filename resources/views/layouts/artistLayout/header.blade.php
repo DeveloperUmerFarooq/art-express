@@ -38,7 +38,7 @@
                     }
                 @endphp
                 @if ($unreadCount>0)
-                <span class="bg-danger p-2 rounded-pill text-white fw-bold d-inline-flex align-items-center justify-content-center" style="min-width: 20px; height: 24px; font-size: 0.8rem;">
+                <span class="bg-danger p-2 rounded-pill text-white fw-bold d-inline-flex align-items-center justify-content-center" style="min-width: 20px; height: 24px; font-size: 0.9rem;">
                     {{$unreadCount}}
                 </span>
                 @endif
