@@ -77,7 +77,7 @@
                                         <a href="{{ route(auth()->user()->getRoleNames()->first() . '.blogs', $product->id) }}"
                                             class="btn btn-outline-success">Read Blog</a>
                                         @can('manage store')
-                                            <button class="btn btn-danger position-absolute top-0 end-0"
+                                            <button class="btn btn-danger position-absolute top-0 end-0 m-1"
                                                 onclick="deleteProduct('{{ route(auth()->user()->getRoleNames()->first() . '.product.delete', $product->id) }}')">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

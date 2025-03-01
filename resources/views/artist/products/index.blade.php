@@ -10,7 +10,7 @@
                 <div class="col-md-6 col-lg-3 mb-4">
                     <center>
                         <div class="card mt-5 product-card position-relative">
-                            <div class="d-flex gap-1 position-absolute top-0 end-0">
+                            <div class="position-absolute top-0 end-0 m-1">
                                 <button class="btn btn-danger" onclick="deleteProduct('{{route('artist.product.delete',$product->id)}}')">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20"
                                         height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -25,10 +25,11 @@
                                     alt="Portrait Painting">
                                 <div class="magnifier" id="magnifier"></div>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body d-flex flex-column gap-0">
                                 <h5 class="card-title">{{ $product->name }}</h5>
                                 <p class="seller"><b>By: {{ $product->artist->name }}</b></p>
-                                <p class="card-text" style="height: 75px; overflow: hidden; align-content:center">{{ $product->description }}</p>
+                                <p class="card-text text-justify" style="height: 75px; overflow: hidden;">
+                                    {{ $product->description }}</p>
                                 <p class="card-price">Price: {{ $product->price }} Rs</p>
                                 @if ($product->blog)
                                 <div class="d-flex justify-content-center gap-1 mt-auto">
