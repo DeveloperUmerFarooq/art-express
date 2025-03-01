@@ -26,7 +26,7 @@
                 <a class="nav-link fs-6" href="{{route('user.artist')}}">Artists</a>
               </li>
               <li class="nav-item pt-1">
-                <a class="nav-link fs-6" href="{{route('user.inbox')}}">Messages</a>
+                <a class="nav-link fs-6" href="{{route('messenger')}}">Messages</a>
               </li>
               <li class="nav-item pt-1">
                 <a class="nav-link fs-6" href="{{route('user.auction')}}">Auctions</a>
