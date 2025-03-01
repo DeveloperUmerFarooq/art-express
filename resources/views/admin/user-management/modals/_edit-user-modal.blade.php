@@ -11,7 +11,7 @@
                 <div class="container">
                     <div class="d-flex flex-column align-items-center justify-content-center gap-2">
                         <div class="rounded shadow bg-dark w-25 h-25">
-                            <img id="img" width="100%" alt="">
+                            <img id="img" width="100%" style="height: 7rem" alt="">
                         </div>
                         <div>
                             <input class="form-control" type="file" name="image" id="image" value="{{old('image')}}">
