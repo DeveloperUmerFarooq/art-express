@@ -5,7 +5,7 @@
         <div class="container d-flex flex-column mt-5">
             <center>
                 <div class="position-relative overflow-hidden" style="width: clamp(10rem,15vw,20rem); height: clamp(10rem,15vw,20rem)">
-                    <img class="rounded-circle w-100 h-100" src="{{$profile->profile_image}}" alt="Profile Image" style="object-fit: cover;">
+                    <img class="rounded-circle w-100 h-100" src="{{asset('storage/users-avatar/'.$profile->user->avatar)}}" alt="Profile Image" style="object-fit: cover;">
                 </div>
                 <div class="fs-3 mt-1" style="vertical-align: middle">
                     <span><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#023222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg></span>
