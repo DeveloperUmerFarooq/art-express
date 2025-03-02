@@ -3,6 +3,15 @@
     --primary:#F4EBD9;
     --secondary:#023222;
     --tertiary:#131010;
+    --loading-bar:#198654;
+}
+.pace .pace-progress {
+    background: var(--loading-bar) !important;
+}
+
+.pace .pace-activity {
+    border-top-color: var(--loading-bar) !important;
+    border-left-color: var(--loading-bar) !important;
 }
 body{
     margin: 0;
