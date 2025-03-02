@@ -8,10 +8,10 @@
     </div>
     <div class="px-2">
         <h1 class="mt-3 mx-2">{{ $category->name }}</h1>
-        <div class="d-flex flex-wrap mx-2">
+        <div class="d-flex gap-2 flex-wrap mx-2">
             <h5>Browse by Subcategory</h5>
-            <h7><a class="ms-3" href="">ask AI about current subcategory</a></h7>
-            <form method="GET" action="{{ route(auth()->user()->getRoleNames()->first() . '.filter', $category->id) }}"
+            <h7><a class="ms-md-3" href="">ask AI about current subcategory</a></h7>
+            <form class="mt-1 mt-sm-0 ms-auto" method="GET" action="{{ route(auth()->user()->getRoleNames()->first() . '.filter', $category->id) }}"
                 id="filter" class="d-flex flex-wrap ms-auto gap-2">
                 <div class="list-group">
                     <select name="subcategory" id="subId" class="form-select">
