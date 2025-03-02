@@ -205,11 +205,10 @@ th,td{
     transform-origin: top;
     max-height: 400px;
     object-fit: contain;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in;
 }
 .product-card:hover .image-container>.card-img-top{
     transform: scaleY(1);
-    transition: all .3s ease-in;
 }
 .product-card:hover .image-container+.card-body{
     opacity:1;
@@ -228,7 +227,6 @@ th,td{
 .product-card .card-price {
     font-size: clamp(1rem, 4.5vw, 1.1rem);
     font-weight: bold;
-    color: #2ecc71;
 }
 .seller{
     font-size: clamp(0.75rem,4vw,1rem) !important;

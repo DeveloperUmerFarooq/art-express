@@ -37,7 +37,7 @@
                             <div class="image-container">
                                 <img src="{{ asset($product->image->image_src) }}" class="card-img-top object-fit-contain"
                                     alt="Portrait Painting">
-                                <div class="magnifier" id="magnifier"></div>
+
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">{{ $product->name }}</h5>
@@ -47,7 +47,7 @@
                                 </a>
                                 <p class="card-text" style="height: 75px; overflow: hidden; align-content:center">
                                     {{ $product->description }}</p>
-                                <p class="card-price">Price: {{ $product->price }} Rs</p>
+                                <p class="card-price text-success">Price: {{ $product->price }} Rs</p>
                                 <div class="d-flex justify-content-center gap-1">
                                     @can('buy art')
                                     @if(!auth()->user()->products()->where('id', $product->id)->exists())

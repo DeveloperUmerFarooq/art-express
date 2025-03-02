@@ -23,14 +23,14 @@
                             <div class="image-container">
                                 <img src="{{ asset($product->image->image_src) }}" class="card-img-top object-fit-contain"
                                     alt="Portrait Painting">
-                                <div class="magnifier" id="magnifier"></div>
+
                             </div>
                             <div class="card-body d-flex flex-column gap-0">
                                 <h5 class="card-title">{{ $product->name }}</h5>
                                 <p class="seller"><b>By: {{ $product->artist->name }}</b></p>
                                 <p class="card-text text-justify" style="height: 75px; overflow: hidden;">
                                     {{ $product->description }}</p>
-                                <p class="card-price">Price: {{ $product->price }} Rs</p>
+                                <p class="card-price text-success">Price: {{ $product->price }} Rs</p>
                                 @if ($product->blog)
                                 <div class="d-flex justify-content-center gap-1 mt-auto">
                                     <button class="btn btn-primary" data-bs-toggle="modal"
