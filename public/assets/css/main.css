@@ -195,7 +195,7 @@ th,td{
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .product-card .card-body{
-    transform: translateY(100%);
+    opacity: 0;
     transition: all 0.5s linear;
 }
 .product-card .card-img-top {
@@ -205,15 +205,15 @@ th,td{
     transform-origin: top;
     max-height: 400px;
     object-fit: contain;
-    transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in-out;
 }
 .product-card:hover .image-container>.card-img-top{
     transform: scaleY(1);
     transition: all .3s ease-in;
 }
 .product-card:hover .image-container+.card-body{
-    transform: translateY(0%);
-    transition: .2s ease-in;
+    opacity:1;
+    transition: 1s;
 }
 .product-card .card-title {
     font-size: clamp(1rem, 5vw, 1.25rem);
