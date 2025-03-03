@@ -89,7 +89,7 @@
                                 <span class="text-secondary small">
                                     - {{ $comment->user->name }} • {{ $comment->created_at->diffForHumans() }}
                                 </span>
-                                <p class="text-muted">{{ $comment->content }}</p>
+                                <p class="text-muted emoji-content">{{ $comment->content }}</p>
                             </div>
                             @if (auth()->user()->hasRole('admin') || auth()->user()->id == $comment->user_id)
                                 <!-- Dropdown Menu -->
@@ -129,7 +129,7 @@
             <div class="mt-4">
                 <h2 class="h5 font-weight-bold text-dark mb-3">Leave a Comment</h2>
                 <div class="form-group">
-                    <textarea name="comment" rows="4" class="form-control" placeholder="Write your comment here..." required></textarea>
+                    <textarea name="comment" id="comment" rows="4" class="form-control" placeholder="Write your comment here..." required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary mt-3" onclick="comment()">
                     Post Comment
@@ -144,6 +144,17 @@
 @push('scripts')
     <script src="{{ asset('assets/js/blogCrud.js') }}"></script>
     <script>
+        $(document).ready(function () {
+        $("#comment").emojioneArea({
+            pickerPosition: "top",
+            tonesStyle: "bullet",
+            autocomplete: false,
+            saveEmojisAs: "shortname",
+        });
+        document.querySelectorAll(".emoji-content").forEach((el) => {
+            el.innerHTML = emojione.toImage(el.innerHTML);
+        });
+    });
         function like() {
             $('#like-btn').toggleClass('btn-outline-success');
             $('#like-btn').toggleClass('btn-success');
