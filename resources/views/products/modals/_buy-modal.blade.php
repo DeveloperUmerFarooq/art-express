@@ -16,7 +16,7 @@
 
             <div class="mb-3">
               <label for="order_date" class="form-label">Confirm Your Address</label>
-              <textarea rows="4" class="form-control" id="address" placeholder="address" name="address" required>{{old('address',auth()->user()->profile->address)}}</textarea>
+              <textarea rows="4" class="form-control" id="address" placeholder="address" name="address" required>{{old('address',auth()->user()->profile->address??null)}}</textarea>
             </div>
 
             <div class="mb-3">

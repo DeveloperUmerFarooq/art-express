@@ -71,6 +71,7 @@ class RegisterController extends Controller
             'avatar'=>'avatar.png',
             'password' => Hash::make($data['password']),
         ]);
+        $user->profile()->create([]);
         $user->assignRole($data['role']);
         return $user;
     }

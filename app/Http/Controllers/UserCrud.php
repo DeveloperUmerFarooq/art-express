@@ -43,6 +43,7 @@ class UserCrud extends Controller
                 'avatar'=>'avatar.png',
                 'password'=>Hash::make($req->password),
             ]);
+            $user->profile()->create([]);
             $user->assignRole('artist');
             toastr()->success('New Artist Created');
         }
@@ -64,6 +65,7 @@ class UserCrud extends Controller
                 'avatar'=>'avatar.png',
                 'password'=>Hash::make($req->password),
             ]);
+            $user->profile()->create([]);
             $user->assignRole('user');
             toastr()->success('New User Created');
         }

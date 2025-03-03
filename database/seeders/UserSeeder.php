@@ -33,7 +33,16 @@ class UserSeeder extends Seeder
             'password'=>Hash::make('user1122')
         ]);
         $admin->assignRole('admin');
+        $admin->profile()->create([
+            'user_id'=>$admin->id
+        ]);
         $artist->assignRole('artist');
+        $artist->profile()->create([
+            'user_id'=>$artist->id
+        ]);
         $user->assignRole('user');
+        $user->profile()->create([
+            'user_id'=>$user->id
+        ]);
     }
 }
