@@ -3,22 +3,22 @@ document.addEventListener('DOMContentLoaded', function() {
     let zoom = {
         scale:0,
         opacity:0,
-        duration:0.3
+        duration:0.4
     }
-    gsap.from('.navbar-brand',zoom);
+    gsap.from('.navbar-brand',{...zoom,delay:0.5});
 
     gsap.from('.nav-link',{
         x:-100,
         scale:0,
         opacity:0,
         duration:0.6,
-        delay:0.3
+        delay:0.5
     })
     tl.from('#logo',{
         scale:0,
         opacity:0,
         y:10,
-        delay:0.5
+        delay:1
     })
     tl.from('.res-title',zoom)
     tl.from('.res-sub',{
