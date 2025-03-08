@@ -13,6 +13,20 @@
     border-top-color: var(--loading-bar) !important;
     border-left-color: var(--loading-bar) !important;
 }
+
+.landing-layout {
+    padding: 1rem;
+    columns: 10rem;
+    column-gap: 0.3rem;
+}
+
+.landing-layout div img {
+    width: 100%;
+    object-fit: contain;
+    break-inside: avoid;
+    transition: all 0.3s ease-in;
+    margin: 0.15rem;
+}
 body{
     margin: 0;
     padding: 0;
@@ -312,6 +326,13 @@ th,td{
 @media (max-width: 320px) {
     .product-card {
         height: 25.1rem !important;
+    }
+}
+@media (width<400px) {
+    .layout{
+        padding: 0rem;
+        columns: 7rem;
+        column-gap: 0.3rem;
     }
 }
 
