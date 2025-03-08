@@ -26,6 +26,10 @@
     break-inside: avoid;
     transition: all 0.3s ease-in;
     margin: 0.15rem;
+    animation: grow both;
+    animation-timeline: view();
+    animation-range-start: entry 10px;
+    animation-range-end: entry 50%;
 }
 body{
     margin: 0;
@@ -306,6 +310,18 @@ th,td{
     display: none !important;
     background-color: red !important;
 }
+
+@keyframes grow {
+    from{
+        transform: translateY(20px) scale(0);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
 @media (min-width: 601px) {
     .landscape,
     .portrait {

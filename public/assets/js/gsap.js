@@ -34,16 +34,4 @@ document.addEventListener('DOMContentLoaded', function() {
         y:50,
         opacity:0
     })
-    gsap.from('.layout-img', {
-        y: 50,
-        opacity: 0,
-        scale: 0.5,
-        scrollTrigger: {
-            trigger: '.landing-layout',
-            start: 'top 70%',
-            end: 'top 30%',
-            scrub:true,
-        }
-    });
-
 });
