@@ -38,12 +38,11 @@ document.addEventListener('DOMContentLoaded', function() {
         y: 50,
         opacity: 0,
         scale: 0.5,
-        duration: 0.3,
         scrollTrigger: {
             trigger: '.landing-layout',
             start: 'top 70%',
-            end: 'top 40%',
-            toggleActions: 'play none none reverse',
+            end: 'top 30%',
+            scrub:true,
         }
     });
 
