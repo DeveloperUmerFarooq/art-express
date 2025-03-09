@@ -14,7 +14,7 @@
                     <center>
                         <div class="mb-3 text-center shadow w-50">
                             <!-- Display current product image if available -->
-                            <img src="" id="productImage" width="200" class="img-fluid" alt="Product Image">
+                            <img loading="lazy" src="" id="productImage" width="200" class="img-fluid" alt="Product Image">
                         </div>
                     </center>
 

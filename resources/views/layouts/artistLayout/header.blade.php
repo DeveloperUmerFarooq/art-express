@@ -2,11 +2,11 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand fs-3 d-flex gap-1 align-items-center" href="/">
-                <img src="{{asset('assets/images/icon.svg')}}" height="50" alt="" style="filter: drop-shadow(1px 1px 10px var(--primary))">
+                <img loading="lazy" src="{{asset('assets/images/icon.svg')}}" height="50" alt="" style="filter: drop-shadow(1px 1px 10px var(--primary))">
                 <span>Art-Express</span>
             </a>
           <a href="{{route('artist.profile')}}" class="nav-link dropdown-toggle no-togggle-icon fs-6 ms-auto mx-1 d-lg-none">
-              <img class="rounded-circle" src="{{asset('storage/users-avatar/'.auth()->user()->avatar)}}" alt="{{auth()->user()->name}}" height="30" width="30">
+              <img loading="lazy" class="rounded-circle" src="{{asset('storage/users-avatar/'.auth()->user()->avatar)}}" alt="{{auth()->user()->name}}" height="30" width="30">
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff0cd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-justify"><path d="M3 12h18"/><path d="M3 18h18"/><path d="M3 6h18"/></svg>
@@ -50,14 +50,14 @@
               </li>
               <li class="nav-item dropdown d-none d-lg-block">
                 <a class="nav-link dropdown-toggle no-togggle-icon fs-6" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img class="rounded-circle" src="{{asset('storage/users-avatar/'.auth()->user()->avatar)}}" alt="{{auth()->user()->name}}" height="30" width="30">
+                    <img loading="lazy" class="rounded-circle" src="{{asset('storage/users-avatar/'.auth()->user()->avatar)}}" alt="{{auth()->user()->name}}" height="30" width="30">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                   <abbr title="View Profile">
                   <li><center>
                     <a class="d-flex flex-column text-decoration-none gap-1 pb-0" href="{{route('artist.profile.index')}}">
                         <div class="profile-image rounded-full">
-                        <img class="rounded-circle" src="{{asset('storage/users-avatar/'.auth()->user()->avatar)}}" style="height: 4rem; width:4rem; object-fit:cover"   alt="{{auth()->user()->name}}">
+                        <img loading="lazy" class="rounded-circle" src="{{asset('storage/users-avatar/'.auth()->user()->avatar)}}" style="height: 4rem; width:4rem; object-fit:cover"   alt="{{auth()->user()->name}}">
                         </div>
                         <p class="text-wrap" style="color:var(--primary)">{{auth()->user()->name}}</p>
                     </a>

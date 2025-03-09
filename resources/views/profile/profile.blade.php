@@ -5,7 +5,7 @@
         <div class="container d-flex flex-column mt-5">
             <center>
                 <div class="position-relative overflow-hidden" style="width: clamp(10rem,15vw,20rem); height: clamp(10rem,15vw,20rem)">
-                    <img class="rounded-circle w-100 h-100" height="100" width="100"  src="{{asset('storage/users-avatar/'.auth()->user()->avatar)}}" alt="Profile Image" style="object-fit: cover;">
+                    <img loading="lazy" class="rounded-circle w-100 h-100" height="100" width="100"  src="{{asset('storage/users-avatar/'.auth()->user()->avatar)}}" alt="Profile Image" style="object-fit: cover;">
                     <div class="position-absolute bg-dark d-flex align-items-center justify-content-center rounded-circle shadow-lg"
                          style="z-index: 5; bottom: 10px; right:10%; width: clamp(2rem,1vw,3rem); height: clamp(2rem,1vw,3rem); cursor:pointer"
                          onclick="document.getElementById('fileInput').click();">

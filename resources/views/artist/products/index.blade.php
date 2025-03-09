@@ -21,7 +21,7 @@
                                     </svg></button>
                             </div>
                             <div class="image-container">
-                                <img src="{{ asset($product->image->image_src) }}" class="card-img-top object-fit-contain"
+                                <img loading="lazy" src="{{ asset($product->image->image_src) }}" class="card-img-top object-fit-contain"
                                     alt="Portrait Painting">
 
                             </div>

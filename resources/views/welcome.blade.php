@@ -6,7 +6,7 @@
 @section('page')
     <section>
         <div class="container d-flex flex-column align-items-center mt-2 mt-md-3 pt-3">
-            <center><img src="{{asset('assets/images/logo.svg')}}" id="logo"
+            <center><img loading="lazy" src="{{asset('assets/images/logo.svg')}}" id="logo"
                  height="150" alt="" style="filter:drop-shadow(1px 1px 10px #131010)"></center>
             <h1 class="res-title">Art-Express</h1>
             <h3 class="res-sub text-center">Get the Art you Desire</h3>
@@ -29,7 +29,7 @@
                 <div class="owl-carousel py-md-2 py-md-3">
                     <div class="slider-card pb-md-2 d-flex align-items-center justify-content-center">
                         <div class="card" >
-                        <img src="{{asset('assets/images/images.jpeg')}}" class="card-img-top" alt="...">
+                        <img loading="lazy" src="{{asset('assets/images/images.jpeg')}}" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 class="card-title">Discover Art Pieces</h5>
                           <p class="card-text">Explore an exclusive collection of art pieces from talented artists around the globe. Find the perfect artwork to match your style and personality.</p>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="slider-card text-white">
                         <div class="card" >
-                            <img src="{{asset('assets/images/Artist Showcase.webp')}}" class="card-img-top" alt="...">
+                            <img loading="lazy" src="{{asset('assets/images/Artist Showcase.webp')}}" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title">Artist Showcase</h5>
                               <p class="card-text">Celebrate the creativity of emerging and renowned artists. Browse through curated profiles and learn the stories behind their masterpieces.</p>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="slider-card text-white">
                         <div class="card" >
-                            <img src="{{asset('assets/images/shutterstock_451991974.jpg')}}" class="card-img-top" alt="...">
+                            <img loading="lazy" src="{{asset('assets/images/shutterstock_451991974.jpg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title">Blog for Art Enthusiasts</h5>
                               <p class="card-text">Dive into engaging blogs about art trends, techniques, and history. Stay inspired and connected with the art community.</p>
@@ -56,7 +56,7 @@
                     </div>
                     <div class="slider-card text-white">
                         <div class="card" >
-                            <img src="{{asset('assets/images/chatGPT.jpg.webp')}}" class="card-img-top" alt="...">
+                            <img loading="lazy" src="{{asset('assets/images/chatGPT.jpg.webp')}}" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title">ChatGPT- Assistance</h5>
                               <p class="card-text">Need help choosing art? Use our AI-powered chat tool to learn more about art categories make your selection easier.</p>
@@ -65,7 +65,7 @@
                     </div>
                     <div class="slider-card text-white">
                         <div class="card">
-                            <img src="{{asset('assets/images/online-shopping-2.jpg')}}" class="card-img-top" alt="...">
+                            <img loading="lazy" src="{{asset('assets/images/online-shopping-2.jpg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title">Secure Online Shopping</h5>
                               <p class="card-text">Shop for art worry-free with our secure payment system. Enjoy a seamless checkout experience and reliable delivery services.</p>
@@ -83,43 +83,43 @@
             <h1 class="text-center res-heading" id="art-grid-title">Explore Masterpieces</h1>
             {{-- <div class="row container mx-auto row gap-1 gx-0" id="bento-grid">
                 <div class="col-lg-5 d-flex gap-1">
-                    <img class="portrait-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt="" style="border: 20px solid var(--secondary)">
-                    <img class="portrait-img" src="{{asset('assets/images/IMG-20241222-WA0009.jpg')}}" alt="" style="border: 20px solid var(--secondary)">
+                    <img loading="lazy" class="portrait-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt="" style="border: 20px solid var(--secondary)">
+                    <img loading="lazy" class="portrait-img" src="{{asset('assets/images/IMG-20241222-WA0009.jpg')}}" alt="" style="border: 20px solid var(--secondary)">
 
                 </div>
                 <div class="col-lg-6">
-                    <img class="landscape-img mx-lg-1" src="{{asset('assets/images/landscape1.png')}}">
+                    <img loading="lazy" class="landscape-img mx-lg-1" src="{{asset('assets/images/landscape1.png')}}">
                 </div>
                 <div class="col-lg-6">
-                    <img class="landscape-img " src="{{asset('assets/images/landscape2.png')}}">
+                    <img loading="lazy" class="landscape-img " src="{{asset('assets/images/landscape2.png')}}">
                 </div>
                 <div class="col-lg-5 d-flex gap-1">
-                    <img class="portrait-img" src="{{asset('assets/images/IMG-20241222-WA0008.jpg')}}" alt="" style="border: 20px solid var(--secondary)">
-                    <img class="portrait-img" src="{{asset('assets/images/IMG-20241222-WA0007.jpg')}}" alt="" style="border: 20px solid var(--secondary)">
+                    <img loading="lazy" class="portrait-img" src="{{asset('assets/images/IMG-20241222-WA0008.jpg')}}" alt="" style="border: 20px solid var(--secondary)">
+                    <img loading="lazy" class="portrait-img" src="{{asset('assets/images/IMG-20241222-WA0007.jpg')}}" alt="" style="border: 20px solid var(--secondary)">
 
                 </div>
             </div> --}}
             <div class="landing-layout">
-                <div><img class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0002.jpg')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0003.jpg')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0004.jpg')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0005.jpg')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0006.jpg')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0007.jpg')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0008.jpg')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0009.jpg')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/landscape1.png')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/landscape2.png')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/landscape1.png')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/landscape2.png')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/landscape1.png')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/landscape2.png')}}" alt=""></div>
-                <div><img class="layout-img" src="{{asset('assets/images/landscape2.png')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0002.jpg')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0003.jpg')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0004.jpg')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0005.jpg')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0006.jpg')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0007.jpg')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0008.jpg')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0009.jpg')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/landscape1.png')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/landscape2.png')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/landscape1.png')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/landscape2.png')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/landscape1.png')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/landscape2.png')}}" alt=""></div>
+                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/landscape2.png')}}" alt=""></div>
 
             </div>
         </div>

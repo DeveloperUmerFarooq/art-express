@@ -5,7 +5,7 @@
         <div class="container d-flex flex-column mt-5">
             <center>
                 <div class="position-relative overflow-hidden" style="width: clamp(10rem,15vw,20rem); height: clamp(10rem,15vw,20rem)">
-                    <img class="rounded-circle w-100 h-100" src="{{asset('storage/users-avatar/'.$profile->user->avatar)}}" alt="Profile Image" style="object-fit: cover;">
+                    <img loading="lazy" class="rounded-circle w-100 h-100" src="{{asset('storage/users-avatar/'.$profile->user->avatar)}}" alt="Profile Image" style="object-fit: cover;">
                 </div>
                 <div class="fs-3 mt-1" style="vertical-align: middle">
                     <span><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#023222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg></span>
@@ -75,7 +75,7 @@
             <div class="portfolio">
                 @foreach ($images as $image)
                 <div class="position-relative" class="img">
-                    <img src="{{asset($image->image_src)}}" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-url="{{asset($image->image_src)}}" alt="">
+                    <img loading="lazy" src="{{asset($image->image_src)}}" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-url="{{asset($image->image_src)}}" alt="">
                     <a href="#" onclick="deleteImage('{{route('artist.profile.image.delete',$image->id)}}')" class="position-absolute top-0 end-0 mt-2 me-1 btn btn-danger p-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f4ebd9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                     </a>
@@ -95,7 +95,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <img id="modalImage" src="" alt="Preview" class="img-fluid" style="height: 25rem; object-fit:contain">
+                <img loading="lazy" id="modalImage" src="" alt="Preview" class="img-fluid" style="height: 25rem; object-fit:contain">
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@
         <center>
             <div class="col-12 bg-success p-4 rounded-3 d-flex justify-content-center w-75">
                 <div class="d-flex gap-3 align-items-center text-white">
-                    <img src="{{ asset('storage/users-avatar/'.$profile->user->avatar) }}" height="100"    width="100"class="rounded-circle" alt="Profile Image">
+                    <img loading="lazy" src="{{ asset('storage/users-avatar/'.$profile->user->avatar) }}" height="100"    width="100"class="rounded-circle" alt="Profile Image">
                     <div>
                         <h1 class="text-start">{{ $profile->user->name }}</h1>
                         <h5>{{ $profile->user->email }}</h5>
@@ -76,7 +76,7 @@
             <div class="portfolio">
                 @foreach ($images as $image)
                 <div class="position-relative" class="img">
-                    <img src="{{asset($image->image_src)}}" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-url="{{asset($image->image_src)}}" alt="">
+                    <img loading="lazy" src="{{asset($image->image_src)}}" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-url="{{asset($image->image_src)}}" alt="">
                 </div>
                 @endforeach
             </div>
@@ -96,7 +96,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <img id="modalImage" src="" alt="Preview" class="img-fluid" style="height: 25rem; object-fit:contain">
+                <img loading="lazy" id="modalImage" src="" alt="Preview" class="img-fluid" style="height: 25rem; object-fit:contain">
             </div>
         </div>
     </div>

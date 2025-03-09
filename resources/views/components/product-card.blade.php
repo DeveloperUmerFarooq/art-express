@@ -1,6 +1,6 @@
 <div class="card mt-5 product-card position-relative">
     <div class="image-container">
-        <img src="{{ asset($product->image->image_src) }}"
+        <img loading="lazy" src="{{ asset($product->image->image_src) }}"
             class="card-img-top object-fit-contain" alt="Portrait Painting">
 
     </div>

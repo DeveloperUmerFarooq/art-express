@@ -4,7 +4,7 @@
     <div class="container my-5">
 
         <div class="text-center mb-4">
-            <img src="{{ asset($blog->product->image->image_src) }}" alt="Beautiful Artwork" class="img-fluid" height="400"
+            <img loading="lazy" src="{{ asset($blog->product->image->image_src) }}" alt="Beautiful Artwork" class="img-fluid" height="400"
                 width="400" style="object-fit: contain; height:20rem; aspect-ratio:1/1;" />
         </div>
 
@@ -83,7 +83,7 @@
                 @if ($blog->comments->count() > 0)
                     @foreach ($blog->comments as $comment)
                         <div class="d-flex gap-3">
-                            <img src="{{asset('storage/users-avatar/'.$comment->user->avatar)}}" class="rounded-circle" height="40"
+                            <img loading="lazy" src="{{asset('storage/users-avatar/'.$comment->user->avatar)}}" class="rounded-circle" height="40"
                                 width="40" alt="">
                             <div class="mb-4">
                                 <span class="text-secondary small">
