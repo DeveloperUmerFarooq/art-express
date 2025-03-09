@@ -18,11 +18,3 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/emojionearea@3.4.2/dist/emojionearea.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/emojione@4.5.0/lib/js/emojione.min.js"></script>
-{{-- <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script> --}}
-<script>
-    window.paceOptions = {
-        ajax: true,
-        document: true,
-        eventLag: false
-    };
-</script>
