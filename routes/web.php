@@ -15,6 +15,7 @@ use App\Http\Controllers\RankController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UserCrud;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -181,3 +182,8 @@ Route::prefix('/user')->name('user.')->middleware(['role:user'])->group(function
 
     });
 });
+
+Route::get('/comments/{id}/time', function ($id) {
+    $comment = Comment::find($id);
+    return response()->json(['updated_at' => $comment->updated_at->diffForHumans()]);
+})->name('comment.time');

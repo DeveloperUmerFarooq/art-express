@@ -87,7 +87,7 @@
                                 width="40" alt="">
                             <div class="mb-4">
                                 <span class="text-secondary small">
-                                    - {{ $comment->user->name }} • {{ $comment->created_at->diffForHumans() }}
+                                    - {{ $comment->user->name }} • <span class="comment-time" data-comment-id='{{$comment->id}}'>{{ $comment->created_at->diffForHumans() }}</span>
                                 </span>
                                 <p class="text-muted emoji-content">{{ $comment->content }}</p>
                             </div>
@@ -193,5 +193,18 @@
                 }
             });
         }
+        function updateCommentTime(){
+            document.querySelectorAll('.comment-time').forEach(el=>{
+                let id=el.getAttribute('data-comment-id');
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('comment.time', ':id') }}".replace(':id', id),
+                    success: function (response) {
+                        el.innerText=response.updated_at
+                    }
+                });
+            })
+        }
+        setInterval(updateCommentTime, 2000);
     </script>
 @endpush
