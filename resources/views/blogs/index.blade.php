@@ -86,8 +86,8 @@
                             <img loading="lazy" src="{{asset('storage/users-avatar/'.$comment->user->avatar)}}" class="rounded-circle" height="40"
                                 width="40" alt="">
                             <div class="mb-4">
-                                <span class="text-secondary small">
-                                    - {{ $comment->user->name }} • <span class="comment-time" data-comment-id='{{$comment->id}}'>{{ $comment->created_at->diffForHumans() }}</span>
+                                <span class="small fw-bold">
+                                    {{ $comment->user->name }} • <span class="comment-time" data-comment-id='{{$comment->id}}'>{{ $comment->created_at->diffForHumans() }}</span>
                                 </span>
                                 <p class="text-muted emoji-content">{{ $comment->content }}</p>
                             </div>
@@ -168,7 +168,6 @@
         }
 
         function comment() {
-            console.log('comment posted');
             if($('textarea[name="comment"]').val()!=""||$('textarea[name="comment"]').val()!=null){
                 $.ajax({
                     type: "POST",
@@ -178,7 +177,7 @@
                         comment: $('textarea[name="comment"]').val()
                     },
                     success: function(response) {
-                        toastr.success('Comment Posted')
+                        window.location.reload()
                     }
                 });
             }
@@ -205,6 +204,6 @@
                 });
             })
         }
-        setInterval(updateCommentTime, 2000);
+        setInterval(updateCommentTime, 10000);
     </script>
 @endpush
