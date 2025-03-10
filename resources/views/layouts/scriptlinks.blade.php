@@ -18,3 +18,12 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/emojionearea@3.4.2/dist/emojionearea.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/emojione@4.5.0/lib/js/emojione.min.js"></script>
+<script src="https://js.pusher.com/8.3.0/pusher.min.js"></script>
+<script>
+        Pusher.logToConsole = true;
+        var key = "{{ env('PUSHER_APP_KEY') }}";
+        var cluster = "{{ env('PUSHER_APP_CLUSTER') }}";
+        var pusher = new Pusher(key, {
+            cluster: cluster,
+        });
+</script>

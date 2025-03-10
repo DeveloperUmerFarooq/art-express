@@ -4,8 +4,8 @@
     <div class="container my-5">
 
         <div class="text-center mb-4">
-            <img loading="lazy" src="{{ asset($blog->product->image->image_src) }}" alt="Beautiful Artwork" class="img-fluid" height="400"
-                width="400" style="object-fit: contain; height:20rem; aspect-ratio:1/1;" />
+            <img loading="lazy" src="{{ asset($blog->product->image->image_src) }}" alt="Beautiful Artwork" class="img-fluid"
+                height="400" width="400" style="object-fit: contain; height:20rem; aspect-ratio:1/1;" />
         </div>
 
         <div class="text-center">
@@ -79,15 +79,26 @@
 
         <div class="mt-5">
             <h2 class="h5 font-weight-bold text-dark mb-4">Comments</h2>
-            <div class="mb-4">
+            <div class="mt-4 mb-md-3 mb-2">
+                <h2 class="h5 font-weight-bold text-dark mb-3">Leave a Comment</h2>
+                <div class="form-group">
+                    <textarea name="comment" id="comment" rows="4" class="form-control"
+                        placeholder="Write your comment here..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3" onclick="comment()">
+                    Post Comment
+                </button>
+            </div>
+            <div class="mb-4" id="comments">
                 @if ($blog->comments->count() > 0)
                     @foreach ($blog->comments as $comment)
                         <div class="d-flex gap-3">
-                            <img loading="lazy" src="{{asset('storage/users-avatar/'.$comment->user->avatar)}}" class="rounded-circle" height="40"
-                                width="40" alt="">
+                            <img loading="lazy" src="{{ asset('storage/users-avatar/' . $comment->user->avatar) }}"
+                                class="rounded-circle" height="40" width="40" alt="">
                             <div class="mb-4">
                                 <span class="small fw-bold">
-                                    {{ $comment->user->name }} • <span class="comment-time" data-comment-id='{{$comment->id}}'>{{ $comment->created_at->diffForHumans() }}</span>
+                                    {{ $comment->user->name }} • <span class="comment-time"
+                                        data-comment-id='{{ $comment->id }}'>{{ $comment->created_at->diffForHumans() }}</span>
                                 </span>
                                 <p class="text-muted emoji-content">{{ $comment->content }}</p>
                             </div>
@@ -125,16 +136,6 @@
                     </div>
                 @endif
             </div>
-
-            <div class="mt-4">
-                <h2 class="h5 font-weight-bold text-dark mb-3">Leave a Comment</h2>
-                <div class="form-group">
-                    <textarea name="comment" id="comment" rows="4" class="form-control" placeholder="Write your comment here..." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary mt-3" onclick="comment()">
-                    Post Comment
-                </button>
-            </div>
         </div>
     </div>
     @if (!auth()->user()->hasRole('user'))
@@ -144,17 +145,76 @@
 @push('scripts')
     <script src="{{ asset('assets/js/blogCrud.js') }}"></script>
     <script>
-        $(document).ready(function () {
-        $("#comment").emojioneArea({
-            pickerPosition: "top",
-            tonesStyle: "bullet",
-            autocomplete: false,
-            saveEmojisAs: "shortname",
+        // Like channel broadcast
+        var channel = pusher.subscribe('like.' + "{{ $blog->id }}")
+        channel.bind('like.post.' + "{{ $blog->id }}", function(data) {
+            document.getElementById('like-count').innerText = data.count;
+        })
+
+        // comment channel broadcast
+        var channel=pusher.subscribe('comment.'+"{{$blog->id}}")
+        channel.bind('comment.post.'+"{{$blog->id}}",function (data){
+            let comments=document.getElementById('comments');
+            let url = `{{ route(auth()->user()->getRoleNames()->first() . '.blog.comment.delete', ':id') }}`.replace(':id', data.comment.id);
+            let commentHtml = `
+                <div class="d-flex gap-3">
+                    <img loading="lazy" src="${data.user.avatar ? '/storage/users-avatar/' + data.user.avatar : '/default-avatar.png'}"
+                        class="rounded-circle" height="40" width="40" alt="">
+                    <div class="mb-4">
+                        <span class="small fw-bold">
+                            ${data.user.name} • <span class="comment-time" data-comment-id="${data.comment.id}">
+                                ${data.time}
+                            </span>
+                        </span>
+                        <p class="text-muted emoji-content">${data.comment.content}</p>
+                    </div>
+                    ${data.user.id == "{{ auth()->id() }}" || "{{ auth()->user()->hasRole('admin') }}" ? `
+                        <div class="dropdown ms-auto">
+                            <button class="btn btn-sm border-0 bg-transparent p-0" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-ellipsis-vertical">
+                                    <circle cx="12" cy="12" r="1" />
+                                    <circle cx="12" cy="5" r="1" />
+                                    <circle cx="12" cy="19" r="1" />
+                                </svg>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-start">
+                                <li class="bg-transparent">
+                                    <button class="dropdown-item text-danger bg-transparent"
+                                        onclick="deleteComment('${url}')">
+                                        Remove Comment
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+
+            $(comments).prepend(commentHtml);
+            document.getElementById('comment-count').innerText = data.count;
+            emojyRender()
+        })
+
+        function emojyRender(){
+            $("#comment").emojioneArea({
+                pickerPosition: "top",
+                tonesStyle: "bullet",
+                autocomplete: false,
+                saveEmojisAs: "shortname",
+            });
+            document.querySelectorAll(".emoji-content").forEach((el) => {
+                el.innerHTML = emojione.toImage(el.innerHTML);
+            });
+        }
+
+        $(document).ready(function() {
+            emojyRender()
         });
-        document.querySelectorAll(".emoji-content").forEach((el) => {
-            el.innerHTML = emojione.toImage(el.innerHTML);
-        });
-    });
+
         function like() {
             $('#like-btn').toggleClass('btn-outline-success');
             $('#like-btn').toggleClass('btn-success');
@@ -168,7 +228,7 @@
         }
 
         function comment() {
-            if($('textarea[name="comment"]').val()!=""||$('textarea[name="comment"]').val()!=null){
+            if ($('textarea[name="comment"]').val() != "" || $('textarea[name="comment"]').val() != null) {
                 $.ajax({
                     type: "POST",
                     url: "{{ route(auth()->user()->getRoleNames()->first() . '.blog.comment', $blog->id) }}",
@@ -177,7 +237,7 @@
                         comment: $('textarea[name="comment"]').val()
                     },
                     success: function(response) {
-                        window.location.reload()
+                        $("#comment").emojioneArea()[0].emojioneArea.setText("");
                     }
                 });
             }
@@ -192,14 +252,15 @@
                 }
             });
         }
-        function updateCommentTime(){
-            document.querySelectorAll('.comment-time').forEach(el=>{
-                let id=el.getAttribute('data-comment-id');
+
+        function updateCommentTime() {
+            document.querySelectorAll('.comment-time').forEach(el => {
+                let id = el.getAttribute('data-comment-id');
                 $.ajax({
                     type: "GET",
                     url: "{{ route('comment.time', ':id') }}".replace(':id', id),
-                    success: function (response) {
-                        el.innerText=response.updated_at
+                    success: function(response) {
+                        el.innerText = response.updated_at
                     }
                 });
             })
