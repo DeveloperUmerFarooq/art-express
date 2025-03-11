@@ -14,6 +14,9 @@
 </main>
 @include('layouts.adminLayout.footer')
 @include('layouts.scriptlinks')
+<script>
+    var userAvatarUrl="{{asset('storage/users-avatar/')}}"
+    </script>
     @stack('scripts')
 </body>
 </html>

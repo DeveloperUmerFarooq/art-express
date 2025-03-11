@@ -91,7 +91,7 @@ class UserCrud extends Controller
                     $user->password=Hash::make($req->password);
                 }
                 if($req->hasFile('image')){
-                    if (Storage::disk('public')->exists('users-avatar/'.$user->avatar)) {
+                    if ($user->avatar!=="avatar.png" && Storage::disk('public')->exists('users-avatar/'.$user->avatar)) {
                         Storage::disk('public')->delete('users-avatar/' . $user->avatar);
                     }
                     $avatar = $req->file('image');

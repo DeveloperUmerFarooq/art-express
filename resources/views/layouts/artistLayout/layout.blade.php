@@ -14,7 +14,7 @@
 </main>
 @include('layouts.artistLayout.footer')
     @include('layouts.scriptlinks')
-
+    
     @stack('scripts')
 </body>
 </html>
