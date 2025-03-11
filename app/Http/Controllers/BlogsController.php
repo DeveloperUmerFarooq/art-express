@@ -66,7 +66,7 @@ class BlogsController extends Controller
             ]);
 
             broadcast(new PostComment($comment,auth()->user(),$post->comments()->count(),$comment->updated_at->diffForHumans(),$post->id));
-            return redirect()->back();
+            return response()->json(['message'=>"Comment Deleted"]);
     }
 
     public function like($id){
@@ -82,7 +82,7 @@ class BlogsController extends Controller
                 ]);
             }
             broadcast(new LikePost($post->likes()->count(),$post->id));
-            return $post->likes()->count();
+            return response()->json(['likes' => $post->likes()->count()]);
     }
 
     public function delete($id){

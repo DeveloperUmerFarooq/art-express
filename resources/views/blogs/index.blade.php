@@ -82,8 +82,8 @@
             <div class="mt-4 mb-md-3 mb-2">
                 <h2 class="h5 font-weight-bold text-dark mb-3">Leave a Comment</h2>
                 <div class="form-group">
-                    <textarea name="comment" id="comment" rows="4" class="form-control"
-                        placeholder="Write your comment here..." required></textarea>
+                    <textarea name="comment" id="comment" rows="4" class="form-control" placeholder="Write your comment here..."
+                        required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary mt-3" onclick="comment()">
                     Post Comment
@@ -129,7 +129,7 @@
                         </div>
                     @endforeach
                 @else
-                    <div>
+                    <div class="no-comments">
                         <center>
                             <p>No comments yet</p>
                         </center>
@@ -146,16 +146,18 @@
     <script src="{{ asset('assets/js/blogCrud.js') }}"></script>
     <script>
         // Like channel broadcast
-        var channel = pusher.subscribe('like.' + "{{ $blog->id }}")
-        channel.bind('like.post.' + "{{ $blog->id }}", function(data) {
+        var blogId = @json($blog->id);
+        var likeChannel = pusher.subscribe('like.' + blogId)
+        likeChannel.bind('like.post.' + "{{ $blog->id }}", function(data) {
             document.getElementById('like-count').innerText = data.count;
         })
 
         // comment channel broadcast
-        var channel=pusher.subscribe('comment.'+"{{$blog->id}}")
-        channel.bind('comment.post.'+"{{$blog->id}}",function (data){
-            let comments=document.getElementById('comments');
-            let url = `{{ route(auth()->user()->getRoleNames()->first() . '.blog.comment.delete', ':id') }}`.replace(':id', data.comment.id);
+        var commentChannel = pusher.subscribe('comment.' + "{{ $blog->id }}")
+        commentChannel.bind('comment.post.' + blogId, function(data) {
+            let comments = document.getElementById('comments');
+            let url = `{{ route(auth()->user()->getRoleNames()->first() . '.blog.comment.delete', ':id') }}`
+                .replace(':id', data.comment.id);
             let commentHtml = `
                 <div class="d-flex gap-3">
                     <img loading="lazy" src="${data.user.avatar ? '/storage/users-avatar/' + data.user.avatar : '/default-avatar.png'}"
@@ -169,28 +171,28 @@
                         <p class="text-muted emoji-content">${data.comment.content}</p>
                     </div>
                     ${data.user.id == "{{ auth()->id() }}" || "{{ auth()->user()->hasRole('admin') }}" ? `
-                        <div class="dropdown ms-auto">
-                            <button class="btn btn-sm border-0 bg-transparent p-0" type="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="lucide lucide-ellipsis-vertical">
-                                    <circle cx="12" cy="12" r="1" />
-                                    <circle cx="12" cy="5" r="1" />
-                                    <circle cx="12" cy="19" r="1" />
-                                </svg>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-start">
-                                <li class="bg-transparent">
-                                    <button class="dropdown-item text-danger bg-transparent"
-                                        onclick="deleteComment('${url}')">
-                                        Remove Comment
+                                <div class="dropdown ms-auto">
+                                    <button class="btn btn-sm border-0 bg-transparent p-0" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-ellipsis-vertical">
+                                            <circle cx="12" cy="12" r="1" />
+                                            <circle cx="12" cy="5" r="1" />
+                                            <circle cx="12" cy="19" r="1" />
+                                        </svg>
                                     </button>
-                                </li>
-                            </ul>
-                        </div>
-                    ` : ''}
+                                    <ul class="dropdown-menu dropdown-menu-start">
+                                        <li class="bg-transparent">
+                                            <button class="dropdown-item text-danger bg-transparent"
+                                                onclick="deleteComment('${url}')">
+                                                Remove Comment
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            ` : ''}
                 </div>
             `;
 
@@ -199,7 +201,8 @@
             emojyRender()
         })
 
-        function emojyRender(){
+        //emojy render
+        function emojyRender() {
             $("#comment").emojioneArea({
                 pickerPosition: "top",
                 tonesStyle: "bullet",
@@ -215,6 +218,7 @@
             emojyRender()
         });
 
+        //like
         function like() {
             $('#like-btn').toggleClass('btn-outline-success');
             $('#like-btn').toggleClass('btn-success');
@@ -222,13 +226,14 @@
                 type: "GET",
                 url: "{{ route(auth()->user()->getRoleNames()->first() . '.blog.like', $blog->id) }}",
                 success: function(response) {
-                    document.getElementById('like-count').innerText = response;
+                    document.getElementById('like-count').innerText = response.likes;
                 }
             });
         }
 
+        //comment
         function comment() {
-            if ($('textarea[name="comment"]').val() != "" || $('textarea[name="comment"]').val() != null) {
+            if ($('textarea[name="comment"]').val() !== "" || $('textarea[name="comment"]').val() !== null) {
                 $.ajax({
                     type: "POST",
                     url: "{{ route(auth()->user()->getRoleNames()->first() . '.blog.comment', $blog->id) }}",
@@ -243,6 +248,7 @@
             }
         }
 
+        //deleteComment
         function deleteComment(url) {
             $.ajax({
                 type: "GET",
@@ -253,6 +259,7 @@
             });
         }
 
+        //UpdateCommentTime
         function updateCommentTime() {
             document.querySelectorAll('.comment-time').forEach(el => {
                 let id = el.getAttribute('data-comment-id');
