@@ -37,6 +37,24 @@ body{
     flex-direction: column;
     min-height: 100vh;
 }
+
+.nav-link{
+    position: relative;
+}
+.nav-link::before{
+    content: "";
+    height: 2px;
+    width: 83%;
+    background-color: var(--primary);
+    position: absolute;
+    top: 80%;
+    transform: scaleX(0);
+    transition: .3s linear;
+    transform-origin: left;
+}
+.nav-link:hover:not(:has(img))::before{
+    transform: scaleX(1);
+}
 .custom-popup{
     background-color: var(--primary) !important;
 }
