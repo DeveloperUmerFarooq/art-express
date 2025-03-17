@@ -80,7 +80,7 @@
             </div>
         </div>
         <div class="container-fluid mt-2 mt-md-5" id="art-grid">
-            <h1 class="text-center res-heading" id="art-grid-title">Explore Masterpieces</h1>
+            <h1 class="text-center res-heading pt-2 pt-md-3" id="art-grid-title">Explore Masterpieces</h1>
             {{-- <div class="row container mx-auto row gap-1 gx-0" id="bento-grid">
                 <div class="col-lg-5 d-flex gap-1">
                     <img loading="lazy" class="portrait-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt="" style="border: 20px solid var(--secondary)">

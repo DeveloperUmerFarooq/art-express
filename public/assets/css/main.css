@@ -20,7 +20,7 @@
     margin: 0.15rem;
     animation: grow both;
     animation-timeline: view();
-    animation-range-start: entry 10px;
+    animation-range-start: entry 5%;
     animation-range-end: entry 50%;
 }
 body{
