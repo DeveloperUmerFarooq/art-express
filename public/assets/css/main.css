@@ -21,7 +21,7 @@
     animation: grow both;
     animation-timeline: view();
     animation-range-start: entry 5%;
-    animation-range-end: entry 50%;
+    animation-range-end: entry 70%;
 }
 body{
     margin: 0;
