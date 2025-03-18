@@ -143,13 +143,11 @@
             },
             600: {
               items: 2,
-              dots:true,
               autoplayTimeout:3000,
             },
             1000:{
                 items:3,
                 autoplayTimeout:2000,
-                dots:true,
             },
             1300:{
                 items:4,
