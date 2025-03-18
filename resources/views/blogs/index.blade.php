@@ -12,7 +12,6 @@
             <h1 class="h3 font-weight-bold text-dark">
                 {{ $blog->title }}
             </h1>
-
             <p class="text-muted">
                 Posted by <span class="font-weight-bold">{{ $blog->product->artist->name }}</span>
                 on {{ $blog->created_at->format('F j, Y') }}
@@ -34,8 +33,8 @@
         </center>
 
 
-        <div class="mt-4">
-            <pre class="text-justify">{{ $blog->content }}</pre>
+        <div class="mt-3">
+            <p class=" text-wrap">{{ $blog->content }}</p>
         </div>
 
         <div class="mt-3 d-flex justify-content-between align-items-center">

@@ -41,6 +41,9 @@ body{
 .nav-link{
     position: relative;
 }
+p{
+    white-space: pre-line;
+}
 .nav-link::before{
     content: "";
     height: 2px;
