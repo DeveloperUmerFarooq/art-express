@@ -66,7 +66,7 @@ const salesChart = new Chart(salesCtx, {
     data: {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
         datasets: [{
-            label: 'Monthly Sales ($)',
+            label: 'Monthly Sales (Rs)',
             data: [1200, 1500, 1700, 1400, 1600, 1800, 2000],
             borderColor: 'rgba(75, 192, 192, 1)',
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
