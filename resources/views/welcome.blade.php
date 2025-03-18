@@ -132,38 +132,27 @@
           margin: 10,
           mouseDrag:false,
           autoplayHoverPause:true,
+          loop:true,
+          mouseDrag:true,
+          touchDrag:true,
+          autoplay:true,
           responsive: {
             0: {
               items: 1,
-              autoplay:true,
               autoplayTimeout:3000,
-              loop:true,
-              touchDrag:true,
-              mouseDrag:true,
             },
             600: {
               items: 2,
-              autoplay:true,
               dots:true,
               autoplayTimeout:3000,
-              loop:true,
-              touchDrag:true
             },
             1000:{
                 items:3,
-                autoplay:true,
                 autoplayTimeout:2000,
-                mouseDrag:true,
-                touchDrag:true,
                 dots:true,
-                loop:true
             },
             1300:{
                 items:4,
-                loop:true,
-                mouseDrag:true,
-                touchDrag:true,
-                autoplay:true,
                 autoplayTimeout:2000,
             },
             1600:{
