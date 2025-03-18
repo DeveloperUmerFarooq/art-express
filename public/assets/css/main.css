@@ -49,10 +49,11 @@ body{
     position: absolute;
     top: 80%;
     transform: scaleX(0);
-    transition: .3s linear;
+    transition:transform .3s linear;
     transform-origin: left;
 }
 .nav-link:hover:not(:has(img))::before{
+    transform-origin: right;
     transform: scaleX(1);
 }
 .custom-popup{
