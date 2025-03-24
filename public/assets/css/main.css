@@ -42,7 +42,11 @@ body{
     position: relative;
 }
 p{
-    white-space: pre-line;
+    white-space: pre-line !important;
+}
+#blog-content{
+    text-align: justify;
+    font-size: clamp(1rem,1.5vw,1.5rem)
 }
 .nav-link::before{
     content: "";
