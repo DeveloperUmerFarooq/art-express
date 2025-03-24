@@ -34,7 +34,7 @@
 
 
         <div class="mt-3">
-            <p class="text-wrap" id="blog-content">{{ $blog->content }}</p>
+            <p id="blog-content">{{ $blog->content }}</p>
         </div>
 
         <div class="mt-3 d-flex justify-content-between align-items-center">
