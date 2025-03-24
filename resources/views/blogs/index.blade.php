@@ -84,8 +84,10 @@
                     <textarea name="comment" id="comment" rows="4" class="form-control" placeholder="Write your comment here..."
                         required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3" onclick="comment()">
-                    Post Comment
+                <button type="submit" class="btn btn-primary mt-3 d-flex gap-2 align-items-center" onclick="comment()">
+                    <l-reuleaux class="d-none" id="loader" size="15" stroke="2" stroke-length="0.05" bg-opacity="0.1" speed="1.2"
+                        color="#F4EBD9"></l-reuleaux>
+                    <span>Post Comment</span>
                 </button>
             </div>
             <div class="mb-4" id="comments">
@@ -170,28 +172,28 @@
                         <p class="text-muted emoji-content">${data.comment.content}</p>
                     </div>
                     ${data.user.id == "{{ auth()->id() }}" || "{{ auth()->user()->hasRole('admin') }}" ? `
-                                <div class="dropdown ms-auto">
-                                    <button class="btn btn-sm border-0 bg-transparent p-0" type="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="lucide lucide-ellipsis-vertical">
-                                            <circle cx="12" cy="12" r="1" />
-                                            <circle cx="12" cy="5" r="1" />
-                                            <circle cx="12" cy="19" r="1" />
-                                        </svg>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-start">
-                                        <li class="bg-transparent">
-                                            <button class="dropdown-item text-danger bg-transparent"
-                                                onclick="deleteComment('${url}')">
-                                                Remove Comment
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            ` : ''}
+                                    <div class="dropdown ms-auto">
+                                        <button class="btn btn-sm border-0 bg-transparent p-0" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-ellipsis-vertical">
+                                                <circle cx="12" cy="12" r="1" />
+                                                <circle cx="12" cy="5" r="1" />
+                                                <circle cx="12" cy="19" r="1" />
+                                            </svg>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-start">
+                                            <li class="bg-transparent">
+                                                <button class="dropdown-item text-danger bg-transparent"
+                                                    onclick="deleteComment('${url}')">
+                                                    Remove Comment
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                ` : ''}
                 </div>
             `;
 
@@ -233,6 +235,7 @@
         //comment
         function comment() {
             if ($('textarea[name="comment"]').val() !== "" || $('textarea[name="comment"]').val() !== null) {
+                $("#loader").removeClass("d-none");
                 $.ajax({
                     type: "POST",
                     url: "{{ route(auth()->user()->getRoleNames()->first() . '.blog.comment', $blog->id) }}",
@@ -242,6 +245,7 @@
                     },
                     success: function(response) {
                         $("#comment").emojioneArea()[0].emojioneArea.setText("");
+                        $("#loader").addClass("d-none");
                     }
                 });
             }
