@@ -17,5 +17,5 @@
 @endsection
 @push('scripts')
     {{ $dataTable->scripts() }}
-    <script src="{{asset('assets/js/permission.js')}}"></script>
+    <script src="{{asset('js/permission.js')}}"></script>
 @endpush

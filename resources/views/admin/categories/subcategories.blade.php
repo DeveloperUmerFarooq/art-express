@@ -42,5 +42,5 @@
 @endsection
 @push('scripts')
     {{ $dataTable->scripts() }}
-    <script src="{{asset('assets/js/category.js')}}"></script>
+    <script src="{{asset('js/category.js')}}"></script>
 @endpush

@@ -144,7 +144,7 @@
     @endif
 @endsection
 @push('scripts')
-    <script src="{{ asset('assets/js/blogCrud.js') }}"></script>
+    <script src="{{ asset('js/blogCrud.js') }}"></script>
     <script>
         // Like channel broadcast
         var blogId = @json($blog->id);

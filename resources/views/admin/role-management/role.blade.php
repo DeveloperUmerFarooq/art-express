@@ -31,5 +31,5 @@ Role-Management
 @include('admin.role-management.modals._edit-permissions')
 @endsection
 @push('scripts')
-    <script src="{{asset('assets/js/permission.js')}}"></script>
+    <script src="{{asset('js/permission.js')}}"></script>
 @endpush

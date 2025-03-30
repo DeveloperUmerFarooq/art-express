@@ -174,5 +174,5 @@
 @include('profile.modals._edit-links')
 @include('profile.modals._change-password')
 @push('scripts')
-<script src="{{asset('assets/js/profile.js')}}"></script>
+<script src="{{asset('js/profile.js')}}"></script>
 @endpush

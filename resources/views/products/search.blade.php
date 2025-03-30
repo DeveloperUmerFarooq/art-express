@@ -32,11 +32,11 @@
 @endsection
 @push('scripts')
 @if (auth()->user()->hasRole('admin'))
-<script src="{{ asset('assets/js/productsCrud.js') }}"></script>
-{{-- <script src="{{ asset('assets/js/products.js') }}"></script> --}}
+<script src="{{ asset('js/productsCrud.js') }}"></script>
+{{-- <script src="{{ asset('js/products.js') }}"></script> --}}
 @endif
 @if (!auth()->user()->hasRole('admin'))
-<script src="{{asset('assets/js/order.js')}}"></script>
+<script src="{{asset('js/order.js')}}"></script>
 @endif
 <script>
     $('#subId').on('change',function(){

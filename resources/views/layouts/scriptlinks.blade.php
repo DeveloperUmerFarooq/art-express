@@ -14,7 +14,7 @@
     integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
-<script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/emojionearea@3.4.2/dist/emojionearea.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/emojione@4.5.0/lib/js/emojione.min.js"></script>

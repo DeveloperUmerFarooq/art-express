@@ -47,5 +47,5 @@
     </div>
   </div>
 @push('scripts')
-<script src="{{asset('assets/js/userCrud.js')}}"></script>
+<script src="{{asset('js/userCrud.js')}}"></script>
 @endpush

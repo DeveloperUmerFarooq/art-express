@@ -90,6 +90,6 @@
     @include('blogs.modals._Add-Post')
 @endsection
 @push('scripts')
-    <script src="{{ asset('assets/js/productsCrud.js') }}"></script>
-    <script src="{{ asset('assets/js/products.js') }}"></script>
+    <script src="{{ asset('js/productsCrud.js') }}"></script>
+    <script src="{{ asset('js/products.js') }}"></script>
 @endpush
