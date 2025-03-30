@@ -1,9 +1,8 @@
 <div class="card mt-5 product-card position-relative">
     <div class="ratio ratio-4x3 bg-light">
         <img loading="lazy" src="{{ asset($product->image->image_src) }}"
-             class="object-fit-contain w-100 h-100"
-             alt="{{ $product->name }}"
-             style="background-color: var(--secondary);">
+             class="object-fit-contain w-100 h-100 image"
+             alt="{{ $product->name }}">
     </div>
     <div class="card-body">
         <h5 class="card-title">{{ $product->name }}</h5>
