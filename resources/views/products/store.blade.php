@@ -8,7 +8,7 @@
         </form>
     </div>
     @foreach ($categories as $key => $category)
-        <div class="caontainer-fluid px-md-5 px-2">
+        <div class="caontainer-fluid px-md-5 px-2 my-3">
             <div class="d-flex flex-wrap align-items-center justify-content-between">
                 <h1 class="product-title" style="color: var(--secondary);">{{ $category->name }}</h1>
                 <div class="ms-auto d-flex gap-3 align-items-center">
