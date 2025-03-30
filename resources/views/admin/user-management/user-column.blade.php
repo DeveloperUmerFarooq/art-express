@@ -3,7 +3,7 @@
    class="text-decoration-none text-dark hover-text-primary">
     <div class="d-flex align-items-center gap-3 p-2 hover-bg-light rounded">
         <img loading="lazy"
-             class="rounded-circle border border-2 border-white shadow-sm"
+             class="rounded-circle border-2 border-white shadow-sm"
              src="{{ asset('storage/users-avatar/'.$user->avatar) }}"
              alt="{{ $user->name }}"
              style="height: 45px; width: 45px; object-fit: cover;">
@@ -20,7 +20,7 @@
    class="text-decoration-none text-dark hover-text-primary">
     <div class="d-flex align-items-center gap-3 p-2 hover-bg-light rounded">
         <img loading="lazy"
-             class="rounded-circle border border-2 border-white shadow-sm"
+             class="rounded-circle border-2 border-white shadow-sm"
              src="{{ asset('storage/users-avatar/'.$user->avatar) }}"
              alt="{{ $user->name }}"
              style="height: 45px; width: 45px; object-fit: cover;">
