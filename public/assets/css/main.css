@@ -320,15 +320,11 @@ th,td{
     .portrait {
         height: 15rem;
     }
-    .product-card{
-        height: 26rem !important ;
-    }
+    
 }
 
 @media (max-width: 320px) {
-    .product-card {
-        height: 25.1rem !important;
-    }
+
 }
 @media (width<400px) {
     .layout{
