@@ -21,23 +21,10 @@
 <script src="https://js.pusher.com/8.3.0/pusher.min.js"></script>
 <script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/reuleaux.js"></script>
 <script>
-    Pusher.logToConsole = true;
-    var key = "{{ env('PUSHER_APP_KEY') }}";
-    var cluster = "{{ env('PUSHER_APP_CLUSTER') }}";
-    var pusher = new Pusher(key, {
-        cluster: cluster,
-    });
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll('.dropdown').forEach(function(dropdown) {
-            dropdown.addEventListener('mouseenter', function() {
-                let dropdownMenu = this.querySelector('.dropdown-menu');
-                dropdownMenu.classList.add('show');
-            });
-
-            dropdown.addEventListener('mouseleave', function() {
-                let dropdownMenu = this.querySelector('.dropdown-menu');
-                dropdownMenu.classList.remove('show');
-            });
+        Pusher.logToConsole = true;
+        var key = "{{ env('PUSHER_APP_KEY') }}";
+        var cluster = "{{ env('PUSHER_APP_CLUSTER') }}";
+        var pusher = new Pusher(key, {
+            cluster: cluster,
         });
-    });
 </script>
