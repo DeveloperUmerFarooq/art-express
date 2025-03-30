@@ -6,12 +6,12 @@
     </div>
     <div class="card-body">
         <h5 class="card-title">{{ $product->name }}</h5>
-        <a
+        {{-- <a
             href="{{ route(auth()->user()->getRoleNames()->first() . '.profile.view', $product->artist->id) }}">
             <p class="seller"><b>By:{{ $product->artist->name }}</b></p>
         </a>
         <p class="card-text" style="height: 75px; overflow: hidden; align-content:center">
-            {{ $product->description }}</p>
+            {{ $product->description }}</p> --}}
         <p class="card-price text-success">Price: {{ $product->price }} Rs</p>
         <div class="d-flex justify-content-center gap-1">
             @can('buy art')

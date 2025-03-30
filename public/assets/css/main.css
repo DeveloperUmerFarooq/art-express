@@ -193,16 +193,16 @@ footer a{
     top: 0 !important;
 }
 
-.card img{
+.features-card img{
     aspect-ratio: 2/1;
 }
-.card{
+.features-card{
     background-color: var(--primary);
     color: var(--tertiary);
     height: 21rem;
 }
 
-.card-title{
+.features-card .card-title{
     color: var(--secondary);
     font-weight: 700;
     font-size: clamp(1.5rem,1vw,2rem);
@@ -234,54 +234,8 @@ th,td{
     background-color:transparent !important;
     vertical-align: middle;
 }
-
-.product-card {
-    position: relative;
-    height: 26rem !important;
-    max-height: 27rem !important ;
-    width: 18rem;
-    border: 1px solid #ccc !important;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-.product-card .card-body{
-    opacity: 0;
-    transition: all 0.5s linear;
-}
-.product-card .card-img-top {
-    background-color: var(--secondary);
-    height: 150px;
-    transform: scale(2.7);
-    transform-origin: top;
-    max-height: 400px;
-    object-fit: contain;
-    transition: all 0.2s ease-in;
-}
-.product-card:hover .image-container>.card-img-top{
-    transform: scaleY(1);
-}
-.product-card:hover .image-container+.card-body{
-    opacity:1;
-    transition: 1s;
-}
-.product-card .card-title {
-    font-size: clamp(1rem, 5vw, 1.25rem);
-    font-weight: bold;
-}
-
-.product-card .card-text {
-    font-size: clamp(0.75rem, 4vw, 0.9rem);
-    color: #666;
-}
-
-.product-card .card-price {
-    font-size: clamp(1rem, 4.5vw, 1.1rem);
-    font-weight: bold;
-}
-.seller{
-    font-size: clamp(0.75rem,4vw,1rem) !important;
+.product-card,.card{
+    background-color: transparent !important;
 }
 .magnifier {
     display: none;

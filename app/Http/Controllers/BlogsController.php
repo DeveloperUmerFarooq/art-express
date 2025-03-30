@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Events\LikePost;
 use App\Events\PostComment;
+use App\Jobs\Like;
+use App\Jobs\PostComment as JobsPostComment;
 use App\Models\Blogs;
 use App\Models\Comment;
 use App\Models\Products;
@@ -64,8 +66,7 @@ class BlogsController extends Controller
                 'user_id' => auth()->user()->id,
                 'content' => $request->comment,
             ]);
-
-            broadcast(new PostComment($comment,auth()->user(),$post->comments()->count(),$comment->updated_at->diffForHumans(),$post->id));
+            dispatch(new JobsPostComment($comment,auth()->user(),$post->comments()->count(),$comment->updated_at->diffForHumans(),$post->id))->afterResponse();
             return response()->json(['message'=>"Comment Deleted"]);
     }
 
@@ -81,7 +82,7 @@ class BlogsController extends Controller
                     'user_id' => $user->id,
                 ]);
             }
-            broadcast(new LikePost($post->likes()->count(),$post->id));
+            dispatch(new Like($post->likes()->count(),$post->id))->afterResponse();
             return response()->json(['likes' => $post->likes()->count()]);
     }
 

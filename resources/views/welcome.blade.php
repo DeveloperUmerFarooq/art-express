@@ -28,7 +28,7 @@
             <div class="container-fluid px-md-3 mt-md-5 mt-3">
                 <div class="owl-carousel py-md-2 py-md-3">
                     <div class="slider-card pb-md-2 d-flex align-items-center justify-content-center">
-                        <div class="card" >
+                        <div class="card features-card" >
                         <img loading="lazy" src="{{asset('assets/images/images.jpeg')}}" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 class="card-title">Discover Art Pieces</h5>
@@ -37,7 +37,7 @@
                       </div>
                     </div>
                     <div class="slider-card text-white">
-                        <div class="card" >
+                        <div class="card features-card" >
                             <img loading="lazy" src="{{asset('assets/images/Artist Showcase.webp')}}" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title">Artist Showcase</h5>
@@ -46,7 +46,7 @@
                           </div>
                     </div>
                     <div class="slider-card text-white">
-                        <div class="card" >
+                        <div class="card features-card" >
                             <img loading="lazy" src="{{asset('assets/images/shutterstock_451991974.jpg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title">Blog for Art Enthusiasts</h5>
@@ -55,7 +55,7 @@
                           </div>
                     </div>
                     <div class="slider-card text-white">
-                        <div class="card" >
+                        <div class="card features-card" >
                             <img loading="lazy" src="{{asset('assets/images/chatGPT.jpg.webp')}}" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title">ChatGPT- Assistance</h5>
@@ -64,7 +64,7 @@
                           </div>
                     </div>
                     <div class="slider-card text-white">
-                        <div class="card">
+                        <div class="card features-card">
                             <img loading="lazy" src="{{asset('assets/images/online-shopping-2.jpg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title">Secure Online Shopping</h5>
