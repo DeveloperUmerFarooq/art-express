@@ -7,7 +7,7 @@ Dashboard-Admin
     <div class="row">
         <!-- Total Sales Card -->
         <div class="col-md-3">
-            <div class="card text-white bg-success mb-3" style="height: max-content">
+            <div class="card dashboard-card text-white bg-success mb-3" style="height: max-content">
                 <div class="card-header">Total Sales</div>
                 <div class="card-body">
                     <h5 class="card-title text-center" style="color: var(--primary)">1,230Rs</h5>
@@ -18,7 +18,7 @@ Dashboard-Admin
 
         <!-- Number of Artists Card -->
         <div class="col-md-3">
-            <div class="card text-white bg-danger bg-gradient mb-3" style="height: max-content">
+            <div class="card dashboard-card text-white bg-danger bg-gradient mb-3" style="height: max-content">
                 <div class="card-header">Likes</div>
                 <div class="card-body">
                     <h5 class="card-title text-center" style="color:var(--primary)">50</h5>
@@ -30,7 +30,7 @@ Dashboard-Admin
 
         <!-- Number of Products Card -->
         <div class="col-md-3">
-            <div class="card text-white bg-primary mb-3" style="height: max-content">
+            <div class="card dashboard-card text-white bg-primary mb-3" style="height: max-content">
                 <div class="card-header">Products</div>
                 <div class="card-body">
                     <h5 class="card-title text-center" style="color:var(--primary)">120</h5>
@@ -41,7 +41,7 @@ Dashboard-Admin
 
         <!-- Number of Blog Posts Card -->
         <div class="col-md-3">
-            <div class="card text-white bg-danger bg-gradient mb-3" style="height: max-content">
+            <div class="card dashboard-card text-white bg-danger bg-gradient mb-3" style="height: max-content">
                 <div class="card-header">Blog Posts</div>
                 <div class="card-body">
                     <h5 class="card-title text-center" style="color:var(--primary)">35</h5>
