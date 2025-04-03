@@ -63,7 +63,7 @@
                             </div>
                           </div>
                     </div>
-                    <div class="slider-card text-white">
+                    <div class="slider-card">
                         <div class="card features-card">
                             <img loading="lazy" src="{{asset('assets/images/online-shopping-2.jpg')}}" class="card-img-top" alt="...">
                             <div class="card-body">
