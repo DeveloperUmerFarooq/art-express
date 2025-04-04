@@ -12,7 +12,7 @@
 
         <!-- Product Details -->
         <div class="col-lg-6">
-            <div class="card">
+            <div class="card border-0">
                 <div class="card-body">
                     <h2 class="card-title">{{$product->name}}</h2>
                     <p class="text-muted mb-2">By: <strong>{{$product->artist->name}}</strong></p>
