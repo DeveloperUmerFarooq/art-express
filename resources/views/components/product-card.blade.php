@@ -6,27 +6,9 @@
     </div>
     <div class="card-body">
         <h5 class="card-title">{{ $product->name }}</h5>
-        {{-- <a
-            href="{{ route(auth()->user()->getRoleNames()->first() . '.profile.view', $product->artist->id) }}">
-            <p class="seller"><b>By:{{ $product->artist->name }}</b></p>
-        </a>
-        <p class="card-text" style="height: 75px; overflow: hidden; align-content:center">
-            {{ $product->description }}</p> --}}
         <p class="card-price text-success">Price: {{ $product->price }} Rs</p>
         <div class="d-flex justify-content-center gap-1">
-            @can('buy art')
-            @if (!auth()->user()->products()->where('id', $product->id)->exists())
-            <a href="#" class="btn btn-primary" data-bs-toggle="modal"
-                data-bs-target="#buyProductModal" onclick="buy({{ $product }})">Buy
-                Now</a>
-            @endif
-            @endcan
-            @can('manage store')
-                <button class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#editProductModal"
-                    onclick="edit({{ $product }},'{{ asset($product->image->image_src) }}')">Edit
-                    Product</button>
-            @endcan
+            <a href="{{route(auth()->user()->getRoleNames()->first().'.artwork',$product->id)}}" class="btn btn-primary">View Artwork</a>
             <a href="{{ route(auth()->user()->getRoleNames()->first() . '.blogs', $product->id) }}"
                 class="btn btn-outline-success">Read Blog</a>
             @can('manage store')
