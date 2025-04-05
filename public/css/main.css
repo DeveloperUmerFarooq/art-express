@@ -256,13 +256,8 @@ th,td{
     transition: all .3s ease-in;
 }
 .product-card .image{
-    transform: scale(1.61);
-    transform-origin:top center;
     background-color: var(--secondary) !important;
     transition: transform .3s ease-in;
-}
-.product-card:hover .image{
-    transform: scale(1);
 }
 .magnifier {
     display: none;
