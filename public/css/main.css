@@ -294,7 +294,7 @@ th,td{
 }
 .portfolio{
     padding: 1rem;
-    columns: 9rem;
+    columns: clamp(6rem, 9vw, 9rem);
     column-gap: 0.3rem;
 }
 .portfolio img {
