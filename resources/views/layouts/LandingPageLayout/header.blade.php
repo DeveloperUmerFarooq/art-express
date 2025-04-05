@@ -12,7 +12,7 @@
             <ul class="navbar-nav ms-auto gap-1 gap-md-4">
                 @if (auth()->user())
                 <li class="nav-item text-center">
-                    <a class="nav-link fs-6" href="{{ route(auth()->user()->getRoleNames()->first().'.dashboard') }}">Dashboard</a>
+                    <a class="nav-link fs-6" href="{{ route($role.'.dashboard') }}">Dashboard</a>
                   </li>
                 @else
                 <li class="nav-item text-center">

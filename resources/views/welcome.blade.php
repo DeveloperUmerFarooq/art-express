@@ -13,7 +13,7 @@
             <p class="res-sub text-center w-75">Dive into a world of breathtaking art and inspiring masterpieces. Explore and connect with creativity like never before.</p>
             @if (auth()->user())
             <center>
-                <a href="{{route(auth()->user()->getRoleNames()->first().'.dashboard')}}">
+                <a href="{{route($role.'.dashboard')}}">
                     <button class="btn btn-primary res-button-font px-4" id="hero-button">Get Started</button>
                 </a>
             </center>

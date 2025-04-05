@@ -21,5 +21,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
+        view()->composer('*', function ($view) {
+            if (auth()->check()) {
+                $view->with('role', auth()->user()->getRoleNames()->first());
+            }
+        });
     }
 }

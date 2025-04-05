@@ -1,7 +1,7 @@
 @extends('layouts.' . auth()->user()->getRoleNames()->first() . 'Layout.layout')
 @section('page')
 <div class="container mt-3 mb-3 mb-md-5">
-    <form action="{{route(auth()->user()->getRoleNames()->first().'.search')}}" method="GET" class="d-flex gap-1">
+    <form action="{{route($role.'.search')}}" method="GET" class="d-flex gap-1">
         <input type="search" name="name" id="name" class="form-control" placeholder="search art-work...">
         <button type="submit" class="btn btn-primary">Search</button>
     </form>

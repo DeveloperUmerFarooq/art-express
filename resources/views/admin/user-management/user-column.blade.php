@@ -1,5 +1,5 @@
 @if ($user->hasRole('artist'))
-<a href="{{ route(auth()->user()->getRoleNames()->first().'.profile.view', $user->id) }}"
+<a href="{{ route($role.'.profile.view', $user->id) }}"
    class="text-decoration-none text-dark ">
     <div class="d-flex align-items-center gap-3 p-2  rounded">
         <img loading="lazy"
@@ -16,7 +16,7 @@
     </div>
 </a>
 @else
-<a href="{{ route(auth()->user()->getRoleNames()->first().'.profile.details.view', $user->id) }}"
+<a href="{{ route($role.'.profile.details.view', $user->id) }}"
    class="text-decoration-none text-dark ">
     <div class="d-flex align-items-center gap-3 p-2  rounded">
         <img loading="lazy"

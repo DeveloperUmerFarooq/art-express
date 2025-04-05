@@ -8,7 +8,7 @@
         <h5 class="card-title">{{ $product->name }}</h5>
         <p class="card-price text-success">Price: {{ $product->price }} Rs</p>
         <div class="d-flex justify-content-center gap-1">
-            <a href="{{route(auth()->user()->getRoleNames()->first().'.artwork',$product->id)}}" class="btn btn-primary">View Artwork</a>
+            <a href="{{route($role.'.artwork',$product->id)}}" class="btn btn-primary">View Artwork</a>
             <a href="{{ route(auth()->user()->getRoleNames()->first() . '.blogs', $product->id) }}"
                 class="btn btn-outline-success">Read Blog</a>
             @can('manage store')

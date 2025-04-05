@@ -2,7 +2,7 @@
 <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="editProductForm" action="{{route(auth()->user()->getRoleNames()->first().'.product.update')}}" method="POST" enctype="multipart/form-data">
+            <form id="editProductForm" action="{{route($role.'.product.update')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" id="product-id" name="id">
                 <div class="modal-header">
