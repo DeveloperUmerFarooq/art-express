@@ -12,7 +12,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff0cd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-justify"><path d="M3 12h18"/><path d="M3 18h18"/><path d="M3 6h18"/></svg>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ms-auto gap-2 text-center">
+            <ul class="navbar-nav ms-auto gap-2 text-lg-center">
               <li class="nav-item pt-1">
                 <a class="nav-link fs-6 active" aria-current="page" href="{{route('admin.dashboard')}}">Dashboard</a>
               </li>
