@@ -8,7 +8,7 @@
 
 .landing-layout {
     padding: 1rem;
-    columns: 10rem;
+    columns: clamp(6rem, 10rem, 10vw);
     column-gap: 0.3rem;
 }
 
@@ -61,6 +61,15 @@ p{
     text-align: justify;
     font-size: clamp(1rem,1.5vw,1.5rem)
 }
+.glasmorphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
 .nav-link::before{
     content: "";
     height: 2px;
@@ -343,16 +352,5 @@ th,td{
         height: 15rem;
     }
 
-}
-
-@media (max-width: 320px) {
-
-}
-@media (width<400px) {
-    .layout{
-        padding: 0rem;
-        columns: 7rem;
-        column-gap: 0.3rem;
-    }
 }
 
