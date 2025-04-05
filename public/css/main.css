@@ -5,7 +5,16 @@
     --tertiary:#131010;
 }
 
-
+#hero-section{
+    background-image: url('/assets/images/background.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+#hero-section p{
+    text-shadow: 8px 8px 10px var(--primary);
+}
 .landing-layout {
     padding: 1rem;
     columns: clamp(6rem, 10rem, 10vw);
