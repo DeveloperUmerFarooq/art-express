@@ -339,18 +339,3 @@ th,td{
     }
 }
 
-@media (min-width: 601px) {
-    .landscape,
-    .portrait {
-        height: 25rem;
-    }
-}
-
-@media (max-width: 600px) {
-    .landscape,
-    .portrait {
-        height: 15rem;
-    }
-
-}
-
