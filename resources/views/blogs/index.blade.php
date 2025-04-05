@@ -120,7 +120,7 @@
                                     <ul class="dropdown-menu dropdown-menu-start">
                                         <li class="bg-transparent">
                                             <button class="dropdown-item text-danger bg-transparent"
-                                                onclick="deleteComment('{{ route(auth()->user()->getRoleNames()->first() . '.blog.comment.delete', $comment->id) }}')">
+                                                onclick="deleteComment('{{ route($role . '.blog.comment.delete', $comment->id) }}')">
                                                 Remove Comment
                                             </button>
                                         </li>
@@ -157,7 +157,7 @@
         var commentChannel = pusher.subscribe('comment.' + "{{ $blog->id }}")
         commentChannel.bind('comment.post.' + blogId, function(data) {
             let comments = document.getElementById('comments');
-            let url = `{{ route(auth()->user()->getRoleNames()->first() . '.blog.comment.delete', ':id') }}`
+            let url = `{{ route($role . '.blog.comment.delete', ':id') }}`
                 .replace(':id', data.comment.id);
             let commentHtml = `
                 <div class="d-flex gap-3">
@@ -225,7 +225,7 @@
             $('#like-btn').toggleClass('btn-success');
             $.ajax({
                 type: "GET",
-                url: "{{ route(auth()->user()->getRoleNames()->first() . '.blog.like', $blog->id) }}",
+                url: "{{ route($role . '.blog.like', $blog->id) }}",
                 success: function(response) {
                     document.getElementById('like-count').innerText = response.likes;
                 }
@@ -238,7 +238,7 @@
                 $("#loader").removeClass("d-none");
                 $.ajax({
                     type: "POST",
-                    url: "{{ route(auth()->user()->getRoleNames()->first() . '.blog.comment', $blog->id) }}",
+                    url: "{{ route($role . '.blog.comment', $blog->id) }}",
                     data: {
                         _token: "{{ csrf_token() }}",
                         comment: $('textarea[name="comment"]').val()

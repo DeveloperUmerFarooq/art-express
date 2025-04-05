@@ -1,7 +1,7 @@
 @extends('layouts.' . auth()->user()->getRoleNames()->first() . 'Layout.layout')
 @section('page')
     <div class="container mt-3 mb-3 mb-md-5">
-        <form action="{{ route(auth()->user()->getRoleNames()->first() . '.search') }}" method="GET" class="d-flex gap-1">
+        <form action="{{ route($role . '.search') }}" method="GET" class="d-flex gap-1">
             <input type="search" name="name" id="name" class="form-control" placeholder="search art-work...">
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
@@ -11,7 +11,7 @@
         <div class="d-flex gap-2 flex-wrap mx-2">
             <h5>Browse by Subcategory</h5>
             <h7><a class="ms-md-3" href="">ask AI about current subcategory</a></h7>
-            <form class="mt-1 mt-sm-0 ms-auto" method="GET" action="{{ route(auth()->user()->getRoleNames()->first() . '.filter', $category->id) }}"
+            <form class="mt-1 mt-sm-0 ms-auto" method="GET" action="{{ route($role . '.filter', $category->id) }}"
                 id="filter" class="d-flex flex-wrap ms-auto gap-2">
                 <div class="list-group">
                     <select name="subcategory" id="subId" class="form-select">

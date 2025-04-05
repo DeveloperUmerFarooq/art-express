@@ -9,65 +9,7 @@
             @foreach ($products as $product)
                 <div class="col-md-6 col-lg-3 mb-4">
                     <center>
-                        <div class="card product-card h-100 shadow-sm border-0 overflow-hidden">
-                            <!-- Delete Button -->
-                            <div class="position-absolute top-0 end-0 m-2 z-1">
-                                <button class="btn btn-sm btn-danger p-1" onclick="deleteProduct('{{route('artist.product.delete',$product->id)}}')">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
-                                        <path d="M18 6 6 18" />
-                                        <path d="m6 6 12 12" />
-                                    </svg>
-                                </button>
-                            </div>
-
-                            <!-- Image Container -->
-                            <div class="ratio ratio-4x3 bg-light">
-                                <img loading="lazy" src="{{ asset($product->image->image_src) }}"
-                                     class="object-fit-contain w-100 h-100"
-                                     alt="{{ $product->name }}"
-                                     style="background-color: var(--secondary);">
-                            </div>
-
-                            <!-- Card Body -->
-                            <div class="card-body d-flex flex-column p-3">
-                                <!-- Title and Artist -->
-                                <div class="mb-2">
-                                    <h5 class="card-title fs-6 fw-bold mb-1 text-truncate">{{ $product->name }}</h5>
-                                    <p class="text-muted small mb-2">By: {{ $product->artist->name }}</p>
-                                </div>
-
-                                <!-- Description -->
-                                <p class="card-text text-muted small mb-3 text-truncate text-wrap" style="max-height: 4.5em; overflow: hidden;">
-                                    {{ $product->description }}
-                                </p>
-
-                                <!-- Price -->
-                                <p class="fw-bold text-success mb-3">Price: {{ number_format($product->price) }}Rs</p>
-
-                                <!-- Buttons -->
-                                @if ($product->blog)
-                                <div class="d-flex gap-2 mt-auto">
-                                    <button class="btn btn-primary btn-sm flex-grow-1 py-1"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#editProductModal"
-                                            onclick="edit({{ $product }},'{{ asset($product->image->image_src) }}')">
-                                        Edit
-                                    </button>
-                                    <a href="{{ route(auth()->user()->getRoleNames()->first() . '.blogs', $product->blog->id) }}"
-                                       class="btn btn-outline-success btn-sm flex-grow-1 py-1">
-                                        Read Blog
-                                    </a>
-                                </div>
-                                @else
-                                <button class="btn btn-primary btn-sm w-100 py-1"
-                                        onclick="addPost({{$product->id}})"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#addPostModal">
-                                    Add Blog
-                                </button>
-                                @endif
-                            </div>
-                        </div>
+                        <x-product-card :product="$product" />
                     </center>
                 </div>
             @endforeach
