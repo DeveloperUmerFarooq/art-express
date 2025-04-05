@@ -81,7 +81,6 @@
                         <!-- Additional Info -->
                         <div class="mt-3">
                             <p class="small text-muted mb-1"><i class="bi bi-shield-check"></i> Secure payment</p>
-                            <p class="small text-muted"><i class="bi bi-truck"></i> Free shipping</p>
                         </div>
                     </div>
                 </div>
