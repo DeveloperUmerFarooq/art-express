@@ -4,7 +4,9 @@
     --secondary:#023222;
     --tertiary:#131010;
 }
-
+*::-webkit-scrollbar{
+    display: none !important;
+}
 #hero-section{
     background-image: url('/assets/images/background.png');
     background-position: center;
