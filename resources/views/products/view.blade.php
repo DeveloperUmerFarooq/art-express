@@ -42,34 +42,37 @@
                                     <input type="tel" name="tel" class="form-control" placeholder="+1 (123) 456-7890" required value="{{old('tel',auth()->user()->profile->phone_number)}}">
                                 </div>
                             </div>
+                            <!-- Payment Methods -->
+                            <h5 class="mb-3">Payment Method</h5>
+                            <div class="mb-4">
+                                <div class="form-check mb-3 border p-3 rounded">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="cardPayment" checked>
+                                    <label class="form-check-label" for="cardPayment">
+                                        <strong>Credit/Debit Card</strong>
+                                    </label>
+                                </div>
+
+                                <div class="form-check border p-3 rounded">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="codPayment">
+                                    <label class="form-check-label" for="codPayment">
+                                        <strong>Cash on Delivery</strong>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-3">
+                                <h3>Delivery Charges:</h3>
+                                <h3 class="text-danger mb-0">250 Rs</h3>
+                            </div>
+                            <!-- Buy Now Button -->
+                            @can('buy art')
+                            @if (!auth()->user()->products()->where('id', $product->id)->exists())
+                            <button class="btn btn-primary btn-lg w-100 py-3">
+                                Buy Now
+                            </button>
+                            @endif
+                            @endcan
                         </form>
 
-                        <!-- Payment Methods -->
-                        <h5 class="mb-3">Payment Method</h5>
-                        <div class="mb-4">
-                            <div class="form-check mb-3 border p-3 rounded">
-                                <input class="form-check-input" type="radio" name="paymentMethod" id="cardPayment" checked>
-                                <label class="form-check-label" for="cardPayment">
-                                    <strong>Credit/Debit Card</strong>
-                                </label>
-                            </div>
-
-                            <div class="form-check border p-3 rounded">
-                                <input class="form-check-input" type="radio" name="paymentMethod" id="codPayment">
-                                <label class="form-check-label" for="codPayment">
-                                    <strong>Cash on Delivery</strong>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Buy Now Button -->
-                        @can('buy art')
-                        @if (!auth()->user()->products()->where('id', $product->id)->exists())
-                        <button class="btn btn-primary btn-lg w-100 py-3">
-                            Buy Now
-                        </button>
-                        @endif
-                        @endcan
                         @if(auth()->user()->can('manage store')||auth()->user()->products()->where('id', $product->id)->exists())
                         <div class="d-flex gap-2">
                             <button class="btn btn-primary btn-lg w-100" data-bs-toggle="modal"
