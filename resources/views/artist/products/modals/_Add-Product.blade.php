@@ -35,7 +35,10 @@
                     </div>
                     <!-- Image Input -->
                     <div class="mb-3">
-                        <input type="file" class="form-control" id="price" name="image" >
+                        <input type="file" class="form-control" id="price" name="image" required>
+                        @error('image')
+                            <p class="ms-1 text-danger">{{$message}}</p>
+                        @enderror
                     </div>
                     <!-- Add Blog Checkbox -->
                     <div class="form-check mb-3">

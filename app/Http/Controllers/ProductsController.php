@@ -40,46 +40,50 @@ class ProductsController extends Controller
                 'content' => 'required'
             ]);
         }
-        try {
-            $product = Products::create([
-                'name' => $req->title,
-                'status' => 'Unsold',
-                'artist_id' => auth()->user()->id,
-                'category_id'=>$req->category,
-                'sub_category_id' => $req->subcategory,
-                'description' => $req->description,
-                'price' => $req->price,
-            ]);
-            if ($req->hasFile('image')) {
-                $image = $req->file('image');
-                $filename = now()->timestamp . '_' . uniqid() . '.' . $image->extension();
-                $image = ImageManager::gd()->read($image);
-                $image->text("By: " . auth()->user()->name, $image->width() / 2, $image->height() / 2, function ($font) {
-                    $font->file(public_path('font.ttf'));
-                    $font->size(70);
-                    $font->color('#495057');
-                    $font->stroke('#f8f9fa', 1);
-                    $font->align('center');
-                    $font->lineHeight(1.6);
-                });
-                $path = 'portfolio/' . $filename;
-                Storage::disk('public')->put($path, (string) $image->encode());
-                $src = Storage::url($path);
-                $product->image()->create([
+        if(auth()->user()->profile->address){
+            try {
+                $product = Products::create([
+                    'name' => $req->title,
+                    'status' => 'Unsold',
                     'artist_id' => auth()->user()->id,
-                    'image_src' => $src
+                    'category_id'=>$req->category,
+                    'sub_category_id' => $req->subcategory,
+                    'description' => $req->description,
+                    'price' => $req->price,
                 ]);
+                if ($req->hasFile('image')) {
+                    $image = $req->file('image');
+                    $filename = now()->timestamp . '_' . uniqid() . '.' . $image->extension();
+                    $image = ImageManager::gd()->read($image);
+                    $image->text("By: " . auth()->user()->name, $image->width() / 2, $image->height() / 2, function ($font) {
+                        $font->file(public_path('font.ttf'));
+                        $font->size(70);
+                        $font->color('#495057');
+                        $font->stroke('#f8f9fa', 1);
+                        $font->align('center');
+                        $font->lineHeight(1.6);
+                    });
+                    $path = 'portfolio/' . $filename;
+                    Storage::disk('public')->put($path, (string) $image->encode());
+                    $src = Storage::url($path);
+                    $product->image()->create([
+                        'artist_id' => auth()->user()->id,
+                        'image_src' => $src
+                    ]);
+                }
+                if ($req->add_blog) {
+                    $product->blog()->create([
+                        'title' => $req->title,
+                        'content' => $req->content
+                    ]);
+                }
+                toastr()->success("Product Created!");
+            } catch (Exception $e) {
+                toastr()->error("Operation Failed!");
             }
-            if ($req->add_blog) {
-                $product->blog()->create([
-                    'title' => $req->title,
-                    'content' => $req->content
-                ]);
-            }
-            toastr()->success("Product Created!");
-        } catch (Exception $e) {
-            toastr()->error("Operation Failed!");
+            return redirect()->back();
         }
+        toastr()->error("Complete Your profile to add an artwork");
         return redirect()->back();
     }
 
