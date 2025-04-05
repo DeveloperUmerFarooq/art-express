@@ -48,7 +48,12 @@ body{
     flex-direction: column;
     min-height: 100vh;
 }
-
+body:has(#product-page){
+    background-image: url('/assets/images/background.png');
+    background-position: bottom;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 .nav-link{
     position: relative;
 }
