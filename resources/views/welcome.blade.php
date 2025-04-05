@@ -27,7 +27,7 @@
         </div>
         <div id="features">
             <div class="container-fluid pb-3 pb-md-5 position-relative">
-                <div class="pt-md-5 pt-3">
+                <div class="pt-md-3 pt-2">
                     <h1 class="text-center res-heading">Features we Provide</h1>
                     <div class="container-fluid px-md-3 mt-md-5 mt-3">
                         <div class="owl-carousel py-md-2 py-md-3">
