@@ -1,4 +1,4 @@
-@extends('layouts.' . auth()->user()->getRoleNames()->first() . 'Layout.layout')
+@extends('layouts.' . $role . 'Layout.layout')
 
 @section('page')
     <div class="container mt-3 mb-3 mb-md-5">

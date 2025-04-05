@@ -1,4 +1,4 @@
-@extends('layouts.' . auth()->user()->getRoleNames()->first() . 'Layout.layout')
+@extends('layouts.' . $role . 'Layout.layout')
 @section('page')
     <div class="d-flex container mt-3">
         <h3>Manage Products</h3>

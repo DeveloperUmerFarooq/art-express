@@ -1,4 +1,4 @@
-@extends('layouts.' . auth()->user()->getRoleNames()->first() . 'Layout.layout')
+@extends('layouts.' . $role . 'Layout.layout')
 @section('page')
 <div class="card shadow-sm mt-2 container" style="height: max-content !important">
     <div class="card-body text-center">
