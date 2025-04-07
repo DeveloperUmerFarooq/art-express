@@ -11,6 +11,16 @@ class OrderController extends Controller
     }
 
     public function store(Request $req){
-        dd($req->toArray());
+        $req->validate([
+            'address'=>'required',
+            'tel'=>'required',
+            'paymentMethod'=>'required',
+        ]);
+        if($req->paymentMethod=="card"){
+            dd("card-payment");
+        }
+        else{
+            dd($req->toArray());
+        }
     }
 }

@@ -33,8 +33,10 @@
                         <h5 class="mb-3">Shipping Information</h5>
                         <form class="mb-4" action="{{route('order.store')}}" method="POST">
                             @csrf
+                            <input type="hidden" name="customer_id" value="{{auth()->user()->id}}">
                             <input type="hidden" name="product_id" value="{{$product->id}}">
                             <input type="hidden" name="total_amount" value="{{$product->price+250}}">
+                            <input type="hidden" name="artist_id" value="{{$product->artist->id}}">
                             <div class="mb-3">
                                 <label class="form-label">Full Address</label>
                                 <textarea class="form-control" name="address" rows="3" placeholder="Street, City, State, ZIP Code" required>{{old('address',auth()->user()->profile->address)}}</textarea>
@@ -49,14 +51,14 @@
                             <h5 class="mb-3">Payment Method</h5>
                             <div class="mb-4">
                                 <div class="form-check mb-3 border p-3 rounded">
-                                    <input class="form-check-input" type="radio" name="paymentMethod" id="cardPayment" checked>
+                                    <input class="form-check-input" value="card" type="radio" name="paymentMethod" id="cardPayment" checked>
                                     <label class="form-check-label" for="cardPayment">
                                         <strong>Credit/Debit Card</strong>
                                     </label>
                                 </div>
 
                                 <div class="form-check border p-3 rounded">
-                                    <input class="form-check-input" type="radio" name="paymentMethod" id="codPayment">
+                                    <input class="form-check-input" value="cod" type="radio" name="paymentMethod" id="codPayment">
                                     <label class="form-check-label" for="codPayment">
                                         <strong>Cash on Delivery</strong>
                                     </label>
