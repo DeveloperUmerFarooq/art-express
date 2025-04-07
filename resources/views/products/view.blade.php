@@ -31,7 +31,10 @@
 
                         <!-- Shipping Form -->
                         <h5 class="mb-3">Shipping Information</h5>
-                        <form class="mb-4">
+                        <form class="mb-4" action="{{route('order.store')}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{$product->id}}">
+                            <input type="hidden" name="total_amount" value="{{$product->price+250}}">
                             <div class="mb-3">
                                 <label class="form-label">Full Address</label>
                                 <textarea class="form-control" name="address" rows="3" placeholder="Street, City, State, ZIP Code" required>{{old('address',auth()->user()->profile->address)}}</textarea>
