@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['standard', 'custom'])->default('standard'); // differentiate order types
+            $table->enum('type', ['standard', 'custom'])->default('standard');
             $table->foreignId('customer_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('artist_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->text('user_address');
-            $table->text('artist_address')->nullable(); // optional for some cases
+            $table->text('artist_address')->nullable();
             $table->date('order_date');
             $table->enum('payment_status', ['Payed', 'UnPayed'])->default('UnPayed');
             $table->timestamps();
