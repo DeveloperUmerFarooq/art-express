@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('artist_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->text('user_address');
-            $table->text('artist_address')->nullable();
+            $table->text('artist_address');
             $table->date('order_date');
             $table->enum('payment_status', ['Payed', 'UnPayed'])->default('UnPayed');
             $table->timestamps();
