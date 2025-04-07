@@ -70,6 +70,9 @@ body:has(#product-page){
     visibility: visible;
     transform: translateY(0);
 } */
+ .dropdown-menu{
+    animation:float-up .1s linear !important;
+ }
 p{
     white-space: pre-line !important;
 }
@@ -355,3 +358,10 @@ th,td{
     }
 }
 
+@keyframes float-up {
+    from{
+        transform: translateY(10px);
+    }to{
+        transform: translateX(0);
+    }
+}
