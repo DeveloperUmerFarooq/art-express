@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained('products')->onUpdate('cascade')->onDelete('cascade');
+            $table->enum('type', ['standard', 'custom'])->default('standard'); // differentiate order types
             $table->foreignId('customer_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('artist_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->text('user_address');
+            $table->text('artist_address')->nullable(); // optional for some cases
             $table->date('order_date');
-            $table->enum('status', ['Processing', 'Completed'])->default('Processing');
-            $table->integer('quantity');
-            $table->text('address');
-            $table->decimal('total_price', 10, 2);
+            $table->enum('payment_status', ['Payed', 'UnPayed'])->default('UnPayed');
             $table->timestamps();
         });
+
     }
 
     /**
