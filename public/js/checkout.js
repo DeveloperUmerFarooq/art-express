@@ -5,6 +5,7 @@ var elements=stripe.elements();
         stripe.createToken(cardElement).then(function(result){
             if(result.token){
                 $('#stripe-token').val(result.token.id);
+                document.getElementById('checkout-form').submit()
                 console.log(result)
             }
         })
