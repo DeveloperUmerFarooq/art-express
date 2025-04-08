@@ -35,7 +35,6 @@ class CustomResetPassword extends Notification
             ->subject('Art-Express Password Reset Request')
             ->line('You are receiving this email because we received a password reset request for your Art-Express account.')
             ->action('Reset Password', $url)
-            ->line('This link will expire in '.config('auth.passwords.'.config('auth.defaults.passwords').'.expire').' minutes.')
             ->line('If you did not request this, please ignore this email.')
             ->salutation('Regards, Art-Express Team');
     }
