@@ -32,6 +32,7 @@ class CustomResetPassword extends Notification
         ], false));
 
         return (new MailMessage)
+            ->greeting("Hello Art-Express User!")
             ->subject('Art-Express Password Reset Request')
             ->line('You are receiving this email because we received a password reset request for your Art-Express account.')
             ->action('Reset Password', $url)
