@@ -186,6 +186,9 @@ Route::prefix('/user')->name('user.')->middleware(['role:user'])->group(function
 });
 Route::post('/order',[OrderController::class,'store'])->name('order.store');
 Route::get('/order/{id}',[OrderController::class,'cancel'])->name('order.cancel');
+Route::get('/checkout',function(){
+    return view('products.checkout');
+});
 Route::get('/comments/{id}/time', function ($id) {
     $comment = Comment::find($id);
     return response()->json(['updated_at' => $comment->updated_at->diffForHumans()]);
