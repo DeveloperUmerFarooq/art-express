@@ -1,6 +1,9 @@
 @extends('layouts.' . $role . 'Layout.layout')
 
 @section('page')
+@php
+    $sellable=$product->status=="Unsold"?true:false;
+@endphp
 <div id="product-page">
     <div class="container py-5" >
         <div class="row">
@@ -20,7 +23,7 @@
 
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h3 class="text-success mb-0">{{$product->price}} Rs</h3>
-                            <span class="badge bg-success">{{$product->status=="Unsold"?"In Stock":"Out Of Stock"}}</span>
+                            <span class="badge {{$sellable? 'bg-success': 'bg-danger'}}">{{$sellable?"In Stock":"Out Of Stock"}}</span>
                         </div>
 
                         <p class="card-text mb-4">
@@ -31,7 +34,7 @@
 
                         <!-- Shipping Form -->
                         <h5 class="mb-3">Shipping Information</h5>
-                        <form class="mb-4" action="{{route('order.store')}}" method="POST">
+                        <form class="mb-4" action="{{route('order.store')}}" method="POST" @if(!$sellable) onsubmit="event.preventDefault()" @endif>
                             @csrf
                             <input type="hidden" name="customer_id" value="{{auth()->user()->id}}">
                             <input type="hidden" name="product_id" value="{{$product->id}}">
@@ -39,26 +42,30 @@
                             <input type="hidden" name="artist_id" value="{{$product->artist->id}}">
                             <div class="mb-3">
                                 <label class="form-label">Full Address</label>
-                                <textarea class="form-control" name="address" rows="3" placeholder="Street, City, State, ZIP Code" required>{{old('address',auth()->user()->profile->address)}}</textarea>
+                                <textarea @if(!$sellable) disabled @endif class="form-control validate" name="address" rows="3" placeholder="Street, City, State, ZIP Code" required>{{old('address',auth()->user()->profile->address)}}</textarea>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Phone Number</label>
-                                    <input type="tel" name="tel" class="form-control" placeholder="+1 (123) 456-7890" required value="{{old('tel',auth()->user()->profile->phone_number)}}">
+                                    <input @if(!$sellable) disabled @endif type="tel" name="tel" class="form-control validate" placeholder="+1 (123) 456-7890" required value="{{old('tel',auth()->user()->profile->phone_number)}}">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input @if(!$sellable) disabled @endif type="email" name="customer_email" class="form-control validate" placeholder="customer@gmail.com" required value="{{old('email',auth()->user()->email)}}">
                                 </div>
                             </div>
                             <!-- Payment Methods -->
                             <h5 class="mb-3">Payment Method</h5>
                             <div class="mb-4">
                                 <div class="form-check mb-3 border p-3 rounded">
-                                    <input class="form-check-input" value="card" type="radio" name="paymentMethod" id="cardPayment" checked>
+                                    <input @if(!$sellable) disabled @endif class="form-check-input" value="card" type="radio" name="paymentMethod" id="cardPayment" checked>
                                     <label class="form-check-label" for="cardPayment">
                                         <strong>Credit/Debit Card</strong>
                                     </label>
                                 </div>
 
                                 <div class="form-check border p-3 rounded">
-                                    <input class="form-check-input" value="cod" type="radio" name="paymentMethod" id="codPayment">
+                                    <input @if(!$sellable) disabled @endif class="form-check-input" value="cod" type="radio" name="paymentMethod" id="codPayment">
                                     <label class="form-check-label" for="codPayment">
                                         <strong>Cash on Delivery</strong>
                                     </label>
@@ -71,9 +78,15 @@
                             <!-- Buy Now Button -->
                             @can('buy art')
                             @if (!auth()->user()->products()->where('id', $product->id)->exists())
+                            @if ($sellable)
                             <button class="btn btn-primary btn-lg w-100 py-3">
                                 Buy Now
                             </button>
+                            @else
+                            <button class="btn btn-danger btn-lg w-100 py-3">
+                                Sold
+                            </button>
+                            @endif
                             @endif
                             @endcan
                         </form>

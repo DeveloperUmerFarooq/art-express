@@ -2,25 +2,94 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Products;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    public function index(){
-        return view('Orders.index');
+    public function index()
+    {
+        $orders = Order::with(['items', 'customer', 'artist'])
+            ->where('customer_id', auth()->id())
+            ->orderBy('order_date', 'desc')
+            ->get();
+
+        return view('Orders.index', compact('orders'));
     }
 
-    public function store(Request $req){
+    public function store(Request $req)
+    {
         $req->validate([
-            'address'=>'required',
-            'tel'=>'required',
-            'paymentMethod'=>'required',
+            'address' => 'required',
+            'tel' => 'required',
+            'paymentMethod' => 'required',
         ]);
-        if($req->paymentMethod=="card"){
-            dd("card-payment");
+        $product = Products::find($req->product_id);
+        if ($product->status == "Sold") {
+            toastr()->info("Product is Sold");
+            return redirect()->back();
         }
-        else{
+        if ($req->paymentMethod !== "card") {
+            DB::beginTransaction();
+
+            try {
+                $order = Order::create([
+                    'type' => 'standard',
+                    'customer_id' => $req->customer_id,
+                    'artist_id' => $req->artist_id,
+                    'user_address' => $req->address,
+                    'artist_address' => User::find($req->artist_id)->profile->address,
+                    'user_contact' => $req->tel,
+                    'order_date' => now(),
+                    'payment_status' => $req->paymentMethod == 'card' ? 'Payed' : 'UnPayed',
+                ]);
+
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $req->product_id,
+                    'item_name' => $product->name,
+                    'img_src' => $product->image->image_src,
+                    'price' => $product->price,
+                    'quantity' => 1,
+                    'total_price' => $product->price + 250,
+                ]);
+                $product->status = "Sold";
+                $product->save();
+                DB::commit();
+                toastr()->success("Your Order Has Been Placed");
+                return redirect()->back();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                toastr()->error("Operation Failed");
+                return redirect()->back();
+            }
+        } else {
             dd($req->toArray());
+        }
+    }
+    function cancel($id){
+        try{
+            $order=Order::find($id);
+            foreach($order->items as $item){
+                if($item->product){
+                    $item->product()->update([
+                        'status'=>'Unsold'
+                    ]);
+                }
+                else{
+                    break;
+                }
+            }
+            $order->delete();
+            toastr()->success("Order has been canceled");
+            return redirect()->back();
+        }
+        catch(\Exception $e){
+            toastr()->error("Operation Failed!");
         }
     }
 }

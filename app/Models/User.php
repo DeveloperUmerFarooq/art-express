@@ -56,4 +56,10 @@ class User extends Authenticatable
     public function images(){
         return $this->hasMany(Images::class,'artist_id');
     }
+    public function orders(){
+        return $this->hasMany(Order::class,'customer_id');
+    }
+    public function sales(){
+        return $this->hasMany(Order::class,'artist_id');
+    }
 }
