@@ -6,7 +6,6 @@ var elements=stripe.elements();
             if(result.token){
                 $('#stripe-token').val(result.token.id);
                 document.getElementById('checkout-form').submit()
-                console.log(result)
             }
         })
     }

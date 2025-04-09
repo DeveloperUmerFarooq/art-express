@@ -34,7 +34,7 @@
 
                         <!-- Shipping Form -->
                         <h5 class="mb-3">Shipping Information</h5>
-                        <form class="mb-4" action="{{route('order.store')}}" method="POST" @if(!$sellable) onsubmit="event.preventDefault()" @endif>
+                        <form class="mb-4" action="{{route('order.store')}}" method="POST" @if(!$sellable) onsubmit="event.preventDefault()" @endif id="checkout-form">
                             @csrf
                             <input type="hidden" name="customer_id" value="{{auth()->user()->id}}">
                             <input type="hidden" name="product_id" value="{{$product->id}}">
@@ -81,20 +81,20 @@
                                 <h3 class="text-danger mb-0">250 Rs</h3>
                             </div>
                             <!-- Buy Now Button -->
-                            @can('buy art')
-                            @if (!auth()->user()->products()->where('id', $product->id)->exists())
-                            @if ($sellable)
-                            <button class="btn btn-primary btn-lg w-100 py-3" onclick="createToken()">
-                                Buy Now
-                            </button>
-                            @else
-                            <button class="btn btn-danger btn-lg w-100 py-3">
-                                Sold
-                            </button>
-                            @endif
-                            @endif
-                            @endcan
                         </form>
+                        @can('buy art')
+                        @if (!auth()->user()->products()->where('id', $product->id)->exists())
+                        @if ($sellable)
+                        <button class="btn btn-primary btn-lg w-100 py-3" onclick="createToken()">
+                            Buy Now
+                        </button>
+                        @else
+                        <button class="btn btn-danger btn-lg w-100 py-3">
+                            Sold
+                        </button>
+                        @endif
+                        @endif
+                        @endcan
 
                         @if(auth()->user()->can('manage store')||auth()->user()->products()->where('id', $product->id)->exists())
                         <div class="d-flex gap-2">
@@ -138,6 +138,7 @@
         }
         cardPaymentRadio.addEventListener('change', toggleCardElement);
         codPaymentRadio.addEventListener('change', toggleCardElement);
+        toggleCardElement();
     });
 </script>
 

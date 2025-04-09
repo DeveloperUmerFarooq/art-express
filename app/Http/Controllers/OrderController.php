@@ -34,41 +34,43 @@ class OrderController extends Controller
             return redirect()->back();
         }
         if ($req->paymentMethod !== "card") {
-            DB::beginTransaction();
-
-            try {
-                $order = Order::create([
-                    'type' => 'standard',
-                    'customer_id' => $req->customer_id,
-                    'artist_id' => $req->artist_id,
-                    'user_address' => $req->address,
-                    'artist_address' => User::find($req->artist_id)->profile->address,
-                    'user_contact' => $req->tel,
-                    'order_date' => now(),
-                    'payment_status' => $req->paymentMethod == 'card' ? 'Payed' : 'UnPayed',
-                ]);
-
-                OrderItem::create([
-                    'order_id' => $order->id,
-                    'product_id' => $req->product_id,
-                    'item_name' => $product->name,
-                    'img_src' => $product->image->image_src,
-                    'price' => $product->price,
-                    'quantity' => 1,
-                    'total_price' => $product->price + 250,
-                ]);
-                $product->status = "Sold";
-                $product->save();
-                DB::commit();
-                toastr()->success("Your Order Has Been Placed");
-                return redirect()->back();
-            } catch (\Exception $e) {
-                DB::rollBack();
-                toastr()->error("Operation Failed");
-                return redirect()->back();
-            }
+            $this->placeOrder($req,$product);
         } else {
             dd($req->toArray());
+        }
+        return redirect()->back();
+    }
+    function placeOrder($req,$product){
+        DB::beginTransaction();
+
+        try {
+            $order = Order::create([
+                'type' => 'standard',
+                'customer_id' => $req->customer_id,
+                'artist_id' => $req->artist_id,
+                'user_address' => $req->address,
+                'artist_address' => User::find($req->artist_id)->profile->address,
+                'user_contact' => $req->tel,
+                'order_date' => now(),
+                'payment_status' => $req->paymentMethod == 'card' ? 'Payed' : 'UnPayed',
+            ]);
+
+            OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $req->product_id,
+                'item_name' => $product->name,
+                'img_src' => $product->image->image_src,
+                'price' => $product->price,
+                'quantity' => 1,
+                'total_price' => $product->price + 250,
+            ]);
+            $product->status = "Sold";
+            $product->save();
+            DB::commit();
+            toastr()->success("Your Order Has Been Placed");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            toastr()->error("Operation Failed");
         }
     }
     function cancel($id){
