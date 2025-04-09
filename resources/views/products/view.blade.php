@@ -55,7 +55,7 @@
                                     <input type="hidden" name="stripeToken" id="stripe-token">
                                 </div>
                             </div>
-                            <div class="@if(!$sellable) d-none @endif" id="card-input">
+                            <div class="d-none" id="card-input">
                                 <label class="form-label">Card Details</label>
                                 <div id="card-element" class="form-control py-2 mb-3"></div>
                             </div>
@@ -63,7 +63,7 @@
                             <h5 class="mb-3">Payment Method</h5>
                             <div class="mb-4">
                                 <div class="form-check mb-3 border p-3 rounded">
-                                    <input @if(!$sellable) disabled @endif class="form-check-input" value="card" type="radio" name="paymentMethod" id="cardPayment" checked>
+                                    <input @if(!$sellable) disabled @endif class="form-check-input" value="card" type="radio" name="paymentMethod" id="cardPayment">
                                     <label class="form-check-label" for="cardPayment">
                                         <strong>Credit/Debit Card</strong>
                                     </label>
@@ -138,7 +138,6 @@
         }
         cardPaymentRadio.addEventListener('change', toggleCardElement);
         codPaymentRadio.addEventListener('change', toggleCardElement);
-        toggleCardElement();
     });
 </script>
 

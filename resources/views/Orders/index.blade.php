@@ -7,13 +7,15 @@
                 <div class="card-body text-center">
                     <h5 class="card-title">No Order Placed!</h5>
                     <p class="card-text">It looks like no orders have been placed yet!</p>
+                    @if($role!=='admin')
                     <a href="{{ route($role . '.store') }}" class="btn btn-primary">Browse Products</a>
+                    @endif
                 </div>
             </div>
         @else
-            <div class="accordion" id="ordersAccordion">
+            <div class="row" id="ordersAccordion">
                 @foreach ($orders as $order)
-                    <div class="card shadow-sm mb-3">
+                    <div class="card shadow-sm mb-3 col-6">
                         <div class="card-header bg-custom" id="heading{{ $order->id }}">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>

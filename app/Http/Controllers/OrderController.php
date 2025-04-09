@@ -34,13 +34,25 @@ class OrderController extends Controller
             return redirect()->back();
         }
         if ($req->paymentMethod !== "card") {
-            $this->placeOrder($req,$product);
+            $this->placeOrder($req, $product);
         } else {
-            dd($req->toArray());
+            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $charge = $stripe->charges->create([
+                'amount' => ($product->price + 250)*100,
+                'currency' => 'pkr',
+                'source' => $req->stripeToken,
+                'description' => "payment for products"
+            ]);
+            if ($charge->status === 'succeeded') {
+                $this->placeOrder($req, $product);
+            }else{
+                toastr()->error("Payment Process Failed!");
+            }
         }
         return redirect()->back();
     }
-    function placeOrder($req,$product){
+    function placeOrder($req, $product)
+    {
         DB::beginTransaction();
 
         try {
@@ -73,24 +85,23 @@ class OrderController extends Controller
             toastr()->error("Operation Failed");
         }
     }
-    function cancel($id){
-        try{
-            $order=Order::find($id);
-            foreach($order->items as $item){
-                if($item->product){
+    function cancel($id)
+    {
+        try {
+            $order = Order::find($id);
+            foreach ($order->items as $item) {
+                if ($item->product) {
                     $item->product()->update([
-                        'status'=>'Unsold'
+                        'status' => 'Unsold'
                     ]);
-                }
-                else{
+                } else {
                     break;
                 }
             }
             $order->delete();
             toastr()->success("Order has been canceled");
             return redirect()->back();
-        }
-        catch(\Exception $e){
+        } catch (\Exception $e) {
             toastr()->error("Operation Failed!");
         }
     }
