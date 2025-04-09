@@ -380,6 +380,14 @@ th,td{
     background-color: var(--secondary) !important;
     color: var(--primary) !important;
 }
+.pagination .page-item.active .page-link{
+    background-color: var(--secondary) !important;
+    color: var(--primary) !important;
+}
+.pagination .page-item .page-link{
+    color: var(--tertiary) !important;
+}
+
 @keyframes grow {
     from{
         transform: translateY(20px) scale(0);

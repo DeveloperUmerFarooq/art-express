@@ -1,6 +1,6 @@
 @extends('layouts.' . $role . 'Layout.layout')
 @section('page')
-    <div class="py-5">
+    <div class="pt-5 px-2">
         @if ($orders->isEmpty())
             <div class="card shadow-sm mt-2">
                 <div class="card-body text-center">
@@ -117,7 +117,7 @@
                 @endforeach
             </div>
         @endif
-        <div class="d-flex justify-content-center pt-5">
+        <div class="d-flex justify-content-center pt-5 pb-0">
             {{$orders->links()}}
         </div>
     </div>

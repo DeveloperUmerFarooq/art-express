@@ -13,7 +13,7 @@ class OrderController extends Controller
 {
     public function adminOrder(){
         $orders = Order::with(['items', 'customer', 'artist'])
-            ->orderBy('order_date', 'desc')
+            ->latest()
             ->paginate(10);
 
         return view('Orders.index', compact('orders'));
@@ -22,8 +22,8 @@ class OrderController extends Controller
     {
         $orders = Order::with(['items', 'customer', 'artist'])
             ->where('customer_id', auth()->id())
-            ->orderBy('order_date', 'desc')
-            ->paginate(10);
+            ->latest()
+            ->paginate(1);
 
         return view('Orders.index', compact('orders'));
     }
@@ -31,7 +31,7 @@ class OrderController extends Controller
     public function sales(){
         $orders = Order::with(['items', 'customer', 'artist'])
             ->where('artist_id', auth()->id())
-            ->orderBy('order_date', 'desc')
+            ->latest()
             ->paginate(10);
 
         return view('Orders.index', compact('orders'));
@@ -67,7 +67,7 @@ class OrderController extends Controller
         }
         return redirect()->back();
     }
-    function placeOrder($req, $product,$id)
+    function placeOrder($req, $product,$id=null)
     {
         DB::beginTransaction();
 
