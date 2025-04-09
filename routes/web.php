@@ -81,7 +81,7 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
     Route::get('/blog/comment/{id}/delete',[BlogsController::class,'deleteComment'])->name('blog.comment.delete');
     Route::get('/blog/{id}/like',[BlogsController::class,'like'])->name('blog.like');
 
-    Route::get('/orders',[OrderController::class,'index'])->name('order');
+    Route::get('/orders',[OrderController::class,'adminOrder'])->name('order');
 
     Route::get('/artist/{id}',[ProfileController::class,'portfolio'])->name('profile.view');
 
@@ -125,6 +125,7 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
     Route::get('/artwork/{id}',[StoreController::class,'product'])->name('artwork');
 
     Route::get('/orders',[OrderController::class,'index'])->name('order');
+    Route::get('/sales',[OrderController::class,'sales'])->name('sales');
 
     Route::get('/artist/{id}',[ProfileController::class,'portfolio'])->name('profile.view');
 

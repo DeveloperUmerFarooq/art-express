@@ -11,12 +11,28 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    public function adminOrder(){
+        $orders = Order::with(['items', 'customer', 'artist'])
+            ->orderBy('order_date', 'desc')
+            ->paginate(10);
+
+        return view('Orders.index', compact('orders'));
+    }
     public function index()
     {
         $orders = Order::with(['items', 'customer', 'artist'])
             ->where('customer_id', auth()->id())
             ->orderBy('order_date', 'desc')
-            ->get();
+            ->paginate(10);
+
+        return view('Orders.index', compact('orders'));
+    }
+
+    public function sales(){
+        $orders = Order::with(['items', 'customer', 'artist'])
+            ->where('artist_id', auth()->id())
+            ->orderBy('order_date', 'desc')
+            ->paginate(10);
 
         return view('Orders.index', compact('orders'));
     }
