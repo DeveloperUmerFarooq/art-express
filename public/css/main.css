@@ -32,7 +32,7 @@
     animation: grow both;
     animation-timeline: view();
     animation-range-start: entry 5%;
-    animation-range-end: entry 70%;
+    animation-range-end: entry 100%;
 }
 body{
     margin: 0;
