@@ -60,19 +60,20 @@ class OrderController extends Controller
                 'description' => "payment for products"
             ]);
             if ($charge->status === 'succeeded') {
-                $this->placeOrder($req, $product);
+                $this->placeOrder($req, $product,$charge->id);
             }else{
                 toastr()->error("Payment Process Failed!");
             }
         }
         return redirect()->back();
     }
-    function placeOrder($req, $product)
+    function placeOrder($req, $product,$id)
     {
         DB::beginTransaction();
 
         try {
             $order = Order::create([
+                'payment_id'=>$id,
                 'type' => 'standard',
                 'customer_id' => $req->customer_id,
                 'artist_id' => $req->artist_id,
@@ -105,6 +106,22 @@ class OrderController extends Controller
     {
         try {
             $order = Order::find($id);
+            if($order->payment_id){
+                $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+                $amount=$order->items()->sum('total_price');
+                $totalAmount=($amount);
+                $refundAmount=intval($totalAmount*0.9);
+                $refundAmount-=100;
+                try{
+                    $refund=$stripe->refunds->create([
+                        'charge'=>$order->payment_id,
+                        'amount'=>$refundAmount*100,
+                    ]);
+                }catch(\Exception $e){
+                    toastr()->error("Refund Failed!");
+                    return redirect()->back();
+                }
+            }
             foreach ($order->items as $item) {
                 if ($item->product) {
                     $item->product()->update([

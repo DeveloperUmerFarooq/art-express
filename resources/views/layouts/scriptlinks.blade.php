@@ -22,7 +22,7 @@
 <script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/reuleaux.js"></script>
 <script src="https://js.stripe.com/basil/stripe.js"></script>
 <script>
-        var stripe = Stripe("pk_test_51QzEFlGLi5VlUYqp4NpVOOo3DNey29Jd7mLkdyxnQ6WFWSTkJSTPNWyfoRqOq3sl2has8wBDzdP6zEiaJAbe6vXe0084f8Yto1");
+        var stripe = Stripe("{{env('STRIPE_KEY')}}");
         Pusher.logToConsole = true;
         var key = "{{ env('PUSHER_APP_KEY') }}";
         var cluster = "{{ env('PUSHER_APP_CLUSTER') }}";
