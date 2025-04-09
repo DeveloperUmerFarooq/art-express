@@ -52,7 +52,12 @@
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Email</label>
                                     <input @if(!$sellable) disabled @endif type="email" name="customer_email" class="form-control validate" placeholder="customer@gmail.com" required value="{{old('email',auth()->user()->email)}}">
+                                    <input type="hidden" name="stripeToken" id="stripe-token">
                                 </div>
+                            </div>
+                            <div class="@if(!$sellable) d-none @endif" id="card-input">
+                                <label class="form-label">Card Details</label>
+                                <div id="card-element" class="form-control py-2 mb-3"></div>
                             </div>
                             <!-- Payment Methods -->
                             <h5 class="mb-3">Payment Method</h5>
@@ -79,7 +84,7 @@
                             @can('buy art')
                             @if (!auth()->user()->products()->where('id', $product->id)->exists())
                             @if ($sellable)
-                            <button class="btn btn-primary btn-lg w-100 py-3">
+                            <button class="btn btn-primary btn-lg w-100 py-3" onclick="createToken()">
                                 Buy Now
                             </button>
                             @else
@@ -117,4 +122,23 @@
 @if (!auth()->user()->hasRole('user'))
     <script src="{{ asset('js/productsCrud.js') }}"></script>
 @endif
+<script src="{{ asset('js/checkout.js') }}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const cardPaymentRadio = document.getElementById('cardPayment');
+        const codPaymentRadio = document.getElementById('codPayment');
+        const cardElement = document.getElementById('card-input');
+
+        function toggleCardElement() {
+            if (cardPaymentRadio.checked) {
+                cardElement.classList.remove('d-none');
+            } else {
+                cardElement.classList.add('d-none');
+            }
+        }
+        cardPaymentRadio.addEventListener('change', toggleCardElement);
+        codPaymentRadio.addEventListener('change', toggleCardElement);
+    });
+</script>
+
 @endpush
