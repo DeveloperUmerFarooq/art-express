@@ -68,14 +68,17 @@ class UserDataTable extends DataTable
      */
     public function getColumns(): array
     {
-        return [
-            Column::make('user')->searchable(true),
+        $columns=[
+            Column::make('user'),
             Column::make('name')->visible(false),
             Column::make('email'),
             Column::make('created_at'),
             Column::make('updated_at'),
-            Column::make('actions')
         ];
+        if(auth()->user()->can('manage users')){
+           $columns[]= Column::make('actions');
+        }
+        return $columns;
     }
 
     /**

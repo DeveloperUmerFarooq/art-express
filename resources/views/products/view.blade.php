@@ -33,6 +33,7 @@
                         <hr>
 
                         <!-- Shipping Form -->
+                        @can('buy art')
                         <h5 class="mb-3">Shipping Information</h5>
                         <form class="mb-4" action="{{route('order.store')}}" method="POST" @if(!$sellable) onsubmit="event.preventDefault()" @endif id="checkout-form">
                             @csrf
@@ -82,6 +83,7 @@
                             </div>
                             <!-- Buy Now Button -->
                         </form>
+                        @endcan
                         @can('buy art')
                         @if (!auth()->user()->products()->where('id', $product->id)->exists())
                         @if ($sellable)
@@ -96,7 +98,7 @@
                         @endif
                         @endcan
 
-                        @if(auth()->user()->can('manage store')||auth()->user()->products()->where('id', $product->id)->exists())
+                        @if(auth()->user()->can('manage store')||(auth()->user()->products()->where('id', $product->id)->exists()&& auth()->user()->can('edit art')))
                         <div class="d-flex gap-2">
                             <button class="btn btn-primary btn-lg w-100" data-bs-toggle="modal"
                                 data-bs-target="#editProductModal"

@@ -8,13 +8,17 @@
         <p class="card-price text-success">Price: {{ $product->price }} Rs</p>
         <div class="d-flex justify-content-center gap-1">
             @if (request()->is('artist/products'))
-                <button class="btn btn-primary btn-sm py-1" data-bs-toggle="modal"
-                    data-bs-target="#editProductModal"
-                    onclick="edit({{ $product }},'{{ asset($product->image->image_src) }}')">
-                    Edit Product
-                </button>
+            @can('edit art')
+            <button class="btn btn-primary btn-sm py-1" data-bs-toggle="modal"
+                data-bs-target="#editProductModal"
+                onclick="edit({{ $product }},'{{ asset($product->image->image_src) }}')">
+                Edit Product
+            </button>
+            @endcan
             @else
-                <a href="{{ route($role . '.artwork', $product->id) }}" class="btn btn-primary">View Artwork</a>
+            @can('view art')
+            <a href="{{ route($role . '.artwork', $product->id) }}" class="btn btn-primary">View Artwork</a>
+            @endcan
             @endif
             @if ($product->blog)
                 <a href="{{ route($role . '.blogs', $product->id) }}" class="btn btn-outline-success">Read Blog</a>
@@ -26,7 +30,7 @@
                     </button>
                 @endif
             @endif
-            @if (auth()->user()->can('manage store') || auth()->user()->products()->where('id', $product->id)->exists())
+            @if (auth()->user()->can('manage store') || (auth()->user()->products()->where('id', $product->id)->exists() && auth()->user()->can('delete art')))
                 <button class="btn btn-danger position-absolute top-0 end-0 m-1"
                     onclick="deleteProduct('{{ route($role . '.product.delete', $product->id) }}')">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"

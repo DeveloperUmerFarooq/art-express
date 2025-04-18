@@ -19,11 +19,10 @@
         </div>
 
         {{-- Edit and delete actions --}}
-
         <center>
             <div class="d-flex gap-2 justify-content-center">
-                @if (auth()->user()->hasRole('admin') ||
-                        (auth()->user()->hasRole('artist') && auth()->user()->id == $blog->product->artist_id))
+                @if (auth()->user()->can('manage blog') ||
+                        (auth()->user()->can('manage blog') && auth()->user()->id == $blog->product->artist_id))
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editPostModal"
                         onclick="editPost({{ $blog }})">Edit</button>
                     <button class="btn btn-danger"

@@ -82,12 +82,16 @@ class SubCategoriesDataTable extends DataTable
      */
     public function getColumns(): array
     {
-        return [
+        $columns=[
             Column::make('name'),
             Column::make('created_at'),
             Column::make('updated_at'),
-            Column::make('actions')
+
         ];
+        if(auth()->user()->can('manage subcategories')){
+            $columns[]=Column::make('actions');
+        }
+        return $columns;
     }
 
     /**

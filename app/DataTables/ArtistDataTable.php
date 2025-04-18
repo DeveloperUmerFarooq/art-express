@@ -71,14 +71,17 @@ class ArtistDataTable extends DataTable
      */
     public function getColumns(): array
     {
-        return [
+        $columns=[
             Column::make('user'),
             Column::make('name')->visible(false),
             Column::make('email'),
             Column::make('created_at'),
             Column::make('updated_at'),
-            Column::make('actions')
         ];
+        if(auth()->user()->can('manage artists')){
+           $columns[]= Column::make('actions');
+        }
+        return $columns;
     }
 
     /**

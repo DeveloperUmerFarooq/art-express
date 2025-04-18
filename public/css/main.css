@@ -51,7 +51,7 @@ body{
 body:has(#product-page){
     background-image: url('/assets/images/background.png');
     background-position: bottom;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
 }
 .nav-link{

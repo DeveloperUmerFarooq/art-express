@@ -81,14 +81,17 @@ class CategoriesDataTable extends DataTable
      */
     public function getColumns(): array
     {
-        return [
+        $columns=[
             Column::make('name'),
             Column::make('subCategories_count')->addClass('text-center'),
             Column::make('sub_categories')->addClass('text-center'),
             Column::make('created_at'),
             Column::make('updated_at'),
-            Column::make('actions')
         ];
+        if(auth()->user()->can('manage categories')){
+            $columns[]=Column::make('actions');
+        }
+        return $columns;
     }
 
     /**

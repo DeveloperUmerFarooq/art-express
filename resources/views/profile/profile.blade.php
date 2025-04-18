@@ -6,6 +6,7 @@
             <center>
                 <div class="position-relative overflow-hidden" style="width: clamp(10rem,15vw,20rem); height: clamp(10rem,15vw,20rem)">
                     <img loading="lazy" class="rounded-circle w-100 h-100" height="100" width="100"  src="{{asset('storage/users-avatar/'.auth()->user()->avatar)}}" alt="Profile Image" style="object-fit: cover;">
+                    @can('manage profile')
                     <div class="position-absolute bg-dark d-flex align-items-center justify-content-center rounded-circle shadow-lg"
                          style="z-index: 5; bottom: 10px; right:10%; width: clamp(2rem,1vw,3rem); height: clamp(2rem,1vw,3rem); cursor:pointer"
                          onclick="document.getElementById('fileInput').click();">
@@ -20,6 +21,7 @@
                             <input type="file" name="avatar" id="fileInput" accept="images/*" onchange="document.getElementById('avatar-form').submit();">
                         </form>
                     </div>
+                    @endcan
                 </div>
                 <div class="fs-3 mt-1" style="vertical-align: middle">
                     <span><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#023222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg></span>
@@ -58,14 +60,18 @@
                             </svg>
                     </a>
                     @endif
+                    @can('manage profile')
                     <abbr title="Edit Social Links">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#Edit-Social-Links">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#131010" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-pen-line"><path d="m18 5-2.414-2.414A2 2 0 0 0 14.172 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2"/><path d="M21.378 12.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><path d="M8 18h1"/></svg>
                         </a>
                     </abbr>
+                    @endcan
                 </div>
                 @else
+                @can('manage profile')
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Add-Social-Links">Add Social Links</button>
+                @endcan
                 @endif
             </center>
             <nav class="navbar navbar-expand-lg bg-transparent mt-1">
@@ -81,12 +87,14 @@
                         <a class="nav-link" href="{{route('artist.profile.index')}}">Portfolio</a>
                     </li>
                     @endif
-                      <li class="nav-item">
-                        <a class="nav-link" id="edit-details" href="#">Edit Details</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#Change-Password">Change Password</a>
-                      </li>
+                    @can('manage profile')
+                    <li class="nav-item">
+                      <a class="nav-link" id="edit-details" href="#">Edit Details</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#Change-Password">Change Password</a>
+                    </li>
+                    @endcan
                     </ul>
                   </div>
                 </div>

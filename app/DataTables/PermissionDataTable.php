@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Validation\Rules\Can;
 use Spatie\Permission\Models\Permission;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -65,12 +66,16 @@ class PermissionDataTable extends DataTable
      */
     public function getColumns(): array
     {
-        return [
+        $columns = [
             Column::make('name'),
             Column::make('created_at'),
             Column::make('updated_at'),
-            Column::make('actions')
         ];
+
+        if (auth()->user()->can('manage permissions')) {
+            $columns[] = Column::make('actions');
+        }
+        return $columns;
     }
 
     /**
