@@ -16,12 +16,17 @@ use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UserCrud;
 use App\Models\Comment;
+use App\Mail\OrderMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
-Route::redirect('/home','/');
-Route::view('/page','artist.portfolio.portfolio');
 Auth::routes();
+Route::redirect('/home','/');
+Route::redirect('/login', '/')->name('login');
+Route::redirect('/register','/')->name('register');
+Route::middleware(['auth'])->group(function(){
+Route::view('/page','artist.portfolio.portfolio');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(function () {
     Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
@@ -187,6 +192,9 @@ Route::prefix('/user')->name('user.')->middleware(['role:user'])->group(function
 });
 Route::post('/order',[OrderController::class,'store'])->name('order.store');
 Route::get('/order/{id}',[OrderController::class,'cancel'])->name('order.cancel');
+Route::get('/send-mail',function(){
+    Mail::to('receiver@example.com')->send(new OrderMail());
+});
 Route::get('/checkout',function(){
     return view('products.checkout');
 });
@@ -194,3 +202,4 @@ Route::get('/comments/{id}/time', function ($id) {
     $comment = Comment::find($id);
     return response()->json(['updated_at' => $comment->updated_at->diffForHumans()]);
 })->name('comment.time');
+});

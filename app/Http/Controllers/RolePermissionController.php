@@ -15,7 +15,6 @@ class RolePermissionController extends Controller
         return view('admin.role-management.role')->with(['roles'=>$roles,'permissions'=>$permissions]);
     }
     public function update(Request $req){
-        // dd($req->toArray());
         $req->validate([
             'permissions'=>'required'
         ]);

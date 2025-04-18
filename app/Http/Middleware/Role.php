@@ -17,7 +17,7 @@ class Role
      * @return mixed
      */
     public function handle(Request $request, Closure $next, $role)
-    {
+    {   
         if (!auth()->check()) {
             return redirect()->route('login');
         }
