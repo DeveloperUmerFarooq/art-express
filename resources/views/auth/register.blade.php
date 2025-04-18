@@ -24,14 +24,14 @@
                 </div>
                 <div>
                     <label for="Password" class="form-label">Password:</label>
-                    <input type="password" minlength="8" name="password" class="form-control password shadow validate" placeholder="Password" value="{{ old('password') }}" required autocomplete="current-password" autofocus>
+                    <input type="password" minlength="8" name="password" id="password-field" class="form-control password shadow validate" placeholder="Password" value="{{ old('password') }}" required autocomplete="current-password" autofocus>
                     @error('password')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
                 </div>
                 <div>
                     <label for="Confirm-Password" class="form-label">Confirm Password:</label>
-                    <input type="password" id="confirm-password" minlength="8" name="password_confirmation" class="form-control password shadow validate" placeholder="Confirm Password" value="{{ old('password_confirmation') }}" required autocomplete="current-password" autofocus>
+                    <input type="password" id="confirm-password-field" minlength="8" name="password_confirmation" class="form-control password shadow validate" placeholder="Confirm Password" value="{{ old('password_confirmation') }}" required autocomplete="current-password" autofocus>
                     @error('password')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
@@ -63,4 +63,24 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const passwordShowCheckbox = document.getElementById('password-show');
+        const passwordField = document.getElementById('password-field');
+        const confirmPasswordField = document.getElementById('confirm-password-field');
+
+        passwordShowCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                passwordField.type = 'text';
+                confirmPasswordField.type = 'text';
+            } else {
+                passwordField.type = 'password';
+                confirmPasswordField.type = 'password';
+            }
+        });
+    });
+</script>
+@endpush

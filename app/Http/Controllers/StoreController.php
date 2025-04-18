@@ -21,7 +21,7 @@ class StoreController extends Controller
         $category=Categories::with('subCategories.products','products')->find($id);
         $subCategories=$category->subCategories;
         $current=$category;
-        $products=$category->products;
+        $products=$category->products()->latest()->get();
         return view('products.products')->with(['category'=>$category,'subCategories'=>$subCategories,'products'=>$products,'current'=>$current]);
     }
     public function filtered($id, Request $req){
