@@ -1,5 +1,5 @@
 <div class="modal fade" id="Edit-Permission-Role" tabindex="-1" aria-labelledby="Edit-Permission-Role" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header border-none outline-none d-flex justify-between">
           <h1 class="modal-title fs-3 " id="Label">Edit Permissions</h1>

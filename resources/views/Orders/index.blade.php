@@ -105,11 +105,14 @@
                                         </table>
                                     </div>
 
-                                    @if($order->status !== 'cancelled' && $order->status !== 'completed')
-                                        <button class="btn btn-danger" onclick="cancelOrder('{{ route('order.cancel', $order->id) }}')">
-                                            Cancel Order
-                                        </button>
+
+                                    @can('cancel order')
+                                    @if (!auth()->user()->sales->contains('id',$order->id))
+                                    <button class="btn btn-danger" onclick="cancelOrder('{{ route('order.cancel', $order->id) }}')">
+                                        Cancel Order
+                                    </button>
                                     @endif
+                                    @endcan
                                 </div>
                             </div>
                         </div>
