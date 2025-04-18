@@ -20,7 +20,11 @@ class ArtistController extends Controller
         $user = User::with('products.blog')->find($artistId);
         $totalBlogs = $user->products->filter(fn($product) => $product->blog !== null)->count();
 
-        $artist = User::with('sales.items')->find($artistId);
+        $artist = User::with(['sales' => function ($query) {
+            $query->whereMonth('created_at', now()->month)
+                  ->whereYear('created_at', now()->year);
+        }, 'sales.items'])->find($artistId);
+
         $totalSaleAmount = $artist->sales->flatMap(function ($sale) {
             return $sale->items;
         })->sum('price');
