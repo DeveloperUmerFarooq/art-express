@@ -23,8 +23,12 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'welcome');
 Auth::routes();
 Route::redirect('/home','/');
-Route::redirect('/login', '/')->name('login');
-Route::redirect('/register','/')->name('register');
+Route::get('/login', function(){
+    return redirect('/');
+})->name('login');
+Route::get('/register',function(){
+    return redirect('/');
+})->name('register');
 Route::middleware(['auth'])->group(function(){
 Route::view('/page','artist.portfolio.portfolio');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
