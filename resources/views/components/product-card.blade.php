@@ -1,4 +1,4 @@
-<div class="card mt-5 product-card position-relative">
+<div class="card mt-5 product-card position-relative shadow">
     <div class="ratio ratio-4x3 bg-light">
         <img loading="lazy" src="{{ asset($product->image->image_src) }}" class="w-100 h-100 image"
             alt="{{ $product->name }}" style="object-fit: contain">

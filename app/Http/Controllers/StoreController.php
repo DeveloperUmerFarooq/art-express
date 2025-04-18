@@ -20,15 +20,22 @@ class StoreController extends Controller
     public function products($id){
         $category=Categories::with('subCategories.products','products')->find($id);
         $subCategories=$category->subCategories;
+        $current=$category;
         $products=$category->products;
-        return view('products.products')->with(['category'=>$category,'subCategories'=>$subCategories,'products'=>$products]);
+        return view('products.products')->with(['category'=>$category,'subCategories'=>$subCategories,'products'=>$products,'current'=>$current]);
     }
     public function filtered($id, Request $req){
         $category=Categories::find($id);
         $subCategories=$category->subCategories;
+        $current=$category;
+        if($req->subcategory){
         $sub=SubCategories::find($req->subcategory);
         $products=$sub->products;
-        return view('products.products')->with(['category'=>$category,'subCategories'=>$subCategories,'products'=>$products,'subId'=>$sub->id]);
+        $current=$sub;
+        }else{
+            $products=$category->products;
+        }
+        return view('products.products')->with(['category'=>$category,'subCategories'=>$subCategories,'products'=>$products,'subId'=>$sub->id??null,'current'=>$current]);
     }
     public function search(Request $req) {
         $products = Products::where('name', 'LIKE', "%{$req->name}%")->get();

@@ -387,7 +387,9 @@ th,td{
 .pagination .page-item .page-link{
     color: var(--tertiary) !important;
 }
-
+.card:hover{
+    transform: translateY(-10px) !important;
+}
 @keyframes grow {
     from{
         transform: translateY(20px) scale(0);
