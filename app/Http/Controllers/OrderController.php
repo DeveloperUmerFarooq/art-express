@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    public function adminOrder(){
+    public function adminOrder()
+    {
         $orders = Order::with(['items', 'customer', 'artist'])
             ->latest()
             ->paginate(10);
@@ -28,7 +29,8 @@ class OrderController extends Controller
         return view('Orders.index', compact('orders'));
     }
 
-    public function sales(){
+    public function sales()
+    {
         $orders = Order::with(['items', 'customer', 'artist'])
             ->where('artist_id', auth()->id())
             ->latest()
@@ -54,26 +56,26 @@ class OrderController extends Controller
         } else {
             $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
             $charge = $stripe->charges->create([
-                'amount' => ($product->price + 250)*100,
+                'amount' => ($product->price + 250) * 100,
                 'currency' => 'pkr',
                 'source' => $req->stripeToken,
                 'description' => "payment for products"
             ]);
             if ($charge->status === 'succeeded') {
-                $this->placeOrder($req, $product,$charge->id);
-            }else{
+                $this->placeOrder($req, $product, $charge->id);
+            } else {
                 toastr()->error("Payment Process Failed!");
             }
         }
         return redirect()->back();
     }
-    function placeOrder($req, $product,$id=null)
+    function placeOrder($req, $product, $id = null)
     {
         DB::beginTransaction();
 
         try {
             $order = Order::create([
-                'payment_id'=>$id,
+                'payment_id' => $id,
                 'type' => 'standard',
                 'customer_id' => $req->customer_id,
                 'artist_id' => $req->artist_id,
@@ -106,18 +108,29 @@ class OrderController extends Controller
     {
         try {
             $order = Order::find($id);
-            if($order->payment_id){
+            if ($order->payment_id) {
                 $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
-                $amount=$order->items()->sum('total_price');
-                $totalAmount=($amount);
-                $refundAmount=intval($totalAmount*0.9);
-                $refundAmount-=100;
-                try{
-                    $refund=$stripe->refunds->create([
-                        'charge'=>$order->payment_id,
-                        'amount'=>$refundAmount*100,
+                $amount = $order->items()->sum('total_price');
+                $totalAmount = intval($amount);
+
+                // Check if the current user is an admin
+                if (auth()->user()->hasRole('admin')) {
+                    // Admin refund: no charges deducted
+                    $refundAmount = $totalAmount;
+                } else {
+                    // Non-admin refund: 10% deduction + 100 fixed charge
+                    $refundAmount = intval($totalAmount * 0.9);
+                    $refundAmount -= 100;
+                    if ($refundAmount < 0) {
+                        $refundAmount = 0; // Prevent negative refund
+                    }
+                }
+                try {
+                    $refund = $stripe->refunds->create([
+                        'charge' => $order->payment_id,
+                        'amount' => $refundAmount * 100,
                     ]);
-                }catch(\Exception $e){
+                } catch (\Exception $e) {
                     toastr()->error("Refund Failed!");
                     return redirect()->back();
                 }

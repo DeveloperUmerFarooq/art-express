@@ -108,7 +108,7 @@
                         @endif
                         <!-- Additional Info -->
                         <div class="mt-3">
-                            <p class="small text-muted mb-1"><i class="bi bi-shield-check"></i> Secure payment</p>
+                            <p class="small text-muted mb-1 bg-success d-inline rounded-pill p-2 "><i class="fa-solid fa-shield-halved text-light"></i> <span class="text-light">Secure payment</span></p>
                         </div>
                     </div>
                 </div>
