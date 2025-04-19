@@ -37,7 +37,7 @@
                     <input type="hidden" id="sub-category-id" name="id">
 
                     <div class="mb-3">
-                        <label for="Name" class="form-label">Name:</label>
+                        <label for="Name" class="form-label fw-semibold">Name:</label>
                         <input type="text" id="Name" name="Name" class="form-control shadow-sm" placeholder="Enter SubCategory Name" value="{{ old('name') }}" required>
                         @error('Name')
                             <small class="text-danger">{{ $message }}</small>

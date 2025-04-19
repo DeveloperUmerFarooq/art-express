@@ -11,28 +11,28 @@
             <form action="{{route('admin.management.artist.add')}}" class="d-flex flex-column gap-2" method="POST" id="Add-Artist">
                 @csrf
                 <div>
-                    <label for="name" class="form-label">Name:</label>
+                    <label for="name" class="form-label fw-semibold">Name:</label>
                     <input type="text" id="name" name="name" class="form-control shadow validate" placeholder="Name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                     @error('name')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
                 </div>
                 <div>
-                    <label for="email" class="form-label">Email:</label>
+                    <label for="email" class="form-label fw-semibold">Email:</label>
                     <input type="email" id="email" name="email" class="form-control shadow validate" placeholder="Email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                     @error('email')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
                 </div>
                 <div>
-                    <label for="Password" class="form-label">Password:</label>
+                    <label for="Password" class="form-label fw-semibold">Password:</label>
                     <input type="password" minlength="8" name="password" class="form-control password shadow validate" placeholder="Password" value="{{ old('password') }}" required autocomplete="current-password" autofocus>
                     @error('password')
                     <p class="text-danger mx-1">{{$message}}</p>
                     @enderror
                 </div>
                 <div>
-                    <label for="Confirm-Password" class="form-label">Confirm Password:</label>
+                    <label for="Confirm-Password" class="form-label fw-semibold">Confirm Password:</label>
                     <input type="password" id="confirm-password" minlength="8" name="password_confirmation" class="form-control password shadow validate" placeholder="Confirm Password" value="{{ old('password_confirmation') }}" required autocomplete="current-password" autofocus>
                     @error('password')
                     <p class="text-danger mx-1">{{$message}}</p>

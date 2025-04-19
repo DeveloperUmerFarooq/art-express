@@ -13,7 +13,7 @@
 
                     {{-- Permission Name --}}
                     <div class="mb-3">
-                        <label for="name" class="form-label">Permission Name</label>
+                        <label for="name" class="form-label fw-semibold">Permission Name</label>
                         <input
                             type="text"
                             name="name"
@@ -31,7 +31,7 @@
 
                     {{-- Assign Permission to Roles --}}
                     <div class="mb-3">
-                        <label class="form-label">Assign Permission to Roles</label>
+                        <label class="form-label fw-semibold">Assign Permission to Roles</label>
                         <div class="d-flex gap-3">
                             <div class="form-check">
                                 <input

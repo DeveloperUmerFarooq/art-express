@@ -16,7 +16,7 @@
 
                     {{-- Name Input --}}
                     <div class="mb-3">
-                        <label for="name" class="form-label">Permission Name</label>
+                        <label for="name" class="form-label fw-semibold">Permission Name</label>
                         <input
                             type="text"
                             id="name"

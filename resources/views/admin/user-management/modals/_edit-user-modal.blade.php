@@ -29,8 +29,7 @@
                     <input type="hidden" name="id" id="id">
 
                     <div>
-                        <label for="name" class="form-label fw-semibold">
-                            <i class="fas fa-user me-1 text-primary"></i> Name:
+                        <label for="name" class="form-label fw-semibold">Name:
                         </label>
                         <input type="text" id="Name" name="name"
                                class="form-control shadow-sm validate"
@@ -41,8 +40,7 @@
                     </div>
 
                     <div>
-                        <label for="email" class="form-label fw-semibold">
-                            <i class="fas fa-envelope me-1 text-primary"></i> Email:
+                        <label for="email" class="form-label fw-semibold">Email:
                         </label>
                         <input type="email" id="Email" name="email"
                                class="form-control shadow-sm validate"
@@ -53,8 +51,7 @@
                     </div>
 
                     <div>
-                        <label for="password" class="form-label fw-semibold">
-                            <i class="fas fa-lock me-1 text-primary"></i> Password:
+                        <label for="password" class="form-label fw-semibold">Password:
                         </label>
                         <input type="password" id="password" name="password" minlength="8"
                                class="form-control shadow-sm validate password"
@@ -67,7 +64,7 @@
                     <div class="form-check d-flex align-items-center gap-2">
                         <input class="form-check-input shadow-sm" type="checkbox" id="show-password">
                         <label for="password-show" class="form-check-label">
-                            <small><i class="fas fa-eye me-1"></i> Show Password</small>
+                            <small>Show Password</small>
                         </label>
                     </div>
 

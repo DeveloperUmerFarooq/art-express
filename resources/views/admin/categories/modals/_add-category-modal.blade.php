@@ -12,7 +12,7 @@
                 <form action="{{ route('admin.management.catergory.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="category-name" class="form-label">Category Name</label>
+                        <label for="category-name" class="form-label fw-semibold">Category Name</label>
                         <input type="text" name="name" id="category-name" class="form-control validate validate @error('name') is-invalid @enderror" placeholder="e.g. Abstract Art" value="{{ old('name') }}" required autofocus>
                         @error('name')
                             <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -20,7 +20,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="sub-category-count" class="form-label">Number of Subcategories <span class="text-muted">(Optional)</span></label>
+                        <label for="sub-category-count" class="form-label fw-semibold">Number of Subcategories <span class="text-muted">(Optional)</span></label>
                         <input type="number" name="count" id="sub-category-count" class="form-control validate validate shadow-sm" placeholder="e.g. 3" min="0">
                         <small class="text-muted">Leave blank if no subcategories are needed.</small>
                     </div>

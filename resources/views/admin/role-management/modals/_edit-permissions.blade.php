@@ -14,7 +14,7 @@
 
                     {{-- Permissions Section --}}
                     <div class="mb-3">
-                        <label class="form-label">Select Permissions to Assign:</label>
+                        <label class="form-label fw-semibold">Select Permissions to Assign:</label>
                         @if ($errors->any())
                             <p class="text-danger ms-1">Please check at least one permission</p>
                         @endif

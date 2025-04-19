@@ -12,7 +12,7 @@
                     @csrf
                     <div class="mb-3">
                         <input type="hidden" id="category-id" name="id">
-                        <label for="name" class="form-label">Name:</label>
+                        <label for="name" class="form-label fw-semibold">Name:</label>
                         <input type="text" id="name" name="name" class="form-control shadow validate"
                             placeholder="Name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                         @error('name')

@@ -14,7 +14,7 @@
 
                     {{-- Subcategory Name --}}
                     <div class="mb-3">
-                        <label for="subcategory-name" class="form-label">Subcategory Name</label>
+                        <label for="subcategory-name" class="form-label fw-semibold">Subcategory Name</label>
                         <input type="text" name="name" id="subcategory-name" class="form-control validate @error('name') is-invalid @enderror" placeholder="e.g. Watercolor Landscape" value="{{ old('name') }}" required autofocus>
                         @error('name')
                             <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -23,7 +23,7 @@
 
                     {{-- Category Selection --}}
                     <div class="mb-3">
-                        <label class="form-label">Select Category</label>
+                        <label class="form-label fw-semibold">Select Category</label>
                         <div class="row">
                             @forelse ($categories as $index => $category)
                                 <div class="col-md-4 col-sm-6 mb-2">

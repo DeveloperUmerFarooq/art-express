@@ -7,7 +7,7 @@ $(document).ready(function(){
             for(let i=0;i<count;i++){
                 container.append(`
                     <div class="mb-3">
-                        <label for="subcategory-${i + 1}" class="form-label">Subcategory Name ${i + 1}:</label>
+                        <label for="subcategory-${i + 1}" class="form-label fw-semibold">Subcategory Name ${i + 1}:</label>
                         <input type="text" name="subcategories[]" id="subcategory-${i + 1}" class="form-control shadow validate" placeholder="Subcategory Name ${i + 1}" required>
                     </div>
                 `);
