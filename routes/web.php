@@ -206,4 +206,5 @@ Route::get('/comments/{id}/time', function ($id) {
     $comment = Comment::find($id);
     return response()->json(['updated_at' => $comment->updated_at->diffForHumans()]);
 })->name('comment.time');
+Route::get('/blogs/{id}/comments/load', [BlogsController::class, 'loadMoreComments'])->name('blog.comments.load');
 });
