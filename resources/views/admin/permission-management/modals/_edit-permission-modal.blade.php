@@ -1,24 +1,46 @@
-<div class="modal fade" id="Edit-Permission" tabindex="-1" aria-labelledby="Edit-Permission" aria-hidden="true">
+<div class="modal fade" id="Edit-Permission" tabindex="-1" aria-labelledby="EditPermissionLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header border-none outline-none d-flex justify-between">
-          <h1 class="modal-title fs-3 " id="Label">Edit Permission</h1>
-          <button type="button" class="btn ms-auto" data-bs-dismiss="modal" aria-label="Close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#131010" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-        </div>
-        <div class="modal-body">
-            <form action="{{ route('admin.management.permission.update') }}" method="POST">
-                @csrf
-                <div class="mb-3">
+        <div class="modal-content shadow-lg border-0">
+            <div class="modal-header bg-success border-bottom">
+                <h5 class="modal-title text-light fw-semibold" id="EditPermissionLabel">
+                    <i class="fas fa-edit me-2 text-warning"></i> Edit Permission
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('admin.management.permission.update') }}" method="POST">
+                    @csrf
+
+                    {{-- Hidden Field for Permission ID --}}
                     <input type="hidden" id="permission-id" name="id">
-                    <label for="name" class="form-label">Name:</label>
-                    <input type="text" id="name" name="name" class="form-control shadow validate" placeholder="Name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                    @error('name')
-                    <p class="text-danger mx-1">{{$message}}</p>
-                    @enderror
-                </div>
-                <center><button type="submit" class="btn btn-primary">Update Permission</button></center>
-            </form>
+
+                    {{-- Name Input --}}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Permission Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            class="form-control validate @error('name') is-invalid @enderror"
+                            placeholder="Enter permission name"
+                            value="{{ old('name') }}"
+                            required
+                            autocomplete="name"
+                            autofocus
+                        >
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    {{-- Submit Button --}}
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-warning px-4">
+                            <i class="fas fa-save me-2"></i> Update Permission
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>

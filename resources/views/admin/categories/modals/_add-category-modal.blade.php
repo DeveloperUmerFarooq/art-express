@@ -1,40 +1,43 @@
-<div class="modal fade" id="Add-Category" tabindex="-1" aria-labelledby="Add-Category" aria-hidden="true">
+<div class="modal fade" id="Add-Category" tabindex="-1" aria-labelledby="AddCategoryLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header border-none outline-none d-flex justify-between">
-          <h1 class="modal-title fs-3 " id="Label">Add Category</h1>
-          <button type="button" class="btn ms-auto" data-bs-dismiss="modal" aria-label="Close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#131010" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-        </div>
-        <div class="modal-body">
-            <form action="{{route('admin.management.catergory.store')}}" method="POST">
-                @csrf
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name:</label>
-                    <input type="text" name="name" class="form-control shadow validate" placeholder="Name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                    @error('name')
-                    <p class="text-danger mx-1">{{$message}}</p>
-                    @enderror
-                    <div class="row align-items-center mb-3 mt-2">
-                        <div class="col-auto">
-                            <label for="sub-category-count" class="form-label">Subcategories Count:</label>
-                        </div>
-                        <div class="col-3 ms-auto">
-                            <input type="number" name="count" id="sub-category-count" class="form-control shadow" placeholder="Count" min="0">
-                        </div>
-                        <div class="col-12">
-                            <p class="text-info mt-1"><small>Leave blank if no subcategories are needed.</small></p>
-                        </div>
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title fw-semibold text-light" id="AddCategoryLabel">
+                    <i class="fas fa-folder-plus me-2 text-light"></i> Add Category
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form action="{{ route('admin.management.catergory.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="category-name" class="form-label">Category Name</label>
+                        <input type="text" name="name" id="category-name" class="form-control validate validate @error('name') is-invalid @enderror" placeholder="e.g. Abstract Art" value="{{ old('name') }}" required autofocus>
+                        @error('name')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
                     </div>
 
-                </div>
-                <div id="subcategory">
-                    @error('subcategories')
-                    <p class="text-danger mx-1">{{$message}}</p>
-                    @enderror
-                </div>
-                <center><button type="submit" class="btn btn-primary">Add Category</button></center>
-            </form>
+                    <div class="mb-3">
+                        <label for="sub-category-count" class="form-label">Number of Subcategories <span class="text-muted">(Optional)</span></label>
+                        <input type="number" name="count" id="sub-category-count" class="form-control validate validate shadow-sm" placeholder="e.g. 3" min="0">
+                        <small class="text-muted">Leave blank if no subcategories are needed.</small>
+                    </div>
+
+                    <div id="subcategory">
+                        @error('subcategories')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary px-4">
+                            <i class="fas fa-check-circle me-1"></i> Add Category
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>

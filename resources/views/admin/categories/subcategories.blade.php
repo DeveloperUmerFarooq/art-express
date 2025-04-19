@@ -24,9 +24,9 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content shadow">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="exampleModalLabel">
-                    <i class="fas fa-edit me-2"></i>Edit SubCategory
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title text-light" id="exampleModalLabel">
+                    <i class="fas fa-edit me-2 text-warning"></i>Edit SubCategory
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-warning text-light">
                             <i class="fas fa-save me-1"></i> Update SubCategory
                         </button>
                     </div>

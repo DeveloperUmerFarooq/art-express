@@ -1,40 +1,82 @@
-<div class="modal fade" id="Add-Permission" tabindex="-1" aria-labelledby="Add-Permission" aria-hidden="true">
+<div class="modal fade" id="Add-Permission" tabindex="-1" aria-labelledby="AddPermissionLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header border-none outline-none d-flex justify-between">
-          <h1 class="modal-title fs-3 " id="Label">Add Permission</h1>
-          <button type="button" class="btn ms-auto" data-bs-dismiss="modal" aria-label="Close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#131010" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-        </div>
-        <div class="modal-body">
-            <form action="{{ route('admin.management.permission.store') }}" method="POST">
-                @csrf
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name:</label>
-                    <input type="text" name="name" class="form-control shadow validate" placeholder="Name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                    @error('name')
-                    <p class="text-danger mx-1">{{$message}}</p>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Add Permission to Roles:</label>
-                    <div class="d-flex align-items-center justify-content-center gap-3">
-                        <label for="admin">
-                            <input type="checkbox" id="admin" name="roles[]" value="admin" class="form-check-input">
-                        <small>Admin</small></label>
-                        <label for="artist">
-                            <input type="checkbox" id="artist" value="artist" name="roles[]" class="form-check-input">
-                        <small>Artist</small></label>
-                        <label for="user">
-                            <input type="checkbox" id="user" value="user" name="roles[]" class="form-check-input">
-                        <small>User</small></label>
+        <div class="modal-content shadow-lg border-0">
+            <div class="modal-header bg-success border-bottom">
+                <h5 class="modal-title fw-semibold text-light" id="AddPermissionLabel">
+                    <i class="fas fa-shield-alt me-2 text-primary"></i> Add Permission
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('admin.management.permission.store') }}" method="POST">
+                    @csrf
+
+                    {{-- Permission Name --}}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Permission Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            class="form-control validate @error('name') is-invalid @enderror"
+                            placeholder="Enter permission name"
+                            value="{{ old('name') }}"
+                            required
+                            autocomplete="name"
+                            autofocus
+                        >
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                    @error('roles')
-                    <p class="text-danger mx-1">{{$message}}</p>
-                    @enderror
-                </div>
-                <center><button type="submit" class="btn btn-primary">Add Permission</button></center>
-            </form>
+
+                    {{-- Assign Permission to Roles --}}
+                    <div class="mb-3">
+                        <label class="form-label">Assign Permission to Roles</label>
+                        <div class="d-flex gap-3">
+                            <div class="form-check">
+                                <input
+                                    type="checkbox"
+                                    id="admin"
+                                    name="roles[]"
+                                    value="admin"
+                                    class="form-check-input"
+                                >
+                                <label for="admin" class="form-check-label">Admin</label>
+                            </div>
+                            <div class="form-check">
+                                <input
+                                    type="checkbox"
+                                    id="artist"
+                                    name="roles[]"
+                                    value="artist"
+                                    class="form-check-input"
+                                >
+                                <label for="artist" class="form-check-label">Artist</label>
+                            </div>
+                            <div class="form-check">
+                                <input
+                                    type="checkbox"
+                                    id="user"
+                                    name="roles[]"
+                                    value="user"
+                                    class="form-check-input"
+                                >
+                                <label for="user" class="form-check-label">User</label>
+                            </div>
+                        </div>
+                        @error('roles')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    {{-- Submit Button --}}
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary px-4">
+                            <i class="fas fa-plus-circle me-2"></i> Add Permission
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>

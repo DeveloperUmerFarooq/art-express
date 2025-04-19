@@ -1,33 +1,52 @@
-<div class="modal fade" id="Edit-Permission-Role" tabindex="-1" aria-labelledby="Edit-Permission-Role" aria-hidden="true">
+<div class="modal fade" id="Edit-Permission-Role" tabindex="-1" aria-labelledby="EditPermissionRoleLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header border-none outline-none d-flex justify-between">
-          <h1 class="modal-title fs-3 " id="Label">Edit Permissions</h1>
-          <button type="button" class="btn ms-auto" data-bs-dismiss="modal" aria-label="Close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#131010" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-        </div>
-        <div class="modal-body">
-            <form action="{{ route('admin.management.role.update') }}" method="POST">
-                @csrf
-                <input type="hidden" id="role-id" name="id">
-                <div class="mb-3">
-                    <label class="form-label">Edit Permission to Role:</label>
-                    @if ($errors->any())
-                        <p class="text-danger ms-1">Please check at least one permission</p>
-                    @endif
-                    <div class="row align-items-center justify-content-center">
-                        @foreach ($permissions as $permission)
-                        <label for="{{$permission->id}}" class="col-6 col-md-4">
-                            <input type="checkbox" id="{{$permission->id}}" name="permissions[]" value="{{$permission->name}}" class="form-check-input permission-check">
-                        <small>{{$permission->name}}</small></label>
-                        @endforeach
+        <div class="modal-content shadow-lg border-0">
+            <div class="modal-header bg-success border-bottom">
+                <h5 class="modal-title text-light fw-semibold" id="EditPermissionRoleLabel">
+                    <i class="fas fa-cogs me-2 text-warning"></i> Edit Permissions to Role
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('admin.management.role.update') }}" method="POST">
+                    @csrf
+                    <input type="hidden" id="role-id" name="id">
+
+                    {{-- Permissions Section --}}
+                    <div class="mb-3">
+                        <label class="form-label">Select Permissions to Assign:</label>
+                        @if ($errors->any())
+                            <p class="text-danger ms-1">Please check at least one permission</p>
+                        @endif
+                        <div class="row align-items-center justify-content-center">
+                            @foreach ($permissions as $permission)
+                                <div class="col-6 col-md-4 mb-2">
+                                    <div class="form-check">
+                                        <input type="checkbox"
+                                               id="permission-{{$permission->id}}"
+                                               name="permissions[]"
+                                               value="{{$permission->name}}"
+                                               class="form-check-input">
+                                        <label for="permission-{{$permission->id}}" class="form-check-label">
+                                            <small>{{$permission->name}}</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        @error('permissions')
+                            <p class="text-danger ms-1">{{$message}}</p>
+                        @enderror
                     </div>
-                    @error('roles')
-                    <p class="text-danger mx-1">{{$message}}</p>
-                    @enderror
-                </div>
-                <center><button type="submit" class="btn btn-primary">Edit Permissions</button></center>
-            </form>
+
+                    {{-- Submit Button --}}
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-warning px-4">
+                            <i class="fas fa-save me-2"></i> Update Permissions
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
