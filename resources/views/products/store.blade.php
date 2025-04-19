@@ -56,7 +56,6 @@
     @if (!auth()->user()->hasRole('user'))
         @include('artist.products.modals._Edit-Product')
     @endif
-    @include('products.modals._buy-modal')
 @endsection
 @push('scripts')
     @if (!auth()->user()->hasRole('user'))

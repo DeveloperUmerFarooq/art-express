@@ -32,7 +32,7 @@
             @endif
 
             @if ($product->blog)
-                <a href="{{ route($role . '.blogs', $product->id) }}"
+                <a href="{{ route($role . '.blogs', $product->blog->id) }}"
                    class="btn btn-outline-success btn-sm">
                    <i class="fas fa-book-open me-1"></i> Read Blog
                 </a>
@@ -52,10 +52,10 @@
     <!-- Delete Button -->
     @if (auth()->user()->can('manage store') ||
          (auth()->user()->products()->where('id', $product->id)->exists() && auth()->user()->can('delete art')))
-        <button class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2 rounded-pill"
+        <button class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2"
                 onclick="deleteProduct('{{ route($role . '.product.delete', $product->id) }}')"
                 title="Delete Product">
-            <i class="fas fa-times m-1"></i>
+            <i class="fas fa-times"></i>
         </button>
     @endif
 </div>
