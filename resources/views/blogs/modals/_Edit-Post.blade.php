@@ -13,11 +13,11 @@
                 @method('POST')
                 <div class="modal-body p-4">
                     <div class="mb-3">
-                        <label for="title" class="form-label">Post Title</label>
+                        <label for="title" class="form-label fw-semibold">Post Title</label>
                         <input type="text" class="form-control" id="editTitle" name="title" placeholder="Enter the post title" value="{{ $blog->title }}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="content" class="form-label">Post Content</label>
+                        <label for="content" class="form-label fw-semibold">Post Content</label>
                         <textarea class="form-control" id="editContent" name="content" rows="6" placeholder="Write your content here..." required>{{ $blog->content }}</textarea>
                     </div>
                 </div>

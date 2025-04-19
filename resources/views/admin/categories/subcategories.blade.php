@@ -28,7 +28,7 @@
                 <h5 class="modal-title text-light" id="exampleModalLabel">
                     <i class="fas fa-edit me-2 text-warning"></i>Edit SubCategory
                 </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div class="modal-body">

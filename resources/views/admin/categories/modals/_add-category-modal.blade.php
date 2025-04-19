@@ -5,7 +5,7 @@
                 <h5 class="modal-title fw-semibold text-light" id="AddCategoryLabel">
                     <i class="fas fa-folder-plus me-2 text-light"></i> Add Category
                 </h5>
-                <button type="button" class="btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div class="modal-body">

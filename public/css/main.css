@@ -104,9 +104,6 @@ p{
     transform-origin: right;
     transform: scaleX(1);
 }
-.custom-popup{
-    background-color: var(--primary) !important;
-}
 main{
     flex: 1 ;
 }

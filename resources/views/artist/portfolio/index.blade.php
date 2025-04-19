@@ -98,7 +98,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
-                <button type="button" class="btn btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
                 <img loading="lazy" id="modalImage" src="" alt="Preview" class="img-fluid" style="height: 25rem; object-fit:contain">

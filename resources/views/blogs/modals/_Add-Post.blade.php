@@ -13,7 +13,7 @@
                 <input type="hidden" name="id" id="productId">
                 <div class="modal-body p-4">
                     <div class="mb-3">
-                        <label for="content" class="form-label">Post Content</label>
+                        <label for="content" class="form-label fw-semibold">Post Content</label>
                         <textarea name="content" id="content" class="form-control" rows="6" placeholder="Write your post content here..." required>{{ old('content') }}</textarea>
                     </div>
                     @error('content')
