@@ -1,103 +1,195 @@
 @extends('layouts.artistLayout.layout')
 @section('title')
-Dashboard-Admin
+Artist Dashboard
 @endsection
 @section('page')
-<div class="container mt-5">
+<div class="container-fluid py-3">
+    <!-- Dashboard Header -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Artist Dashboard</h1>
+        <div class="d-none d-sm-inline-block">
+            <span class="badge bg-primary text-white p-2">
+                <i class="fas fa-calendar-alt mr-2"></i>
+                <?php echo date('F j, Y'); ?>
+            </span>
+        </div>
+    </div>
+
+    <!-- Cards Row -->
     <div class="row">
         <!-- Total Sales Card -->
-        <div class="col-md-3">
-            <div class="card dashboard-card text-white bg-success mb-3" style="height: max-content">
-                <div class="card-header">Total Sales</div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
-                    <h5 class="card-title text-center" style="color: var(--primary)">{{$totalSaleAmount}} Rs</h5>
-                    <p class="card-text">This month's sales</p>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Total Sales</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalSaleAmount}} Rs</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <span class="text-xs text-muted">This month's earnings</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Number of Likes Card -->
-        <div class="col-md-3">
-            <div class="card dashboard-card text-white bg-danger bg-gradient mb-3" style="height: max-content">
-                <div class="card-header">Likes</div>
+        <!-- Likes Card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">
-                    <h5 class="card-title text-center" style="color:var(--primary)">{{$totalLikes}}</h5>
-                    <p class="card-text">Total likes on platform</p>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                Total Likes</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalLikes}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-heart fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <span class="text-xs text-muted">On your artworks</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-
-        <!-- Number of Products Card -->
-        <div class="col-md-3">
-            <div class="card dashboard-card text-white bg-primary mb-3" style="height: max-content">
-                <div class="card-header">Products</div>
+        <!-- Products Card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
-                    <h5 class="card-title text-center" style="color:var(--primary)">{{$totalProducts}}</h5>
-                    <p class="card-text">Total number of artworks</p>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Artworks</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalProducts}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-palette fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <span class="text-xs text-muted">In your collection</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Number of Blog Posts Card -->
-        <div class="col-md-3">
-            <div class="card dashboard-card text-white bg-danger bg-gradient mb-3" style="height: max-content">
-                <div class="card-header">Blog Posts</div>
+        <!-- Blog Posts Card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
                 <div class="card-body">
-                    <h5 class="card-title text-center" style="color:var(--primary)">{{$totalBlogs}}</h5>
-                    <p class="card-text">Total blog posts published</p>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Blog Posts</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalBlogs}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-newspaper fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <span class="text-xs text-muted">Published articles</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sales Chart -->
+    <div class="row">
+        <div class="col-xl-12 col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Monthly Sales Performance</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center small">
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-primary"></i> Sales (Rs)
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<center>
-    <div class="container mt-5">
-        <canvas id="salesChart"></canvas>
-    </div>
-</center>
 
 @push('scripts')
 <script>
-    const salesCtx = document.getElementById('salesChart').getContext('2d');
-
-    const salesChart = new Chart(salesCtx, {
-        type: 'line',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            datasets: [{
-                label: 'Monthly Sales (Rs)',
-                data: @json($monthlySales),
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                fill: true,
-                tension: 0.4,
-                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
-                pointRadius: 5,
-                pointHoverBackgroundColor: 'rgba(0, 123, 255, 1)',
-                borderWidth: 2,
-            }]
+// Sales Chart
+const salesCtx = document.getElementById('salesChart').getContext('2d');
+const salesChart = new Chart(salesCtx, {
+    type: 'line',
+    data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [{
+            label: 'Monthly Sales (Rs)',
+            data: @json($monthlySales),
+            borderColor: 'rgba(78, 115, 223, 1)',
+            backgroundColor: 'rgba(78, 115, 223, 0.05)',
+            fill: true,
+            tension: 0.3,
+            pointBackgroundColor: 'rgba(78, 115, 223, 1)',
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: 'rgba(78, 115, 223, 1)',
+            pointHitRadius: 10,
+            pointBorderWidth: 2,
+            borderWidth: 2,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    display: true,
+                    color: "rgba(0, 0, 0, .05)",
+                    drawBorder: false
+                },
+                ticks: {
+                    padding: 10
+                }
+            },
+            x: {
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    padding: 10
+                }
+            }
         },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                }
+        plugins: {
+            legend: {
+                display: false
             },
-            plugins: {
-                tooltip: {
-                    backgroundColor: 'rgba(0,0,0,0.7)',
-                    titleColor: '#fff',
-                    bodyColor: '#fff',
-                    footerColor: '#fff',
-                    borderColor: 'rgba(0,0,0,0.3)',
-                    borderWidth: 1,
-                }
-            },
-        }
-    });
-    </script>
-
+            tooltip: {
+                backgroundColor: 'rgba(0,0,0,0.8)',
+                titleColor: '#fff',
+                bodyColor: '#fff',
+                footerColor: '#fff',
+                borderColor: 'rgba(0,0,0,0.2)',
+                borderWidth: 1,
+                padding: 15,
+                displayColors: false
+            }
+        },
+    }
+});
+</script>
 @endpush
+
 @endsection

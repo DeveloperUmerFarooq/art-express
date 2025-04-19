@@ -3,74 +3,185 @@
 Dashboard-Admin
 @endsection
 @section('page')
-<div class="container mt-5">
+<div class="container-fluid py-3">
+    <!-- Dashboard Header -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Dashboard Overview</h1>
+        <div class="d-none d-sm-inline-block">
+            <span class="badge bg-primary text-white p-2">
+                <i class="fas fa-calendar-alt mr-2"></i>
+                <?php echo date('F j, Y'); ?>
+            </span>
+        </div>
+    </div>
+
+    <!-- Cards Row -->
     <div class="row">
         <!-- Total Sales Card -->
-        <div class="col-md-3">
-            <div class="card dashboard-card text-white bg-success mb-3" style="height: max-content">
-                <div class="card-header">Total Sales</div>
+        <div class="col-xl-2 col-md-4 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
-                    <h5 class="card-title text-center" style="color: var(--primary)">{{$sales}} Rs</h5>
-                    <p class="card-text">This month's sales</p>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total Sales</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalSales}} Rs</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <span class="text-xs text-muted">This year</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Number of Artists Card -->
-        <div class="col-md-3">
-            <div class="card dashboard-card text-white bg-primary bg-gradient mb-3" style="height: max-content">
-                <div class="card-header">Artists</div>
+        <!-- Artists Card -->
+        <div class="col-xl-2 col-md-4 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
-                    <h5 class="card-title text-center" style="color:var(--primary)">{{$artists}}</h5>
-                    <p class="card-text">Total artists on the platform</p>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Artists</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$artists}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-palette fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <span class="text-xs text-muted">Total registered</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Number of Users Card -->
-        <div class="col-md-3">
-            <div class="card dashboard-card text-white bg-success bg-gradient mb-3" style="height: max-content">
-                <div class="card-header">Users</div>
+        <!-- Users Card -->
+        <div class="col-xl-2 col-md-4 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
                 <div class="card-body">
-                    <h5 class="card-title text-center" style="color:var(--primary);">{{$users}}</h5>
-                    <p class="card-text">Total Users on the platform</p>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Users</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$users}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <span class="text-xs text-muted">Active accounts</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Number of Products Card -->
-        <div class="col-md-3">
-            <div class="card dashboard-card text-white bg-primary mb-3" style="height: max-content">
-                <div class="card-header">Products</div>
+        <!-- Products Card -->
+        <div class="col-xl-2 col-md-4 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
                 <div class="card-body">
-                    <h5 class="card-title text-center" style="color:var(--primary)">{{$products}}</h5>
-                    <p class="card-text">Total number of artworks</p>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Artworks</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$products}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-image fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <span class="text-xs text-muted">Available pieces</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Number of Blog Posts Card -->
-        <div class="col-md-3">
-            <div class="card dashboard-card text-white bg-danger bg-gradient mb-3" style="height: max-content">
-                <div class="card-header">Blog Posts</div>
+        <!-- Blog Posts Card -->
+        <div class="col-xl-2 col-md-4 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">
-                    <h5 class="card-title text-center" style="color:var(--primary)">{{$blogs}}</h5>
-                    <p class="card-text">Total blog posts published</p>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                Blog Posts</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$blogs}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-newspaper fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <span class="text-xs text-muted">Published articles</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monthly Revenue Card -->
+        <div class="col-xl-2 col-md-4 mb-4">
+            <div class="card border-left-secondary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                                Revenue</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$monthlySales[date('n')-1]}} Rs</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-chart-line fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <span class="text-xs text-muted">Current month</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container mt-5">
+
+    <!-- Charts Row -->
     <div class="row">
         <!-- Sales Chart -->
-        <div class="col-md-6">
-            <canvas id="salesChart"></canvas>
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Monthly Sales Overview</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center small">
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-primary"></i> Sales
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Users Chart -->
-        <div class="col-md-6">
-            <canvas id="usersChart"></canvas>
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-success">User Acquisition</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="usersChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center small">
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-success"></i> New Users
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -86,26 +197,48 @@ const usersChart = new Chart(usersCtx, {
         datasets: [{
             label: 'New Users',
             data: @json($monthlyUsers),
-            backgroundColor: 'rgba(75, 192, 75, 0.6)',
-            borderColor: 'rgba(75, 192, 75, 1)',
+            backgroundColor: 'rgba(28, 200, 138, 0.6)',
+            borderColor: 'rgba(28, 200, 138, 1)',
             borderWidth: 1,
         }]
     },
     options: {
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
             y: {
                 beginAtZero: true,
+                grid: {
+                    display: true,
+                    color: "rgba(0, 0, 0, .05)",
+                    drawBorder: false
+                },
+                ticks: {
+                    padding: 10
+                }
+            },
+            x: {
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    padding: 10
+                }
             }
         },
         plugins: {
+            legend: {
+                display: false
+            },
             tooltip: {
-                backgroundColor: 'rgba(0,0,0,0.7)',
+                backgroundColor: 'rgba(0,0,0,0.8)',
                 titleColor: '#fff',
                 bodyColor: '#fff',
                 footerColor: '#fff',
-                borderColor: 'rgba(0,0,0,0.3)',
+                borderColor: 'rgba(0,0,0,0.2)',
                 borderWidth: 1,
+                padding: 15,
+                displayColors: false
             }
         },
     }
@@ -120,31 +253,56 @@ const salesChart = new Chart(salesCtx, {
         datasets: [{
             label: 'Monthly Sales (Rs)',
             data: @json($monthlySales),
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(78, 115, 223, 1)',
+            backgroundColor: 'rgba(78, 115, 223, 0.05)',
             fill: true,
-            tension: 0.4,
-            pointBackgroundColor: 'rgba(75, 192, 192, 1)',
-            pointRadius: 5,
-            pointHoverBackgroundColor: 'rgba(0, 123, 255, 1)',
+            tension: 0.3,
+            pointBackgroundColor: 'rgba(78, 115, 223, 1)',
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: 'rgba(78, 115, 223, 1)',
+            pointHitRadius: 10,
+            pointBorderWidth: 2,
             borderWidth: 2,
         }]
     },
     options: {
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
             y: {
                 beginAtZero: true,
+                grid: {
+                    display: true,
+                    color: "rgba(0, 0, 0, .05)",
+                    drawBorder: false
+                },
+                ticks: {
+                    padding: 10
+                }
+            },
+            x: {
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    padding: 10
+                }
             }
         },
         plugins: {
+            legend: {
+                display: false
+            },
             tooltip: {
-                backgroundColor: 'rgba(0,0,0,0.7)',
+                backgroundColor: 'rgba(0,0,0,0.8)',
                 titleColor: '#fff',
                 bodyColor: '#fff',
                 footerColor: '#fff',
-                borderColor: 'rgba(0,0,0,0.3)',
+                borderColor: 'rgba(0,0,0,0.2)',
                 borderWidth: 1,
+                padding: 15,
+                displayColors: false
             }
         },
     }

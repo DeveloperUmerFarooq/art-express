@@ -22,8 +22,9 @@ class AdminController extends Controller
         $users=User::Role('user')->count();
         $artists=User::Role('artist')->count();
         $sales=Order::whereMonth('created_at',now()->month)->whereYear('created_at',now()->year)->with('items')->get()->flatMap->items->sum('total_price');
+        $totalSales=Order::whereYear('created_at',now()->year)->with('items')->get()->flatMap->items->sum('total_price');
         $products=Products::count();
         $blogs=Blogs::count();
-        return view('admin.dashboard',compact('sales','users','artists','products','blogs','monthlyUsers','monthlySales'));
+        return view('admin.dashboard',compact('sales','totalSales','users','artists','products','blogs','monthlyUsers','monthlySales'));
     }
 }
