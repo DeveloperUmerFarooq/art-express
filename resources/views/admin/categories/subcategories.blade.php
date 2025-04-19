@@ -1,46 +1,64 @@
 @extends('layouts.adminLayout.layout')
+
 @section('page')
 <div class="container mt-5">
-    <div class="d-flex flex-column border border-1 border-dark-subtle p-3 rounded-2">
-        <div class="d-flex align-items-center">
-            <h5 class="mt-2">Manage SubCategories</h5>
-            <button class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#Add-SubCategory">Add SubCategory</button>
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-success text-white d-flex align-items-center justify-content-between">
+            <h5 class="mb-0">
+                <i class="fas fa-sitemap me-2"></i>Manage SubCategories
+            </h5>
+            <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#Add-SubCategory">
+                <i class="fas fa-plus-circle me-1"></i> Add SubCategory
+            </button>
         </div>
-        <hr>
-        <div class="table-responsive overflow-hidden">
-            {{ $dataTable->table() }}
+
+        <div class="card-body">
+            <div class="table-responsive">
+                {{ $dataTable->table(['class' => 'table table-bordered table-hover table-striped align-middle']) }}
+            </div>
         </div>
     </div>
 </div>
 
-  <!--Edit Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Edit SubCategory Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit SubCategory</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content shadow">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <i class="fas fa-edit me-2"></i>Edit SubCategory
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form action="{{ route('admin.management.catergory.sub.update') }}" method="POST">
+                    @csrf
+                    <input type="hidden" id="sub-category-id" name="id">
+
+                    <div class="mb-3">
+                        <label for="Name" class="form-label">Name:</label>
+                        <input type="text" id="Name" name="Name" class="form-control shadow-sm" placeholder="Enter SubCategory Name" value="{{ old('name') }}" required>
+                        @error('Name')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save me-1"></i> Update SubCategory
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="modal-body">
-          <form action="{{route('admin.management.catergory.sub.update')}}" method="POST">
-            @csrf
-            <input type="hidden" id="sub-category-id" name="id">
-            <label for="Name">Name:</label>
-            <input type="text" id="Name" name="Name" class="form-control shadow validate" placeholder="Name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-            @error('Name')
-                <p class="ms-1 text-danger">{{$message}}</p>
-            @enderror
-            <center>
-                <button type="submit" class="btn btn-primary mt-3">Update SubCategory</button>
-            </center>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+
 @include('admin.categories.modals._add-subcategory-modal')
 @endsection
+
 @push('scripts')
     {{ $dataTable->scripts() }}
-    <script src="{{asset('js/category.js')}}"></script>
+    <script src="{{ asset('js/category.js') }}"></script>
 @endpush
