@@ -1,45 +1,61 @@
-<div class="card mt-5 product-card position-relative shadow">
-    <div class="ratio ratio-4x3 bg-light">
-        <img loading="lazy" src="{{ asset($product->image->image_src) }}" class="w-100 h-100 image"
-            alt="{{ $product->name }}" style="object-fit: contain">
+<div class="card mt-5 product-card position-relative shadow rounded-4 border-0 overflow-hidden">
+    <!-- Image Section -->
+    <div class="ratio ratio-4x3 bg-light rounded-top overflow-hidden">
+        <img loading="lazy" src="{{ asset($product->image->image_src) }}"
+             class="w-100 h-100 image" alt="{{ $product->name }}"
+             style="object-fit: contain;">
     </div>
-    <div class="card-body">
-        <h5 class="card-title">{{ $product->name }}</h5>
-        <p class="card-price text-success">Price: {{ $product->price }} Rs</p>
-        <div class="d-flex justify-content-center gap-1">
+
+    <!-- Card Body -->
+    <div class="card-body text-center">
+        <h5 class="card-title fw-bold text-dark">{{ $product->name }}</h5>
+        <span class="badge bg-success fs-6 mb-3">Price: {{ $product->price }} Rs</span>
+
+        <!-- Action Buttons -->
+        <div class="d-flex flex-wrap justify-content-center gap-2">
             @if (request()->is('artist/products'))
-            @can('edit art')
-            <button class="btn btn-primary btn-sm py-1" data-bs-toggle="modal"
-                data-bs-target="#editProductModal"
-                onclick="edit({{ $product }},'{{ asset($product->image->image_src) }}')">
-                Edit Product
-            </button>
-            @endcan
+                @can('edit art')
+                    <button class="btn btn-primary btn-sm"
+                            data-bs-toggle="modal"
+                            data-bs-target="#editProductModal"
+                            onclick="edit({{ $product }}, '{{ asset($product->image->image_src) }}')">
+                        <i class="fas fa-edit me-1"></i> Edit Product
+                    </button>
+                @endcan
             @else
-            @can('view art')
-            <a href="{{ route($role . '.artwork', $product->id) }}" class="btn btn-primary">View Artwork</a>
-            @endcan
+                @can('view art')
+                    <a href="{{ route($role . '.artwork', $product->id) }}"
+                       class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-eye me-1"></i> View Artwork
+                    </a>
+                @endcan
             @endif
+
             @if ($product->blog)
-                <a href="{{ route($role . '.blogs', $product->id) }}" class="btn btn-outline-success">Read Blog</a>
+                <a href="{{ route($role . '.blogs', $product->id) }}"
+                   class="btn btn-outline-success btn-sm">
+                   <i class="fas fa-book-open me-1"></i> Read Blog
+                </a>
             @else
                 @if (request()->is('artist/products'))
-                    <button class="btn btn-outline-success btn-sm py-1" onclick="addPost({{ $product->id }})"
-                        data-bs-toggle="modal" data-bs-target="#addPostModal">
-                        Add Blog
+                    <button class="btn btn-outline-success btn-sm"
+                            onclick="addPost({{ $product->id }})"
+                            data-bs-toggle="modal"
+                            data-bs-target="#addPostModal">
+                        <i class="fas fa-plus me-1"></i> Add Blog
                     </button>
                 @endif
             @endif
-            @if (auth()->user()->can('manage store') || (auth()->user()->products()->where('id', $product->id)->exists() && auth()->user()->can('delete art')))
-                <button class="btn btn-danger position-absolute top-0 end-0 m-1"
-                    onclick="deleteProduct('{{ route($role . '.product.delete', $product->id) }}')">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-x">
-                        <path d="M18 6 6 18" />
-                        <path d="m6 6 12 12" />
-                    </svg></button>
-            @endif
         </div>
     </div>
+
+    <!-- Delete Button -->
+    @if (auth()->user()->can('manage store') ||
+         (auth()->user()->products()->where('id', $product->id)->exists() && auth()->user()->can('delete art')))
+        <button class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2 rounded-circle"
+                onclick="deleteProduct('{{ route($role . '.product.delete', $product->id) }}')"
+                title="Delete Product">
+            <i class="fas fa-times"></i>
+        </button>
+    @endif
 </div>

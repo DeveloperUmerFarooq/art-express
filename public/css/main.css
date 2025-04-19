@@ -278,7 +278,6 @@ th,td{
     vertical-align: middle;
 }
 .product-card,.card:not(.dashboard-card){
-    background-color: transparent !important;
     overflow: hidden;
     cursor: pointer;
     transition: all .3s ease-in;
