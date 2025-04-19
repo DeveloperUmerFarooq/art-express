@@ -386,7 +386,7 @@ th,td{
 .pagination .page-item .page-link{
     color: var(--tertiary) !important;
 }
-.card:not(.features-card):hover{
+.card:not(.features-card,.profile-card):hover{
     transform: translateY(-10px) !important;
     transition: .3s ease-in;
 }
