@@ -1,4 +1,4 @@
-<div class="card mt-5 product-card position-relative shadow rounded-4 border-0 overflow-hidden">
+<div class="card mt-5 product-card position-relative shadow rounded-2 border-0 overflow-hidden">
     <!-- Image Section -->
     <div class="ratio ratio-4x3 bg-light rounded-top overflow-hidden">
         <img loading="lazy" src="{{ asset($product->image->image_src) }}"
@@ -52,10 +52,10 @@
     <!-- Delete Button -->
     @if (auth()->user()->can('manage store') ||
          (auth()->user()->products()->where('id', $product->id)->exists() && auth()->user()->can('delete art')))
-        <button class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2 rounded-circle"
+        <button class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2 rounded-pill"
                 onclick="deleteProduct('{{ route($role . '.product.delete', $product->id) }}')"
                 title="Delete Product">
-            <i class="fas fa-times"></i>
+            <i class="fas fa-times m-1"></i>
         </button>
     @endif
 </div>

@@ -39,7 +39,7 @@
 
                 <!-- Social Links -->
                 @if ($profile->facebook_link || $profile->instagram_link || $profile->linkedin_link || $profile->twitter_link)
-                <div class="d-flex justify-content-center mt-3">
+                <div class="d-flex justify-content-center align-items-center mt-3">
                     @if($profile->facebook_link)
                     <a href="{{$profile->facebook_link}}" target="_blank" rel="noopener noreferrer" class="mx-2 text-primary">
                         <i class="fab fa-facebook fa-2x"></i>
@@ -66,7 +66,7 @@
 
                     @can('manage profile')
                     <a href="#" data-bs-toggle="modal" data-bs-target="#Edit-Social-Links" class="mx-2 text-secondary">
-                        <i class="fas fa-edit fa-lg" title="Edit Social Links"></i>
+                        <i class="fas fa-edit fa-lg fs-4" title="Edit Social Links"></i>
                     </a>
                     @endcan
                 </div>
