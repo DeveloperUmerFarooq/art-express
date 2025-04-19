@@ -153,12 +153,13 @@
                 }
             });
         });
+
+        // Comment channel broadcast
         var commentChannel = pusher.subscribe('comment.' + "{{ $blog->id }}")
         commentChannel.bind('comment.post.' + blogId, function(data) {
             let commentsContainer = $('#comments');
             let noCommentsMsg = commentsContainer.find('.text-center.text-muted');
 
-            // Remove "no comments" message if it exists
             if (noCommentsMsg.length) {
                 noCommentsMsg.remove();
             }
