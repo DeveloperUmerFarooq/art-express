@@ -5,7 +5,7 @@
             <h5 class="modal-title text-light fw-semibold" id="Label">
                 <i class="fas fa-paint-brush me-2 text-primary"></i> Add Artist
             </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <form action="{{route('admin.management.artist.add')}}" class="d-flex flex-column gap-2" method="POST" id="Add-Artist">

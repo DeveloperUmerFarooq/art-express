@@ -5,7 +5,7 @@
                 <h5 class="modal-title fw-semibold text-light" id="AddPermissionLabel">
                     <i class="fas fa-shield-alt me-2 text-primary"></i> Add Permission
                 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form action="{{ route('admin.management.permission.store') }}" method="POST">
