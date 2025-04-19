@@ -19,7 +19,7 @@
                          onclick="document.getElementById('fileInput').click();">
                         <i class="fas fa-pencil text-white"></i>
                         <form action="{{route($role.'.avatar')}}" method="POST" class="d-none" id="avatar-form" enctype="multipart/form-data">
-                            @csrf
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}" disabled>
                             <input type="hidden" name="id" value="{{auth()->user()->id}}">
                             <input type="file" name="avatar" id="fileInput" accept="images/*" onchange="document.getElementById('avatar-form').submit();">
                         </form>
@@ -122,8 +122,8 @@
     <div class="card profile-card bg-transparent shadow-sm border-0 rounded-lg">
         <div class="card-body">
             <form action="{{route($role.'.details.update')}}" method="POST" id="profile">
-                @csrf
-                <input type="hidden" name="id" value="{{auth()->user()->id}}" disabled>
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="id" value="{{auth()->user()->id}}">
 
                 <div class="row g-3 mb-3">
                     <div class="col-md-6">
@@ -231,11 +231,11 @@
                     </div>
                 </div>
 
-                <div class="text-center d-none" id="form-actions">
-                    <button type="submit" class="btn btn-primary px-4">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary px-4 d-none" id="submit-profile">
                         <i class="fas fa-save me-2"></i>Save Changes
                     </button>
-                    <button type="button" id="cancel" class="btn btn-outline-secondary px-4 ms-2">
+                    <button type="button" id="cancel" class="btn btn-outline-danger d-none px-4 ms-2">
                         <i class="fas fa-times me-2"></i>Cancel
                     </button>
                 </div>
@@ -257,41 +257,5 @@
 
 
 @push('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const editBtn = document.getElementById('edit-details');
-        const cancelBtn = document.getElementById('cancel');
-        const form = document.getElementById('profile');
-        const formActions = document.getElementById('form-actions');
-        const inputs = form.querySelectorAll('input, textarea, select');
-
-        if (editBtn) {
-            editBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-
-                inputs.forEach(input => {
-                    input.disabled = false;
-                });
-
-                formActions.classList.remove('d-none');
-                formActions.classList.add('d-block');
-
-                formActions.scrollIntoView({ behavior: 'smooth' });
-            });
-        }
-
-        if (cancelBtn) {
-            cancelBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-
-                inputs.forEach(input => {
-                    input.disabled = true;
-                });
-
-                formActions.classList.remove('d-block');
-                formActions.classList.add('d-none');
-            });
-        }
-    });
-</script>
+<script src="{{asset('js/profile.js')}}"></script>
 @endpush

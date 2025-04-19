@@ -1,5 +1,5 @@
 <div class="modal fade" id="Add-SubCategory" tabindex="-1" aria-labelledby="AddSubCategoryLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content border-0 shadow-lg">
             <div class="modal-header bg-success">
                 <h5 class="modal-title fw-semibold text-light" id="AddSubCategoryLabel">

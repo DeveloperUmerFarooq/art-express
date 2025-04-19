@@ -8,7 +8,7 @@
                     <h5 class="modal-title fw-bold text-light" id="productModalLabel">
                         <i class="fas fa-plus-circle me-2 text-primary"></i> Add New Product
                     </h5>
-                    <button type="button" class="btn-close btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body px-4 py-3">
                     <!-- Product Title -->

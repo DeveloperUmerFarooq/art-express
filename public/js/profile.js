@@ -1,15 +1,13 @@
 $(document).ready(function(){
-    $('#profile-submit').hide();
-    $('#cancel').hide();
     $("#edit-details").on('click',function(e){
         e.preventDefault();
         $(this).css('pointer-events','none')
-        $('#profile input,textarea').each(function(){
+        $('#profile input:not(input[type="hidden"]),textarea').each(function(){
 
             $(this).prop('disabled',!$(this).prop('disabled'));
-            $('#profile-submit').show();
-            $('#cancel').show();
         })
+        $('#submit-profile').removeClass('d-none');
+        $('#cancel').removeClass('d-none');
     })
     $('.mark-null').on('change', function () {
         var target = $($(this).data('target'));
@@ -31,11 +29,11 @@ $(document).ready(function(){
     $('#cancel').on('click',function(e){
         e.preventDefault()
         $('#edit-details').css('pointer-events','auto')
-        $('#profile input,textarea').each(function(){
+        $('#profile input:not(input[type="hidden"]),textarea').each(function(){
             $(this).prop('disabled',!$(this).prop('disabled'));
             $(this).val(this.defaultValue);
         })
-        $('#profile-submit').hide();
-        $('#cancel').hide();
+        $('#submit-profile').addClass('d-none');
+        $('#cancel').addClass('d-none');
     })
 })
