@@ -7,7 +7,7 @@
             <h5 class="mb-0">
                 <i class="fas fa-users-cog me-2 text-light"></i> Manage Users
             </h5>
-            <button class="btn btn-light ms-auto" data-bs-toggle="modal" data-bs-target="#Add-User">
+            <button class="btn btn-light btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#Add-User">
                 <i class="fas fa-user-plus me-1"></i> Add User
             </button>
         </div>

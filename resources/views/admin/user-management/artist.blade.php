@@ -7,7 +7,7 @@
             <h5 class="mb-0">
                 <i class="fas fa-palette me-2 text-light"></i> Manage Artists
             </h5>
-            <button class="btn btn-light ms-auto" data-bs-toggle="modal" data-bs-target="#Add-Artist">
+            <button class="btn btn-light btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#Add-Artist">
                 <i class="fas fa-user-plus me-1"></i> Add Artist
             </button>
         </div>
