@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Yrsa:ital,wght@0,300..700;1,300..700&display=swap');
 :root{
     --primary:#F4EBD9;
+    --primary-light:#f8f9fa;
     --secondary:#023222;
     --tertiary:#131010;
 }
@@ -93,7 +94,7 @@ p{
     content: "";
     height: 2px;
     width: 83%;
-    background-color: var(--primary);
+    background-color:#f8f9fa;
     position: absolute;
     top: 80%;
     transform: scaleX(0);
@@ -118,10 +119,10 @@ main{
     background-color: var(--secondary) !important;
 }
 .navbar a,.navbar-toggler-icon{
-    color: var(--primary) !important;
+    color: var(--primary-light) !important;
 }
 .navbar a:hover{
-    color: var(--primary);
+    color: var(--primary) !important;
 }
 .navbar .dropdown-menu,#logout:hover{
     background-color: transparent;
