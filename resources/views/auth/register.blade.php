@@ -1,69 +1,96 @@
 <div class="modal fade" id="Sign-Up" tabindex="-1" aria-labelledby="Sign-Up" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header border-none outline-none d-flex justify-between">
-          <h1 class="modal-title fs-3 " id="Label">Register</h1>
-          <button type="button" class="btn ms-auto" data-bs-dismiss="modal" aria-label="Close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#131010" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-        </div>
-        <div class="modal-body">
-            <form action="{{ route('register') }}" id="register" class="d-flex flex-column gap-2" method="POST">
-                @csrf
-                <div>
-                    <label for="name" class="form-label">Name:</label>
-                    <input type="text" name="name" class="form-control shadow validate" placeholder="Name" value="{{ old('name') }}" required autocomplete="email" autofocus>
-                    @error('name')
-                    <p class="text-danger mx-1">{{$message}}</p>
-                    @enderror
-                </div>
-                <div>
-                    <label for="email" class="form-label">Email:</label>
-                    <input type="email" name="email" class="form-control shadow validate" placeholder="Email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                    @error('email')
-                    <p class="text-danger mx-1">{{$message}}</p>
-                    @enderror
-                </div>
-                <div>
-                    <label for="Password" class="form-label">Password:</label>
-                    <input type="password" minlength="8" name="password" id="password-field" class="form-control password shadow validate" placeholder="Password" value="{{ old('password') }}" required autocomplete="current-password" autofocus>
-                    @error('password')
-                    <p class="text-danger mx-1">{{$message}}</p>
-                    @enderror
-                </div>
-                <div>
-                    <label for="Confirm-Password" class="form-label">Confirm Password:</label>
-                    <input type="password" id="confirm-password-field" minlength="8" name="password_confirmation" class="form-control password shadow validate" placeholder="Confirm Password" value="{{ old('password_confirmation') }}" required autocomplete="current-password" autofocus>
-                    @error('password')
-                    <p class="text-danger mx-1">{{$message}}</p>
-                    @enderror
-                </div>
-                <div class="d-flex gap-1">
-                    <input class="form-check-input shadow" type="checkbox" id="password-show">
-                    <label for="password-show"><small> Show Password</small></label>
-                </div>
-                <div class="d-flex gap-3 align-items-center">
-                    <label for="role">Choose Role:</label>
-                    <div class="col-md-6">
-                        <div class="d-flex">
-                            <input class="form-radio-input" type="radio" name="role" id="role_admin" value="artist" required>
-                            <label class="form-check-input-label" for="role_admin">
-                                {{ __('Artist') }}
-                            </label>
-                        </div>
-                        <div class="d-flex">
-                            <input class="form-radio-input" type="radio" name="role" id="role_user" value="user" required>
-                            <label class="form-check-input-label" for="role_user">
-                                {{ __('User') }}
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <p>By Clicking on register, you agrees to our <a href="/">privacy policies!</a> </p>
-                <center><button type="submit" class="btn-primary btn">Register</button></center>
-            </form>
-        </div>
+  <div class="modal-dialog">
+    <div class="modal-content shadow-lg rounded-3">
+      <div class="modal-header bg-success border-0">
+        <h1 class="modal-title fs-4 fw-semibold text-light" id="Label">
+          <i class="fas fa-user-plus me-2"></i> Register
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <form action="{{ route('register') }}" id="register" method="POST" class="d-flex flex-column gap-3">
+          @csrf
+
+          <div>
+            <label for="name" class="form-label fw-semibold">Name:
+            </label>
+            <input type="text" name="name" class="form-control shadow-sm" placeholder="Enter your name"
+              value="{{ old('name') }}" required autocomplete="email" autofocus>
+            @error('name')
+            <p class="text-danger small mt-1">{{ $message }}</p>
+            @enderror
+          </div>
+
+          <div>
+            <label for="email" class="form-label fw-semibold">Email:
+            </label>
+            <input type="email" name="email" class="form-control shadow-sm" placeholder="Enter your email"
+              value="{{ old('email') }}" required autocomplete="email" autofocus>
+            @error('email')
+            <p class="text-danger small mt-1">{{ $message }}</p>
+            @enderror
+          </div>
+
+          <div>
+            <label for="Password" class="form-label fw-semibold">Password:
+            </label>
+            <input type="password" minlength="8" name="password" id="password-field"
+              class="form-control shadow-sm" placeholder="Enter password" value="{{ old('password') }}" required
+              autocomplete="current-password" autofocus>
+            @error('password')
+            <p class="text-danger small mt-1">{{ $message }}</p>
+            @enderror
+          </div>
+
+          <div>
+            <label for="Confirm-Password" class="form-label fw-semibold">Confirm Password:
+            </label>
+            <input type="password" id="confirm-password-field" minlength="8" name="password_confirmation"
+              class="form-control shadow-sm" placeholder="Confirm password"
+              value="{{ old('password_confirmation') }}" required autocomplete="current-password" autofocus>
+            @error('password')
+            <p class="text-danger small mt-1">{{ $message }}</p>
+            @enderror
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="password-show">
+            <label class="form-check-label small" for="password-show">Show Password
+            </label>
+          </div>
+
+          <div class="mt-2">
+            <label class="form-label fw-semibold d-block">
+              <i class="fas fa-user-tag me-1 text-secondary"></i> Choose Role:
+            </label>
+            <div class="d-flex gap-4">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="role" id="role_admin" value="artist" required>
+                <label class="form-check-label" for="role_admin">Artist</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="role" id="role_user" value="user" required>
+                <label class="form-check-label" for="role_user">User</label>
+              </div>
+            </div>
+          </div>
+
+          <p class="small mt-2">
+            By clicking on Register, you agree to our <a href="/" class="text-decoration-underline">privacy policies</a>.
+          </p>
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary px-4 py-2">
+              <i class="fas fa-user-check me-2"></i> Register
+            </button>
+          </div>
+        </form>
       </div>
     </div>
+  </div>
 </div>
+
 
 @push('scripts')
 <script>
