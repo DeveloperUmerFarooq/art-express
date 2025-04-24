@@ -93,7 +93,7 @@ p{
 .nav-link::before{
     content: "";
     height: 2px;
-    width: 83%;
+    width: 90%;
     background-color:#f8f9fa;
     position: absolute;
     top: 80%;

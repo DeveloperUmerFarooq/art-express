@@ -107,7 +107,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#Change-Password">
-                                    <i class="fas fa-key me-1"></i>Change Password
+                                    <i class="fas fa-key me-1"></i>Update Password
                                 </a>
                             </li>
                             @endcan
