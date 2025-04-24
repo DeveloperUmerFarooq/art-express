@@ -2,7 +2,8 @@
 
 @section('page')
 <div class="container my-4">
-    <h2 class="mb-4 text-center fw-bold">🎨 Top Performing Artists</h2>
+    <h2 class="mb-4 text-center fw-bold"><i class="fas fa-palette me-1 text-primary"></i>
+        Top Performing Artists</h2>
 
     @if($topArtists->count() > 0)
         @foreach($topArtists as $artist)
@@ -44,7 +45,7 @@
         <div class="card shadow-sm mt-4">
             <div class="card-body text-center">
                 <h5 class="card-title">No Rankings Produced</h5>
-                <p class="card-text">It looks like all artists have sales below 10!</p>
+                <p class="card-text">It looks like all artists have products count below 10!</p>
             </div>
         </div>
     @endif
