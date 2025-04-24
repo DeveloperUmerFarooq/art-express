@@ -220,12 +220,12 @@
 
         //like
         function like() {
-            $('#like-btn').toggleClass('btn-outline-success');
-            $('#like-btn').toggleClass('btn-success');
             $.ajax({
                 type: "GET",
                 url: "{{ route($role . '.blog.like', $blog->id) }}",
                 success: function(response) {
+                    $('#like-btn').toggleClass('btn-outline-success');
+                    $('#like-btn').toggleClass('btn-success');
                     document.getElementById('like-count').innerText = response.likes;
                 }
             });
@@ -234,7 +234,6 @@
         //comment
         function comment() {
             if ($('textarea[name="comment"]').val() !== "" || $('textarea[name="comment"]').val() !== null) {
-                $("#loader").removeClass("d-none");
                 $.ajax({
                     type: "POST",
                     url: "{{ route($role . '.blog.comment', $blog->id) }}",
@@ -244,7 +243,6 @@
                     },
                     success: function(response) {
                         $("#comment").emojioneArea()[0].emojioneArea.setText("");
-                        $("#loader").addClass("d-none");
                     }
                 });
             }

@@ -94,10 +94,8 @@ class BlogsController extends Controller
             'user_id' => auth()->user()->id,
             'content' => $request->comment,
         ]);
-        dispatch(new JobsPostComment($comment, auth()->user(), $post->comments()->count(), $comment->updated_at->diffForHumans(), $post->id))->afterResponse();
-        return response()->json(['message' => "Comment Deleted"]);
+        JobsPostComment::dispatch($comment, auth()->user(), $post->comments()->count(), $comment->updated_at->diffForHumans(), $post->id)->delay(now()->addSeconds(1));
     }
-
     public function like($id)
     {
         $post = Blogs::findOrFail($id);
@@ -111,7 +109,7 @@ class BlogsController extends Controller
                 'user_id' => $user->id,
             ]);
         }
-        dispatch(new Like($post->likes()->count(), $post->id))->afterResponse();
+        Like::dispatch($post->likes()->count(), $post->id)->delay(now()->addSeconds(1));
         return response()->json(['likes' => $post->likes()->count()]);
     }
 
