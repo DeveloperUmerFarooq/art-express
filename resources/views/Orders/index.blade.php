@@ -98,9 +98,6 @@
                                                     <i class="fas fa-envelope text-primary mr-2"></i>
                                                     <strong>Email:</strong> {{ $order->artist->email }}
                                                 </p>
-                                                <button class="btn btn-sm btn-outline-primary">
-                                                    <i class="fas fa-comment-dots mr-1"></i>Message Artist
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
