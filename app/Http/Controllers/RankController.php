@@ -20,7 +20,7 @@ class RankController extends Controller
                 return $user;
             })
             ->filter(function ($user) {
-                return $user->products_count > 10 && $user->ratio > 0;
+                return $user->products_count > 1 && $user->ratio > 0;
             })
             ->sortByDesc('ratio')
             ->take(10)

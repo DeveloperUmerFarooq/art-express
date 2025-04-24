@@ -32,12 +32,11 @@
                         </div>
                     </div>
 
-                    <a href="/messenger/{{ $artist->id }}"
-                       class="btn btn-outline-primary rounded-circle d-flex align-items-center justify-content-center"
-                       target="_blank"
-                       title="Message {{ $artist->name }}">
-                        <i class="fas fa-comments"></i>
-                    </a>
+                    <abbr title="Start a chatt">
+                        <a href="/messenger/{{$artist->id}}" target="_blank">
+                            <i class="fa-solid fa-message fs-2"></i>
+                        </a>
+                    </abbr>
                 </div>
             </a>
         @endforeach
