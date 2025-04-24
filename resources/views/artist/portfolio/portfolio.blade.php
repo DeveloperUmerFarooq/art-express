@@ -9,8 +9,8 @@
                 <div class="d-flex gap-3 align-items-center text-white">
                     <img loading="lazy" src="{{ asset('storage/users-avatar/'.$profile->user->avatar) }}" height="100" width="100" class="rounded-circle" alt="Profile Image">
                     <div>
-                        <h1 class="text-start">{{ $profile->user->name }}</h1>
-                        <h5>{{ $profile->user->email }}</h5>
+                        <h1 class="text-start"><i class="fas fa-user-circle text-info me-1"></i>{{ $profile->user->name }}</h1>
+                        <h5 class="d-flex align-items-center"><i class="fas fa-envelope text-primary me-1"></i>{{ $profile->user->email }}</h5>
                     </div>
                 </div>
             </div>
@@ -78,21 +78,11 @@
 
 {{-- preview modal --}}
 <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="imageModalLabel">
-                    <i class="fas fa-image me-2"></i>Image Preview
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <img loading="lazy" id="modalImage" src="" alt="Preview" class="img-fluid" style="height: 25rem; object-fit:contain">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    <i class="fas fa-times me-1"></i>Close
-                </button>
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+        <div class="modal-content bg-transparent border-0 shadow-none">
+            <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-4 z-3" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-body d-flex justify-content-center align-items-center p-0">
+                <img loading="lazy" id="modalImage" src="" alt="Preview" class="img-fluid" style="max-height: 90vh; object-fit: contain;">
             </div>
         </div>
     </div>
