@@ -41,8 +41,7 @@ class RegisterController extends Controller
             if (
                 !$emailValidation ||
                 !$emailValidation['is_valid_format'] ||
-                !$emailValidation['is_smtp_valid'] ||
-                !$emailValidation['is_deliverable']
+                !$emailValidation['is_smtp_valid']
             ) {
                 $validator->errors()->add('reg_email', 'The email provided is invalid or undeliverable.');
             }

@@ -12,7 +12,6 @@
             </button>
         </div>
         <div class="card-body p-4">
-            <hr>
             <div class="table-responsive">
                 {{ $dataTable->table(['class' => 'table table-striped table-hover align-middle']) }}
             </div>
