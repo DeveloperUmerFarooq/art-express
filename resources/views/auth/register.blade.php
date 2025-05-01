@@ -25,9 +25,9 @@
           <div>
             <label for="email" class="form-label fw-semibold">Email:
             </label>
-            <input type="email" name="email" class="form-control shadow-sm" placeholder="Enter your email"
-              value="{{ old('email') }}" required autocomplete="email" autofocus>
-            @error('email')
+            <input type="email" name="reg_email" class="form-control shadow-sm" placeholder="Enter your email"
+              value="{{ old('reg_email') }}" required autocomplete="email" autofocus>
+            @error('reg_email')
             <p class="text-danger small mt-1">{{ $message }}</p>
             @enderror
           </div>

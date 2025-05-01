@@ -12,32 +12,11 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
     protected $redirectTo;
     protected $emailValidator;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct(EmailValidator $validator)
     {
         $this->middleware('guest');
@@ -45,66 +24,63 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * Validate registration input
      */
     protected function validator(array $data)
-{
-    $validator = Validator::make($data, [
-        'name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        'password' => ['required', 'string', 'min:8', 'confirmed'],
-        'role' => ['required']
-    ]);
-    
-    $validator->after(function ($validator) use ($data) {
-        $emailValidation = $this->emailValidator->validate($data['email']);
+    {
+        $validator = Validator::make($data, [
+            'name'       => ['required', 'string', 'max:255'],
+            'reg_email'  => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'password'   => ['required', 'string', 'min:8', 'confirmed'],
+            'role'       => ['required']
+        ]);
 
-        if (
-            !$emailValidation ||
-            !$emailValidation['is_valid_format'] ||
-            !$emailValidation['is_smtp_valid'] ||
-            !$emailValidation['is_deliverable']
-        ) {
-            $validator->errors()->add('email', 'The email provided is invalid or undeliverable.');
-        }
-    });
+        $validator->after(function ($validator) use ($data) {
+            $emailValidation = $this->emailValidator->validate($data['reg_email']);
 
-    return $validator;
-}
+            if (
+                !$emailValidation ||
+                !$emailValidation['is_valid_format'] ||
+                !$emailValidation['is_smtp_valid'] ||
+                !$emailValidation['is_deliverable']
+            ) {
+                $validator->errors()->add('reg_email', 'The email provided is invalid or undeliverable.');
+            }
+        });
 
+        return $validator;
+    }
 
     /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
+     * Create a new user instance
      */
     protected function create(array $data)
     {
         $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'avatar' => 'avatar.png',
+            'name'     => $data['name'],
+            'email'    => $data['reg_email'],
+            'avatar'   => 'avatar.png',
             'password' => Hash::make($data['password']),
         ]);
 
-        $user->profile()->create([]);
+        $user->profile()->create();
         $user->assignRole($data['role']);
+
         return $user;
     }
 
+    /**
+     * Redirect user after registration based on role
+     */
     protected function redirectTo()
     {
         $role = Auth::user()->getRoleNames()->first();
-        if ($role == 'admin') {
-            return '/admin/dashboard';
-        } elseif ($role == 'user') {
-            return '/user/dashboard';
-        } elseif ($role == 'artist') {
-            return '/artist/dashboard';
-        }
+
+        return match ($role) {
+            'admin'  => '/admin/dashboard',
+            'user'   => '/user/dashboard',
+            'artist' => '/artist/dashboard',
+            default  => '/',
+        };
     }
 }
