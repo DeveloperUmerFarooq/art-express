@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\EmailValidator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -30,15 +31,17 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo;
+    protected $emailValidator;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(EmailValidator $validator)
     {
         $this->middleware('guest');
+        $this->emailValidator = $validator;
     }
 
     /**
@@ -53,7 +56,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role'=>['required']
+            'role' => ['required']
         ]);
     }
 
@@ -65,24 +68,33 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user= User::create([
+        $emailValidation = $this->emailValidator->validate($data['email']);
+        if (!$emailValidation || !$emailValidation['is_valid_format'] || !$emailValidation['is_smtp_valid'] || !$emailValidation['is_deliverable']) {
+            // This throws a validation error just like built-in validation
+            Validator::make([], [])->after(function ($validator) {
+                $validator->errors()->add('email', 'The email provided is invalid or undeliverable.');
+            })->validate();
+        }
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'avatar'=>'avatar.png',
+            'avatar' => 'avatar.png',
             'password' => Hash::make($data['password']),
         ]);
+
         $user->profile()->create([]);
         $user->assignRole($data['role']);
         return $user;
     }
 
-    protected function redirectTo(){
+    protected function redirectTo()
+    {
         $role = Auth::user()->getRoleNames()->first();
         if ($role == 'admin') {
             return '/admin/dashboard';
         } elseif ($role == 'user') {
             return '/user/dashboard';
-        } elseif($role== 'artist'){
+        } elseif ($role == 'artist') {
             return '/artist/dashboard';
         }
     }
