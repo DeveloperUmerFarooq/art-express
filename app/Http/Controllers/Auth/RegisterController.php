@@ -51,14 +51,30 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['required']
-        ]);
-    }
+{
+    $validator = Validator::make($data, [
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
+        'role' => ['required']
+    ]);
+    
+    $validator->after(function ($validator) use ($data) {
+        $emailValidation = $this->emailValidator->validate($data['email']);
+
+        if (
+            !$emailValidation ||
+            !$emailValidation['is_valid_format'] ||
+            !$emailValidation['is_smtp_valid'] ||
+            !$emailValidation['is_deliverable']
+        ) {
+            $validator->errors()->add('email', 'The email provided is invalid or undeliverable.');
+        }
+    });
+
+    return $validator;
+}
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -68,13 +84,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $emailValidation = $this->emailValidator->validate($data['email']);
-        if (!$emailValidation || !$emailValidation['is_valid_format'] || !$emailValidation['is_smtp_valid'] || !$emailValidation['is_deliverable']) {
-            // This throws a validation error just like built-in validation
-            Validator::make([], [])->after(function ($validator) {
-                $validator->errors()->add('email', 'The email provided is invalid or undeliverable.');
-            })->validate();
-        }
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],

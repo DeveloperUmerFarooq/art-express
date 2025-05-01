@@ -14,7 +14,13 @@
 </main>
 @include('layouts.userLayout.footer')
 @include('layouts.scriptlinks')
-
-    @stack('scripts')
+@if ($errors->any())
+    <script>
+        @foreach ($errors->all() as $error)
+            toastr.error("{{ $error }}");
+        @endforeach
+    </script>
+@endif
+@stack('scripts')
 </body>
 </html>
