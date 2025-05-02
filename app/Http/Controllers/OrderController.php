@@ -112,7 +112,6 @@ class OrderController extends Controller
                 $amount = $order->items()->sum('total_price');
                 $totalAmount = intval($amount);
 
-                // Check if the current user is an admin
                 if (auth()->user()->hasRole('admin')) {
                     // Admin refund: no charges deducted
                     $refundAmount = $totalAmount;
@@ -121,7 +120,7 @@ class OrderController extends Controller
                     $refundAmount = intval($totalAmount * 0.9);
                     $refundAmount -= 100;
                     if ($refundAmount < 0) {
-                        $refundAmount = 0; // Prevent negative refund
+                        $refundAmount = 0;
                     }
                 }
                 try {

@@ -10,12 +10,6 @@
                         <h3 class="h4 text-gray-900 mb-2">No Orders Found</h3>
                         <p class="text-muted">No orders have been placed yet.</p>
                     </div>
-                    @if (($role !== 'artist' && !Request::is('artist/sales'))||$role === 'admin' )
-                        <a href="{{ route($role . '.store') }}" class="btn btn-primary px-4">
-                            <i class="fas fa-store mr-2"></i>Browse Products
-                        </a>
-                    @endif
-
                 </div>
             </div>
         @else
