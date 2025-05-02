@@ -22,6 +22,6 @@ class Order extends Model
 
     public function artist()
     {
-        return $this->belongsTo(User::class,'artist_id');
+        return $this->belongsTo(User::class, 'artist_id');
     }
 }
