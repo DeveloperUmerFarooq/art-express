@@ -25,8 +25,8 @@ class ArtistController extends Controller
                   ->whereYear('created_at', now()->year);
         }, 'sales.items'])->find($artistId);
 
-        $totalSaleAmount = $artist->sales->flatMap(function ($sale) {
-            return $sale->items;
+        $totalSaleAmount= OrderItem::whereHas('order',function ($query) use ($artistId){
+                $query->where('artist_id',$artistId);
         })->sum('price');
 
         $monthlySales = collect(range(1, 12))->map(function ($month) use ($artistId) {
