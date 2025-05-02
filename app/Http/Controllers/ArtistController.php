@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTables\SearchArtistDataTable;
 use App\Models\Like;
+use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,8 +26,12 @@ class ArtistController extends Controller
                   ->whereYear('created_at', now()->year);
         }, 'sales.items'])->find($artistId);
 
-        $totalSaleAmount = $artist->sales->flatMap(function ($sale) {
+        $totalMonthlySaleAmount = $artist->sales->flatMap(function ($sale) {
             return $sale->items;
+        })->sum('price');
+
+        $totalSalesAmount = Order::where('artist_id',$artistId)->with('items')->get()->flatMap(function ($order) {
+            return $order->items;
         })->sum('price');
 
         $monthlySales = collect(range(1, 12))->map(function ($month) use ($artistId) {
@@ -36,7 +41,7 @@ class ArtistController extends Controller
                       ->whereYear('created_at', now()->year);
             })->sum('price');
         });
-        return view('artist.dashboard', compact('totalLikes', 'totalProducts', 'totalBlogs','totalSaleAmount','monthlySales'));
+        return view('artist.dashboard', compact('totalLikes', 'totalProducts', 'totalBlogs','totalMonthlySaleAmount','monthlySales','totalSalesAmount'));
     }
 
     public function artist(SearchArtistDataTable $datatable)

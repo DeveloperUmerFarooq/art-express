@@ -16,19 +16,19 @@ Artist Dashboard
     </div>
 
     <!-- Cards Row -->
-    <div class="row">
-        <!-- Total Sales Card -->
-        <div class="col-xl-3 col-md-6 mb-4">
+    <div class="row justify-content-center">
+        <!-- Total Monthly Sales Card -->
+        <div class="col-xl-2 col-md-6 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Total Sales</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalSaleAmount}} Rs</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalMonthlySaleAmount}} Rs</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <i class="fas fa-chart-line  fa-2x text-gray-300"></i>
                         </div>
                     </div>
                     <div class="mt-2 text-right">
@@ -38,8 +38,28 @@ Artist Dashboard
             </div>
         </div>
 
+        <!-- Total Sales on Platform -->
+        <div class="col-xl-2 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Total Sales</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalSalesAmount}} Rs</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-money-bill-alt fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <span class="text-xs text-muted">Total sales on platform</span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Likes Card -->
-        <div class="col-xl-3 col-md-6 mb-4">
+        <div class="col-xl-2 col-md-6 mb-4">
             <div class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -60,7 +80,7 @@ Artist Dashboard
         </div>
 
         <!-- Products Card -->
-        <div class="col-xl-3 col-md-6 mb-4">
+        <div class="col-xl-2 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -81,7 +101,7 @@ Artist Dashboard
         </div>
 
         <!-- Blog Posts Card -->
-        <div class="col-xl-3 col-md-6 mb-4">
+        <div class="col-xl-2 col-md-6 mb-4">
             <div class="card border-left-info shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
