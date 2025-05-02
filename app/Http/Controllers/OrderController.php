@@ -26,6 +26,9 @@ class OrderController extends Controller
             ->latest()
             ->paginate(10);
 
+        $orders= auth()->user()->orders;
+        dd($orders->toArray());
+
         return view('Orders.index', compact('orders'));
     }
 
@@ -35,7 +38,6 @@ class OrderController extends Controller
             ->where('artist_id', auth()->id())
             ->latest()
             ->paginate(10);
-
         return view('Orders.index', compact('orders'));
     }
 
