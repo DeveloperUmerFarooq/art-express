@@ -272,7 +272,6 @@ footer a{
     top: 0;
 }
 th,td{
-    background-color:transparent !important;
     vertical-align: middle;
 }
 .product-card,.card:not(.dashboard-card){
@@ -334,7 +333,6 @@ th,td{
 
 #searchartist-table th{
     display: none !important;
-    background-color: red !important;
 }
 
 #art-grid-title{
