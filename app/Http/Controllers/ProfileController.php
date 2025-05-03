@@ -98,11 +98,14 @@ class ProfileController extends Controller
         $req->validate([
             'email' => 'email|required',
             'name' => 'required',
-            'cnic' => 'required',
+            'cnic' => 'required|regex:/^[0-9]{5}-[0-9]{7}-[0-9]{1}$/',
             'phone_number' => 'required|min:10|max:15',
             'address' => 'required',
             'city' => 'required',
             'country' => 'required'
+        ],[
+            'cnic.required' => 'The CNIC field is required.',
+            'cnic.regex' => 'The CNIC format must be 12345-1234567-1.',
         ]);
         $user = User::find($req->id);
         $profile = $user->profile;
