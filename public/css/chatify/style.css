@@ -20,28 +20,29 @@ body {
   --listView-header-height: 110px;
 
   /* Light theme variables */
-  --primary-bg-color: #F4EBD9;
-  --secondary-bg-color: #f4ebd9d4;
-  --border-color: #fff;
-  --messagingView-bg-color: #F4EBD9;
-  --scrollbar-thumb-color: #cfcfcf;
-  --modal-bg-color: #F4EBD9;
-  --send-input-icons-color: #4b4b4b;
-  --message-hint-bg-color: #ededed;
-  --message-hint-color: #4b4b4b;
-  --message-card-color: #fff;
+--primary-bg-color: #FFF8F0;
+--secondary-bg-color: #FFEEDB;
+--border-color: #e0d4c1;
+--messagingView-bg-color: #FFF5E6;
+--scrollbar-thumb-color: #d4af7f;
+--modal-bg-color: #FFFFFF;
+--send-input-icons-color: #2d2d2d;
+--message-hint-bg-color: #f9f5f0;
+--message-hint-color: #5e5e5e;
+--message-card-color: #ffffff;
+
 
   /* Dark theme variables */
-  --dark-primary-bg-color: #121212;
-  --dark-secondary-bg-color: #202020;
-  --dark-border-color: #202020;
-  --dark-messagingView-bg-color: #1b1b1b;
-  --dark-scrollbar-thumb-color: #212121;
-  --dark-modal-bg-color: #1a1a1a;
-  --dark-send-input-icons-color: #c8c8c8;
-  --dark-message-hint-bg-color: #292929;
-  --dark-message-hint-color: #ffffff;
-  --dark-message-card-color: #292929;
+--dark-primary-bg-color: #0d0d0d;
+--dark-secondary-bg-color: #1a1a1a;
+--dark-border-color: #2a2a2a;
+--dark-messagingView-bg-color: #141414;
+--dark-scrollbar-thumb-color: #555555;
+--dark-modal-bg-color: #1e1e1e;
+--dark-send-input-icons-color: #e0e0e0;
+--dark-message-hint-bg-color: #222222;
+--dark-message-hint-color: #eeeeee;
+--dark-message-card-color: #2c2c2c;
 }
 
 /* NProgress background */
