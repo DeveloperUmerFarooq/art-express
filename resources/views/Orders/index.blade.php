@@ -13,7 +13,15 @@
                 </div>
             </div>
         @else
-            <div class="row g-4">
+        <div class="d-flex justify-content-between">
+            <h2>{{request()->is('artist/sales')?"Sales":"Orders"}}</h2>
+        @if (request()->is('artist/sales'))
+            <button class="btn btn-primary text-light" data-bs-toggle="modal" data-bs-target="#customRequestModal">
+                <small><i class="fas fa-plus me-1">
+                    </i>Add Custom Request</small></button>
+            @endif
+        </div>
+            <div class="row g-4 py-3">
                 @foreach ($orders as $order)
                     <div class="col-lg-6">
                         <div class="card shadow-sm h-100 border-0">
@@ -213,7 +221,7 @@
         </div>
     </div>
 @endsection
-
+@include('Orders.modals.add-custom-request')
 @push('scripts')
     <script>
         function cancelOrder(url) {
