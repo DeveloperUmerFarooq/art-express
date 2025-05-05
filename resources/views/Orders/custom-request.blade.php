@@ -4,6 +4,8 @@
 <div class="container my-1 my-md-3 my-lg-5">
     <h2>Add {{ $count }} Order Items</h2>
     <form method="POST" action="" enctype="multipart/form-data">
+        <input type="hidden" name="artist_id" value="{{auth()->user()->id}}">
+        <input type="hidden" name="customer_id" value="{{$id}}">
         @csrf
         @for ($i = 0; $i < $count; $i++)
             <div class="card mb-3">
