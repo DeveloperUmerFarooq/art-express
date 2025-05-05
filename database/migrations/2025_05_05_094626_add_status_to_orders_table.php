@@ -8,7 +8,7 @@ class AddStatusToOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->enum('status', ['pending', 'in-progress', 'completed', 'cancelled'])
+            $table->enum('status', ['pending', 'in-progress', 'completed'])
                   ->default('pending')
                   ->after('payment_status');
         });

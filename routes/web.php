@@ -91,6 +91,7 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
     Route::get('/blog/{id}/like',[BlogsController::class,'like'])->name('blog.like');
 
     Route::get('/orders',[OrderController::class,'adminOrder'])->name('order');
+    Route::post('/order/{id}',[OrderController::class,'updateStatus'])->name('order.status');
 
     Route::get('/artist/{id}',[ProfileController::class,'portfolio'])->name('profile.view');
 

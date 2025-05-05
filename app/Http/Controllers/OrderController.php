@@ -144,9 +144,21 @@ class OrderController extends Controller
             }
             $order->delete();
             toastr()->success("Order has been canceled");
-            return redirect()->back();
         } catch (\Exception $e) {
             toastr()->error("Operation Failed!");
         }
+        return redirect()->back();
+    }
+
+    public function updateStatus($id,Request $req){
+        try{
+            $order=Order::find($id);
+            $order->status=$req->status;
+            $order->save();
+            toastr()->success("Status Updated Successfully!");
+        }catch(\Exception $e){
+            toastr()->error("Operation Failed!");
+        }
+        return redirect()->back();
     }
 }

@@ -42,18 +42,16 @@
                                     <div class="d-flex flex-wrap mb-3">
                                         <span
                                             class="badge badge-{{ $order->payment_status == 'Payed' ? 'success' : 'warning' }} badge-pill text-black mr-2 mb-2">
-                                            <i
-                                                class="{{ $order->payment_status == 'Payed' ? 'fas fa-check-circle' : 'fas fa-money-bill-wave' }} mr-1"></i>
-                                            {{ $order->payment_status == 'Payed' ? 'Paid' : 'Cash on Delivery' }}
+                                            <i class="fas fa-money-bill-wave mr-1"></i>
+                                            {{ $order->payment_status == 'Payed' ? 'Card Payment' : 'Cash on Delivery' }}
                                         </span>
                                         <span class="badge badge-info badge-pill mr-2 mb-2 text-black">
-                                            <i class="fas fa-{{ $order->type == 'online' ? 'globe' : 'store' }} mr-1"></i>
+                                            <i class="fas fa-store mr-1"></i>
                                             {{ ucfirst($order->type) }} order
                                         </span>
                                         <span
                                             class="badge badge-{{ $order->status == 'cancelled' ? 'danger' : 'primary' }} badge-pill mr-2 mb-2 text-black">
-                                            <i
-                                                class="fas fa-{{ $order->status == 'cancelled' ? 'times-circle' : 'truck' }} mr-1"></i>
+                                            <i class="fas fa-truck mr-1"></i>
                                             {{ ucfirst($order->status) }}
                                         </span>
                                     </div>
@@ -147,17 +145,61 @@
                                             </tfoot>
                                         </table>
                                     </div>
+                                    @if (!request()->is('artist/sales'))
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            @if ($role !== 'admin' || in_array($order->status, ['completed']))
+                                                <div class="status">
+                                                    Status: <b>{{ $order->status }}</b>
+                                                </div>
+                                            @else
+                                                <div class="status-form">
+                                                    <form action="{{route('admin.order.status',$order->id)}}" method="POST" id="status-form">
+                                                        @csrf
+                                                        <label class="d-flex gap-2 align-items-center">Status:
+                                                            <select class="form-select" name="status" id="status-input"
+                                                                onchange="document.getElementById('status-form').submit()">
+                                                                <option value="pending"
+                                                                    {{ $order->status === 'pending' ? 'selected' : '' }}>
+                                                                    pending</option>
+                                                                <option value="in-progress"
+                                                                    {{ $order->status === 'in-progress' ? 'selected' : '' }}>
+                                                                    in-progress</option>
+                                                                <option value="completed"
+                                                                    {{ $order->status === 'completed' ? 'selected' : '' }}>
+                                                                    completed</option>
+                                                            </select></label>
+                                                    </form>
+                                                </div>
+                                            @endif
 
-                                    @can('cancel order')
-                                        @if (!auth()->user()->sales->contains('id', $order->id))
-                                            <div class="d-flex gap-1 justify-content-end">
-                                                <button class="btn btn-outline-danger"
-                                                    onclick="cancelOrder('{{ route('order.cancel', $order->id) }}')">
-                                                    <i class="fas fa-times-circle"></i> Cancel Order
-                                                </button>
-                                            </div>
-                                        @endif
-                                    @endcan
+                                            @can('cancel order')
+                                                @php
+                                                    $userIsNotSales = !auth()
+                                                        ->user()
+                                                        ->sales->contains('id', $order->id);
+                                                    $isPending = $order->status === 'pending';
+                                                    $adminCanCancel =
+                                                        $role === 'admin' && !in_array($order->status, ['completed']);
+                                                    $userCanCancel = $role !== 'admin' && $userIsNotSales && $isPending;
+                                                @endphp
+
+                                                @if ($userCanCancel || $adminCanCancel)
+                                                    <div class="d-flex gap-1 justify-content-end">
+                                                        <button class="btn btn-outline-danger"
+                                                            onclick="cancelOrder('{{ route('order.cancel', $order->id) }}')">
+                                                            <i class="fas fa-times-circle"></i> Cancel Order
+                                                        </button>
+                                                    </div>
+                                                @endif
+
+                                                @if (!$userCanCancel && !$adminCanCancel && $role !== 'admin')
+                                                    <button class="btn btn-primary">{{ $order->status }}</button>
+                                                @endif
+                                            @endcan
+
+                                        </div>
+                                    @endif
+
                                 </div>
                             </div>
                         </div>
