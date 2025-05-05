@@ -107,6 +107,15 @@ class OrderController extends Controller
     {
         try {
             $order = Order::find($id);
+
+            if (
+                (auth()->user()->hasRole('admin') && $order->status === 'completed') ||
+                (!auth()->user()->hasRole('admin') && in_array($order->status, ['in-progress', 'completed']))
+            ) {
+                toastr()->error("You are not allowed to cancel this order.");
+                return redirect()->back();
+            }
+
             if ($order->payment_id) {
                 $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
                 $amount = $order->items()->sum('total_price');
