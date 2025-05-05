@@ -125,7 +125,7 @@ class OrderController extends Controller
                     // Admin refund: no charges deducted
                     $refundAmount = $totalAmount;
                 } else {
-                    // Non-admin refund: 10% deduction + 100 fixed charge
+                    // Non-admin refund: 10% deduction + 100Rs fixed charge
                     $refundAmount = intval($totalAmount * 0.9);
                     $refundAmount -= 100;
                     if ($refundAmount < 0) {
