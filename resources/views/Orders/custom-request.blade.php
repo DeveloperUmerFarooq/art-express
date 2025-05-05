@@ -10,7 +10,7 @@
         <input type="hidden" name="customer_id" value="{{ $id }}">
 
         @for ($i = 0; $i < $count; $i++)
-            <div class="p-4 mb-4 border border-2 rounded-3 bg-light">
+            <div class="p-4 mb-4 border-2 rounded-3 bg-light">
                 <h5 class="mb-3">Item #{{ $i + 1 }}</h5>
 
                 <!-- Item Name -->
