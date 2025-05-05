@@ -1,6 +1,6 @@
 <div class="modal fade" id="customRequestModal" tabindex="-1" aria-labelledby="customRequestModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <form method="GET" action="">
+      <form method="GET" action="{{route('artist.custom.request.index')}}">
         @csrf
         <div class="modal-content">
           <div class="modal-header bg-success">

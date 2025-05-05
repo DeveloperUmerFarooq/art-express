@@ -6,6 +6,7 @@ use App\Http\Controllers\AuctionController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\CustomRequestController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PortfolioController;
@@ -136,6 +137,8 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
 
     Route::get('/orders',[OrderController::class,'index'])->name('order');
     Route::get('/sales',[OrderController::class,'sales'])->name('sales');
+
+    Route::get('/custom-request',[CustomRequestController::class,'index'])->name('custom.request.index');
 
     Route::get('/artist/{id}',[ProfileController::class,'portfolio'])->name('profile.view');
 
