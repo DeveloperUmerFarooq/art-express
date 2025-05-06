@@ -24,6 +24,7 @@ class EmailValidator
                 'is_valid_format' => $data['is_valid_format']['value'] ?? false,
                 'is_smtp_valid'   => $data['is_smtp_valid']['value'] ?? false,
                 'is_deliverable'  => $data['deliverability']==="DELIVERABLE",
+                'is_disposable'   => $data['is_disposable_email']['value']??false,
                 'autocorrect'     => $data['autocorrect'] ?? null,
             ];
         }

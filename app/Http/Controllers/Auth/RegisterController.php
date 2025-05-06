@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\EmailValidator;
+use Egulias\EmailValidator\Validation\EmailValidation;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -40,7 +41,9 @@ class RegisterController extends Controller
             if (
                 !$emailValidation ||
                 !$emailValidation['is_valid_format'] ||
-                !$emailValidation['is_smtp_valid']
+                !$emailValidation['is_smtp_valid']||
+                !$emailValidation['is_deliverable']||
+                $emailValidation['is_disposable']
             ) {
                 $validator->errors()->add('reg_email', 'The email provided is invalid or undeliverable.');
             }
