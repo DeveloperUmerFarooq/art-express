@@ -37,7 +37,6 @@ class RegisterController extends Controller
 
         $validator->after(function ($validator) use ($data) {
             $emailValidation = $this->emailValidator->validate($data['reg_email']);
-
             if (
                 !$emailValidation ||
                 !$emailValidation['is_valid_format'] ||

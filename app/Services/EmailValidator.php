@@ -20,11 +20,10 @@ class EmailValidator
 
         if ($response->successful()) {
             $data = $response->json();
-
             return [
                 'is_valid_format' => $data['is_valid_format']['value'] ?? false,
                 'is_smtp_valid'   => $data['is_smtp_valid']['value'] ?? false,
-                'is_deliverable'  => $data['is_deliverable'] ?? false,
+                'is_deliverable'  => $data['deliverability']==="DELIVERABLE",
                 'autocorrect'     => $data['autocorrect'] ?? null,
             ];
         }
