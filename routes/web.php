@@ -139,9 +139,9 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
     Route::get('/sales',[OrderController::class,'sales'])->name('sales');
 
     Route::get('/custom-request',[CustomRequestController::class,'index'])->name('custom.request.index');
+    Route::post('/custom-request',[CustomRequestController::class,'store'])->name('custom.request.store');
 
     Route::get('/artist/{id}',[ProfileController::class,'portfolio'])->name('profile.view');
-
 
 
     Route::get('/auction',[AuctionController::class,'index'])->name('auction');

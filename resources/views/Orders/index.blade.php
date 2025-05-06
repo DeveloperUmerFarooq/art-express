@@ -2,8 +2,16 @@
 
 @section('page')
     <div class="container-fluid pt-4 px-4">
+        <div class="d-flex justify-content-between">
+            <h2>{{request()->is('artist/sales')?"Sales":"Orders"}}</h2>
+        @if (request()->is('artist/sales'))
+            <button class="btn btn-primary text-light" data-bs-toggle="modal" data-bs-target="#customRequestModal">
+                <small><i class="fas fa-plus me-1">
+                    </i>Add Custom Request</small></button>
+            @endif
+        </div>
         @if ($orders->isEmpty())
-            <div class="card shadow border-0 rounded-lg">
+            <div class="card shadow border-0 rounded-lg my-5">
                 <div class="card-body text-center p-5">
                     <div class="mb-4">
                         <i class="fas fa-clipboard-list fa-4x text-secondary mb-3"></i>
@@ -13,18 +21,10 @@
                 </div>
             </div>
         @else
-        <div class="d-flex justify-content-between">
-            <h2>{{request()->is('artist/sales')?"Sales":"Orders"}}</h2>
-        @if (request()->is('artist/sales'))
-            <button class="btn btn-primary text-light" data-bs-toggle="modal" data-bs-target="#customRequestModal">
-                <small><i class="fas fa-plus me-1">
-                    </i>Add Custom Request</small></button>
-            @endif
-        </div>
             <div class="row g-4 py-3">
                 @foreach ($orders as $order)
                     <div class="col-lg-6">
-                        <div class="card shadow-sm h-100 border-0">
+                        <div class="card shadow-sm h-auto border-0">
                             <div class="card-header bg-success text-white rounded-top">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
