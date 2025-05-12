@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderCancel;
 use App\Mail\OrderMail;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -74,7 +75,6 @@ class OrderController extends Controller
     function placeOrder($req, $product, $id = null)
     {
         DB::beginTransaction();
-
         try {
             $order = Order::create([
                 'payment_id' => $id,
@@ -82,7 +82,7 @@ class OrderController extends Controller
                 'customer_id' => $req->customer_id,
                 'artist_id' => $req->artist_id,
                 'user_address' => $req->address,
-                'customer_email'=>$req->cutomer_email,
+                'customer_email'=>$req->customer_email,
                 'artist_address' => User::find($req->artist_id)->profile->address,
                 'user_contact' => $req->tel,
                 'order_date' => now(),
@@ -164,6 +164,10 @@ class OrderController extends Controller
                     break;
                 }
             }
+            $admin = User::role('admin')->first();
+            Mail::to($order->customer_email)->send(new OrderCancel($order));
+            Mail::to($order->artist->email)->send(new OrderCancel($order));
+            Mail::to($admin->email)->send(new OrderCancel($order));
             $order->delete();
             toastr()->success("Order has been canceled");
         } catch (\Exception $e) {
