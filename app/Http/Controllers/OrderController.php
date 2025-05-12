@@ -8,6 +8,8 @@ use App\Models\Products;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderPlacedMail;
 
 class OrderController extends Controller
 {
@@ -44,6 +46,7 @@ class OrderController extends Controller
             'address' => 'required',
             'tel' => 'required',
             'paymentMethod' => 'required',
+            'customer_email'=>'required|email'
         ]);
         $product = Products::find($req->product_id);
         if ($product->status == "Sold") {
@@ -79,6 +82,7 @@ class OrderController extends Controller
                 'customer_id' => $req->customer_id,
                 'artist_id' => $req->artist_id,
                 'user_address' => $req->address,
+                'customer_email'=>$req->cutomer_email,
                 'artist_address' => User::find($req->artist_id)->profile->address,
                 'user_contact' => $req->tel,
                 'order_date' => now(),
@@ -97,6 +101,20 @@ class OrderController extends Controller
             $product->status = "Sold";
             $product->save();
             DB::commit();
+            // Send emails
+            $artist = User::find($req->artist_id);
+            $admin = User::role('admin')->first();
+
+            Mail::to($req->customer_email)->send(new OrderPlacedMail($order));
+
+            if ($artist && $artist->email) {
+                Mail::to($artist->email)->send(new OrderPlacedMail($order));
+            }
+
+            if ($admin && $admin->email) {
+                Mail::to($admin->email)->send(new OrderPlacedMail($order));
+            }
+
             toastr()->success("Your Order Has Been Placed");
         } catch (\Exception $e) {
             DB::rollBack();
@@ -159,13 +177,14 @@ class OrderController extends Controller
         return redirect()->back();
     }
 
-    public function updateStatus($id,Request $req){
-        try{
-            $order=Order::find($id);
-            $order->status=$req->status;
+    public function updateStatus($id, Request $req)
+    {
+        try {
+            $order = Order::find($id);
+            $order->status = $req->status;
             $order->save();
             toastr()->success("Status Updated Successfully!");
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             toastr()->error("Operation Failed!");
         }
         return redirect()->back();
