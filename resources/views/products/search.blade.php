@@ -25,9 +25,6 @@
     </div>
     @endif
     </div>
-    @if (!auth()->user()->hasRole('user'))
-        @include('artist.products.modals._Edit-Product')
-    @endif
 @endsection
 @push('scripts')
 @if (auth()->user()->hasRole('admin'))
