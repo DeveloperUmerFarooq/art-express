@@ -7,6 +7,8 @@ use App\Models\OrderItem;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Mail\OrderMail;
+use Illuminate\Support\Facades\Mail;
 
 class CustomRequestController extends Controller
 {
@@ -32,6 +34,9 @@ class CustomRequestController extends Controller
         $req->validate([
             'artist_id' => 'required|exists:users,id',
             'customer_id' => 'required|exists:users,id',
+            'customer_email'=>'required|email',
+            'customer_address'=>'required',
+            'customer_tel'=>'required',
             'items' => 'required|array|min:1',
             'items.*.item_name' => 'required|string|max:255',
             'items.*.quantity' => 'required|integer|min:1',
@@ -48,6 +53,7 @@ class CustomRequestController extends Controller
             "artist_address"=>User::find($req->artist_id)->profile->address,
             "user_contact"=>$req->customer_tel,
             "user_address"=>$req->customer_address,
+            "customer_email"=>$req->customer_email,
             "order_date"=>now(),
             "payment_status"=>"UnPayed",
         ]);
@@ -65,6 +71,14 @@ class CustomRequestController extends Controller
             ]);
         }
         DB::commit();
+
+        $artist = User::find($req->artist_id);
+        $admin = User::role('admin')->first();
+
+        Mail::to($req->customer_email)->send(new OrderMail($order,$order->customer->name));
+        Mail::to($artist->email)->send(new OrderMail($order,$artist->name));
+        Mail::to($admin->email)->send(new OrderMail($order,$admin->name));
+
         toastr()->success('Your custom order has been placed.');
         return redirect()->route('artist.sales');
     }catch (\Exception $e) {

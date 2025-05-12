@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderMail;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Products;
@@ -9,7 +10,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\OrderPlacedMail;
 
 class OrderController extends Controller
 {
@@ -101,19 +101,14 @@ class OrderController extends Controller
             $product->status = "Sold";
             $product->save();
             DB::commit();
-            // Send emails
+
             $artist = User::find($req->artist_id);
             $admin = User::role('admin')->first();
 
-            Mail::to($req->customer_email)->send(new OrderPlacedMail($order));
+            Mail::to($req->customer_email)->send(new OrderMail($order,$order->customer->name));
+            Mail::to($artist->email)->send(new OrderMail($order,$artist->name));
+            Mail::to($admin->email)->send(new OrderMail($order,$admin->name));
 
-            if ($artist && $artist->email) {
-                Mail::to($artist->email)->send(new OrderPlacedMail($order));
-            }
-
-            if ($admin && $admin->email) {
-                Mail::to($admin->email)->send(new OrderPlacedMail($order));
-            }
 
             toastr()->success("Your Order Has Been Placed");
         } catch (\Exception $e) {

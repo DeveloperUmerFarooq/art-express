@@ -23,8 +23,16 @@
                 <div class="mb-3">
                     <label for="customer_tel" class="form-label">Customer Phone Number</label>
                     <input type="text" name="customer_tel" class="form-control" id="customer_tel" required
-                        value="{{ old('customer_address', $user->profile->phone_number) }}">
+                        value="{{ old('customer_tel', $user->profile->phone_number) }}">
                     @error('customer_tel')
+                        <p class="text-danger ms-1">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="customer_email" class="form-label">Customer Email</label>
+                    <input type="text" name="customer_email" class="form-control" id="customer_email" required
+                        value="{{ old('customer_email', $user->email) }}">
+                    @error('customer_email')
                         <p class="text-danger ms-1">{{$message}}</p>
                     @enderror
                 </div>
