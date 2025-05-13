@@ -95,7 +95,7 @@ Dashboard-Admin
                         </div>
                     </div>
                     <div class="mt-2 text-right">
-                        <span class="text-xs text-muted">Available pieces</span>
+                        <span class="text-xs text-muted">Total pieces</span>
                     </div>
                 </div>
             </div>
