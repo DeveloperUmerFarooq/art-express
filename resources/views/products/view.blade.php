@@ -43,16 +43,27 @@
                             <input type="hidden" name="artist_id" value="{{$product->artist->id}}">
                             <div class="mb-3">
                                 <label class="form-label">Full Address</label>
-                                <textarea @if(!$sellable) disabled @endif class="form-control validate" name="address" rows="3" placeholder="Street, City, State, ZIP Code" required>{{old('address',auth()->user()->profile->address)}}</textarea>
+                                <textarea @if(!$sellable) disabled @endif class="form-control validate" name="address" rows="3" placeholder="Street, City, State, ZIP Code" required
+                                @if (auth()->user()->products()->where('id', $product->id)->exists())
+                                        disabled
+                                @endif>{{old('address',auth()->user()->profile->address)}}</textarea>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Phone Number</label>
-                                    <input @if(!$sellable) disabled @endif type="tel" name="tel" class="form-control validate" placeholder="+1 (123) 456-7890" required value="{{old('tel',auth()->user()->profile->phone_number)}}">
+                                    <input @if(!$sellable) disabled @endif type="tel" name="tel" class="form-control validate" placeholder="+1 (123) 456-7890" required
+                                    @if (auth()->user()->products()->where('id', $product->id)->exists())
+                                        disabled
+                                    @endif
+                                    value="{{old('tel',auth()->user()->profile->phone_number)}}">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Email</label>
-                                    <input @if(!$sellable) disabled @endif type="email" name="customer_email" class="form-control validate" placeholder="customer@gmail.com" required value="{{old('email',auth()->user()->email)}}">
+                                    <input @if(!$sellable) disabled @endif type="email" name="customer_email" class="form-control validate" placeholder="customer@gmail.com" required value="{{old('email',auth()->user()->email)}}"
+                                    @if (auth()->user()->products()->where('id', $product->id)->exists())
+                                        disabled
+                                    @endif
+                                    >
                                     <input type="hidden" name="stripeToken" id="stripe-token">
                                 </div>
                             </div>
@@ -64,14 +75,22 @@
                             <h5 class="mb-3">Payment Method</h5>
                             <div class="mb-4">
                                 <div class="form-check mb-3 border p-3 rounded">
-                                    <input @if(!$sellable) disabled @endif class="form-check-input" value="card" type="radio" name="paymentMethod" id="cardPayment">
+                                    <input @if(!$sellable) disabled @endif
+                                    @if (auth()->user()->products()->where('id', $product->id)->exists())
+                                        disabled
+                                    @endif
+                                    class="form-check-input" value="card" type="radio" name="paymentMethod" id="cardPayment">
                                     <label class="form-check-label" for="cardPayment">
                                         <strong>Credit/Debit Card</strong>
                                     </label>
                                 </div>
 
                                 <div class="form-check border p-3 rounded">
-                                    <input @if(!$sellable) disabled @endif class="form-check-input" value="cod" type="radio" name="paymentMethod" id="codPayment">
+                                    <input @if(!$sellable) disabled @endif
+                                    @if (auth()->user()->products()->where('id', $product->id)->exists())
+                                        disabled
+                                    @endif
+                                    class="form-check-input" value="cod" type="radio" name="paymentMethod" id="codPayment">
                                     <label class="form-check-label" for="codPayment">
                                         <strong>Cash on Delivery</strong>
                                     </label>
