@@ -1,5 +1,7 @@
 @extends('layouts.' . $role . 'Layout.layout')
-
+@section('title')
+   Artist Ranking | Art-Express
+@endsection
 @section('page')
 <div class="container my-4">
     <h2 class="mb-4 text-center fw-bold"><i class="fas fa-palette me-1 text-primary"></i>

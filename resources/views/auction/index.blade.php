@@ -1,5 +1,7 @@
 @extends('layouts.' . $role . 'Layout.layout')
-
+@section('title')
+    Auctions | Art-Express
+@endsection
 @section('page')
 
 <div class="card shadow-sm mt-2 container" style="height: max-content !important">

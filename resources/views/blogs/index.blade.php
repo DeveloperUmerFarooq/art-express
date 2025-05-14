@@ -1,5 +1,7 @@
 @extends('layouts.' . $role . 'Layout.layout')
-
+@section('title')
+    Product Blog | Art-Express
+@endsection
 @section('page')
     <div class="container my-5">
 

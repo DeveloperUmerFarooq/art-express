@@ -1,6 +1,6 @@
 @extends('layouts.artistLayout.layout')
 @section('title')
-Artist Dashboard
+Artist Dashboard | Art-Express
 @endsection
 @section('page')
 <div class="container-fluid py-3">

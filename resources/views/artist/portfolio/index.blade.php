@@ -1,4 +1,7 @@
 @extends('layouts.' . $role . 'Layout.layout')
+@section('title')
+    Portfolio | Art-Express
+@endsection
 @section('page')
     <div class="container-fluid">
         <div class="d-flex flex-column mt-3">

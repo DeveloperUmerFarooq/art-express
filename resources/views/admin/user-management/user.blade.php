@@ -1,5 +1,7 @@
 @extends('layouts.adminLayout.layout')
-
+@section('title')
+    Users Management | Art-Express
+@endsection
 @section('page')
 <div class="container mt-5">
     <div class="card shadow-sm border-0">

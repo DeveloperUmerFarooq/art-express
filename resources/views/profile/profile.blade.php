@@ -1,5 +1,7 @@
 @extends('layouts.' . $role . 'Layout.layout')
-
+@section('title')
+    Profile | Art-Express
+@endsection
 @section('page')
 <div class="container-fluid py-4">
     <!-- Profile Header -->

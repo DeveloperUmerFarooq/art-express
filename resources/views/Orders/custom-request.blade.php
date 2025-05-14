@@ -1,5 +1,7 @@
 @extends('layouts.' . $role . 'Layout.layout')
-
+@section('title')
+    Custom Request | Art-Express
+@endsection
 @section('page')
     <div class="container my-5">
         <h2 class="mb-4 fw-semibold text-dark">Add {{ $count }} Order Item{{ $count > 1 ? 's' : '' }}</h2>

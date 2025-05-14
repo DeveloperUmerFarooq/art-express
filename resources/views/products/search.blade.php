@@ -1,4 +1,7 @@
 @extends('layouts.' . $role . 'Layout.layout')
+@section('title')
+    Product Search | Art-Express
+@endsection
 @section('page')
 <div class="container mt-3 mb-3 mb-md-5">
     <form action="{{route($role.'.search')}}" method="GET" class="d-flex gap-1">

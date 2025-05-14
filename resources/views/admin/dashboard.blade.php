@@ -1,6 +1,6 @@
 @extends('layouts.adminLayout.layout')
 @section('title')
-Dashboard-Admin
+Dashboard-Admin | Art-Express
 @endsection
 @section('page')
 <div class="container-fluid py-3">

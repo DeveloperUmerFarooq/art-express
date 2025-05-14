@@ -1,4 +1,8 @@
 @extends('layouts.' . $role . 'Layout.layout')
+
+@section('title')
+    View Portfolio | Art-Express
+@endsection
 @section('page')
 
 <div class="container-fluid">

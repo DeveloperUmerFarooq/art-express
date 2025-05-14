@@ -1,7 +1,7 @@
 @extends('layouts.adminLayout.layout')
 
 @section('title')
-Role Management
+Role Management | Art-Express
 @endsection
 
 @section('page')

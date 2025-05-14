@@ -1,5 +1,7 @@
 @extends('layouts.' . $role . 'Layout.layout')
-
+@section('title')
+    Product View | Art-Express
+@endsection
 @section('page')
 @php
     $sellable=$product->status=="Unsold"?true:false;

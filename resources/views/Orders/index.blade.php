@@ -1,5 +1,7 @@
 @extends('layouts.' . $role . 'Layout.layout')
-
+@section('title')
+    {{request()->is('artist/sales')?"Sales":"Orders"}} | Art-Express
+@endsection
 @section('page')
     <div class="container-fluid pt-4 px-4">
         <div class="d-flex justify-content-between">

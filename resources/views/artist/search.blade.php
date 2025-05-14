@@ -1,5 +1,7 @@
 @extends('layouts.' . $role . 'Layout.layout')
-
+@section('title')
+    Artist Search | Art-Express
+@endsection
 @section('page')
 
 <div class="container mt-5 mb-4">
