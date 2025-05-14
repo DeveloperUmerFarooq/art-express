@@ -21,7 +21,7 @@
                          onclick="document.getElementById('fileInput').click();">
                         <i class="fas fa-pencil text-white"></i>
                         <form action="{{route($role.'.avatar')}}" method="POST" class="d-none" id="avatar-form" enctype="multipart/form-data">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}" disabled>
+                            @csrf
                             <input type="hidden" name="id" value="{{auth()->user()->id}}">
                             <input type="file" name="avatar" id="fileInput" accept="images/*" onchange="document.getElementById('avatar-form').submit();">
                         </form>
