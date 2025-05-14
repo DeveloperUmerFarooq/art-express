@@ -18,16 +18,16 @@ document.addEventListener('DOMContentLoaded', function() {
         scale:0,
         opacity:0,
         y:10,
-        delay:1
+        delay:0.7
     })
     tl.from('.res-title',zoom)
     tl.from('.res-sub',{
         y:50,
         opacity:0,
         stagger:0.2
-    })
+    },"-=0.2")
     tl.from('#hero-button',{
         opacity:0,
         duration:0.3
-    })
+    },"-=0.3")
 });
