@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @include('layouts.headlinks')
-    <title>Art-Express</title>
+    @stack('title')
 </head>
 <body>
 @include('layouts.userLayout.header')
