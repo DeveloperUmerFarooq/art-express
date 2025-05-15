@@ -46,7 +46,8 @@
         <div class="card shadow-sm mt-4">
             <div class="card-body text-center">
                 <h5 class="card-title">No Rankings Produced</h5>
-                <p class="card-text">It looks like all artists have products count below 10!</p>
+                <p class="card-text">It looks like all artists have products count below 10
+                or does not have enough sales !</p>
             </div>
         </div>
     @endif
