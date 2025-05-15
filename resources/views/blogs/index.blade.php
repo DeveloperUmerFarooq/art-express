@@ -68,10 +68,13 @@
                         required></textarea>
                 </div>
                 <button type="submit"
-                    class="btn btn-primary mt-3 d-flex gap-2 align-items-center px-4 py-2 rounded-3 shadow-sm border-0 transition-all ease-in-out duration-300 hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary-light"
+                    class="btn btn-primary mt-3 d-flex gap-2 justify-content-between align-items-center px-4 py-2 rounded-3 shadow-sm border-0"
                     onclick="comment()">
-                    <i class="fas fa-comment-alt"></i>
-                    <span>Post Comment</span>
+                    <div class="d-flex gap-2 align-items-center">
+                        <i class="fas fa-comment-alt"></i>
+                        <span>Post Comment</span>
+                    </div>
+                    <div class="spinner-grow spinner-grow-sm d-none" id="loader" role="status"></div>
                 </button>
 
             </div>
@@ -180,21 +183,21 @@
                 <p class="text-muted emoji-content">${data.comment.content}</p>
             </div>
             ${data.user.id == "{{ auth()->id() }}" || "{{ auth()->user()->hasRole('admin') }}" ? `
-                        <div class="dropdown ms-auto">
-                            <button class="btn btn-sm border-0 bg-transparent p-0" type="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-start">
-                                <li class="bg-transparent">
-                                    <button class="dropdown-item text-danger bg-transparent"
-                                        onclick="deleteComment('${url}')">
-                                        Remove Comment
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                    ` : ''}
+                            <div class="dropdown ms-auto">
+                                <button class="btn btn-sm border-0 bg-transparent p-0" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-start">
+                                    <li class="bg-transparent">
+                                        <button class="dropdown-item text-danger bg-transparent"
+                                            onclick="deleteComment('${url}')">
+                                            Remove Comment
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        ` : ''}
         </div>
     `;
 
@@ -236,6 +239,7 @@
         //comment
         function comment() {
             if ($('textarea[name="comment"]').val() !== "" || $('textarea[name="comment"]').val() !== null) {
+                $("#loader").removeClass("d-none")
                 $.ajax({
                     type: "POST",
                     url: "{{ route($role . '.blog.comment', $blog->id) }}",
@@ -244,6 +248,7 @@
                         comment: $('textarea[name="comment"]').val()
                     },
                     success: function(response) {
+                        $("#loader").addClass("d-none")
                         $("#comment").emojioneArea()[0].emojioneArea.setText("");
                     }
                 });
