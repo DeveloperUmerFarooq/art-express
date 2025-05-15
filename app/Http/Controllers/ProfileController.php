@@ -99,11 +99,12 @@ class ProfileController extends Controller
             'email' => 'email|required',
             'name' => 'required',
             'cnic' => 'required|regex:/^[0-9]{5}-[0-9]{7}-[0-9]{1}$/',
-            'phone_number' => 'required|min:10|max:15',
+            'phone_number' => 'required|phone:PK',
             'address' => 'required',
             'city' => 'required',
             'country' => 'required'
         ],[
+            'phone_number.phone' => 'Please enter a valid Pakistani phone number.',
             'cnic.required' => 'The CNIC field is required.',
             'cnic.regex' => 'The CNIC format must be 12345-1234567-1.',
         ]);

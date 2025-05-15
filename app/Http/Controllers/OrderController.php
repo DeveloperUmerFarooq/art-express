@@ -45,9 +45,11 @@ class OrderController extends Controller
     {
         $req->validate([
             'address' => 'required',
-            'tel' => 'required',
+            'tel' => 'required|phone:PK',
             'paymentMethod' => 'required',
             'customer_email'=>'required|email'
+        ],[
+            'tel.phone' => 'Please enter a valid Pakistani phone number.',
         ]);
         $product = Products::find($req->product_id);
         if ($product->status == "Sold") {

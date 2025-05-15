@@ -36,12 +36,14 @@ class CustomRequestController extends Controller
             'customer_id' => 'required|exists:users,id',
             'customer_email'=>'required|email',
             'customer_address'=>'required',
-            'customer_tel'=>'required',
+            'customer_tel'=>'required|phone:PK',
             'items' => 'required|array|min:1',
             'items.*.item_name' => 'required|string|max:255',
             'items.*.quantity' => 'required|integer|min:1',
             'items.*.price' => 'required|numeric|min:0',
             'items.*.img_src' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ],[
+            'customer_tel.phone' => 'Please enter a valid Pakistani phone number.',
         ]);
         DB::beginTransaction();
         try{
