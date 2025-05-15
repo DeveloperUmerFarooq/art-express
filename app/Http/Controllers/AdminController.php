@@ -12,7 +12,10 @@ class AdminController extends Controller
 {
     public function index()
     {
+        return view('admin.dashboard');
+    }
 
+    public function getDashboardStats(){
         $monthlyUsers = collect(range(1, 12))->map(function ($month) {
             return User::whereMonth('created_at', $month)->whereYear('created_at', now()->year)
             ->whereHas('roles', function ($query) {
@@ -33,7 +36,15 @@ class AdminController extends Controller
 
         $products = Products::count();
         $blogs = Blogs::count();
-
-        return view('admin.dashboard', compact('sales', 'totalSales', 'users', 'artists', 'products', 'blogs', 'monthlyUsers', 'monthlySales'));
+        return response()->json([
+        'monthlyUsers' => $monthlyUsers,
+        'monthlySales' => $monthlySales,
+        'users' => $users,
+        'artists' => $artists,
+        'sales' => $sales,
+        'totalSales' => $totalSales,
+        'products' => $products,
+        'blogs' => $blogs,
+    ]);
     }
 }
