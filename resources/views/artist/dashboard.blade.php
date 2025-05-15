@@ -25,7 +25,7 @@ Artist Dashboard | Art-Express
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
                                 Revenue</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalMonthlySaleAmount}} Rs</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="currentMonthSales">---</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-chart-line  fa-2x text-gray-300"></i>
@@ -46,7 +46,7 @@ Artist Dashboard | Art-Express
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Total Sales</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalSalesAmount}} Rs</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalSalesAmount">---</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-money-bill-alt fa-2x text-gray-300"></i>
@@ -66,7 +66,7 @@ Artist Dashboard | Art-Express
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                 Total Likes</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalLikes}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="total-likes">---</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-heart fa-2x text-gray-300"></i>
@@ -87,7 +87,7 @@ Artist Dashboard | Art-Express
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Artworks</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalProducts}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="total-products">---</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-palette fa-2x text-gray-300"></i>
@@ -108,7 +108,7 @@ Artist Dashboard | Art-Express
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                 Blog Posts</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalBlogs}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="total-blogs">---</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-newspaper fa-2x text-gray-300"></i>
@@ -143,73 +143,107 @@ Artist Dashboard | Art-Express
         </div>
     </div>
 </div>
-
+@endsection
 @push('scripts')
 <script>
-// Sales Chart
-const salesCtx = document.getElementById('salesChart').getContext('2d');
-const salesChart = new Chart(salesCtx, {
-    type: 'line',
-    data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        datasets: [{
-            label: 'Monthly Sales (Rs)',
-            data: @json($monthlySales),
-            borderColor: 'rgba(78, 115, 223, 1)',
-            backgroundColor: 'rgba(78, 115, 223, 0.05)',
-            fill: true,
-            tension: 0.3,
-            pointBackgroundColor: 'rgba(78, 115, 223, 1)',
-            pointRadius: 3,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: 'rgba(78, 115, 223, 1)',
-            pointHitRadius: 10,
-            pointBorderWidth: 2,
-            borderWidth: 2,
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true,
-                grid: {
-                    display: true,
-                    color: "rgba(0, 0, 0, .05)",
-                    drawBorder: false
+$(document).ready(function() {
+    // Initialize the sales chart
+    const salesCtx = document.getElementById('salesChart').getContext('2d');
+    const salesChart = new Chart(salesCtx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                label: 'Monthly Sales (Rs)',
+                data: [],
+                borderColor: 'rgba(78, 115, 223, 1)',
+                backgroundColor: 'rgba(78, 115, 223, 0.05)',
+                fill: true,
+                tension: 0.3,
+                pointBackgroundColor: 'rgba(78, 115, 223, 1)',
+                pointRadius: 3,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: 'rgba(78, 115, 223, 1)',
+                pointHitRadius: 10,
+                pointBorderWidth: 2,
+                borderWidth: 2,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        display: true,
+                        color: "rgba(0, 0, 0, .05)",
+                        drawBorder: false
+                    },
+                    ticks: {
+                        padding: 10,
+                        callback: function(value) {
+                            return 'Rs ' + value.toLocaleString();
+                        }
+                    }
                 },
-                ticks: {
-                    padding: 10
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        padding: 10
+                    }
                 }
             },
-            x: {
-                grid: {
+            plugins: {
+                legend: {
                     display: false
                 },
-                ticks: {
-                    padding: 10
+                tooltip: {
+                    backgroundColor: 'rgba(0,0,0,0.8)',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    footerColor: '#fff',
+                    borderColor: 'rgba(0,0,0,0.2)',
+                    borderWidth: 1,
+                    padding: 15,
+                    displayColors: false,
+                    callbacks: {
+                        label: function(context) {
+                            return 'Rs ' + context.raw.toLocaleString();
+                        }
+                    }
                 }
-            }
-        },
-        plugins: {
-            legend: {
-                display: false
             },
-            tooltip: {
-                backgroundColor: 'rgba(0,0,0,0.8)',
-                titleColor: '#fff',
-                bodyColor: '#fff',
-                footerColor: '#fff',
-                borderColor: 'rgba(0,0,0,0.2)',
-                borderWidth: 1,
-                padding: 15,
-                displayColors: false
+        }
+    });
+
+    // Function to fetch and update dashboard stats
+    function fetchDashboardStats() {
+        $.ajax({
+            url: "{{ route('artist.stats') }}",
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                $('#currentMonthSales').text('Rs ' + response.currentMonthSales.toLocaleString());
+                $('#totalSalesAmount').text('Rs ' + response.totalSalesAmount.toLocaleString());
+                $('#total-likes').text(response.totalLikes.toLocaleString());
+                $('#total-products').text(response.totalProducts.toLocaleString());
+                $('#total-blogs').text(response.totalBlogs.toLocaleString());
+
+                salesChart.data.datasets[0].data = response.monthlySales;
+                salesChart.update();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching dashboard stats:', error);
             }
-        },
+        });
     }
+
+    fetchDashboardStats();
+
+    setInterval(fetchDashboardStats, 120000);
 });
 </script>
 @endpush
-
-@endsection

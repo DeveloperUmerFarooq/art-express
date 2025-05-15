@@ -111,6 +111,7 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
 
 Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(function () {
     Route::get('/dashboard',[ArtistController::class,'index'])->name('dashboard');
+    Route::get('/dashboard/stats',[ArtistController::class,'getDashboardStats'])->name('stats');
 
     Route::get('/categories/{id}/subcategories',[ProductsController::class,'getCategory'])->name('getcategory');
 

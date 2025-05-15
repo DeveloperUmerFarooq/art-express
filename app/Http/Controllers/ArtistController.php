@@ -14,6 +14,11 @@ class ArtistController extends Controller
 {
     public function index()
     {
+        return view('artist.dashboard');
+    }
+
+    public function getDashboardStats()
+    {
         $artistId = auth()->user()->id;
 
         $totalLikes = Like::whereHas('post.product', function ($query) use ($artistId) {
@@ -32,7 +37,7 @@ class ArtistController extends Controller
             }
         ])->find($artistId);
 
-        $totalMonthlySaleAmount = $artist->sales->flatMap(fn($sale) => $sale->items)->sum(fn($item) => $item->price * $item->quantity);
+        $currentMonthSales = $artist->sales->flatMap(fn($sale) => $sale->items)->sum(fn($item) => $item->price * $item->quantity);
 
         $totalSalesAmount = Order::where('artist_id', $artistId)
             ->with('items')
@@ -52,17 +57,15 @@ class ArtistController extends Controller
                 ->sum(DB::raw('price * quantity'));
         });
 
-
-        return view('artist.dashboard', compact(
-            'totalLikes',
-            'totalProducts',
-            'totalBlogs',
-            'totalMonthlySaleAmount',
-            'monthlySales',
-            'totalSalesAmount'
-        ));
+        return response()->json([
+        'totalLikes' => $totalLikes,
+        'totalProducts' => $totalProducts,
+        'totalBlogs' => $totalBlogs,
+        'monthlySales' => $monthlySales,
+        'currentMonthSales' => $currentMonthSales,
+        'totalSalesAmount' => $totalSalesAmount,
+    ]);
     }
-
 
     public function artist(SearchArtistDataTable $datatable)
     {
