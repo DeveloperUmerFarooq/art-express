@@ -91,12 +91,12 @@
             </div>
             @if ($comments->hasMorePages())
                 <div class="text-center mt-3">
-                    <button id="load-more-comments" class="btn btn-outline-primary" data-next-page="2"
+                    <button id="load-more-comments" class="btn btn-outline-success" data-next-page="2"
                         data-blog-id="{{ $blog->id }}">
                         <i class="fas fa-comments me-2"></i> Load More Comments
                     </button>
                     <div id="loading-spinner" class="d-none mt-2">
-                        <div class="spinner-border text-primary" role="status">
+                        <div class="spinner-border text-success" role="status">
                             <span class="visually-hidden">Loading...</span>
                         </div>
                     </div>
