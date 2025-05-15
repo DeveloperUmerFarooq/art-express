@@ -3,11 +3,11 @@
     Products | Art-Express
 @endsection
 @section('page')
-    <div class="container mt-4">
+    <div class="container-fluid mt-4">
 
         <!-- Page Header -->
         <div class="d-flex align-items-center justify-content-between mb-4">
-            <h3 class="fw-bold text-secondary">
+            <h3 class="fw-bold">
                 <i class="fas fa-box-open me-2"></i>Manage Products
             </h3>
             <button class="btn btn-primary shadow-sm px-4 py-2" data-bs-toggle="modal" data-bs-target="#productModal">

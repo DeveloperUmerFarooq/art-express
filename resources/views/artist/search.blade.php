@@ -4,10 +4,10 @@
 @endsection
 @section('page')
 
-<div class="container mt-5 mb-4">
+<div class="container mt-4 mb-4">
 
     <!-- Heading Section -->
-    <h1 class="text-center mb-5">Artists</h1>
+    <h1 class="text-center mb-5"><i class="fas fa-palette"></i> Artists</h1>
 
     <!-- Search Bar Section -->
     <div class="d-flex justify-content-center mb-4">

@@ -6,7 +6,7 @@ Artist Dashboard | Art-Express
 <div class="container-fluid py-3">
     <!-- Dashboard Header -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Artist Dashboard</h1>
+        <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-chart-line"></i> Artist Dashboard</h1>
         <div class="d-none d-sm-inline-block">
             <span class="badge bg-primary text-white p-2">
                 <i class="fas fa-calendar-alt mr-2"></i>
