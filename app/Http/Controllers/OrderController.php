@@ -11,9 +11,15 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use App\Services\EmailValidator;
 
 class OrderController extends Controller
 {
+    protected $emailValidator;
+    public function __construct(EmailValidator $validate)
+    {
+        $this->emailValidator=$validate;
+    }
     public function adminOrder()
     {
         $orders = Order::with(['items', 'customer', 'artist'])
@@ -51,6 +57,20 @@ class OrderController extends Controller
         ],[
             'tel.phone' => 'Please enter a valid Pakistani phone number.',
         ]);
+        
+        if(!User::where('email',$req->customer_email)->exists()){
+            $emailValidation=$this->emailValidator->validate($req->customer_email);
+            if (
+                !$emailValidation ||
+                !$emailValidation['is_valid_format'] ||
+                !$emailValidation['is_smtp_valid'] ||
+                !$emailValidation['is_deliverable'] ||
+                $emailValidation['is_disposable']
+            ) {
+                return back()->withErrors(['customer_email' => 'The email provided is invalid or undeliverable.'])->withInput();
+            }
+        }
+
         $product = Products::find($req->product_id);
         if ($product->status == "Sold") {
             toastr()->info("Product is Sold");

@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Mail\OrderMail;
 use Illuminate\Support\Facades\Mail;
+use App\Services\EmailValidator;
 
 class CustomRequestController extends Controller
 {
+    protected $emailValidator;
+    public function __construct(EmailValidator $validate)
+    {
+        $this->emailValidator=$validate;
+    }
     public function index(Request $req){
             $req->validate([
                 'user_email'=>'required|email|exists:users,email',
@@ -45,6 +51,19 @@ class CustomRequestController extends Controller
         ],[
             'customer_tel.phone' => 'Please enter a valid Pakistani phone number.',
         ]);
+        if(!User::where('email',$req->customer_email)->exists()){
+            $emailValidation=$this->emailValidator->validate($req->customer_email);
+            if (
+                !$emailValidation ||
+                !$emailValidation['is_valid_format'] ||
+                !$emailValidation['is_smtp_valid'] ||
+                !$emailValidation['is_deliverable'] ||
+                $emailValidation['is_disposable']
+            ) {
+                return back()->withErrors(['customer_email' => 'The email provided is invalid or undeliverable.'])->withInput();
+            }
+        }
+
         DB::beginTransaction();
         try{
         $order=Order::create([

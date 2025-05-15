@@ -8,9 +8,15 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use App\Services\EmailValidator;
 
 class ProfileController extends Controller
 {
+    protected $emailValidator;
+    public function __construct(EmailValidator $validate)
+    {
+        $this->emailValidator=$validate;
+    }
     public function index()
     {
         $profile = auth()->user()->profile;
@@ -108,6 +114,20 @@ class ProfileController extends Controller
             'cnic.required' => 'The CNIC field is required.',
             'cnic.regex' => 'The CNIC format must be 12345-1234567-1.',
         ]);
+
+        if(!User::where('email',$req->email)->exists()){
+            $emailValidation=$this->emailValidator->validate($req->email);
+            if (
+                !$emailValidation ||
+                !$emailValidation['is_valid_format'] ||
+                !$emailValidation['is_smtp_valid'] ||
+                !$emailValidation['is_deliverable'] ||
+                $emailValidation['is_disposable']
+            ) {
+                return back()->withErrors(['email' => 'The email provided is invalid or undeliverable.'])->withInput();
+            }
+        }
+
         $user = User::find($req->id);
         $profile = $user->profile;
         $user->update([
