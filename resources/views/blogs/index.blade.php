@@ -279,6 +279,6 @@
                 });
             })
         }
-        setInterval(updateCommentTime, 10000);
+        setInterval(updateCommentTime, 30000);
     </script>
 @endpush
