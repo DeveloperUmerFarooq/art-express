@@ -189,6 +189,7 @@
         <script>
             $(document).ready(function() {
 
+                // Fetch Admin Stats
                 function fetchDashboardStats() {
                     $.ajax({
                         url: "{{ route('admin.stats') }}",
@@ -214,6 +215,7 @@
                 const usersCtx = document.getElementById('usersChart').getContext('2d');
                 const salesCtx = document.getElementById('salesChart').getContext('2d');
 
+                // userChart
                 const usersChart = new Chart(usersCtx, {
                     type: 'bar',
                     data: {
@@ -231,6 +233,7 @@
                     options: getChartOptions()
                 });
 
+                // Sales Chart
                 const salesChart = new Chart(salesCtx, {
                     type: 'line',
                     data: {
