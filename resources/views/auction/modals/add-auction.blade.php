@@ -8,7 +8,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <input type="number" name="item_count" min="1" class="form-control validate" required placeholder="Enter number of items">
+            <input type="number" name="item_count" min="1" class="form-control" required placeholder="Enter number of items">
           </div>
           <div class="d-flex align-items-center justify-content-center mb-3">
               <button type="submit" class="btn btn-success">Continue</button>

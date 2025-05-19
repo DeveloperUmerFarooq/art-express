@@ -22,8 +22,25 @@
     </div>
 </div>
 @else
+<div class="container">
+    <div class="card shadow-sm border-0">
+           <div class="card-header bg-success text-white d-flex align-items-center justify-content-between">
+               <h5 class="mb-0">
+                   <i class="fas fa-gavel me-2"></i>Auctions
+               </h5>
+           </div>
 
+           <div class="card-body">
+               <div class="table-responsive">
+                   {{ $dataTable->table(['class' => 'table table-bordered table-hover table-striped align-middle']) }}
+               </div>
+           </div>
+       </div>
+</div>
 @endif
 </div>
 @include('auction.modals.add-auction')
 @endsection
+@push('scripts')
+    {{ $dataTable->scripts() }}
+@endpush
