@@ -1,5 +1,7 @@
 @extends('layouts.' . $role . 'Layout.layout')
-
+@section('title')
+    Create Auctions | Art-Express
+@endsection
 @section('page')
     <div class="container pt-3">
         <h3 class="mb-4"><i class="fas fa-gavel"></i> Create Auction</h3>

@@ -14,4 +14,7 @@ class Auction extends Model
     public function items(){
         return $this->hasMany(AuctionItem::class,'auction_id');
     }
+    public function host(){
+        return $this->belongsTo(User::class,'host_id');
+    }
 }

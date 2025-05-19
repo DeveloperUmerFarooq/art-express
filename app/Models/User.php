@@ -72,4 +72,7 @@ class User extends Authenticatable
     {
         $this->notify(new CustomResetPassword($token));
     }
+    public function auctions(){
+        return $this->hasMany(Auction::class,'host_id');
+    }
 }
