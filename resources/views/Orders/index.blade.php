@@ -1,17 +1,22 @@
 @extends('layouts.' . $role . 'Layout.layout')
 @section('title')
-    {{request()->is('artist/sales')?"Sales":"Orders"}} | Art-Express
+    {{ request()->is('artist/sales') ? 'Sales' : 'Orders' }} | Art-Express
 @endsection
 @section('page')
     <div class="container-fluid pt-4 px-4">
-        <div class="d-flex justify-content-between">
-            <h2><i class="fas fa-box-open"></i> {{request()->is('artist/sales')?"Sales":"Orders"}}</h2>
-        @if (request()->is('artist/sales'))
-            <button class="btn btn-success btn-sm text-light" data-bs-toggle="modal" data-bs-target="#createAuctionModal">
-            <i class="fas fa-plus me-1"></i> Add Custom Request
-        </button>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="mb-0">
+                <i class="fas fa-box-open me-2"></i>
+                {{ request()->is('artist/sales') ? 'Sales' : 'Orders' }}
+            </h2>
+
+            @if (request()->is('artist/sales'))
+                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#customRequestModal">
+                    <i class="fas fa-plus me-1"></i> Add Custom Request
+                </button>
             @endif
         </div>
+
         @if ($orders->isEmpty())
             <div class="card shadow border-0 rounded-lg my-5">
                 <div class="card-body text-center p-5">
@@ -163,7 +168,8 @@
                                                 </div>
                                             @else
                                                 <div class="status-form">
-                                                    <form action="{{route('admin.order.status',$order->id)}}" method="POST" id="status-form">
+                                                    <form action="{{ route('admin.order.status', $order->id) }}"
+                                                        method="POST" id="status-form">
                                                         @csrf
                                                         <label class="d-flex gap-2 align-items-center">Status:
                                                             <select class="form-select" name="status" id="status-input"
