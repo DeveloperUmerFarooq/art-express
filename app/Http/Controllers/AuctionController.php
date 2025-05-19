@@ -9,4 +9,7 @@ class AuctionController extends Controller
     public function index (){
         return view('auction.index');
     }
+    public function test(){
+        return view('auction.test');
+    }
 }

@@ -148,6 +148,8 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
 
     Route::get('/auction',[AuctionController::class,'index'])->name('auction');
 
+    Route::get('/test-auction',[AuctionController::class,'test'])->name('auctions');
+
     Route::prefix('/profile')->group(function(){
         Route::get('/portfolio',[PortfolioController::class,'index'])->name('profile.index');
         Route::post('/portfolio/image',[PortfolioController::class,'addImage'])->name('profile.image');
