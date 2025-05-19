@@ -22,7 +22,7 @@ class RolePermissionSeeder extends Seeder
             'delete art',
             'manage users',
             'manage permissions',
-            'manage store',
+            'manage products',
             'manage artists',
             'manage profile',
             'manage categories',

@@ -9,9 +9,11 @@
             <h5 class="mb-0">
                 <i class="fas fa-sitemap me-2"></i>Manage SubCategories
             </h5>
+            @can('manage subcategories')
             <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#Add-SubCategory">
                 <i class="fas fa-plus-circle me-1"></i> Add SubCategory
             </button>
+            @endcan
         </div>
 
         <div class="card-body">

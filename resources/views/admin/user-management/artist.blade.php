@@ -9,9 +9,11 @@
             <h5 class="mb-0">
                 <i class="fas fa-palette me-2 text-light"></i> Manage Artists
             </h5>
+            @can('manage artists')
             <button class="btn btn-light btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#Add-Artist">
                 <i class="fas fa-user-plus me-1"></i> Add Artist
             </button>
+            @endcan
         </div>
         <div class="card-body p-4">
             <div class="table-responsive">

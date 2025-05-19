@@ -9,9 +9,11 @@
             <h5 class="mb-0">
                 <i class="fas fa-user-shield me-2"></i>Manage Permissions
             </h5>
+            @can('manage permissions')
             <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#Add-Permission">
                 <i class="fas fa-plus-circle me-1"></i> Add Permission
             </button>
+            @endcan
         </div>
 
         <div class="card-body">

@@ -9,9 +9,11 @@
             <h5 class="mb-0">
                 <i class="fas fa-folder-tree me-2"></i>Manage Categories
             </h5>
+            @can('manage categories')
             <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#Add-Category">
                 <i class="fas fa-plus-circle me-1"></i> Add Category
             </button>
+            @endcan
         </div>
 
         <div class="card-body">
