@@ -21,7 +21,14 @@ class RolePermissionSeeder extends Seeder
             'edit art',
             'delete art',
             'manage users',
-            'manage roles'
+            'manage permissions',
+            'manage store',
+            'manage artists',
+            'manage profile',
+            'manage categories',
+            'manage subcategories',
+            'manage blog',
+            'cancel order'
         ];
 
         // Create permissions for 'artist'
@@ -29,13 +36,20 @@ class RolePermissionSeeder extends Seeder
             'create art',
             'edit art',
             'delete art',
-            'view art'
+            'view art',
+            'buy art',
+            'manage profile',
+            'manage portfolio',
+            'manage blog',
+            'cancel order'
         ];
 
         // Create permissions for 'user'
         $userPermissions = [
             'view art',
-            'buy art'
+            'buy art',
+            'manage profile',
+            'cancel order'
         ];
 
         // Loop through the permission arrays and create permissions if they don't exist
