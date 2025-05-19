@@ -7,9 +7,9 @@
         <div class="d-flex justify-content-between">
             <h2><i class="fas fa-box-open"></i> {{request()->is('artist/sales')?"Sales":"Orders"}}</h2>
         @if (request()->is('artist/sales'))
-            <button class="btn btn-primary btn-sm text-light" data-bs-toggle="modal" data-bs-target="#customRequestModal">
-                <i class="fas fa-plus me-1">
-                    </i>Add Custom Request</button>
+            <button class="btn btn-success btn-sm text-light" data-bs-toggle="modal" data-bs-target="#createAuctionModal">
+            <i class="fas fa-plus me-1"></i> Add Custom Request
+        </button>
             @endif
         </div>
         @if ($orders->isEmpty())

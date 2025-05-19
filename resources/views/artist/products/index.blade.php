@@ -10,7 +10,7 @@
             <h3 class="fw-bold">
                 <i class="fas fa-box-open me-2"></i>Manage Products
             </h3>
-            <button class="btn btn-primary shadow-sm px-4 py-2" data-bs-toggle="modal" data-bs-target="#productModal">
+            <button class="btn btn-success btn-sm shadow-sm px-4 py-2" data-bs-toggle="modal" data-bs-target="#productModal">
                 <i class="fas fa-plus me-1"></i>Add Product
             </button>
         </div>
