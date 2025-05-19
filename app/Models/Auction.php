@@ -9,4 +9,9 @@ class Auction extends Model
 {
     /** @use HasFactory<\Database\Factories\AuctionFactory> */
     use HasFactory;
+    protected $guarded=[];
+
+    public function items(){
+        return $this->hasMany(AuctionItem::class,'auction_id');
+    }
 }
