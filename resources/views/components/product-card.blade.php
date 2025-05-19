@@ -50,7 +50,7 @@
     </div>
 
     <!-- Delete Button -->
-    @if (auth()->user()->can('manage products') ||
+    @if (auth()->user()->can('manage store') ||
          (auth()->user()->products()->where('id', $product->id)->exists() && auth()->user()->can('delete art')))
         <button class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2"
                 onclick="deleteProduct('{{ route($role . '.product.delete', $product->id) }}')"
