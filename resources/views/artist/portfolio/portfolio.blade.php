@@ -72,7 +72,7 @@
             <div class="portfolio">
                 @foreach ($images as $image)
                 <div class="position-relative" class="img">
-                    <img loading="lazy" src="{{asset($image->image_src)}}" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-url="{{asset($image->image_src)}}" alt="">
+                    <img loading="lazy" src="{{asset($image->image_src)}}" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-url="{{asset($image->image_src)}}" alt="art-works">
                 </div>
                 @endforeach
             </div>
