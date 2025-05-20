@@ -26,13 +26,19 @@ class AuctionsDataTable extends DataTable
             ->setRowId('id')
             ->addIndexColumn()
             ->addColumn('start_date', function ($query) {
-                return $query->created_at->format('d/m/Y');
+                return Carbon::parse($query->start_date)->format('d-m-Y');
             })
             ->editColumn('start_time', function ($query) {
                 return Carbon::parse($query->start_time)->format('h:i A');
             })
             ->editColumn('end_time', function ($query) {
                 return Carbon::parse($query->end_time)->format('h:i A');
+            })
+            ->editColumn('status',function($query){
+                return view('auction.columns.status',compact('query'));
+            })
+            ->addColumn('actions',function ($query){
+                return view('auction.columns.actions',compact('query'));
             });
     }
 
@@ -41,7 +47,8 @@ class AuctionsDataTable extends DataTable
      */
     public function query(Auction $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()
+        ->orderByRaw("FIELD(status, 'ongoing', 'upcoming', 'ended')");
     }
 
     /**
@@ -53,17 +60,10 @@ class AuctionsDataTable extends DataTable
             ->setTableId('auctions-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
+            ->ordering(false)
             //->dom('Bfrtip')
             ->orderBy(1)
-            ->selectStyleSingle()
-            ->buttons([
-                Button::make('excel'),
-                Button::make('csv'),
-                Button::make('pdf'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload')
-            ]);
+            ->selectStyleSingle();
     }
 
     /**
@@ -77,10 +77,12 @@ class AuctionsDataTable extends DataTable
                 ->searchable(false)
                 ->orderable(false),
             Column::make('title'),
+            Column::make('description'),
             Column::make('start_date'),
             Column::make('start_time'),
             Column::make('end_time'),
             Column::make('status'),
+            Column::make('actions')
         ];
     }
 

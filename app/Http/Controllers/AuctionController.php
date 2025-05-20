@@ -62,4 +62,9 @@ class AuctionController extends Controller
         $role=auth()->user()->getRoleNames()->first();
         return redirect()->route($role.'.auctions');
     }
+
+    public function items($id){
+        $items=AuctionItem::where('auction_id',$id)->get();
+        return view('auction.items',compact('items'));
+    }
 }
