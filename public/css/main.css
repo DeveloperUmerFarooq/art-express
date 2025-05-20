@@ -73,7 +73,7 @@ body:has(#product-page){
     visibility: visible;
     transform: translateY(0);
 } */
- .dropdown-menu{
+ .dropdown-menu::not(.auction-dropdown){
     animation:float-up .1s linear !important;
  }
 p{

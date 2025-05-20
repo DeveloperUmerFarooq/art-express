@@ -38,7 +38,9 @@
         @endif
     </div>
     @include('auction.modals.add-auction')
+    @include('auction.modals.edit-auction')
 @endsection
 @push('scripts')
     {{ $dataTable->scripts() }}
+    <script src="{{asset('js/auctionCrud.js')}}"></script>
 @endpush
