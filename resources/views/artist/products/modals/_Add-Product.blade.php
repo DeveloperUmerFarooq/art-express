@@ -77,7 +77,7 @@
                     </div>
 
                     <!-- Subcategory Select -->
-                    <div class="mb-3 d-none" id="subcategoryContainer">
+                    <div class="mb-3" id="subcategoryContainer">
                         <label for="subcategory" class="form-label fw-semibold">Subcategory</label>
                         <select class="form-select" id="subcategory" name="subcategory" required>
                             <option value="">Select a Subcategory</option>
