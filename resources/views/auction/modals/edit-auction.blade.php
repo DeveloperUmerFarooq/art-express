@@ -2,7 +2,7 @@
 <div class="modal fade" id="editAuctionModal" tabindex="-1" aria-labelledby="editAuctionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
         <div class="modal-content">
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{route($role.'.auction.update')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" id="auction-id" name="auction_id">
                 <div class="modal-header bg-warning">

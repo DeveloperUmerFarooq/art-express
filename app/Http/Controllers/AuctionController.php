@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\DataTables\AuctionsDataTable;
 use App\Models\Auction;
 use App\Models\AuctionItem;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Stmt\TryCatch;
 
 class AuctionController extends Controller
 {
@@ -37,28 +39,33 @@ class AuctionController extends Controller
             'items.*.starting_bid' => 'required|numeric|min:1',
             'items.*.image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
-        $auction = Auction::create([
-            'host_id' => Auth::id(),
-            'title' => $req->title,
-            'description' => $req->description,
-            'start_date' => $req->start_date,
-            'start_time' => $req->start_time,
-            'end_time' => $req->end_time,
-        ]);
-        foreach ($req->items as $item) {
-        $image = $item['image']->store('auction_items', 'public');
-        $imagePath=asset('storage/'.$image);
+        try{
+            $auction = Auction::create([
+                'host_id' => Auth::id(),
+                'title' => $req->title,
+                'description' => $req->description,
+                'start_date' => $req->start_date,
+                'start_time' => $req->start_time,
+                'end_time' => $req->end_time,
+            ]);
+            foreach ($req->items as $item) {
+            $image = $item['image']->store('auction_items', 'public');
+            $imagePath=asset('storage/'.$image);
 
-        AuctionItem::create([
-            'auction_id' => $auction->id,
-            'name' => $item['name'],
-            'description' => $item['description'],
-            'starting_bid' => $item['starting_bid'],
-            'current_bid' => null,
-            'winner_id' => null,
-            'image' => $imagePath,
-        ]);
-    }
+            AuctionItem::create([
+                'auction_id' => $auction->id,
+                'name' => $item['name'],
+                'description' => $item['description'],
+                'starting_bid' => $item['starting_bid'],
+                'current_bid' => null,
+                'winner_id' => null,
+                'image' => $imagePath,
+            ]);
+        }
+            toastr()->success("Auction created successfully!");
+        }catch(Exception $error){
+            toastr()->error("Operation Failed!");
+        }
         $role=auth()->user()->getRoleNames()->first();
         return redirect()->route($role.'.auctions');
     }
@@ -66,5 +73,31 @@ class AuctionController extends Controller
     public function items($id){
         $items=AuctionItem::where('auction_id',$id)->get();
         return view('auction.items',compact('items'));
+    }
+
+    public function update(Request $req){
+        try{
+            $auction=Auction::find($req->auction_id);
+            $auction->update([
+                'title' => $req->title??$auction->title,
+                'description' => $req->description??$auction->description,
+            ]);
+            toastr()->success("Auction Updated Successfully!");
+
+        }catch(Exception $error){
+            toastr()->error("Operation Failed!");
+        }
+        return redirect()->back();
+    }
+
+    public function delete($id){
+        try{
+            $auction=Auction::find($id);
+            $auction->delete();
+            toastr()->success("Auction Deleted Successfully!");
+        }catch(Exception $error){
+            toastr()->error("Operation Failed!");
+        }
+        return redirect()->back();
     }
 }

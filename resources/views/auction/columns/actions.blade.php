@@ -32,7 +32,8 @@
             </a>
         </li>
 
-        @if (!($startDate->toDateString() >= now()->toDateString()))
+        {{-- @if (!($startDate->toDateString() >= now()->toDateString())) --}}
+        @can('edit auction')
         <li>
             <a class="dropdown-item" href="#"
             data-bs-toggle="modal" data-bs-target="#editAuctionModal"
@@ -40,11 +41,14 @@
                 <i class="fas fa-edit me-2"></i> Edit
             </a>
         </li>
-        <li>
-            <a class="dropdown-item text-danger" href="#">
+        @endcan
+        @can('delete auction')
+        <li onclick="deleteAuction('{{route($role.'.auction.delete',$query->id)}}')">
+            <a class="dropdown-item text-danger">
                 <i class="fas fa-trash-alt me-2"></i> Delete
             </a>
         </li>
-        @endif
+        @endcan
+        {{-- @endif --}}
     </ul>
 </div>

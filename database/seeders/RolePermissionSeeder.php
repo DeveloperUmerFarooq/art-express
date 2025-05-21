@@ -28,7 +28,10 @@ class RolePermissionSeeder extends Seeder
             'manage categories',
             'manage subcategories',
             'manage blog',
-            'cancel order'
+            'cancel order',
+            'create auction',
+            'edit auction',
+            'delete auction',
         ];
 
         // Create permissions for 'artist'
@@ -41,7 +44,10 @@ class RolePermissionSeeder extends Seeder
             'manage profile',
             'manage portfolio',
             'manage blog',
-            'cancel order'
+            'cancel order',
+            'create auction',
+            'edit auction',
+            'delete auction',
         ];
 
         // Create permissions for 'user'
