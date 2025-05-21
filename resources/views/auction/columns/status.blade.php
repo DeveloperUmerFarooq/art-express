@@ -10,5 +10,5 @@
 @endphp
 
 <div class="d-flex align-items-center">
-    <span class="{{ $statusClass }}">{{ $formattedStatus }}</span>  
+    <span class="{{ $statusClass }}">{{ $formattedStatus }}</span>
 </div>
