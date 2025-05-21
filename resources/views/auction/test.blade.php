@@ -38,6 +38,7 @@
     </div>
     @include('auction.modals.add-auction')
     @include('auction.modals.edit-auction')
+    @include('auction.modals.register')
 @endsection
 @push('scripts')
     {{ $dataTable->scripts() }}

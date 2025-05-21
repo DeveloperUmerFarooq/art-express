@@ -26,7 +26,7 @@
                 <i class="fas fa-undo-alt me-2"></i> Claim Refund
             </a>
         </li>
-        <li>
+        <li data-bs-toggle="modal" data-bs-target="#registerAuctionModal">
             <a class="dropdown-item" href="#">
                 <i class="fas fa-user-plus me-2"></i> Register
             </a>
