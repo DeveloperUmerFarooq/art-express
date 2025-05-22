@@ -74,7 +74,13 @@ class AuctionController extends Controller
 
     public function items($id)
     {
+        if (!AuctionItem::where('auction_id', $id)->exists()) {
+            toastr()->error("No Items Exist!");
+            return redirect()->back();
+        }
+
         $items = AuctionItem::where('auction_id', $id)->get();
+
         return view('auction.items', compact('items'));
     }
 
@@ -128,6 +134,11 @@ class AuctionController extends Controller
     public function register(Request $req)
     {
         // dd($req->toArray());
+        if (!Auction::where('id', $req->auction_id)->exists()) {
+            toastr()->error("Auction does not exist!");
+            return redirect()->back();
+        }
+
         try {
             $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
             $charge = $stripe->charges->create([
@@ -154,6 +165,10 @@ class AuctionController extends Controller
 
     public function refund($id)
     {
+        if (!Auction::where('id', $id)->exists()) {
+            toastr()->error("Auction does not exist!");
+            return redirect()->back();
+        }
         try {
             $reg = Registration::where('auction_id', $id)->where('user_id', auth()->id())->first();
             $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
