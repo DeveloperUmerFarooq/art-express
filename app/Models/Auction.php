@@ -17,4 +17,7 @@ class Auction extends Model
     public function host(){
         return $this->belongsTo(User::class,'host_id');
     }
+    public function registrations(){
+        return $this->hasMany(Registration::class);
+    }
 }

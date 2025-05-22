@@ -23,3 +23,7 @@ function deleteAuction(url){
         }
       });
 }
+
+function openRegister(id){
+    $('#auction_id').val(id);
+}

@@ -6,8 +6,8 @@
 <td  style="position: relative;">
     <div class="dropdown d-inline">
         <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="actionDropdown{{ $query->id }}"
-            data-bs-toggle="dropdown" aria-expanded="false"
-             @if ($startDate->toDateString() < now()->toDateString())disabled @endif>
+            data-bs-toggle="dropdown" aria-expanded="false">
+             {{-- @if ($startDate->toDateString() < now()->toDateString())disabled @endif> --}}
             Actions
         </button>
 
@@ -17,21 +17,24 @@
                     <i class="fas fa-eye me-2"></i> View Items
                 </a>
             </li>
-            <li>
+            @if (!auth()->user()->hasRegisteredForAuction($query->id))
+            <li data-bs-toggle="modal" data-bs-target="#registerAuctionModal" onclick="openRegister({{$query->id}})">
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-user-plus me-2"></i> Register
+                </a>
+            </li>
+            @else
+             <li>
                 <a class="dropdown-item" href="#">
                     <i class="fas fa-running me-2"></i> Participate
                 </a>
             </li>
             <li>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{route($role.'.auction.refund',$query->id)}}">
                     <i class="fas fa-undo-alt me-2"></i> Claim Refund
                 </a>
             </li>
-            <li data-bs-toggle="modal" data-bs-target="#registerAuctionModal">
-                <a class="dropdown-item" href="#">
-                    <i class="fas fa-user-plus me-2"></i> Register
-                </a>
-            </li>
+            @endif
             @if ($query->status==="upcoming")
             <li>
                 <a class="dropdown-item" href="#">
@@ -55,7 +58,7 @@
             @can('delete auction')
             @if ($query->host_id===auth()->id())
             <li onclick="deleteAuction('{{route($role.'.auction.delete',$query->id)}}')">
-                <a class="dropdown-item text-danger">
+                <a class="dropdown-item text-danger" href="#">
                     <i class="fas fa-trash-alt me-2"></i> Delete
                 </a>
             </li>

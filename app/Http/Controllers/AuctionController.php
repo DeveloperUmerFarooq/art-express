@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\DataTables\AuctionsDataTable;
 use App\Models\Auction;
 use App\Models\AuctionItem;
+use App\Models\Registration;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\TryCatch;
 
 class AuctionController extends Controller
@@ -39,7 +41,7 @@ class AuctionController extends Controller
             'items.*.starting_bid' => 'required|numeric|min:1',
             'items.*.image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
-        try{
+        try {
             $auction = Auction::create([
                 'host_id' => Auth::id(),
                 'title' => $req->title,
@@ -49,53 +51,123 @@ class AuctionController extends Controller
                 'end_time' => $req->end_time,
             ]);
             foreach ($req->items as $item) {
-            $image = $item['image']->store('auction_items', 'public');
-            $imagePath=asset('storage/'.$image);
+                $image = $item['image']->store('auction_items', 'public');
+                $imagePath = asset('storage/' . $image);
 
-            AuctionItem::create([
-                'auction_id' => $auction->id,
-                'name' => $item['name'],
-                'description' => $item['description'],
-                'starting_bid' => $item['starting_bid'],
-                'current_bid' => null,
-                'winner_id' => null,
-                'image' => $imagePath,
-            ]);
-        }
+                AuctionItem::create([
+                    'auction_id' => $auction->id,
+                    'name' => $item['name'],
+                    'description' => $item['description'],
+                    'starting_bid' => $item['starting_bid'],
+                    'current_bid' => null,
+                    'winner_id' => null,
+                    'image' => $imagePath,
+                ]);
+            }
             toastr()->success("Auction created successfully!");
-        }catch(Exception $error){
+        } catch (Exception $error) {
             toastr()->error("Operation Failed!");
         }
-        $role=auth()->user()->getRoleNames()->first();
-        return redirect()->route($role.'.auctions');
+        $role = auth()->user()->getRoleNames()->first();
+        return redirect()->route($role . '.auctions');
     }
 
-    public function items($id){
-        $items=AuctionItem::where('auction_id',$id)->get();
-        return view('auction.items',compact('items'));
+    public function items($id)
+    {
+        $items = AuctionItem::where('auction_id', $id)->get();
+        return view('auction.items', compact('items'));
     }
 
-    public function update(Request $req){
-        try{
-            $auction=Auction::find($req->auction_id);
+    public function update(Request $req)
+    {
+        try {
+            $auction = Auction::find($req->auction_id);
             $auction->update([
-                'title' => $req->title??$auction->title,
-                'description' => $req->description??$auction->description,
+                'title' => $req->title ?? $auction->title,
+                'description' => $req->description ?? $auction->description,
             ]);
             toastr()->success("Auction Updated Successfully!");
-
-        }catch(Exception $error){
+        } catch (Exception $error) {
             toastr()->error("Operation Failed!");
         }
         return redirect()->back();
     }
 
-    public function delete($id){
-        try{
-            $auction=Auction::find($id);
+    public function delete($id)
+    {
+        DB::beginTransaction();
+        try {
+            $auction = Auction::find($id);
+            if (!$auction) {
+                toastr("Auction does not exist!");
+                return redirect()->back();
+            }
+            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $regs = Registration::where('auction_id', $auction->id)->get();
+
+            if ($regs->count()) {
+                foreach ($regs as $reg) {
+                    $refund = $stripe->refunds->create([
+                        'charge' => $reg->payment_id,
+                    ]);
+                    if ($refund->status === 'succeeded') {
+                        $reg->delete();
+                    }
+                }
+            }
             $auction->delete();
+            DB::commit();
             toastr()->success("Auction Deleted Successfully!");
-        }catch(Exception $error){
+        } catch (Exception $error) {
+            toastr()->error("Operation Failed!");
+            DB::rollBack();
+        }
+        return redirect()->back();
+    }
+
+    public function register(Request $req)
+    {
+        // dd($req->toArray());
+        try {
+            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $charge = $stripe->charges->create([
+                'amount' => 2000 * 100,
+                'currency' => 'pkr',
+                'source' => $req->stripe_token,
+                'description' => "Registeration for Auction"
+            ]);
+            if ($charge->status === 'succeeded') {
+                Registration::create([
+                    'user_id' => $req->user_id,
+                    'auction_id' => $req->auction_id,
+                    'payment_id' => $charge->id,
+                ]);
+                toastr()->success("Registration Successfull!");
+            } else {
+                toastr()->error("Payment Process Failed!");
+            }
+        } catch (Exception $error) {
+            toastr()->error("Operation Failed! Try Again!");
+        }
+        return redirect()->back();
+    }
+
+    public function refund($id)
+    {
+        try {
+            $reg = Registration::where('auction_id', $id)->where('user_id', auth()->id())->first();
+            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $refund = $stripe->refunds->create([
+                'charge' => $reg->payment_id,
+                'amount' => 1900 * 100,
+            ]);
+            if ($refund->status === 'succeeded') {
+                $reg->delete();
+                toastr()->success("Refund Successfull!");
+            } else {
+                toastr()->error("Refund Failed!");
+            }
+        } catch (Exception $error) {
             toastr()->error("Operation Failed!");
         }
         return redirect()->back();

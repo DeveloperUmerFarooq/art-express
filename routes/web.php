@@ -155,6 +155,9 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
     Route::post('/auction/update',[AuctionController::class,'update'])->name("auction.update");
     Route::get('/auction/{id}',[AuctionController::class,'delete'])->name('auction.delete');
 
+    // register auction & Refund
+    Route::post('/auction/register',[AuctionController::class,'register'])->name('auction.register');
+    Route::get('/auction/{id}/refund',[AuctionController::class,'refund'])->name('auction.refund');
 
     Route::prefix('/profile')->group(function(){
         Route::get('/portfolio',[PortfolioController::class,'index'])->name('profile.index');
