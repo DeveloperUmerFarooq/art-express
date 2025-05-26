@@ -32,7 +32,7 @@ class ProductsController extends Controller
             'price' => 'required',
             'category' => 'required',
             'subcategory' => 'required',
-            'image' => 'required|mimes:peg,png,jpg,gif|max:2048'
+            'image' => 'required|mimes:jpeg,png,jpg,gif|max:2048'
 
         ]);
         if ($req->add_blog) {
@@ -40,17 +40,8 @@ class ProductsController extends Controller
                 'content' => 'required'
             ]);
         }
-        if(auth()->user()->profile->address){
+        if (auth()->user()->profile->address) {
             try {
-                $product = Products::create([
-                    'name' => $req->title,
-                    'status' => 'Unsold',
-                    'artist_id' => auth()->user()->id,
-                    'category_id'=>$req->category,
-                    'sub_category_id' => $req->subcategory,
-                    'description' => $req->description,
-                    'price' => $req->price,
-                ]);
                 if ($req->hasFile('image')) {
                     $image = $req->file('image');
                     $filename = now()->timestamp . '_' . uniqid() . '.' . $image->extension();
@@ -66,10 +57,21 @@ class ProductsController extends Controller
                     $path = 'portfolio/' . $filename;
                     Storage::disk('public')->put($path, (string) $image->encode());
                     $src = Storage::url($path);
-                    $product->image()->create([
-                        'artist_id' => auth()->user()->id,
-                        'image_src' => $src
-                    ]);
+                    if($src){
+                        $product = Products::create([
+                            'name' => $req->title,
+                            'status' => 'Unsold',
+                            'artist_id' => auth()->user()->id,
+                            'category_id' => $req->category,
+                            'sub_category_id' => $req->subcategory,
+                            'description' => $req->description,
+                            'price' => $req->price,
+                        ]);
+                        $product->image()->create([
+                            'artist_id' => auth()->user()->id,
+                            'image_src' => $src
+                        ]);
+                    }
                 }
                 if ($req->add_blog) {
                     $product->blog()->create([
@@ -135,7 +137,7 @@ class ProductsController extends Controller
 
     function delete($id)
     {
-        try{
+        try {
             $product = Products::find($id);
             $image = $product->image;
             $relativePath = str_replace('/storage/', '', $image->image_src);
@@ -144,8 +146,7 @@ class ProductsController extends Controller
             }
             $product->delete();
             toastr()->success("Product Deleted Successfully!");
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
             toastr()->error("Operation Failed!");
         }
         return redirect()->back();
