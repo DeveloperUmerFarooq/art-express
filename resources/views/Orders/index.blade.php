@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="text-right">
                                         <div class="h5 mb-0 font-weight-bold">
-                                            {{ number_format($order->items->sum('total_price')) }} Rs</div>
+                                            {{ number_format($order->items->sum('total_price'),0) }} Rs</div>
                                     </div>
                                 </div>
                             </div>
@@ -142,11 +142,11 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td class="text-right">{{ number_format($item->price, 2) }} Rs</td>
+                                                        <td class="text-right">{{ number_format($item->price, 0) }} Rs</td>
                                                         <td class="text-center">{{ $item->quantity }}</td>
                                                         <td class="text-right">250 Rs</td>
                                                         <td class="text-right font-weight-bold">
-                                                            {{ number_format($item->total_price, 2) }} Rs</td>
+                                                            {{ number_format($item->total_price, 0) }} Rs</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -154,7 +154,7 @@
                                                 <tr>
                                                     <td colspan="4" class="text-right font-weight-bold">Grand Total</td>
                                                     <td class="text-right font-weight-bold text-primary">
-                                                        {{ number_format($order->items->sum('total_price'), 2) }} Rs
+                                                        {{ number_format($order->items->sum('total_price'), 0) }} Rs
                                                     </td>
                                                 </tr>
                                             </tfoot>

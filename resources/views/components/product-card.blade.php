@@ -9,7 +9,7 @@
     <!-- Card Body -->
     <div class="card-body text-center">
         <h5 class="card-title fw-bold text-dark">{{ $product->name }}</h5>
-        <span class="badge bg-success fs-6 mb-3">Price: {{ $product->price }} Rs</span>
+        <span class="badge bg-success fs-6 mb-3">Price: {{number_format($product->price,0) }} Rs</span>
 
         <!-- Action Buttons -->
         <div class="d-flex flex-wrap justify-content-center gap-2">

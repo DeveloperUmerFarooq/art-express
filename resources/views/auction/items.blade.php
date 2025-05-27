@@ -43,7 +43,7 @@
                                 <i class="fas fa-flag mr-1"></i> Starting Bid
                             </small>
                             <span class="h5 font-weight-bold text-success">
-                                <i class="fas fa-dollar-sign mr-1"></i>{{ number_format($item['starting_bid'], 2) }}
+                            {{ number_format($item['starting_bid'], 0) }} Rs
                             </span>
                         </div>
                         <div class="text-end">
@@ -52,7 +52,7 @@
                             </small>
                             <span class="h5 font-weight-bold {{ $item['current_bid'] ? 'text-success' : 'text-secondary' }}">
                                 @if($item['current_bid'])
-                                    <i class="fas fa-dollar-sign mr-1"></i>{{ number_format($item['current_bid'], 2) }}
+                                {{ number_format($item['current_bid'], 0) }} Rs
                                 @else
                                     <i class="fas fa-times-circle mr-1"></i> No bids
                                 @endif
