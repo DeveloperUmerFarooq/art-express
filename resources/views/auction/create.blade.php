@@ -69,10 +69,23 @@
                         <div class="border p-3 mb-3 rounded">
                             <h5>Item {{ $i + 1 }}</h5>
 
-                            {{-- Item Image --}}
+                            {{-- Item Image with Preview --}}
                             <div class="mb-3">
                                 <label class="form-label">Item Image</label>
-                                <input type="file" name="items[{{ $i }}][image]" class="form-control" required>
+                                <input type="file" name="items[{{ $i }}][image]"
+                                       class="form-control item-image-input"
+                                       data-preview-target="item-preview-{{ $i }}"
+                                       required>
+
+                                {{-- Image Preview Container --}}
+                                <div class="mt-2 text-center">
+                                    <img id="item-preview-{{ $i }}"
+                                         src="https://via.placeholder.com/200x150?text=No+Image+Selected"
+                                         alt="Item Preview"
+                                         class="img-thumbnail"
+                                         style="max-width: 200px; max-height: 150px; display: block; margin: 0 auto;">
+                                </div>
+
                                 @error("items.$i.image")
                                     <p class="ms-1 text-danger">{{ $message }}</p>
                                 @enderror
@@ -118,4 +131,27 @@
             </div>
         </form>
     </div>
+
 @endsection
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.item-image-input').forEach(input => {
+                input.addEventListener('change', function(e) {
+                    const previewId = this.getAttribute('data-preview-target');
+                    const previewElement = document.getElementById(previewId);
+
+                    if (this.files && this.files[0]) {
+                        const reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            previewElement.src = e.target.result;
+                        }
+
+                        reader.readAsDataURL(this.files[0]);
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
