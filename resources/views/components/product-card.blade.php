@@ -15,12 +15,14 @@
         <div class="d-flex flex-wrap justify-content-center gap-2">
             @if (request()->is('artist/products'))
                 @can('edit art')
+                @if ($product->status==="Unsold")
                     <button class="btn btn-primary btn-sm"
                             data-bs-toggle="modal"
                             data-bs-target="#editProductModal"
                             onclick="edit({{ $product }}, '{{ asset($product->image->image_src) }}')">
                         <i class="fas fa-edit me-1"></i> Edit Product
                     </button>
+                @endif
                 @endcan
             @else
                 @can('view art')
@@ -52,10 +54,12 @@
     <!-- Delete Button -->
     @if (auth()->user()->can('manage store') ||
          (auth()->user()->products()->where('id', $product->id)->exists() && auth()->user()->can('delete art')))
-        <button class="btn btn-danger btn-sm position-absolute top-2 end-0 z-3"
-                onclick="deleteProduct('{{ route($role . '.product.delete', $product->id) }}')"
-                title="Delete Product">
-            <i class="fas fa-times"></i>
-        </button>
+         @if ($product->status==="Unsold")
+         <button class="btn btn-danger btn-sm position-absolute top-2 end-0 z-3"
+                 onclick="deleteProduct('{{ route($role . '.product.delete', $product->id) }}')"
+                 title="Delete Product">
+             <i class="fas fa-times"></i>
+         </button>
+         @endif
     @endif
 </div>
