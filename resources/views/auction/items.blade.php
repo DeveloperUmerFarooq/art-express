@@ -2,108 +2,171 @@
 @section('title')
     Auction Items | Art-Express
 @endsection
+
 @section('page')
-<div class="container py-5">
-    <div class="d-flex justify-content-between align-items-center mb-5">
-        <h1 class="h2 font-weight-bold text-dark">
-            <i class="fas fa-gavel mr-2"></i> Auction Items
-        </h1>
-        @if($role === 'admin' || $items[0]->auction->host_id===auth()->id())
-         <button class="btn btn-success btn-sm text-light">
-                    <i class="fas fa-plus me-1"></i> Add Item
-                </button>
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h2 font-weight-bold text-dark mb-1">
+                <i class="fas fa-gavel me-2 text-primary"></i> Auction Items
+            </h1>
+        </div>
+
+        @if($role === 'admin' || (count($items) > 0 && $items[0]->auction->host_id === auth()->id()))
+        <button class="btn btn-success btn-sm shadow-sm">
+            <i class="fas fa-plus me-2"></i> Add New Item
+        </button>
         @endif
     </div>
 
     @if(count($items) > 0)
-    <div class="row">
+    <div class="row g-4">
         @foreach($items as $item)
-        <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 shadow-sm hover-shadow-lg transition">
-                <div class="position-relative" style="height: 250px; overflow: hidden;">
-                    <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" class="card-img-top h-100 w-100 object-fit-contain" style="background-color: var(--secondary)"
-                    data-bs-toggle="modal" data-bs-target="#imageModal" data-image-url="{{$item['image']}}" >
-                    @if ($item->auction->status==="ongoing")
-                    <span class="position-absolute top-0 end-0 bg-danger text-white small fw-bold px-2 py-1 rounded m-2">
-                        <i class="fas fa-bolt mr-1"></i>Live
-                    </span>
-                    @endif
+        <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="card h-100 border-0 shadow-sm overflow-hidden hover-shadow-lg transition-all">
+                <div class="card-header bg-white border-0 p-0 position-relative">
+                    <button class="btn btn-danger btn-sm position-absolute top-2 end-2 z-3 shadow-sm"
+                            title="Delete Item" style="width: 30px; height: 30px">
+                        <i class="fas fa-times"></i>
+                    </button>
+
+                    <!-- Item Image -->
+                    <div class="position-relative" style="height: 220px; overflow: hidden;">
+                        <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}"
+                             class="img-fluid w-100 h-100 object-fit-contain"
+                             data-bs-toggle="modal" data-bs-target="#imageModal"
+                             data-image-url="{{$item['image']}}"
+                             style="background-color: var(--secondary)">
+
+                        <!-- Live Badge -->
+                        @if ($item->auction->status === "ongoing")
+                        <span class="position-absolute top-2 start-2 bg-danger text-white small fw-bold px-2 py-1 rounded z-2">
+                            <i class="fas fa-bolt me-1"></i> Live Auction
+                        </span>
+                        @endif
+
+                        <!-- Bid Count Badge -->
+                        <span class="position-absolute bottom-2 start-2 bg-dark text-white small fw-bold px-2 py-1 rounded">
+                            <i class="fas fa-gavel me-1"></i> {{ $item->bids_count ?? 0 }} Bids
+                        </span>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h3 class="h5 card-title font-weight-bold text-dark">
-                        <i class="fas fa-image mr-2 text-secondary"></i> {{ $item['name'] }}
+
+                <!-- Card Body -->
+                <div class="card-body d-flex flex-column">
+                    <h3 class="h5 card-title font-weight-bold text-dark mb-2">
+                        <i class="fas fa-image me-2 text-secondary"></i> {{ $item['name'] }}
                     </h3>
-                    <p class="card-text text-muted mb-3">
-                        <i class="fas fa-align-left mr-2 text-secondary"></i> {{ Str::limit($item['description'], 100) }}
+
+                    <p class="card-text text-muted mb-3 flex-grow-1">
+                        <i class="fas fa-align-left me-2 text-secondary"></i>{{ Str::limit($item['description'], 120) }}
                     </p>
 
-                    <div class="d-flex justify-content-between mb-3">
+                    <!-- Bid Information -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
                         <div>
                             <small class="text-muted d-block">
-                                <i class="fas fa-flag mr-1"></i> Starting Bid
+                                <i class="fas fa-flag me-1"></i> Starting Bid
                             </small>
                             <span class="h5 font-weight-bold text-success">
-                            {{ number_format($item['starting_bid'], 0) }} Rs
+                                {{ number_format($item['starting_bid'], 0) }} Rs
                             </span>
                         </div>
                         <div class="text-end">
                             <small class="text-muted d-block">
-                                <i class="fas fa-trophy mr-1"></i> Current Bid
+                                <i class="fas fa-trophy me-1"></i> Current Bid
                             </small>
                             <span class="h5 font-weight-bold {{ $item['current_bid'] ? 'text-success' : 'text-secondary' }}">
                                 @if($item['current_bid'])
                                 {{ number_format($item['current_bid'], 0) }} Rs
                                 @else
-                                    <i class="fas fa-times-circle mr-1"></i> No bids
+                                    <span class="badge bg-light text-dark">No bids yet</span>
                                 @endif
                             </span>
                         </div>
                     </div>
-                    <form action="" method="POST">
+
+                    <!-- Time Remaining (if ongoing) -->
+                    @if ($item->auction->status === "ongoing")
+                    <div class="mb-3">
+                        <small class="text-muted d-block">
+                            <i class="fas fa-clock me-1"></i> Time Remaining
+                        </small>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 65%"></div>
+                        </div>
+                        <small class="text-muted">2h 15m remaining</small>
+                    </div>
+                    @endif
+
+                    <!-- Bid Form -->
+                    <form action="" method="POST" class="mb-3">
                         @csrf
-                        <input type="number" class="form-control mb-2"
-                         min="{{$item["current_bid"]?$item["current_bid"]+1:$item["starting_bid"]+1}}"
-                         value="{{$item["current_bid"]?? $item["starting_bid"] + 1}}" required>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light">Rs</span>
+                            <input type="number" class="form-control"
+                                   min="{{$item["current_bid"] ? $item["current_bid"]+1 : $item["starting_bid"]+1}}"
+                                   value="{{$item["current_bid"] ?? $item["starting_bid"] + 1}}"
+                                   placeholder="Your bid amount" required>
+                        </div>
                     </form>
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-primary flex-grow-1">
-                            <i class="fas fa-gavel"></i> Place Bids
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex gap-2 mt-auto">
+                        <button class="btn btn-primary flex-grow-1 shadow-sm">
+                            <i class="fas fa-gavel me-2"></i> Place Bid
                         </button>
-                        @if($role === 'admin'|| $item->auction->host_id===auth()->id())
-                        <button class="btn btn-warning flex-grow-1 text-white">
-                            <i class="fas fa-edit mr-1"></i> Edit
+                        @if($role === 'admin' || $item->auction->host_id === auth()->id())
+                        <button class="btn btn-outline-secondary flex-grow-1">
+                            <i class="fas fa-edit me-2"></i> Edit
                         </button>
                         @endif
                     </div>
+                </div>
+
+                <!-- Card Footer -->
+                <div class="card-footer bg-white border-0 pt-0">
+                    <small class="text-muted">
+                        <i class="fas fa-calendar-alt me-1"></i>
+                        Added on {{ $item->created_at->format('M d, Y') }}
+                    </small>
                 </div>
             </div>
         </div>
         @endforeach
     </div>
     @else
-    <div class="text-center py-5">
-        <i class="fas fa-box-open fa-4x text-muted mb-4"></i>
-        <h3 class="h4 font-weight-bold text-dark">No auction items found</h3>
-        <p class="text-muted mb-4">There are currently no items available for auction.</p>
+    <!-- Empty State -->
+    <div class="text-center py-5 my-5">
+        <div class="mb-4">
+            <i class="fas fa-box-open fa-4x text-light" style="font-size: 5rem;"></i>
+        </div>
+        <h3 class="h4 font-weight-bold text-dark mb-3">No Auction Items Available</h3>
+        <p class="text-muted mb-4">There are currently no items listed for auction.</p>
+        <button class="btn btn-primary px-4">
+            <i class="fas fa-plus me-2"></i> Create New Auction
+        </button>
     </div>
     @endif
 </div>
 
-
 @include('auction.modals.image-preview')
 @endsection
 @push('scripts')
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const modalImage = document.getElementById('modalImage');
-        const viewImageButtons = document.querySelectorAll('img');
-
-        viewImageButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const imageUrl = this.getAttribute('data-image-url');
-                modalImage.src = imageUrl;
-            });
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const modalImage = document.getElementById('modalImage');
+    document.querySelectorAll('[data-bs-target="#imageModal"]').forEach(button => {
+        button.addEventListener('click', function () {
+            modalImage.src = this.getAttribute('data-image-url');
+            modalImage.alt = this.alt;
         });
     });
-    </script>
+
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[title]'));
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
+</script>
 @endpush
