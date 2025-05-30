@@ -31,7 +31,7 @@
           {{-- Starting Bid --}}
           <div class="mb-3">
             <label class="form-label">Starting Bid (PKR)</label>
-            <input type="number" name="starting_bid" step="1" min="1" class="form-control" required placeholder="Enter starting bid">
+            <input type="number" name="starting_bid" min="1" class="form-control" required placeholder="Enter starting bid">
             @error('starting_bid')
                 <p class="text-danger ms-1">{{$message}}</p>
             @enderror
