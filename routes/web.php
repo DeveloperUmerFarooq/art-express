@@ -7,6 +7,7 @@ use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\CustomRequestController;
+use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PortfolioController;
@@ -158,6 +159,10 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
     // register auction & Refund
     Route::post('/auction/register',[AuctionController::class,'register'])->name('auction.register');
     Route::get('/auction/{id}/refund',[AuctionController::class,'refund'])->name('auction.refund');
+
+    // auction items crud
+    Route::post('/item/store',[ItemsController::class,'store'])->name('item.store');
+    Route::get('/item/{id}',[ItemsController::class,'delete'])->name('item.delete');
 
     Route::prefix('/profile')->group(function(){
         Route::get('/portfolio',[PortfolioController::class,'index'])->name('profile.index');

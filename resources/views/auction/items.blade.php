@@ -13,7 +13,7 @@
         </div>
 
         @if($role === 'admin' || (count($items) > 0 && $items[0]->auction->host_id === auth()->id()))
-        <button class="btn btn-success btn-sm shadow-sm">
+        <button class="btn btn-success btn-sm shadow-sm" data-bs-toggle="modal" data-bs-target="#addItemModal">
             <i class="fas fa-plus me-2"></i> Add New Item
         </button>
         @endif
@@ -25,7 +25,7 @@
         <div class="col-xl-3 col-lg-4 col-md-6">
             <div class="card h-100 border-0 shadow-sm overflow-hidden hover-shadow-lg transition-all">
                 <div class="card-header bg-white border-0 p-0 position-relative">
-                    <button class="btn btn-danger btn-sm position-absolute top-2 end-2 z-3 shadow-sm"
+                    <button onclick="deleteItem('{{route($role.'.item.delete',$item->id)}}')" class="btn btn-danger btn-sm position-absolute top-2 end-2 z-3 shadow-sm"
                             title="Delete Item" style="width: 30px; height: 30px">
                         <i class="fas fa-times"></i>
                     </button>
@@ -86,19 +86,6 @@
                         </div>
                     </div>
 
-                    <!-- Time Remaining (if ongoing) -->
-                    @if ($item->auction->status === "ongoing")
-                    <div class="mb-3">
-                        <small class="text-muted d-block">
-                            <i class="fas fa-clock me-1"></i> Time Remaining
-                        </small>
-                        <div class="progress" style="height: 6px;">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 65%"></div>
-                        </div>
-                        <small class="text-muted">2h 15m remaining</small>
-                    </div>
-                    @endif
-
                     <!-- Bid Form -->
                     <form action="" method="POST" class="mb-3">
                         @csrf
@@ -149,10 +136,11 @@
     </div>
     @endif
 </div>
-
+@include('auction.modals.add-auction-item')
 @include('auction.modals.image-preview')
 @endsection
 @push('scripts')
+<script src="{{asset('js/auctionItems.js')}}"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const modalImage = document.getElementById('modalImage');

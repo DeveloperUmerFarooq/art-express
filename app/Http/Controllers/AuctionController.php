@@ -81,7 +81,7 @@ class AuctionController extends Controller
 
         $items = AuctionItem::where('auction_id', $id)->get();
 
-        return view('auction.items', compact('items'));
+        return view('auction.items', compact('items','id'));
     }
 
     public function update(Request $req)
@@ -133,7 +133,6 @@ class AuctionController extends Controller
 
     public function register(Request $req)
     {
-        // dd($req->toArray());
         if (!Auction::where('id', $req->auction_id)->exists()) {
             toastr()->error("Auction does not exist!");
             return redirect()->back();
