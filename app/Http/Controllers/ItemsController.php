@@ -37,6 +37,10 @@ class ItemsController extends Controller
         dd($req->toArray());
     }
 
+    public function update(Request $req){
+        $req->toArray();
+    }
+
     public function delete($id){
         try{
             $items=AuctionItem::find($id)->delete();

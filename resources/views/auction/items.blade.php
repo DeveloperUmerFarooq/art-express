@@ -104,7 +104,8 @@
                             <i class="fas fa-gavel me-2"></i> Place Bid
                         </button>
                         @if($role === 'admin' || $item->auction->host_id === auth()->id())
-                        <button class="btn btn-outline-secondary flex-grow-1">
+                        <button class="btn btn-outline-secondary flex-grow-1" data-bs-toggle="modal" data-bs-target="#editItemModal"
+                        onclick="editItem({{$item}})">
                             <i class="fas fa-edit me-2"></i> Edit
                         </button>
                         @endif
@@ -137,6 +138,7 @@
     @endif
 </div>
 @include('auction.modals.add-auction-item')
+@include('auction.modals.edit-auction-item')
 @include('auction.modals.image-preview')
 @endsection
 @push('scripts')

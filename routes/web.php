@@ -162,6 +162,7 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
 
     // auction items crud
     Route::post('/item/store',[ItemsController::class,'store'])->name('item.store');
+    Route::post('/item/update',[ItemsController::class,'update'])->name('item.update');
     Route::get('/item/{id}',[ItemsController::class,'delete'])->name('item.delete');
 
     Route::prefix('/profile')->group(function(){
