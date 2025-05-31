@@ -99,12 +99,14 @@
                                 data-bs-target="#imageModal" data-image-url="{{ asset($image->image_src) }}"
                                 alt="">
                             @can('manage portfolio')
+                            @if ($image->product?->status!=="sold")
                                 <a href="#"
                                     onclick="deleteImage('{{ route('artist.profile.image.delete', $image->id) }}')"
                                     class="position-absolute top-0 end-0 mt-2 me-1 btn btn-danger p-1">
                                     <i class="fas fa-trash-alt text-white"></i>
                                 </a>
                             @endcan
+                            @endif
                         </div>
                     @endforeach
                 </div>

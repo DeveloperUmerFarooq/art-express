@@ -16,7 +16,7 @@
             @if (request()->is('artist/products'))
                 @can('edit art')
                 @if ($product->status==="Unsold")
-                    <button class="btn btn-primary btn-sm"
+                    <button class="btn btn-warning btn-sm"
                             data-bs-toggle="modal"
                             data-bs-target="#editProductModal"
                             onclick="edit({{ $product }}, '{{ asset($product->image->image_src) }}')">

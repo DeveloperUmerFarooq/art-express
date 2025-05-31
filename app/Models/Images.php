@@ -13,4 +13,7 @@ class Images extends Model
     public function artist(){
         return $this->hasOne(User::class);
     }
+    public function product(){
+        return $this->belongsTo(Products::class,'product_id');
+    }
 }
