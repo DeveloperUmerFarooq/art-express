@@ -108,7 +108,7 @@ class AuctionController extends Controller
                 toastr("Auction does not exist!");
                 return redirect()->back();
             }
-            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
             $regs = Registration::where('auction_id', $auction->id)->get();
 
             if ($regs->count()) {
@@ -139,7 +139,7 @@ class AuctionController extends Controller
         }
 
         try {
-            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
             $charge = $stripe->charges->create([
                 'amount' => 2000 * 100,
                 'currency' => 'pkr',
@@ -170,7 +170,7 @@ class AuctionController extends Controller
         }
         try {
             $reg = Registration::where('auction_id', $id)->where('user_id', auth()->id())->first();
-            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
             $refund = $stripe->refunds->create([
                 'charge' => $reg->payment_id,
                 'amount' => 1900 * 100,

@@ -1,3 +1,8 @@
+@php
+    use Carbon\Carbon;
+    $startDate = Carbon::parse($items[0]->auction->start_date);
+@endphp
+
 @extends('layouts.' . $role . 'Layout.layout')
 @section('title')
     Auction Items | Art-Express
@@ -25,10 +30,12 @@
         <div class="col-xl-3 col-lg-4 col-md-6">
             <div class="card h-100 border-0 shadow-sm overflow-hidden hover-shadow-lg transition-all">
                 <div class="card-header bg-white border-0 p-0 position-relative">
+            @if ($startDate->toDateString() > now()->toDateString())
                     <button onclick="deleteItem('{{route($role.'.item.delete',$item->id)}}')" class="btn btn-danger btn-sm position-absolute top-2 end-2 z-3 shadow-sm"
                             title="Delete Item" style="width: 30px; height: 30px">
                         <i class="fas fa-times"></i>
                     </button>
+            @endif
 
                     <!-- Item Image -->
                     <div class="position-relative" style="height: 220px; overflow: hidden;">
@@ -87,6 +94,7 @@
                     </div>
 
                     <!-- Bid Form -->
+                    @if (Request::is('*/participate*'))
                     <form action="" method="POST" class="mb-3">
                         @csrf
                         <div class="input-group">
@@ -97,17 +105,22 @@
                                    placeholder="Your bid amount" required>
                         </div>
                     </form>
+                    @endif
 
                     <!-- Action Buttons -->
                     <div class="d-flex gap-2 mt-auto">
-                        <button class="btn btn-primary flex-grow-1 shadow-sm">
+                        @if (Request::is("*/participate"))
+                        <button class="btn btn-success flex-grow-1 shadow-sm">
                             <i class="fas fa-gavel me-2"></i> Place Bid
                         </button>
+                        @endif
                         @if($role === 'admin' || $item->auction->host_id === auth()->id())
-                        <button class="btn btn-outline-secondary flex-grow-1" data-bs-toggle="modal" data-bs-target="#editItemModal"
+            @if ($startDate->toDateString() > now()->toDateString())
+                        <button class="btn btn-outline-warning flex-grow-1" data-bs-toggle="modal" data-bs-target="#editItemModal"
                         onclick="editItem({{$item}})">
                             <i class="fas fa-edit me-2"></i> Edit
                         </button>
+                        @endif
                         @endif
                     </div>
                 </div>

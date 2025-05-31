@@ -57,7 +57,7 @@ class OrderController extends Controller
         ],[
             'tel.phone' => 'Please enter a valid Pakistani phone number.',
         ]);
-        
+
         if(!User::where('email',$req->customer_email)->exists()){
             $emailValidation=$this->emailValidator->validate($req->customer_email);
             if (
@@ -79,7 +79,7 @@ class OrderController extends Controller
         if ($req->paymentMethod !== "card") {
             $this->placeOrder($req, $product);
         } else {
-            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
             $charge = $stripe->charges->create([
                 'amount' => ($product->price + 250) * 100,
                 'currency' => 'pkr',
@@ -152,7 +152,7 @@ class OrderController extends Controller
             }
 
             if ($order->payment_id) {
-                $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+                $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
                 $amount = $order->items()->sum('total_price');
                 $totalAmount = intval($amount);
 
