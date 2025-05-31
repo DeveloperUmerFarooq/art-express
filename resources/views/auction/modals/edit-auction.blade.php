@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center py-3 justify-content-center">
-                    <button class="btn btn-success"><i class="fas fa-save me-1"></i> Update Auction</button>
+                    <button class="btn btn-warning"><i class="fas fa-save me-1"></i> Update Auction</button>
                 </div>
             </form>
         </div>
