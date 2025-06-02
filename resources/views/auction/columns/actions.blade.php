@@ -24,13 +24,13 @@
                 </a>
             </li>
             @else
-            @if ($query->status==="ongoing")
+            {{-- @if ($query->status==="ongoing") --}}
             <li>
-               <a class="dropdown-item" href="#">
+               <a class="dropdown-item" href="{{route($role.'.auction.participate',$query->id)}}">
                    <i class="fas fa-running me-2"></i> Participate
                </a>
            </li>
-            @endif
+            {{-- @endif --}}
             <li>
                 <a class="dropdown-item" href="{{route($role.'.auction.refund',$query->id)}}">
                     <i class="fas fa-undo-alt me-2"></i> Claim Refund
