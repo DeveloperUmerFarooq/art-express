@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\AuctionsDataTable;
+use App\Mail\AuctionStart;
 use App\Models\Auction;
 use App\Models\AuctionItem;
 use App\Models\Registration;
@@ -10,6 +11,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use PhpParser\Node\Stmt\TryCatch;
 
 class AuctionController extends Controller
@@ -18,6 +20,44 @@ class AuctionController extends Controller
     {
         return view('auction.index');
     }
+
+    public function start($id)
+    {
+
+        $auction = Auction::find($id);
+        if (!$auction) {
+            toastr()->error("Auction Not Found!");
+            return redirect()->back();
+        }
+        try {
+            $auction->update([
+                'status' => 'ongoing'
+            ]);
+            $registeredUsers = $auction->registeredUsers;
+            foreach ($registeredUsers as $user) {
+                Mail::to($user->email)->send(new AuctionStart($auction, $user));
+            }
+            toastr()->success("Auction Started!");
+        } catch (\Exception $error) {
+            toastr()->error("Operation Failed!");
+        }
+        return redirect()->back();
+    }
+
+    public function placeBid(Request $req, $id)
+    {
+        $item = AuctionItem::find($id);
+        $minBid = $item->current_bid ? $item->current_bid + 100 : $item->starting_bid + 1;
+        $req->validate([
+            'bid_amount' => 'required|numeric|min:'. $minBid,
+        ]);
+        $item->update([
+            "current_bid"=>$req->bid_amount
+        ]);
+        toastr()->success("Bid Placed Successfully!");
+        return redirect()->back()->with(["message"=>"Bid Placed Successfully!","amount"=>$item->current_bid,"item_id"=>$item->id]);
+    }
+
     public function test(AuctionsDataTable $datatable)
     {
         $count = Auction::count();
@@ -81,7 +121,7 @@ class AuctionController extends Controller
 
         $items = AuctionItem::where('auction_id', $id)->get();
 
-        return view('auction.items', compact('items','id'));
+        return view('auction.items', compact('items', 'id'));
     }
 
     public function update(Request $req)

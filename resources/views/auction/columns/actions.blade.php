@@ -24,13 +24,13 @@
                 </a>
             </li>
             @else
-            {{-- @if ($query->status==="ongoing") --}}
+            @if ($query->status==="ongoing")
             <li>
                <a class="dropdown-item" href="{{route($role.'.auction.participate',$query->id)}}">
                    <i class="fas fa-running me-2"></i> Participate
                </a>
            </li>
-            {{-- @endif --}}
+            @endif
             <li>
                 <a class="dropdown-item" href="{{route($role.'.auction.refund',$query->id)}}">
                     <i class="fas fa-undo-alt me-2"></i> Claim Refund
@@ -39,13 +39,13 @@
             @endif
             @if ($query->status==="upcoming")
             <li>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{route($role.'.auction.start',$query->id)}}">
                     <i class="fas fa-gavel me-2"></i> Start Auction
                 </a>
             </li>
             @endif
 
-            {{-- @if ($startDate->toDateString() > now()->toDateString()) --}}
+            @if ($startDate->toDateString() > now()->toDateString())
             @can('edit auction')
             @if ($query->host_id===auth()->id())
             <li>
@@ -66,7 +66,7 @@
             </li>
             @endif
             @endcan
-            {{-- @endif --}}
+            @endif
         </ul>
     </div>
 </td>

@@ -166,7 +166,9 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
     Route::get('/item/{id}',[ItemsController::class,'delete'])->name('item.delete');
 
     // Bidding and aprticipation
+    Route::get('/auction/{id}/start',[AuctionController::class,'start'])->name('auction.start');
     Route::get('/auction/{id}/participate',[AuctionController::class,'items'])->name('auction.participate');
+    Route::post('/item/{id}/place-bid',[AuctionController::class,'placeBid'])->name('bid.place');
 
     Route::prefix('/profile')->group(function(){
         Route::get('/portfolio',[PortfolioController::class,'index'])->name('profile.index');

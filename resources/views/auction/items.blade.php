@@ -18,9 +18,17 @@
         </div>
 
         @if($role === 'admin' || (count($items) > 0 && $items[0]->auction->host_id === auth()->id()))
+        @if($items[0]->auction->status==='ongoing')
+        <a href="">
+            <button class="btn btn-danger btn-sm shadow-sm">
+            <i class="fas fa-gavel me-2"></i> End Auction
+        </button>
+        </a>
+        @else
         <button class="btn btn-success btn-sm shadow-sm" data-bs-toggle="modal" data-bs-target="#addItemModal">
             <i class="fas fa-plus me-2"></i> Add New Item
         </button>
+        @endif
         @endif
     </div>
 
@@ -95,11 +103,11 @@
 
                     <!-- Bid Form -->
                     @if (Request::is('*/participate*'))
-                    <form action="" method="POST" class="mb-3">
+                    <form action="{{route($role.'.bid.place',$item["id"])}}" id="bid-form-{{$item->id}}" method="POST" class="mb-3">
                         @csrf
                         <div class="input-group">
                             <span class="input-group-text bg-light">Rs</span>
-                            <input type="number" class="form-control"
+                            <input type="number" name="bid_amount" class="form-control"
                                    min="{{$item["current_bid"] ? $item["current_bid"]+1 : $item["starting_bid"]+1}}"
                                    value="{{$item["current_bid"] ?? $item["starting_bid"] + 1}}"
                                    placeholder="Your bid amount" required>
@@ -110,7 +118,9 @@
                     <!-- Action Buttons -->
                     <div class="d-flex gap-2 mt-auto">
                         @if (Request::is("*/participate"))
-                        <button class="btn btn-success flex-grow-1 shadow-sm">
+                        <button class="btn btn-success flex-grow-1 shadow-sm"
+                        onclick="document.getElementById('bid-form-{{$item->id}}').submit()"
+                        >
                             <i class="fas fa-gavel me-2"></i> Place Bid
                         </button>
                         @endif
