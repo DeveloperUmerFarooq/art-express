@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTables\AuctionsDataTable;
 use App\Mail\AuctionStart;
+use App\Mail\WinnerPaymentMail;
 use App\Models\Auction;
 use App\Models\AuctionItem;
 use App\Models\Registration;
@@ -44,6 +45,23 @@ class AuctionController extends Controller
         return redirect()->back();
     }
 
+    public function end($id){
+        try{
+            $auction=Auction::find($id);
+            $items=$auction->items;
+            foreach($items as $item){
+                Mail::to($item->winner->email)->send(new WinnerPaymentMail($item,$auction));
+            }
+            $auction->update([
+                "status"=>"ended"
+            ]);
+            toastr()->success("Auction Ended Successfully");
+        }catch(\Exception $error){
+            toastr()->error("Operation Failed!");
+        }
+        return redirect()->route('auctions');
+    }
+
     public function placeBid(Request $req, $id)
     {
         $item = AuctionItem::find($id);
@@ -52,7 +70,8 @@ class AuctionController extends Controller
             'bid_amount' => 'required|numeric|min:'. $minBid,
         ]);
         $item->update([
-            "current_bid"=>$req->bid_amount
+            "current_bid"=>$req->bid_amount,
+            "winner_id"=>$req->user_id,
         ]);
         toastr()->success("Bid Placed Successfully!");
         return redirect()->back()->with(["message"=>"Bid Placed Successfully!","amount"=>$item->current_bid,"item_id"=>$item->id]);

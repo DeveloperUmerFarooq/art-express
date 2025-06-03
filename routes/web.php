@@ -6,6 +6,7 @@ use App\Http\Controllers\AuctionController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomRequestController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\OrderController;
@@ -149,7 +150,6 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
 
     Route::get('/auction',[AuctionController::class,'index'])->name('auction');
 
-    Route::get('/test-auction',[AuctionController::class,'test'])->name('auctions');
     Route::get('/auction/add',[AuctionController::class,'form'])->name('auction.form');
     Route::post('/auction/add',[AuctionController::class,'store'])->name("auction.store");
     Route::get('/auction/{id}/items',[AuctionController::class,'items'])->name("auction.items");
@@ -167,6 +167,7 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
 
     // Bidding and aprticipation
     Route::get('/auction/{id}/start',[AuctionController::class,'start'])->name('auction.start');
+    Route::get('/auction/{id}/end',[AuctionController::class,'end'])->name('auction.end');
     Route::get('/auction/{id}/participate',[AuctionController::class,'items'])->name('auction.participate');
     Route::post('/item/{id}/place-bid',[AuctionController::class,'placeBid'])->name('bid.place');
 
@@ -223,6 +224,7 @@ Route::prefix('/user')->name('user.')->middleware(['role:user'])->group(function
     });
 });
 Route::post('/order',[OrderController::class,'store'])->name('order.store');
+Route::get('/checkout/payment/{item}', [CheckoutController::class, 'show'])->name('checkout.payment');
 Route::get('/order/{id}',[OrderController::class,'cancel'])->name('order.cancel');
 Route::get('/comments/{id}/time', function ($id) {
     $comment = Comment::find($id);
@@ -230,3 +232,5 @@ Route::get('/comments/{id}/time', function ($id) {
 })->name('comment.time');
 Route::get('/blogs/{id}/comments/load', [BlogsController::class, 'loadMoreComments'])->name('blog.comments.load');
 });
+
+Route::get('/test-auction',[AuctionController::class,'test'])->name('auctions');

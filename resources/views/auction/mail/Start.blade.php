@@ -52,7 +52,7 @@
 
         <a href="{{ route('artist.auction.participate',$auction->id) }}" class="button">Enter Auction</a>
 
-        <p class="footer">Thank you for being part of our community.<br>— The {{ config('app.name') }} Team</p>
+        <p class="footer">Thank you for being part of our community.<br>— The Art-Express Team</p>
     </div>
 </body>
 </html>

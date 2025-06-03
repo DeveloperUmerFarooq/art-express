@@ -19,7 +19,7 @@
 
         @if($role === 'admin' || (count($items) > 0 && $items[0]->auction->host_id === auth()->id()))
         @if($items[0]->auction->status==='ongoing')
-        <a href="">
+        <a href="{{route($role.'.auction.end',$items[0]->auction->id)}}">
             <button class="btn btn-danger btn-sm shadow-sm">
             <i class="fas fa-gavel me-2"></i> End Auction
         </button>
@@ -107,6 +107,7 @@
                         @csrf
                         <div class="input-group">
                             <span class="input-group-text bg-light">Rs</span>
+                            <input type="hidden" name="user_id" value="{{auth()->id()}}">
                             <input type="number" name="bid_amount" class="form-control"
                                    min="{{$item["current_bid"] ? $item["current_bid"]+1 : $item["starting_bid"]+1}}"
                                    value="{{$item["current_bid"] ?? $item["starting_bid"] + 1}}"
