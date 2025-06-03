@@ -23,10 +23,11 @@
 <script src="https://js.stripe.com/basil/stripe.js"></script>
 <script>
         var stripe = Stripe("{{config('services.stripe.key')}}");
-        Pusher.logToConsole = true;
-        var key = "{{ env('PUSHER_APP_KEY') }}";
-        var cluster = "{{ env('PUSHER_APP_CLUSTER') }}";
+        // Pusher.logToConsole = true;
+        var key = "{{ config('services.pusher.key') }}";
+        var cluster = "{{ config('services.pusher.cluster') }}";
         var pusher = new Pusher(key, {
             cluster: cluster,
         });
+        console.log(pusher);
 </script>

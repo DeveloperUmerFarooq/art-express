@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\AuctionsDataTable;
+use App\Events\BidEvent;
 use App\Mail\AuctionStart;
 use App\Mail\WinnerPaymentMail;
 use App\Models\Auction;
@@ -65,6 +66,7 @@ class AuctionController extends Controller
     public function placeBid(Request $req, $id)
     {
         $item = AuctionItem::find($id);
+        $auction=$item->auction->id;
         $minBid = $item->current_bid ? $item->current_bid + 100 : $item->starting_bid + 1;
         $req->validate([
             'bid_amount' => 'required|numeric|min:'. $minBid,
@@ -73,6 +75,7 @@ class AuctionController extends Controller
             "current_bid"=>$req->bid_amount,
             "winner_id"=>$req->user_id,
         ]);
+        broadcast(new BidEvent($auction,$item->current_bid,$item->id));
         toastr()->success("Bid Placed Successfully!");
         return redirect()->back()->with(["message"=>"Bid Placed Successfully!","amount"=>$item->current_bid,"item_id"=>$item->id]);
     }

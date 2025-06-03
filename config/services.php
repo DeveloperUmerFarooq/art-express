@@ -38,5 +38,9 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    'pusher'=>[
+        'key'=>env('PUSHER_APP_KEY'),
+        'cluster'=>env('PUSHER_APP_CLUSTER'),
+    ]
 
 ];

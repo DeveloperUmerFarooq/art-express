@@ -91,7 +91,7 @@
                             <small class="text-muted d-block">
                                 <i class="fas fa-trophy me-1"></i> Current Bid
                             </small>
-                            <span class="h5 font-weight-bold {{ $item['current_bid'] ? 'text-success' : 'text-secondary' }}">
+                            <span class="h5 font-weight-bold {{ $item['current_bid'] ? 'text-success' : 'text-secondary' }}" id="current-bid-{{$item->id}}">
                                 @if($item['current_bid'])
                                 {{ number_format($item['current_bid'], 0) }} Rs
                                 @else
@@ -108,7 +108,7 @@
                         <div class="input-group">
                             <span class="input-group-text bg-light">Rs</span>
                             <input type="hidden" name="user_id" value="{{auth()->id()}}">
-                            <input type="number" name="bid_amount" class="form-control"
+                            <input type="number" name="bid_amount" id="bid_input-{{$item->id}}" class="form-control"
                                    min="{{$item["current_bid"] ? $item["current_bid"]+1 : $item["starting_bid"]+1}}"
                                    value="{{$item["current_bid"] ?? $item["starting_bid"] + 1}}"
                                    placeholder="Your bid amount" required>
@@ -182,5 +182,14 @@ document.addEventListener('DOMContentLoaded', function () {
         return new bootstrap.Tooltip(tooltipTriggerEl);
     });
 });
+    const auction_id={{$items[0]->auction->id}};
+    const bidChannel=pusher.subscribe('bid.'+auction_id);
+    bidChannel.bind('bid.update',function(data){
+        console.log(data);
+        $(`#current-bid-${data.item_id}`).text(`${parseFloat(data.amount).toFixed(0)} Rs`)
+        .removeClass('text-secondary')
+        .addClass('text-success');
+        $(`#bid_input-${data.item_id}`).val(parseFloat(data.amount).toFixed(0));
+    })
 </script>
 @endpush
