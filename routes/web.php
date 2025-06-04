@@ -23,7 +23,7 @@ use App\Mail\OrderMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome');
+Route::view('/', 'welcome')->name('welcome');
 Auth::routes();
 Route::redirect('/home','/');
 Route::get('/login', function(){
@@ -231,6 +231,6 @@ Route::get('/comments/{id}/time', function ($id) {
     return response()->json(['updated_at' => $comment->updated_at->diffForHumans()]);
 })->name('comment.time');
 Route::get('/blogs/{id}/comments/load', [BlogsController::class, 'loadMoreComments'])->name('blog.comments.load');
-});
-
 Route::get('/test-auction',[AuctionController::class,'test'])->name('auctions');
+Route::post('/checkout/process',[CheckoutController::class,'checkout'])->name('item.checkout');
+});
