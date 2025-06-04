@@ -48,6 +48,10 @@ class ItemsController extends Controller
         ]);
         try {
             $item = AuctionItem::find($req->item_id);
+            if($item->auction->status!=="upcoming"){
+                toastr()->error("Cannot Update Item Now!");
+                return redirect()->back();
+            }
             $imagePath=$item->image;
             if($req->hasFile('image')){
                 $image = $req['image']->store('auction_items', 'public');
@@ -69,7 +73,12 @@ class ItemsController extends Controller
     public function delete($id)
     {
         try {
-            $items = AuctionItem::find($id)->delete();
+            $item = AuctionItem::find($id);
+             if($item->auction->status!=="upcoming"){
+                toastr()->error("Cannot Update Item Now!");
+                return redirect()->back();
+            }
+            $item->delete();
             toastr()->success("Item Deleted Successfully!");
         } catch (\Exception $error) {
             toastr()->error("Operation Failed!");

@@ -87,6 +87,10 @@ class AuctionController extends Controller
     }
     public function form(Request $req)
     {
+        if(!auth()->user()->profile->cnic){
+                toastr()->error("Please Complete your Profile!");
+                return redirect()->back();
+            }
         return view('auction.create')->with(['itemCount' => $req->item_count]);
     }
     public function store(Request $req)
@@ -167,7 +171,11 @@ class AuctionController extends Controller
         try {
             $auction = Auction::find($id);
             if (!$auction) {
-                toastr("Auction does not exist!");
+                toastr()->error("Auction does not exist!");
+                return redirect()->back();
+            }
+            if($auction->status!=="upcoming"){
+                toastr()->error("Cannot delete this auction now!");
                 return redirect()->back();
             }
             $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
@@ -200,6 +208,11 @@ class AuctionController extends Controller
             return redirect()->back();
         }
 
+        if(!auth()->user()->profile->cnic){
+            toastr()->error("Complete Your Profile!");
+            return redirect()->back();
+        }
+
         try {
             $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
             $charge = $stripe->charges->create([
@@ -226,10 +239,16 @@ class AuctionController extends Controller
 
     public function refund($id)
     {
-        if (!Auction::where('id', $id)->exists()) {
+        $auction=Auction::find($id);
+        if (!$auction) {
             toastr()->error("Auction does not exist!");
             return redirect()->back();
         }
+
+        if($auction->status!=="upcoming"){
+            toastr()->error("Cannot claim refund now!");
+        }
+        
         try {
             $reg = Registration::where('auction_id', $id)->where('user_id', auth()->id())->first();
             $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
