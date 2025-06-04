@@ -28,6 +28,9 @@ class AuctionsDataTable extends DataTable
             ->addColumn('start_date', function ($query) {
                 return Carbon::parse($query->start_date)->format('d-m-Y');
             })
+            ->addColumn('registrations',function($query){
+                return $query->registrations()->count();
+            })
             ->editColumn('start_time', function ($query) {
                 return Carbon::parse($query->start_time)->format('h:i A');
             })
@@ -78,6 +81,7 @@ class AuctionsDataTable extends DataTable
                 ->orderable(false),
             Column::make('title'),
             Column::make('description'),
+            Column::make('registrations')->addClass('text-center'),
             Column::make('start_date'),
             Column::make('start_time'),
             Column::make('end_time'),
