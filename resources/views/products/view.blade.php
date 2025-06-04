@@ -130,12 +130,14 @@
 
                             @if (auth()->user()->can('manage store') ||
                                     (auth()->user()->products()->where('id', $product->id)->exists() && auth()->user()->can('edit art')))
+                                @if ($product->status==="unsold")
                                 <div class="d-flex gap-2">
                                     <button class="btn btn-primary btn-lg w-100" data-bs-toggle="modal"
                                         data-bs-target="#editProductModal"
                                         onclick="edit({{ $product }},'{{ asset($product->image->image_src) }}')">Edit
                                         Product</button>
                                 </div>
+                                @endif
                             @endif
                             <!-- Additional Info -->
                             <div class="mt-3">
