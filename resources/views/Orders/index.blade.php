@@ -194,7 +194,7 @@
                                                     $canCancel = false;
 
                                                     if (
-                                                        $role === 'user' &&
+                                                        $role !== 'admin' &&
                                                         $order->status === 'pending' &&
                                                         $order->type === 'standard'
                                                     ) {
@@ -206,12 +206,8 @@
                                                     ) {
                                                         $canCancel = true;
                                                     }
-                                                    elseif (
-                                                        $role === 'artist' &&
-                                                        $order->status === 'pending' &&
-                                                        $order->artist_id == auth()->id()
-                                                    ) {
-                                                        $canCancel = true;
+                                                    else{
+                                                        $canCancel= false;
                                                     }
                                                 @endphp
 
