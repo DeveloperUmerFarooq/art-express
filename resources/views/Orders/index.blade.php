@@ -201,8 +201,7 @@
                                                         $canCancel = true;
                                                     }
                                                     elseif (
-                                                        $role === 'admin' &&
-                                                        !in_array($order->status, ['completed', 'cancelled'])
+                                                        $role === 'admin' && $order->status==="completed"
                                                     ) {
                                                         $canCancel = true;
                                                     }
