@@ -9,6 +9,7 @@ use App\Mail\WinnerPaymentMail;
 use App\Models\Auction;
 use App\Models\AuctionItem;
 use App\Models\Registration;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,12 @@ class AuctionController extends Controller
             toastr()->error("Auction Not Found!");
             return redirect()->back();
         }
+        $currentTime = Carbon::now();
+        $start_time = Carbon::parse($auction->start_date . ' ' . $auction->start_time)->addMinutes(5);
+        if (!$currentTime->greaterThanOrEqualTo($start_time)) {
+            toastr()->error("Cannot start auction right now!");
+            return redirect()->back();
+        }
         try {
             $auction->update([
                 'status' => 'ongoing'
@@ -46,18 +53,25 @@ class AuctionController extends Controller
         return redirect()->back();
     }
 
-    public function end($id){
-        try{
-            $auction=Auction::find($id);
-            $items=$auction->items;
-            foreach($items as $item){
-                Mail::to($item->winner->email)->send(new WinnerPaymentMail($item,$auction));
+    public function end($id)
+    {
+        try {
+            $auction = Auction::find($id);
+            $items = $auction->items;
+            $currentTime = Carbon::now();
+            $end_time = Carbon::parse($auction->start_date . ' ' . $auction->start_time);
+            if (!$currentTime->greaterThanOrEqualTo($end_time)) {
+                toastr()->error("Cannot end auction right now!");
+                return redirect()->back();
+            }
+            foreach ($items as $item) {
+                Mail::to($item->winner->email)->send(new WinnerPaymentMail($item, $auction));
             }
             $auction->update([
-                "status"=>"ended"
+                "status" => "ended"
             ]);
             toastr()->success("Auction Ended Successfully");
-        }catch(\Exception $error){
+        } catch (\Exception $error) {
             toastr()->error("Operation Failed!");
         }
         return redirect()->route('auctions');
@@ -66,18 +80,18 @@ class AuctionController extends Controller
     public function placeBid(Request $req, $id)
     {
         $item = AuctionItem::find($id);
-        $auction=$item->auction->id;
+        $auction = $item->auction->id;
         $minBid = $item->current_bid ? $item->current_bid + 100 : $item->starting_bid + 1;
         $req->validate([
-            'bid_amount' => 'required|numeric|min:'. $minBid,
+            'bid_amount' => 'required|numeric|min:' . $minBid,
         ]);
         $item->update([
-            "current_bid"=>$req->bid_amount,
-            "winner_id"=>$req->user_id,
+            "current_bid" => $req->bid_amount,
+            "winner_id" => $req->user_id,
         ]);
-        broadcast(new BidEvent($auction,$item->current_bid,$item->id));
+        broadcast(new BidEvent($auction, $item->current_bid, $item->id));
         toastr()->success("Bid Placed Successfully!");
-        return redirect()->back()->with(["message"=>"Bid Placed Successfully!","amount"=>$item->current_bid,"item_id"=>$item->id]);
+        return redirect()->back()->with(["message" => "Bid Placed Successfully!", "amount" => $item->current_bid, "item_id" => $item->id]);
     }
 
     public function test(AuctionsDataTable $datatable)
@@ -87,10 +101,10 @@ class AuctionController extends Controller
     }
     public function form(Request $req)
     {
-        if(!auth()->user()->profile->cnic){
-                toastr()->error("Please Complete your Profile!");
-                return redirect()->back();
-            }
+        if (!auth()->user()->profile->cnic) {
+            toastr()->error("Please Complete your Profile!");
+            return redirect()->back();
+        }
         return view('auction.create')->with(['itemCount' => $req->item_count]);
     }
     public function store(Request $req)
@@ -174,7 +188,7 @@ class AuctionController extends Controller
                 toastr()->error("Auction does not exist!");
                 return redirect()->back();
             }
-            if($auction->status!=="upcoming"){
+            if ($auction->status !== "upcoming") {
                 toastr()->error("Cannot delete this auction now!");
                 return redirect()->back();
             }
@@ -208,7 +222,7 @@ class AuctionController extends Controller
             return redirect()->back();
         }
 
-        if(!auth()->user()->profile->cnic){
+        if (!auth()->user()->profile->cnic) {
             toastr()->error("Complete Your Profile!");
             return redirect()->back();
         }
@@ -239,16 +253,16 @@ class AuctionController extends Controller
 
     public function refund($id)
     {
-        $auction=Auction::find($id);
+        $auction = Auction::find($id);
         if (!$auction) {
             toastr()->error("Auction does not exist!");
             return redirect()->back();
         }
 
-        if($auction->status!=="upcoming"){
+        if ($auction->status !== "upcoming") {
             toastr()->error("Cannot claim refund now!");
         }
-        
+
         try {
             $reg = Registration::where('auction_id', $id)->where('user_id', auth()->id())->first();
             $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
