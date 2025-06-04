@@ -11,7 +11,8 @@
             </h2>
 
             @if (request()->is('artist/sales'))
-                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#customRequestModal">
+                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#customRequestModal">
                     <i class="fas fa-plus me-1"></i> Add Custom Request
                 </button>
             @endif
@@ -46,7 +47,7 @@
                                     </div>
                                     <div class="text-right">
                                         <div class="h5 mb-0 font-weight-bold">
-                                            {{ number_format($order->items->sum('total_price'),0) }} Rs</div>
+                                            {{ number_format($order->items->sum('total_price'), 0) }} Rs</div>
                                     </div>
                                 </div>
                             </div>
@@ -190,25 +191,38 @@
 
                                             @can('cancel order')
                                                 @php
-                                                    $userIsNotSales = !auth()
-                                                        ->user()
-                                                        ->sales->contains('id', $order->id);
-                                                    $isPending = $order->status === 'pending';
-                                                    $adminCanCancel =
-                                                        $role === 'admin' && !in_array($order->status, ['completed']);
-                                                    $userCanCancel = $role !== 'admin' && $userIsNotSales && $isPending;
+                                                    $canCancel = false;
+
+                                                    if (
+                                                        $role === 'user' &&
+                                                        $order->status === 'pending' &&
+                                                        $order->type === 'standard'
+                                                    ) {
+                                                        $canCancel = true;
+                                                    }
+                                                    elseif (
+                                                        $role === 'admin' &&
+                                                        !in_array($order->status, ['completed', 'cancelled'])
+                                                    ) {
+                                                        $canCancel = true;
+                                                    }
+                                                    elseif (
+                                                        $role === 'artist' &&
+                                                        $order->status === 'pending' &&
+                                                        $order->artist_id == auth()->id()
+                                                    ) {
+                                                        $canCancel = true;
+                                                    }
                                                 @endphp
 
-                                                @if ($userCanCancel || $adminCanCancel)
+                                                @if ($canCancel && !request()->is('*/sales'))
                                                     <div class="d-flex gap-1 justify-content-end">
                                                         <button class="btn btn-outline-danger"
                                                             onclick="cancelOrder('{{ route('order.cancel', $order->id) }}')">
                                                             <i class="fas fa-times-circle"></i> Cancel Order
                                                         </button>
                                                     </div>
-                                                @endif
-
-                                                @if (!$userCanCancel && !$adminCanCancel && $role !== 'admin')
+                                                @else
                                                     <button class="btn btn-primary">{{ $order->status }}</button>
                                                 @endif
                                             @endcan
