@@ -17,6 +17,7 @@
                     <i class="fas fa-eye me-2"></i> View Items
                 </a>
             </li>
+            @can('can register in auction')
             @if (!auth()->user()->hasRegisteredForAuction($query->id))
             @if ($query->host_id!==auth()->id())
             <li data-bs-toggle="modal" data-bs-target="#registerAuctionModal" onclick="openRegister({{$query->id}})">
@@ -41,6 +42,7 @@
             </li>
             @endif
             @endif
+            @endcan
             @if ($query->status==="upcoming"&&$startDate->toDateString() === now()->toDateString())
             <li>
                 <a class="dropdown-item" href="{{route($role.'.auction.start',$query->id)}}">

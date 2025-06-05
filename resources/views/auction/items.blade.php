@@ -1,6 +1,7 @@
 @php
     use Carbon\Carbon;
-    $startDate = Carbon::parse($items[0]->auction->start_date);
+    $auction=$items[0]->auction;
+    $startDate = Carbon::parse($auction->start_date);
 @endphp
 
 @extends('layouts.' . $role . 'Layout.layout')
@@ -15,14 +16,14 @@
                 <h1 class="h2 font-weight-bold text-dark mb-1">
                     <i class="fas fa-gavel me-2 text-primary"></i> Auction Items
                 </h1>
-                @if ($items[0]->auction->status==="ongoing")
+                @if ($auction->status==="ongoing")
                 <div class="bg-danger rounded-circle" title="Live" style="width: 10px; height: 10px; cursor:pointer"></div>
                 @endif
             </div>
 
-            @if ($role === 'admin' || (count($items) > 0 && $items[0]->auction->host_id === auth()->id()))
-                @if ($items[0]->auction->status === 'ongoing')
-                    <a href="{{ route($role . '.auction.end', $items[0]->auction->id) }}">
+            @if (count($items) > 0 && $auction->host_id === auth()->id())
+                @if ($auction->status === 'ongoing')
+                    <a href="{{ route($role . '.auction.end', $auction->id) }}">
                         <button class="btn btn-danger btn-sm shadow-sm">
                             <i class="fas fa-gavel me-2"></i> End Auction
                         </button>
@@ -41,7 +42,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="card h-100 border-0 shadow-sm overflow-hidden hover-shadow-lg transition-all">
                             <div class="card-header bg-white border-0 p-0 position-relative">
-                                @if ($startDate->toDateString() > now()->toDateString()&&$role!=='user')
+                                @if ($startDate->toDateString() > now()->toDateString()&&$auction->host_id===auth()->id())
                                     <button onclick="deleteItem('{{ route($role . '.item.delete', $item->id) }}')"
                                         class="btn btn-danger btn-sm position-absolute top-2 end-2 z-3 shadow-sm"
                                         title="Delete Item" style="width: 30px; height: 30px">
@@ -127,13 +128,11 @@
                                             <i class="fas fa-gavel me-2"></i> Place Bid
                                         </button>
                                     @endif
-                                    @if ($role === 'admin' || $item->auction->host_id === auth()->id())
-                                        @if ($startDate->toDateString() > now()->toDateString())
+                                    @if ($item->auction->host_id === auth()->id() && $startDate->toDateString() > now()->toDateString())
                                             <button class="btn btn-outline-warning flex-grow-1" data-bs-toggle="modal"
                                                 data-bs-target="#editItemModal" onclick="editItem({{ $item }})">
                                                 <i class="fas fa-edit me-2"></i> Edit
                                             </button>
-                                        @endif
                                     @endif
                                 </div>
                             </div>
@@ -181,7 +180,7 @@
                 });
             });
         });
-        const auction_id = {{ $items[0]->auction->id }};
+        const auction_id = {{ $auction->id }};
         const bidChannel = pusher.subscribe('bid.' + auction_id);
         bidChannel.bind('bid.update', function(data) {
             console.log(data);

@@ -22,6 +22,9 @@
               <li class="nav-item pt-1">
                 <a class="nav-link fs-6" href="{{route('admin.order')}}">Orders</a>
               </li>
+              <li class="nav-item pt-1">
+                <a class="nav-link fs-6" href="{{route('auction')}}">Auctions</a>
+              </li>
               <li class="nav-item dropdown pt-1">
                 <a class="nav-link dropdown-toggle fs-6" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Management

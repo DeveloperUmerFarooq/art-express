@@ -101,6 +101,21 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
 
     Route::get('/user/{id}',[ProfileController::class,'profile'])->name('profile.details.view');
 
+    Route::get('/auction/add',[AuctionController::class,'form'])->name('auction.form');
+    Route::post('/auction/add',[AuctionController::class,'store'])->name("auction.store");
+    Route::post('/auction/update',[AuctionController::class,'update'])->name("auction.update");
+    Route::get('/auction/{id}',[AuctionController::class,'delete'])->name('auction.delete');
+
+    // auction items crud
+    Route::post('/item/store',[ItemsController::class,'store'])->name('item.store');
+    Route::post('/item/update',[ItemsController::class,'update'])->name('item.update');
+    Route::get('/item/{id}',[ItemsController::class,'delete'])->name('item.delete');
+
+    // Bidding and aprticipation
+    Route::get('/auction/{id}/start',[AuctionController::class,'start'])->name('auction.start');
+    Route::get('/auction/{id}/end',[AuctionController::class,'end'])->name('auction.end');
+
+
     Route::prefix('/profile')->group(function(){
         Route::get('/',[ProfileController::class,'index'])->name('profile');
         Route::post('/links',[ProfileController::class,'addSocialLinks'])->name('profile.links');
