@@ -36,8 +36,10 @@
             </div>
         @endif
     </div>
+    @if ($role!=='user')
     @include('auction.modals.add-auction')
     @include('auction.modals.edit-auction')
+    @endif
     @include('auction.modals.register')
 @endsection
 @push('scripts')

@@ -147,18 +147,10 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
 
     Route::get('/artist/{id}',[ProfileController::class,'portfolio'])->name('profile.view');
 
-
-    Route::get('/auction',[AuctionController::class,'index'])->name('auction');
-
     Route::get('/auction/add',[AuctionController::class,'form'])->name('auction.form');
     Route::post('/auction/add',[AuctionController::class,'store'])->name("auction.store");
-    Route::get('/auction/{id}/items',[AuctionController::class,'items'])->name("auction.items");
     Route::post('/auction/update',[AuctionController::class,'update'])->name("auction.update");
     Route::get('/auction/{id}',[AuctionController::class,'delete'])->name('auction.delete');
-
-    // register auction & Refund
-    Route::post('/auction/register',[AuctionController::class,'register'])->name('auction.register');
-    Route::get('/auction/{id}/refund',[AuctionController::class,'refund'])->name('auction.refund');
 
     // auction items crud
     Route::post('/item/store',[ItemsController::class,'store'])->name('item.store');
@@ -168,8 +160,6 @@ Route::prefix('/artist')->name('artist.')->middleware(['role:artist'])->group(fu
     // Bidding and aprticipation
     Route::get('/auction/{id}/start',[AuctionController::class,'start'])->name('auction.start');
     Route::get('/auction/{id}/end',[AuctionController::class,'end'])->name('auction.end');
-    Route::get('/auction/{id}/participate',[AuctionController::class,'items'])->name('auction.participate');
-    Route::post('/item/{id}/place-bid',[AuctionController::class,'placeBid'])->name('bid.place');
 
     Route::prefix('/profile')->group(function(){
         Route::get('/portfolio',[PortfolioController::class,'index'])->name('profile.index');
@@ -203,8 +193,6 @@ Route::prefix('/user')->name('user.')->middleware(['role:user'])->group(function
 
     Route::get('/orders',[OrderController::class,'index'])->name('order');
 
-    Route::get('/auction',[AuctionController::class,'index'])->name('auction');
-
 
     Route::get('/artists',[ArtistController::class,'artist'])->name('artist');
 
@@ -231,6 +219,15 @@ Route::get('/comments/{id}/time', function ($id) {
     return response()->json(['updated_at' => $comment->updated_at->diffForHumans()]);
 })->name('comment.time');
 Route::get('/blogs/{id}/comments/load', [BlogsController::class, 'loadMoreComments'])->name('blog.comments.load');
-Route::get('/test-auction',[AuctionController::class,'test'])->name('auctions');
+
+Route::get('/auctions',[AuctionController::class,'index'])->name('auction');
+Route::get('/auction/{id}/items',[AuctionController::class,'items'])->name("auction.items");
+
+Route::post('/auction/register',[AuctionController::class,'register'])->name('auction.register');
+Route::get('/auction/{id}/refund',[AuctionController::class,'refund'])->name('auction.refund');
+
+Route::get('/auction/{id}/participate',[AuctionController::class,'items'])->name('auction.participate');
+Route::post('/item/{id}/place-bid',[AuctionController::class,'placeBid'])->name('bid.place');
+
 Route::post('/checkout/process',[CheckoutController::class,'checkout'])->name('item.checkout');
 });

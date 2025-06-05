@@ -41,7 +41,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="card h-100 border-0 shadow-sm overflow-hidden hover-shadow-lg transition-all">
                             <div class="card-header bg-white border-0 p-0 position-relative">
-                                @if ($startDate->toDateString() > now()->toDateString())
+                                @if ($startDate->toDateString() > now()->toDateString()&&$role!=='user')
                                     <button onclick="deleteItem('{{ route($role . '.item.delete', $item->id) }}')"
                                         class="btn btn-danger btn-sm position-absolute top-2 end-2 z-3 shadow-sm"
                                         title="Delete Item" style="width: 30px; height: 30px">
@@ -104,7 +104,7 @@
 
                                 <!-- Bid Form -->
                                 @if (Request::is('*/participate*'))
-                                    <form action="{{ route($role . '.bid.place', $item['id']) }}"
+                                    <form action="{{ route('bid.place', $item['id']) }}"
                                         id="bid-form-{{ $item->id }}" method="POST" class="mb-3">
                                         @csrf
                                         <div class="input-group">
@@ -163,8 +163,10 @@
             </div>
         @endif
     </div>
+    @if ($role!=='user')
     @include('auction.modals.add-auction-item')
     @include('auction.modals.edit-auction-item')
+    @endif
     @include('auction.modals.image-preview')
 @endsection
 @push('scripts')

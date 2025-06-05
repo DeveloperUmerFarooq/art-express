@@ -49,7 +49,7 @@
                 </a>
               </li>
               <li class="nav-item pt-1">
-                <a class="nav-link fs-6" href="{{route('artist.auction')}}">Auctions</a>
+                <a class="nav-link fs-6" href="{{route('auction')}}">Auctions</a>
               </li>
               <li class="nav-item dropdown d-none d-lg-block">
                 <a class="nav-link dropdown-toggle no-togggle-icon fs-6" role="button" data-bs-toggle="dropdown" aria-expanded="false">

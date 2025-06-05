@@ -1,6 +1,6 @@
 <div class="modal fade" id="registerAuctionModal" tabindex="-1" aria-labelledby="registerAuctionModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <form method="POST" id="checkout-form" action="{{route($role.'.auction.register')}}" onsubmit="register(event)">
+      <form method="POST" id="checkout-form" action="{{route('auction.register')}}" onsubmit="register(event)">
         @csrf
         <input type="hidden" name="auction_id" id="auction-id">
         <div class="modal-content">

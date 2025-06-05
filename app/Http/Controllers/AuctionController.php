@@ -19,11 +19,11 @@ use PhpParser\Node\Stmt\TryCatch;
 
 class AuctionController extends Controller
 {
-    public function index()
+    public function index(AuctionsDataTable $datatable)
     {
-        return view('auction.index');
+        $count = Auction::count();
+        return $datatable->render('auction.index', compact('count'));
     }
-
     public function start($id)
     {
 
@@ -92,12 +92,6 @@ class AuctionController extends Controller
         broadcast(new BidEvent($auction, $item->current_bid, $item->id));
         toastr()->success("Bid Placed Successfully!");
         return redirect()->back()->with(["message" => "Bid Placed Successfully!", "amount" => $item->current_bid, "item_id" => $item->id]);
-    }
-
-    public function test(AuctionsDataTable $datatable)
-    {
-        $count = Auction::count();
-        return $datatable->render('auction.test', compact('count'));
     }
     public function form(Request $req)
     {

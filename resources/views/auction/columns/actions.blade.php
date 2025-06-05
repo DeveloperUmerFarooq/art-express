@@ -13,7 +13,7 @@
 
         <ul class="dropdown-menu auction-dropdown" aria-labelledby="actionDropdown{{ $query->id }}">
             <li>
-                <a class="dropdown-item auction-dropdown-item" href="{{ route($role . '.auction.items', $query->id) }}">
+                <a class="dropdown-item auction-dropdown-item" href="{{ route('auction.items', $query->id) }}">
                     <i class="fas fa-eye me-2"></i> View Items
                 </a>
             </li>
@@ -28,14 +28,14 @@
             @else
             @if ($query->status==="ongoing")
             <li>
-               <a class="dropdown-item" href="{{route($role.'.auction.participate',$query->id)}}">
+               <a class="dropdown-item" href="{{route('auction.participate',$query->id)}}">
                    <i class="fas fa-running me-2"></i> Participate
                </a>
            </li>
             @endif
             @if ($query->status==="upcoming")
             <li>
-                <a class="dropdown-item" href="{{route($role.'.auction.refund',$query->id)}}">
+                <a class="dropdown-item" href="{{route('auction.refund',$query->id)}}">
                     <i class="fas fa-undo-alt me-2"></i> Claim Refund
                 </a>
             </li>
