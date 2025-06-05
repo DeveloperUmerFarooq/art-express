@@ -128,9 +128,9 @@
                                 @endif
                             @endcan
 
-                            @if (auth()->user()->can('manage store') ||
-                                    (auth()->user()->products()->where('id', $product->id)->exists() && auth()->user()->can('edit art')))
-                                @if ($product->status==="unsold")
+                            @if (auth()->user()->can('manage store')||
+                                    ($product->artist_id===auth()->id() && auth()->user()->can('edit art')))
+                                @if ($sellable)
                                 <div class="d-flex gap-2">
                                     <button class="btn btn-primary btn-lg w-100" data-bs-toggle="modal"
                                         data-bs-target="#editProductModal"
