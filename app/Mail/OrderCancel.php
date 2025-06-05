@@ -18,11 +18,12 @@ class OrderCancel extends Mailable
      * Create a new message instance.
      */
 
-    public $order;
+    public $order,$name;
 
-    public function __construct(Order $order)
+    public function __construct(Order $order,$name)
     {
         $this->order=$order;
+        $this->name=$name;
     }
 
     /**
@@ -44,6 +45,7 @@ class OrderCancel extends Mailable
             view: 'mail.order_cancelled',
             with: [
             'order' => $this->order,
+            'name'=> $this->name,
         ],
         );
     }

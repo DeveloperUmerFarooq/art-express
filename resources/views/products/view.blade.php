@@ -58,7 +58,7 @@
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Phone Number</label>
                                             <input @if (!$sellable) disabled @endif type="tel"
-                                                name="tel" class="form-control validate" placeholder="+1 (123) 456-7890"
+                                                name="tel" class="form-control validate" placeholder="+92##########"
                                                 required @if (auth()->user()->products()->where('id', $product->id)->exists()) disabled @endif
                                                 value="{{ old('tel', auth()->user()->profile->phone_number) }}">
                                             @error('tel')

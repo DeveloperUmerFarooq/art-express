@@ -187,9 +187,10 @@ class OrderController extends Controller
                 }
             }
             $admin = User::role('admin')->first();
-            Mail::to($order->customer_email)->send(new OrderCancel($order));
-            Mail::to($order->artist->email)->send(new OrderCancel($order));
-            Mail::to($admin->email)->send(new OrderCancel($order));
+            $artist = User::find($order->artist_id);
+            Mail::to($order->customer_email)->send(new OrderCancel($order,$order->customer->name));
+            Mail::to($order->artist->email)->send(new OrderCancel($order,$artist->name));
+            Mail::to($admin->email)->send(new OrderCancel($order,$admin->name));
             $order->delete();
             toastr()->success("Order has been canceled");
         } catch (\Exception $e) {
