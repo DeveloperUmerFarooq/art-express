@@ -149,7 +149,7 @@ class AuctionController extends Controller
             toastr()->error("Operation Failed!");
         }
         $role = auth()->user()->getRoleNames()->first();
-        return redirect()->route($role . '.auctions');
+        return redirect()->route('auctions');
     }
 
     public function items($id)
