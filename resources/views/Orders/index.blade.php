@@ -199,14 +199,10 @@
                                                         $order->type === 'standard'
                                                     ) {
                                                         $canCancel = true;
-                                                    }
-                                                    elseif (
-                                                        $role === 'admin' && $order->status==="completed"
-                                                    ) {
+                                                    } elseif ($role === 'admin' && $order->status !== 'completed') {
                                                         $canCancel = true;
-                                                    }
-                                                    else{
-                                                        $canCancel= false;
+                                                    } else {
+                                                        $canCancel = false;
                                                     }
                                                 @endphp
 
@@ -243,25 +239,21 @@
     <script>
         function cancelOrder(url) {
             Swal.fire({
-                title: "Cancel Order",
-                text: "Are you sure you want to cancel this order?",
+                title: "Cancel Order!",
+                text: "Are you sure you want to cancel this Order?",
+                showDenyButton: true,
                 icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: "#dc3545",
-                cancelButtonColor: "#6c757d",
-                confirmButtonText: "Yes, cancel it",
-                cancelButtonText: "No, keep it",
-                reverseButtons: true,
-                buttonsStyling: false,
+                confirmButtonText: "Yes",
+                confirmButtonColor: "green",
+                denyButtonText: `No`,
                 customClass: {
-                    confirmButton: 'btn btn-danger',
-                    cancelButton: 'btn btn-secondary mx-2'
+                    popup: 'custom-popup'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = url;
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    toastr.info('Your order remains active.');
+                    window.location.href = `${url}`
+                } else if (result.isDenied) {
+                    toastr.info('Order Remains Active!')
                 }
             });
         }
