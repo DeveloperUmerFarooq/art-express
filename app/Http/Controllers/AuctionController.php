@@ -61,10 +61,10 @@ class AuctionController extends Controller
             $items = $auction->items;
             $currentTime = Carbon::now();
             $end_time = Carbon::parse($auction->start_date . ' ' . $auction->start_time);
-            // if (!$currentTime->greaterThanOrEqualTo($end_time)) {
-            //     toastr()->error("Cannot end auction right now!");
-            //     return redirect()->back();
-            // }
+            if (!$currentTime->greaterThanOrEqualTo($end_time)) {
+                toastr()->error("Cannot end auction right now!");
+                return redirect()->back();
+            }
             foreach ($items as $item) {
                 Mail::to($item->winner->email)->send(new WinnerPaymentMail($item, $auction));
             }
