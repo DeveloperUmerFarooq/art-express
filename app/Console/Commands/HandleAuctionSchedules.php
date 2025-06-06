@@ -1,6 +1,7 @@
 <?php
 namespace App\Console\Commands;
 
+use App\Events\AuctionEndEvent;
 use Illuminate\Console\Command;
 use App\Models\Auction;
 use App\Mail\AuctionStart;
@@ -21,6 +22,7 @@ class HandleAuctionSchedules extends Command
         $auctionsToStart = Auction::where('status', 'upcoming')->get();
         foreach ($auctionsToStart as $auction) {
             $auctionStart = Carbon::parse($auction->start_date . ' ' . $auction->start_time)->addMinutes(5);
+            $this->info($now);
             if ($now->greaterThanOrEqualTo($auctionStart)) {
                 $auction->update(['status' => 'ongoing']);
                 foreach ($auction->registeredUsers as $user) {
@@ -43,6 +45,7 @@ class HandleAuctionSchedules extends Command
                 $auction->update(['status' => 'ended']);
                 $this->info("Ended auction ID: {$auction->id}");
             }
+            broadcast(new AuctionEndEvent($auction->id));
         }
 
         return 0;

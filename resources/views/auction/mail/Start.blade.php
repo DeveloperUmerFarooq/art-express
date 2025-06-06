@@ -50,7 +50,7 @@
 
         <p>Click the button below to view and participate in the auction:</p>
 
-        <a href="{{ route('artist.auction.participate',$auction->id) }}" class="button">Enter Auction</a>
+        <a href="{{ route('auction.participate',$auction->id) }}" class="button">Enter Auction</a>
 
         <p class="footer">Thank you for being part of our community.<br>— The Art-Express Team</p>
     </div>
