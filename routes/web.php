@@ -241,7 +241,7 @@ Route::get('/auction/{id}/items',[AuctionController::class,'items'])->name("auct
 Route::post('/auction/register',[AuctionController::class,'register'])->name('auction.register');
 Route::get('/auction/{id}/refund',[AuctionController::class,'refund'])->name('auction.refund');
 
-Route::get('/auction/{id}/participate',[AuctionController::class,'items'])->name('auction.participate');
+Route::get('/auction/{id}/participate',[AuctionController::class,'participate'])->name('auction.participate');
 Route::post('/item/{id}/place-bid',[AuctionController::class,'placeBid'])->name('bid.place');
 
 Route::post('/checkout/process',[CheckoutController::class,'checkout'])->name('item.checkout');

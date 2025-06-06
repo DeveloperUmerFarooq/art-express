@@ -60,8 +60,8 @@ class AuctionController extends Controller
             $auction = Auction::find($id);
             $items = $auction->items;
             $currentTime = Carbon::now();
-            $end_time = Carbon::parse($auction->start_date . ' ' . $auction->start_time);
-            if (!$currentTime->greaterThanOrEqualTo($end_time)) {
+            $start_time = Carbon::parse($auction->start_date . ' ' . $auction->start_time);
+            if (!$currentTime->greaterThan($start_time)) {
                 toastr()->error("Cannot end auction right now!");
                 return redirect()->back();
             }
@@ -164,6 +164,16 @@ class AuctionController extends Controller
         $items = AuctionItem::where('auction_id', $id)->get();
 
         return view('auction.items', compact('items', 'id'));
+    }
+
+    public function participate($id){
+            $auction=Auction::find($id);
+            if($auction->status==="ended"){
+                toastr()->info("This Auction Has Been Ended!");
+                return redirect()->back();
+            }else{
+                $this->items($id);
+            }
     }
 
     public function update(Request $req)
