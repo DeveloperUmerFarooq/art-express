@@ -120,6 +120,10 @@ class AuctionController extends Controller
             'items.*.starting_bid' => 'required|numeric|min:1',
             'items.*.image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
+        if(!auth()->user()->profile->address){
+            toastr()->error("Complete Your Profile!");
+            return redirect()->back();
+        }
         try {
             $auction = Auction::create([
                 'host_id' => Auth::id(),
@@ -147,7 +151,6 @@ class AuctionController extends Controller
         } catch (Exception $error) {
             toastr()->error("Operation Failed!");
         }
-        $role = auth()->user()->getRoleNames()->first();
         return redirect()->route('auction');
     }
 

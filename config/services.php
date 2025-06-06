@@ -41,6 +41,9 @@ return [
     'pusher'=>[
         'key'=>env('PUSHER_APP_KEY'),
         'cluster'=>env('PUSHER_APP_CLUSTER'),
+    ],
+    'abstractApi'=>[
+        'key'=>env('ABSTRACT_API_KEY'),
     ]
 
 ];

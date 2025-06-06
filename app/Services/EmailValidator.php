@@ -9,7 +9,7 @@ class EmailValidator
 
     public function __construct()
     {
-        $this->apiKey = env('ABSTRACT_API_KEY');
+        $this->apiKey = config('services.abstractApi.key');
     }
 
     public function validate($email)
