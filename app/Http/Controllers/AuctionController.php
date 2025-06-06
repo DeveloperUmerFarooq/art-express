@@ -90,8 +90,11 @@ class AuctionController extends Controller
             "winner_id" => $req->user_id,
         ]);
         broadcast(new BidEvent($auction, $item->current_bid, $item->id));
-        toastr()->success("Bid Placed Successfully!");
-        return redirect()->back()->with(["message" => "Bid Placed Successfully!", "amount" => $item->current_bid, "item_id" => $item->id]);
+       return response()->json([
+        "message" => "Bid Placed Successfully!",
+        "amount" => $item->current_bid,
+        "item_id" => $item->id,
+    ]);
     }
     public function form(Request $req)
     {

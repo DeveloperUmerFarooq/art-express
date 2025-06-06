@@ -1,6 +1,6 @@
 @php
     use Carbon\Carbon;
-    $auction=$items[0]->auction;
+    $auction = $items[0]->auction;
     $startDate = Carbon::parse($auction->start_date);
 @endphp
 
@@ -16,12 +16,13 @@
                 <h1 class="h2 font-weight-bold text-dark mb-1">
                     <i class="fas fa-gavel me-2 text-primary"></i> Auction Items
                 </h1>
-                @if ($auction->status==="ongoing")
-                <div class="bg-danger rounded-circle" title="Live" style="width: 10px; height: 10px; cursor:pointer"></div>
+                @if ($auction->status === 'ongoing')
+                    <div class="bg-danger rounded-circle" title="Live" style="width: 10px; height: 10px; cursor:pointer">
+                    </div>
                 @endif
             </div>
 
-            @if (count($items) > 0 && $auction->host_id === auth()->id())
+            @if ($auction->host_id === auth()->id())
                 @if ($auction->status === 'ongoing')
                     <a href="{{ route($role . '.auction.end', $auction->id) }}">
                         <button class="btn btn-danger btn-sm shadow-sm">
@@ -42,7 +43,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="card h-100 border-0 shadow-sm overflow-hidden hover-shadow-lg transition-all">
                             <div class="card-header bg-white border-0 p-0 position-relative">
-                                @if ($startDate->toDateString() > now()->toDateString()&&$auction->host_id===auth()->id())
+                                @if ($startDate->toDateString() > now()->toDateString() && $auction->host_id === auth()->id())
                                     <button onclick="deleteItem('{{ route($role . '.item.delete', $item->id) }}')"
                                         class="btn btn-danger btn-sm position-absolute top-2 end-2 z-3 shadow-sm"
                                         title="Delete Item" style="width: 30px; height: 30px">
@@ -105,12 +106,13 @@
 
                                 <!-- Bid Form -->
                                 @if (Request::is('*/participate*'))
-                                    <form action="{{ route('bid.place', $item['id']) }}"
-                                        id="bid-form-{{ $item->id }}" method="POST" class="mb-3">
+                                    <form action="{{ route('bid.place', $item['id']) }}" id="bid-form-{{ $item->id }}"
+                                        method="POST" class="mb-3">
                                         @csrf
                                         <div class="input-group">
                                             <span class="input-group-text bg-light">Rs</span>
-                                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                                            <input type="hidden" name="user_id" id="user_id"
+                                                value="{{ auth()->id() }}">
                                             <input type="number" name="bid_amount" id="bid_input-{{ $item->id }}"
                                                 class="form-control"
                                                 min="{{ $item['current_bid'] ? $item['current_bid'] + 1 : $item['starting_bid'] + 1 }}"
@@ -123,16 +125,24 @@
                                 <!-- Action Buttons -->
                                 <div class="d-flex gap-2 mt-auto">
                                     @if (Request::is('*/participate'))
-                                        <button class="btn btn-success flex-grow-1 shadow-sm"
-                                            onclick="document.getElementById('bid-form-{{ $item->id }}').submit()">
-                                            <i class="fas fa-gavel me-2"></i> Place Bid
+                                        <button
+                                            class="btn btn-success flex-grow-1 shadow-sm place-bid d-flex align-items-center justify-content-center gap-2"
+                                            onclick="placeBid('{{ route('bid.place', $item['id']) }}', event, {{ $item->id }},{{$item->id}})">
+                                            <i class="fas fa-gavel me-1"></i>
+                                            <span>Place Bid</span>
+                                            <div id="spinner-{{ $item->id }}" class="spinner-grow text-light d-none"
+                                                role="status" style="width:1rem;height:1rem">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                        </button>
+
                                         </button>
                                     @endif
                                     @if ($item->auction->host_id === auth()->id() && $startDate->toDateString() > now()->toDateString())
-                                            <button class="btn btn-outline-warning flex-grow-1" data-bs-toggle="modal"
-                                                data-bs-target="#editItemModal" onclick="editItem({{ $item }})">
-                                                <i class="fas fa-edit me-2"></i> Edit
-                                            </button>
+                                        <button class="btn btn-outline-warning flex-grow-1" data-bs-toggle="modal"
+                                            data-bs-target="#editItemModal" onclick="editItem({{ $item }})">
+                                            <i class="fas fa-edit me-2"></i>
+                                        </button>
                                     @endif
                                 </div>
                             </div>
@@ -162,9 +172,9 @@
             </div>
         @endif
     </div>
-    @if ($role!=='user')
-    @include('auction.modals.add-auction-item')
-    @include('auction.modals.edit-auction-item')
+    @if ($role !== 'user')
+        @include('auction.modals.add-auction-item')
+        @include('auction.modals.edit-auction-item')
     @endif
     @include('auction.modals.image-preview')
 @endsection
@@ -183,11 +193,48 @@
         const auction_id = {{ $auction->id }};
         const bidChannel = pusher.subscribe('bid.' + auction_id);
         bidChannel.bind('bid.update', function(data) {
-            console.log(data);
             $(`#current-bid-${data.item_id}`).text(`${parseFloat(data.amount).toFixed(0)} Rs`)
                 .removeClass('text-secondary')
                 .addClass('text-success');
-            $(`#bid_input-${data.item_id}`).val(parseFloat(data.amount).toFixed(0));
         })
+
+        async function placeBid(url, e,id) {
+            $(`#spinner-${ id }`).removeClass('d-none');
+            const bid = await $(`#bid_input-${id}`).val()
+            const user_id = $('#user_id').val()
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    bid_amount: bid,
+                    user_id: user_id,
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                },
+                success: function(response) {
+                    $(`#spinner-${ id }`).addClass('d-none');
+                    toastr.success(response.message);
+                    $(`#current_bid-${response.item_id}`).text(response.amount);
+                    Swal.fire({
+                        title: `Bid of Rs ${response.amount} Placed!`,
+                        text: response.message,
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                },
+                error: function(xhr) {
+                    $(`#spinner-${ id }`).addClass('d-none');
+                    if (xhr.status === 422) {
+                        const errors = xhr.responseJSON.errors;
+                        for (const key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                toastr.error(errors[key][0]);
+                            }
+                        }
+                    } else {
+                        toastr.error("An unexpected error occurred.");
+                    }
+                }
+            });
+        }
     </script>
 @endpush
