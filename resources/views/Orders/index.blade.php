@@ -106,6 +106,12 @@
                                                     <i class="fas fa-envelope text-primary mr-2"></i>
                                                     <strong>Email:</strong> {{ $order->artist->email }}
                                                 </p>
+                                                @if ($role==="admin")
+                                                <p class="mb-2">
+                                                    <i class="fas fa-map-marker-alt text-primary mr-2"></i>
+                                                    <strong>Address:</strong> {{ $order->artist->profile->address }}
+                                                </p>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
