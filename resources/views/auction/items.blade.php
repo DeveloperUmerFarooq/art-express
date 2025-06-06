@@ -197,44 +197,18 @@
                 .removeClass('text-secondary')
                 .addClass('text-success');
         })
-
-        async function placeBid(url, e,id) {
-            $(`#spinner-${ id }`).removeClass('d-none');
-            const bid = await $(`#bid_input-${id}`).val()
-            const user_id = $('#user_id').val()
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: {
-                    bid_amount: bid,
-                    user_id: user_id,
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                },
-                success: function(response) {
-                    $(`#spinner-${ id }`).addClass('d-none');
-                    toastr.success(response.message);
-                    $(`#current_bid-${response.item_id}`).text(response.amount);
-                    Swal.fire({
-                        title: `Bid of Rs ${response.amount} Placed!`,
-                        text: response.message,
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                    });
-                },
-                error: function(xhr) {
-                    $(`#spinner-${ id }`).addClass('d-none');
-                    if (xhr.status === 422) {
-                        const errors = xhr.responseJSON.errors;
-                        for (const key in errors) {
-                            if (errors.hasOwnProperty(key)) {
-                                toastr.error(errors[key][0]);
-                            }
-                        }
-                    } else {
-                        toastr.error("An unexpected error occurred.");
-                    }
-                }
+        const endAuction=pusher.subscribe('auction.'+auction_id);
+        endAuction.bind('AuctionEnded',function(data){
+            Swal.fire({
+                icon: 'info',
+                title: 'Auction Ended',
+                text: data.message,
+                timer: 5000,
+                confirmButtonText: 'Go to Auctions'
+            }).then(() => {
+                window.location.href = "{{ route('auction') }}";
             });
-        }
+        })
     </script>
+    <script src="{{asset('js/bidding.js')}}"></script>
 @endpush

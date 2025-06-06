@@ -9,6 +9,7 @@ use App\Mail\WinnerPaymentMail;
 use App\Models\Auction;
 use App\Models\AuctionItem;
 use App\Models\Registration;
+use AuctionEnded;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -60,16 +61,17 @@ class AuctionController extends Controller
             $items = $auction->items;
             $currentTime = Carbon::now();
             $end_time = Carbon::parse($auction->start_date . ' ' . $auction->start_time);
-            if (!$currentTime->greaterThanOrEqualTo($end_time)) {
-                toastr()->error("Cannot end auction right now!");
-                return redirect()->back();
-            }
+            // if (!$currentTime->greaterThanOrEqualTo($end_time)) {
+            //     toastr()->error("Cannot end auction right now!");
+            //     return redirect()->back();
+            // }
             foreach ($items as $item) {
                 Mail::to($item->winner->email)->send(new WinnerPaymentMail($item, $auction));
             }
             $auction->update([
                 "status" => "ended"
             ]);
+            broadcast(new AuctionEnded($auction->id));
             toastr()->success("Auction Ended Successfully");
         } catch (\Exception $error) {
             toastr()->error("Operation Failed!");
