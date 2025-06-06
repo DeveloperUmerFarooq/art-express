@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\AuctionsDataTable;
+use App\Events\AuctionEndEvent;
 use App\Events\BidEvent;
 use App\Mail\AuctionStart;
 use App\Mail\WinnerPaymentMail;
 use App\Models\Auction;
 use App\Models\AuctionItem;
 use App\Models\Registration;
-use AuctionEnded;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -71,12 +71,12 @@ class AuctionController extends Controller
             $auction->update([
                 "status" => "ended"
             ]);
-            broadcast(new AuctionEnded($auction->id));
+            broadcast(new AuctionEndEvent($auction->id));
             toastr()->success("Auction Ended Successfully");
         } catch (\Exception $error) {
             toastr()->error("Operation Failed!");
         }
-        return redirect()->route('auctions');
+        return redirect()->route('auction');
     }
 
     public function placeBid(Request $req, $id)
