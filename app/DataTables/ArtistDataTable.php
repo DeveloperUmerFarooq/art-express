@@ -23,19 +23,24 @@ class ArtistDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('actions', function($query){
+            ->addColumn('actions', function ($query) {
                 return view('admin.user-management.actions', [
                     'id' => $query->id,
                     'user' => $query
                 ]);
             })
-            ->addColumn('user',function ($query){
-                return view('admin.user-management.user-column',['user'=>$query]);
+            ->editColumn('status', function ($query) {
+                return view('admin.user-management.status_column', [
+                    'user' => $query
+                ]);
             })
-            ->addColumn('created_at',function($query){
+            ->addColumn('user', function ($query) {
+                return view('admin.user-management.user-column', ['user' => $query]);
+            })
+            ->addColumn('created_at', function ($query) {
                 return $query->created_at->format('d/m/Y');
             })
-            ->addColumn('updated_at',function($query){
+            ->addColumn('updated_at', function ($query) {
                 return $query->updated_at->format('d/m/Y');
             });
     }
@@ -54,16 +59,16 @@ class ArtistDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('user-table')
-                    ->setTableAttribute('class','table table-success')
-                    ->setTableAttribute('data-responsive-wrapper', 'true')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    // ->dom('Bfrtip')
-                    ->pageLength(25)
-                    ->orderBy(1)
-                    ->ordering(false)
-                    ->selectStyleSingle();
+            ->setTableId('user-table')
+            ->setTableAttribute('class', 'table table-success')
+            ->setTableAttribute('data-responsive-wrapper', 'true')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            // ->dom('Bfrtip')
+            ->pageLength(25)
+            ->orderBy(1)
+            ->ordering(false)
+            ->selectStyleSingle();
     }
 
     /**
@@ -71,16 +76,16 @@ class ArtistDataTable extends DataTable
      */
     public function getColumns(): array
     {
-        $columns=[
+        $columns = [
             Column::make('user'),
             Column::make('name')->visible(false),
             Column::make('email'),
             Column::make('created_at'),
             Column::make('updated_at'),
         ];
-        if(auth()->user()->can('manage artists')){
-           $columns[]=Column::make('status')->addClass('text-center');
-           $columns[]= Column::make('actions');
+        if (auth()->user()->can('manage artists')) {
+            $columns[] = Column::make('status')->addClass('text-center');
+            $columns[] = Column::make('actions');
         }
         return $columns;
     }
