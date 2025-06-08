@@ -28,6 +28,9 @@ class UserDataTable extends DataTable
                 'user' => $query
             ]);
         })
+        // ->editColumn('status',function($query){
+        //     return view('admin.user-management.status_column');
+        // })
         ->addColumn('user',function ($query){
             return view('admin.user-management.user-column',['user'=>$query]);
     })
@@ -76,6 +79,7 @@ class UserDataTable extends DataTable
             Column::make('updated_at'),
         ];
         if(auth()->user()->can('manage users')){
+           $columns[]=Column::make('status')->addClass('text-center');
            $columns[]= Column::make('actions');
         }
         return $columns;

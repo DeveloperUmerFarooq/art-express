@@ -79,6 +79,7 @@ class ArtistDataTable extends DataTable
             Column::make('updated_at'),
         ];
         if(auth()->user()->can('manage artists')){
+           $columns[]=Column::make('status')->addClass('text-center');
            $columns[]= Column::make('actions');
         }
         return $columns;
