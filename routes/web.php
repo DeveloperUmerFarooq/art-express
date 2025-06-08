@@ -5,7 +5,6 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\AuctionController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\ChatController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomRequestController;
 use App\Http\Controllers\ItemsController;
@@ -19,7 +18,6 @@ use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UserCrud;
 use App\Models\Comment;
-use App\Mail\OrderMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -32,9 +30,8 @@ Route::get('/login', function(){
 Route::get('/register',function(){
     return redirect('/');
 })->name('register');
-Route::middleware(['auth'])->group(function(){
-Route::view('/page','artist.portfolio.portfolio');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth','suspend'])->group(function(){
+// Route::view('/page','artist.portfolio.portfolio');
 Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(function () {
     Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
     Route::get('/dashboard/stats',[AdminController::class,'getDashboardStats'])->name('stats');
