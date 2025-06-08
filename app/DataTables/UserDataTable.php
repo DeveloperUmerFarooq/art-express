@@ -28,9 +28,11 @@ class UserDataTable extends DataTable
                 'user' => $query
             ]);
         })
-        // ->editColumn('status',function($query){
-        //     return view('admin.user-management.status_column');
-        // })
+        ->editColumn('status',function($query){
+            return view('admin.user-management.status_column',[
+                'user'=>$query
+            ]);
+        })
         ->addColumn('user',function ($query){
             return view('admin.user-management.user-column',['user'=>$query]);
     })

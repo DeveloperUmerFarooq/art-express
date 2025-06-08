@@ -108,4 +108,18 @@ class UserCrud extends Controller
         }
         return redirect()->back();
     }
+    public function updateStatus(Request $req,$id){
+        $req->validate([
+            'status'=>'required|boolean'
+        ]);
+        try{
+            $user=User::find($id);
+            $user->status=$req->status;
+            $user->save();
+            toastr()->success("Account Status Updated!");
+        }catch(\Exception $error){
+            toastr()->error("Operation Failed!");
+        }
+        return redirect()->back();
+    }
 }

@@ -1,8 +1,7 @@
-<div>
-    <form action="" method="POST">
-        <select name="status" id="status-select">
-            <option value="false"><span class="bg-success badge">Active</span></option>
-            <option value="true"><span class="bg-danger badge">Suspended</span></option>
-        </select>
-    </form>
-</div>
+<form action="{{route('admin.management.user.status',$user->id)}}" method="POST" id="status-form-{{$user->id}}">
+    @csrf
+    <select class="form-select status-dropdown" name="status" onchange="document.getElementById('status-form-{{$user->id}}').submit()">
+        <option value="0" {{ $user->status==0? 'selected' : '' }}>🟢 Active</option>
+        <option value="1" {{ $user->status==1? 'selected' : '' }}>🔴 Suspended</option>
+    </select>
+</form>

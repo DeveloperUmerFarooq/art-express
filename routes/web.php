@@ -44,6 +44,8 @@ Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(funct
         Route::post('/add/user',[UserCrud::class,'addUser'])->name('user.add');
         Route::post('/edit/user',[UserCrud::class,'editUsers'])->name('user.edit');
 
+        Route::post('/user/{id}/update-status',[UserCrud::class,'updateStatus'])->name('user.status');
+
         Route::get('/roles',[RolePermissionController::class,'index'])->name('role');
         Route::post('/roles/permissions/update',[RolePermissionController::class,'update'])->name('role.update');
 
