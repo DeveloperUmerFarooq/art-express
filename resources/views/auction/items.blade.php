@@ -141,7 +141,7 @@
                                     @if ($item->auction->host_id === auth()->id() && $startDate->toDateString() > now()->toDateString())
                                         <button class="btn btn-outline-warning flex-grow-1" data-bs-toggle="modal"
                                             data-bs-target="#editItemModal" onclick="editItem({{ $item }})">
-                                            <i class="fas fa-edit me-2"></i>
+                                            <i class="fas fa-edit me-2"></i> Edit Item
                                         </button>
                                     @endif
                                 </div>

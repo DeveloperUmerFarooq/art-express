@@ -3,7 +3,7 @@
     Create Auctions | Art-Express
 @endsection
 @section('page')
-    <div class="container pt-3">
+    <div class="container py-3">
         <h3 class="mb-4"><i class="fas fa-gavel"></i> Create Auction</h3>
 
         <form action="{{ route($role . '.auction.store') }}" method="POST" enctype="multipart/form-data">
