@@ -182,8 +182,8 @@
 
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="text" name="country" id="country" class="form-control"
-                                   placeholder="Country" value="{{$profile->country}}" disabled>
+                            <input type="text" value="Pakistan" name="country" id="country" class="form-control"
+                                   placeholder="Country" disabled>
                             <label for="country" class="form-label">
                                 <i class="fas fa-globe me-2 text-muted"></i>Country
                             </label>

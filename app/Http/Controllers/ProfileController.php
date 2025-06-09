@@ -108,8 +108,7 @@ class ProfileController extends Controller
             'cnic' => 'required|regex:/^[0-9]{5}-[0-9]{7}-[0-9]{1}$/',
             'phone_number' => 'required|phone:PK',
             'address' => ['required',new ContainsCity()],
-            'city' => 'required',
-            'country' => 'required'
+            'city' => ['required',new ContainsCity()],
         ],[
             'phone_number.phone' => 'Please enter a valid Pakistani phone number.',
             'cnic.required' => 'The CNIC field is required.',
@@ -139,7 +138,7 @@ class ProfileController extends Controller
             'bio' => $req->bio ?? $profile->bio,
             'cnic' => $req->cnic ?? $profile->cnic,
             'city' => $req->city ?? $profile->city,
-            'country' => $req->country ?? $profile->country,
+            'country' => "Pakistan",
             'address' => $req->address ?? $profile->address,
             'phone_number' => $req->phone_number ?? $profile->phone_number
         ]);

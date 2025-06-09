@@ -2,7 +2,7 @@ $(document).ready(function(){
     $("#edit-details").on('click',function(e){
         e.preventDefault();
         $(this).css('pointer-events','none')
-        $('#profile input:not(input[type="hidden"]),textarea').each(function(){
+        $('#profile input:not(input[type="hidden"],#country),textarea').each(function(){
 
             $(this).prop('disabled',!$(this).prop('disabled'));
         })
