@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Products;
 use App\Models\User;
+use App\Rules\ContainsCity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -50,7 +51,7 @@ class OrderController extends Controller
     public function store(Request $req)
     {
         $req->validate([
-            'address' => 'required',
+            'address' => ['required',new ContainsCity()],
             'tel' => 'required|phone:PK',
             'paymentMethod' => 'required',
             'customer_email'=>'required|email'

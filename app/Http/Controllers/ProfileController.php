@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Rules\ContainsCity;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Exception;
 use Illuminate\Http\Request;
@@ -106,7 +107,7 @@ class ProfileController extends Controller
             'name' => 'required',
             'cnic' => 'required|regex:/^[0-9]{5}-[0-9]{7}-[0-9]{1}$/',
             'phone_number' => 'required|phone:PK',
-            'address' => 'required',
+            'address' => ['required',new ContainsCity()],
             'city' => 'required',
             'country' => 'required'
         ],[

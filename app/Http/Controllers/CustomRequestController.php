@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Mail\OrderMail;
+use App\Rules\ContainsCity;
 use Illuminate\Support\Facades\Mail;
 use App\Services\EmailValidator;
 
@@ -41,7 +42,7 @@ class CustomRequestController extends Controller
             'artist_id' => 'required|exists:users,id',
             'customer_id' => 'required|exists:users,id',
             'customer_email'=>'required|email',
-            'customer_address'=>'required',
+            'customer_address'=>['required',new ContainsCity()],
             'customer_tel'=>'required|phone:PK',
             'items' => 'required|array|min:1',
             'items.*.item_name' => 'required|string|max:255',
