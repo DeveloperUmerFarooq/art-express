@@ -114,7 +114,6 @@ class ProfileController extends Controller
             'cnic.required' => 'The CNIC field is required.',
             'cnic.regex' => 'The CNIC format must be 12345-1234567-1.',
         ]);
-
         if(!User::where('email',$req->email)->exists()){
             $emailValidation=$this->emailValidator->validate($req->email);
             if (
@@ -127,7 +126,7 @@ class ProfileController extends Controller
                 return back()->withErrors(['email' => 'The email provided is invalid or undeliverable.'])->withInput();
             }
         }
-
+        $city = extractCityFromAddress($req->city);
         $user = User::find($req->id);
         $profile = $user->profile;
         $user->update([
@@ -137,7 +136,7 @@ class ProfileController extends Controller
         $user->profile()->update([
             'bio' => $req->bio ?? $profile->bio,
             'cnic' => $req->cnic ?? $profile->cnic,
-            'city' => $req->city ?? $profile->city,
+            'city' => $city ?? $profile->city,
             'country' => "Pakistan",
             'address' => $req->address ?? $profile->address,
             'phone_number' => $req->phone_number ?? $profile->phone_number

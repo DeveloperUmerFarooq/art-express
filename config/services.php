@@ -44,6 +44,9 @@ return [
     ],
     'abstractApi'=>[
         'key'=>env('ABSTRACT_API_KEY'),
+    ],
+    'ors'=>[
+        'key'=>env('ORS_API_KEY'),
     ]
 
 ];

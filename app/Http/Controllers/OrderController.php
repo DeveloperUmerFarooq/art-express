@@ -16,7 +16,7 @@ use App\Services\EmailValidator;
 
 class OrderController extends Controller
 {
-    protected $emailValidator;
+    protected $emailValidator,$delivery;
     public function __construct(EmailValidator $validate)
     {
         $this->emailValidator=$validate;
@@ -58,7 +58,6 @@ class OrderController extends Controller
         ],[
             'tel.phone' => 'Please enter a valid Pakistani phone number.',
         ]);
-
         if(!User::where('email',$req->customer_email)->exists()){
             $emailValidation=$this->emailValidator->validate($req->customer_email);
             if (
@@ -73,6 +72,12 @@ class OrderController extends Controller
         }
 
         $product = Products::find($req->product_id);
+        $userCity = extractCityFromAddress($req->address);
+        $artistCity= $product->artist->profile->city;
+        $to=getCoordinates($userCity);
+        $from=getCoordinates($artistCity);
+        $distance=getDistanceInKm($from,$to);
+        $this->delivery=deliverCharge($distance);
         if ($product->status == "Sold") {
             toastr()->info("Product is Sold");
             return redirect()->back();
@@ -82,7 +87,7 @@ class OrderController extends Controller
         } else {
             $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
             $charge = $stripe->charges->create([
-                'amount' => ($product->price + 250) * 100,
+                'amount' => ($product->price + $this->delivery) * 100,
                 'currency' => 'pkr',
                 'source' => $req->stripeToken,
                 'description' => "payment for products"
@@ -119,7 +124,7 @@ class OrderController extends Controller
                 'img_src' => $product->image->image_src,
                 'price' => $product->price,
                 'quantity' => 1,
-                'total_price' => $product->price + 250,
+                'total_price' => $product->price + $this->delivery,
             ]);
             $product->status = "Sold";
             $product->save();
