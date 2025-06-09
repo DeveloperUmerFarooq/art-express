@@ -21,7 +21,10 @@
                     <div class="card border-0">
                         <div class="card-body">
                             <h2 class="card-title">{{ $product->name }}</h2>
-                            <p class="text-muted mb-2">By: <strong>{{ $product->artist->name }}</strong></p>
+                            <div class="d-flex gap-4">
+                                <p class="text-muted mb-2">By: <strong>{{ $product->artist->name }}</strong></p>
+                                <p class="text-muted mb-2">From: <strong>{{ $product->artist->profile->city}}</strong></p>
+                            </div>
 
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <h3 class="text-success mb-0">{{ $product->price }} Rs</h3>
@@ -107,9 +110,8 @@
                                             <p class="ms-1 text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
-                                    <div class="d-flex gap-3">
-                                        <h3>Delivery Charges:</h3>
-                                        <h3 class="text-danger mb-0">250 Rs</h3>
+                                    <div class="text-danger">
+                                        <small>Note: Delivery charges will be calculated based on the delivery distance!</small>
                                     </div>
                                     <!-- Buy Now Button -->
                                 </form>
