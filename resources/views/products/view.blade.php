@@ -146,6 +146,13 @@
                                 <p class="small text-muted mb-1 bg-success d-inline rounded-pill p-2 "><i
                                         class="fa-solid fa-shield-halved text-light"></i> <span class="text-light">Secure payment</span></p>
                             </div>
+                            <hr>
+                            <h6>Delivery charges are calculated as: </h6>
+                           <small>Different City: 100 + (distanceInKm*5)</small>
+                           <small>Same City: 350 Rs</small>
+                           <div>
+                            <small><b>Note:</b> The above formula will give you approximate value of charges</small>
+                           </div>
                         </div>
                     </div>
                 </div>
