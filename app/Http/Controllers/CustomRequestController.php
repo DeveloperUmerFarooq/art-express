@@ -14,7 +14,7 @@ use App\Services\EmailValidator;
 
 class CustomRequestController extends Controller
 {
-    protected $emailValidator;
+    protected $emailValidator,$delivery;
     public function __construct(EmailValidator $validate)
     {
         $this->emailValidator=$validate;
@@ -64,6 +64,12 @@ class CustomRequestController extends Controller
                 return back()->withErrors(['customer_email' => 'The email provided is invalid or undeliverable.'])->withInput();
             }
         }
+        $userCity = extractCityFromAddress($req->customer_address);
+        $artistCity= User::find($req->artist_id)->profile->address;
+        $to=getCoordinates($userCity);
+        $from=getCoordinates($artistCity);
+        $distance=getDistanceInKm($from,$to);
+        $this->delivery=deliverCharge($distance);
 
         DB::beginTransaction();
         try{
@@ -88,7 +94,7 @@ class CustomRequestController extends Controller
                 "item_name"=>$item["item_name"],
                 "price"=>$item["price"],
                 "quantity"=>$item["quantity"],
-                "total_price"=>($item["price"]+250)*$item["quantity"],
+                "total_price"=>($item["price"]+$this->delivery)*$item["quantity"],
                 "img_src"=>$imageSrc,
             ]);
         }

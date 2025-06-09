@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
+    protected $delivery;
     public function show($item){
         $AuctionItem=AuctionItem::find($item);
         return view('auction.checkout')->with(['item'=>$AuctionItem]);
@@ -29,11 +30,18 @@ class CheckoutController extends Controller
         $share = round($profit * 0.5);
         $price=$item->current_bid-$share;
 
+        $userCity = $winner->profile->city;
+        $artistCity= $host->profile->city;
+        $to=getCoordinates($userCity);
+        $from=getCoordinates($artistCity);
+        $distance=getDistanceInKm($from,$to);
+        $this->delivery=deliverCharge($distance);
+
         DB::beginTransaction();
         try{
             $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
             $charge = $stripe->charges->create([
-                'amount' => ($item->current_bid + 250) * 100,
+                'amount' => ($item->current_bid + $this->delivery) * 100,
                 'currency' => 'pkr',
                 'source' => $req->stripeToken,
                 'description' => "payment for auction item"
@@ -57,7 +65,7 @@ class CheckoutController extends Controller
                 'img_src' => $item->image,
                 'price' => $price,
                 'quantity' => 1,
-                'total_price' => $item->current_bid+250,
+                'total_price' => $item->current_bid+$this->delivery,
             ]);
             DB::commit();
             $artist = User::find($req->artist_id);
