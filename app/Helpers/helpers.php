@@ -62,7 +62,7 @@ if (!function_exists('deliverCharge')) {
         if($distanceKm>0){
             return $baseFee + ($distanceKm * $ratePerKm);
         }else{
-            return $baseFee+250;
+            return $baseFee;
         }
     }
 }
