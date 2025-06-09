@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomRequestController;
 use App\Http\Controllers\ItemsController;
+use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PortfolioController;
@@ -244,4 +245,5 @@ Route::get('/auction/{id}/participate',[AuctionController::class,'participate'])
 Route::post('/item/{id}/place-bid',[AuctionController::class,'placeBid'])->name('bid.place');
 
 Route::post('/checkout/process',[CheckoutController::class,'checkout'])->name('item.checkout');
+Route::get('/messenger/search',[MessagesController::class, 'search'])->name('search');
 });
