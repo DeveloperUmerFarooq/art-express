@@ -127,7 +127,7 @@
                                     @if (Request::is('*/participate'))
                                         <button
                                             class="btn btn-success flex-grow-1 shadow-sm place-bid d-flex align-items-center justify-content-center gap-2"
-                                            onclick="placeBid('{{ route('bid.place', $item['id']) }}', event, {{ $item->id }},{{$item->id}})">
+                                            onclick="placeBid('{{ route('bid.place', $item['id']) }}', event, {{ $item->id }},{{ $item->id }})">
                                             <i class="fas fa-gavel me-1"></i>
                                             <span>Place Bid</span>
                                             <div id="spinner-{{ $item->id }}" class="spinner-grow text-light d-none"
@@ -145,7 +145,21 @@
                                         </button>
                                     @endif
                                 </div>
+                                @if ($item->auction->status==='ended')
+                                <div class="mt-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="badge bg-success">
+                                            {{ $item->status }}
+                                        </span>
+                                        <small class="text-muted" title="{{$item->winner->email}}">
+                                            <i class="fas fa-crown text-warning me-1"></i>
+                                            Winner: {{ $item->winner->name }}
+                                        </small>
+                                    </div>
+                                </div>
+                                @endif
                             </div>
+
 
                             <!-- Card Footer -->
                             <div class="card-footer bg-white border-0 pt-0">
@@ -197,8 +211,8 @@
                 .removeClass('text-secondary')
                 .addClass('text-success');
         })
-        const endAuction=pusher.subscribe('auction.'+auction_id);
-        endAuction.bind('AuctionEnded',function(data){
+        const endAuction = pusher.subscribe('auction.' + auction_id);
+        endAuction.bind('AuctionEnded', function(data) {
             Swal.fire({
                 icon: 'info',
                 title: 'Auction Ended',
@@ -210,5 +224,5 @@
             });
         })
     </script>
-    <script src="{{asset('js/bidding.js')}}"></script>
+    <script src="{{ asset('js/bidding.js') }}"></script>
 @endpush

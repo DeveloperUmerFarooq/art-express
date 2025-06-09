@@ -6,8 +6,7 @@
 <td  style="position: relative;">
     <div class="dropdown d-inline">
         <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="actionDropdown{{ $query->id }}"
-            data-bs-toggle="dropdown" aria-expanded="false"
-             @if ($query->status==="ended")disabled @endif>
+            data-bs-toggle="dropdown" aria-expanded="false">
             Actions
         </button>
 
@@ -17,6 +16,7 @@
                     <i class="fas fa-eye me-2"></i> View Items
                 </a>
             </li>
+            @if ($query->status!=="ended")
             @can('can register in auction')
             @if (!auth()->user()->hasRegisteredForAuction($query->id))
             @if ($query->host_id!==auth()->id())
@@ -72,6 +72,7 @@
             </li>
             @endif
             @endcan
+            @endif
             @endif
         </ul>
     </div>

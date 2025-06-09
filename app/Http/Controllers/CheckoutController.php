@@ -67,6 +67,8 @@ class CheckoutController extends Controller
                 'quantity' => 1,
                 'total_price' => $item->current_bid+$this->delivery,
             ]);
+            $item->status="Sold";
+            $item->save();
             DB::commit();
             $artist = User::find($req->artist_id);
             $admin = User::role('admin')->first();
