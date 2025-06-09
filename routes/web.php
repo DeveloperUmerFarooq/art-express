@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('welcome');
+Route::view('/terms','terms')->name('terms');
 Auth::routes();
 Route::redirect('/home','/');
 Route::get('/login', function(){
