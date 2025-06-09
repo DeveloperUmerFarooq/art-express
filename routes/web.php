@@ -7,6 +7,7 @@ use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomRequestController;
+use App\Http\Controllers\GPTController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\OrderController;
@@ -247,4 +248,6 @@ Route::post('/item/{id}/place-bid',[AuctionController::class,'placeBid'])->name(
 
 Route::post('/checkout/process',[CheckoutController::class,'checkout'])->name('item.checkout');
 Route::get('/messenger/search',[MessagesController::class, 'search'])->name('search');
+
+Route::get('/explanation',[GPTController::class,'explain'])->name('category.explain');
 });

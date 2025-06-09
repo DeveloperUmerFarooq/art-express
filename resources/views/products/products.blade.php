@@ -12,7 +12,9 @@
     <div class="px-2">
         <h1 class="mt-3 mx-2">{{ $category->name }}</h1>
         <div class="d-flex gap-2 flex-wrap mx-2">
-            <h7><a class="ms-1" href="#" data-bs-toggle="modal" data-bs-target="#categoryExplanationModal">Ask AI about current category</a></h7>
+            <h7><a class="ms-1" href="#"
+                    onclick="categoryExplain('{{ $current->name }}','{{ route('category.explain') }}')"
+                    data-bs-toggle="modal" data-bs-target="#categoryExplanationModal">Ask AI about current category</a></h7>
             <form class="mt-1 mt-sm-0 ms-auto" method="GET" action="{{ route($role . '.filter', $category->id) }}"
                 id="filter" class="d-flex flex-wrap ms-auto gap-2">
                 <div class="list-group">
@@ -49,7 +51,7 @@
             </div>
         @endif
     </div>
-@include('products.modals.category-explanation-modal')
+    @include('products.modals.category-explanation-modal')
 @endsection
 @push('scripts')
     @if (auth()->user()->hasRole('admin'))
@@ -64,4 +66,5 @@
             $('#filter').submit()
         })
     </script>
+   <script src="{{asset('js/categoryExplanation.js')}}"></script>
 @endpush
