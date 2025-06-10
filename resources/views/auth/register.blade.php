@@ -76,8 +76,7 @@
             </div>
           </div>
 
-          <p class="small">
-            By clicking on Register, you agree to our <a href="{{route('terms')}}" class="text-decoration-underline">terms and conditions</a>.
+          <p class="small">By clicking on Register, you agree to our <a href="{{route('terms')}}" class="text-decoration-underline">terms and conditions</a>.
           </p>
 
           <div class="text-center">
