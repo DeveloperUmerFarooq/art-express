@@ -213,8 +213,6 @@ Route::prefix('/user')->name('user.')->middleware(['role:user'])->group(function
 
     Route::get('/artists',[ArtistController::class,'artist'])->name('artist');
 
-    Route::get('/rankings',[RankController::class,'index'])->name('ranking');
-
 
     Route::post('/order',[OrderController::class,'store'])->name('order.store');
 
@@ -250,4 +248,6 @@ Route::post('/checkout/process',[CheckoutController::class,'checkout'])->name('i
 Route::get('/messenger/search',[MessagesController::class, 'search'])->name('search');
 
 Route::get('/explanation',[GPTController::class,'explain'])->name('category.explain');
+
+ Route::get('/rankings',[RankController::class,'index'])->name('ranking');
 });

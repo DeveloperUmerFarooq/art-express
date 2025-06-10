@@ -35,6 +35,9 @@
                         <a class="nav-link fs-6" href="{{ route('artist.product') }}">Products</a>
                     </li>
                     <li class="nav-item pt-1">
+                        <a class="nav-link fs-6" href="{{ route('ranking') }}">Top Artists</a>
+                    </li>
+                    <li class="nav-item pt-1">
                         <a class="nav-link fs-6" href="{{ route('artist.order') }}">Orders</a>
                     </li>
                     <li class="nav-item pt-1">
