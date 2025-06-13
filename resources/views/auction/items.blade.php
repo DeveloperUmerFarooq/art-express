@@ -151,9 +151,9 @@
                                         <span class="badge bg-success">
                                             {{ $item->status }}
                                         </span>
-                                        <small class="text-muted" title="{{$item->winner->email}}">
+                                        <small class="text-muted" title="{{$item->winner->email?? 'N/A'}}">
                                             <i class="fas fa-crown text-warning me-1"></i>
-                                            Winner: {{ $item->winner->name }}
+                                            Winner: {{ $item->winner->name?? 'N/A' }}
                                         </small>
                                     </div>
                                 </div>
