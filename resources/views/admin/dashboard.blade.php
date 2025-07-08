@@ -151,7 +151,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                     Order</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlySalesData">---</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="ordersData">---</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-box-open fa-2x text-gray-300"></i>
@@ -172,7 +172,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                     Auctions</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlySalesData">---</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="auctionsData">---</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-gavel fa-2x text-gray-300"></i>
@@ -193,7 +193,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
                                     Auctions</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlySalesData">---</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="hostedData">---</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-gavel fa-2x text-gray-300"></i>
