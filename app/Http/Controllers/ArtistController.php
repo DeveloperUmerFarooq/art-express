@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\SearchArtistDataTable;
+use App\Models\Auction;
 use App\Models\Like;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -20,6 +21,7 @@ class ArtistController extends Controller
     public function getDashboardStats()
     {
         $artistId = auth()->user()->id;
+        $auctions= Auction::where('host_id',auth()->id())->count();
 
         $totalLikes = Like::whereHas('post.product', function ($query) use ($artistId) {
             $query->where('artist_id', $artistId);
@@ -57,13 +59,22 @@ class ArtistController extends Controller
                 ->sum(DB::raw('price * quantity'));
         });
 
+        $auctionsStatus=Auction::where('host_id',auth()->id())->selectRaw('status, COUNT(*) as count')->groupBy('status')->pluck('count','status')->toArray();
+        $auctionLabels=["upcoming","ongoing","ended"];
+        $auctionsData=[];
+        foreach($auctionLabels as $label){
+            $auctionsData[]=$auctionsStatus[$label]??0;
+        }
+
         return response()->json([
+        'auctions' => $auctions,
         'totalLikes' => $totalLikes,
         'totalProducts' => $totalProducts,
         'totalBlogs' => $totalBlogs,
         'monthlySales' => $monthlySales,
         'currentMonthSales' => $currentMonthSales,
         'totalSalesAmount' => $totalSalesAmount,
+        'auctionsData' => $auctionsData,
     ]);
     }
 

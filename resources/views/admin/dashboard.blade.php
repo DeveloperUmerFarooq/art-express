@@ -250,10 +250,10 @@
         </div>
         <hr>
         <!-- Charts Row -->
-        <div class="row">
+        <div class="row gy-4">
             <!-- Sales Chart -->
             <div class="col-xl-6 col-lg-6">
-                <div class="card shadow mb-4">
+                <div class="card h-100 shadow mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-primary">Monthly Sales Overview</h6>
                     </div>
@@ -272,7 +272,7 @@
 
             <!-- Users Chart -->
             <div class="col-xl-6 col-lg-6">
-                <div class="card shadow mb-4">
+                <div class="card h-100 shadow mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-success">User Acquisition</h6>
                     </div>
@@ -291,13 +291,13 @@
 
             <!-- Orders Pie Chart -->
             <div class="col-xl-6 col-lg-6">
-                <div class="card shadow mb-4">
+                <div class="card h-100 shadow mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-warning">Orders Status Pie Chart</h6>
                     </div>
                     <div class="card-body">
                         <div class="chart-area">
-                            <canvas id="ordersPieChart" width="200" height="200"></canvas>
+                            <canvas id="ordersPieChart" height="200"></canvas>
                         </div>
                         <div class="mt-4 text-center small">
                             <span class="mr-2"><i class="fas fa-circle text-warning"></i> Orders</span>
@@ -308,13 +308,13 @@
 
             <!-- Auctions Pie Chart -->
             <div class="col-xl-6 col-lg-6">
-                <div class="card shadow mb-4">
+                <div class="card h-100 shadow mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-info">Auctions Status Pie Chart</h6>
                     </div>
                     <div class="card-body">
                         <div class="chart-area">
-                            <canvas id="auctionsPieChart" width="200" height="200"></canvas>
+                            <canvas id="auctionsPieChart" height="200"></canvas>
                         </div>
                         <div class="mt-4 text-center small">
                             <span class="mr-2"><i class="fas fa-circle text-info"></i> Auctions</span>
@@ -416,15 +416,10 @@
                             borderWidth: 1
                         }]
                     },
-                    options: {
-                        responsive: true,
-                         maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom'
-                            }
-                        }
-                    }
+                    options:{
+                    responsive:true,
+                    maintainAspectRatio:false
+                }
                 });
 
                 // Auctions Pie Chart - Static Data
@@ -439,15 +434,10 @@
                             borderWidth: 1
                         }]
                     },
-                    options: {
-                        responsive: true,
-                         maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom'
-                            }
-                        }
-                    }
+                    options:{
+                    responsive:true,
+                    maintainAspectRatio:false
+                }
                 });
 
 
