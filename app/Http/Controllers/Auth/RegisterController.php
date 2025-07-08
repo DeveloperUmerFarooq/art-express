@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\EmailValidator;
-use Egulias\EmailValidator\Validation\EmailValidation;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -49,7 +48,7 @@ class RegisterController extends Controller
             }
         });
 
-        return $validator;
+        return $validator??null;
     }
 
     /**
