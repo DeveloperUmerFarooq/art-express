@@ -205,6 +205,48 @@
                     </div>
                 </div>
             </div>
+
+            {{-- Active Users Count --}}
+            <div class="col-xl-2 col-md-4 mb-4">
+                <div class="card border-left-secondary shadow py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Active</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="activeData">---</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-user fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                        <div class="mt-2 text-right">
+                            <span class="text-xs text-muted">Total Active User Accounts</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Suspended Users Count --}}
+            <div class="col-xl-2 col-md-4 mb-4">
+                <div class="card border-left-secondary shadow py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                    Suspended</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="suspendData">---</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-user fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                        <div class="mt-2 text-right">
+                            <span class="text-xs text-muted">Total Suspended Users Accounts</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <hr>
         <!-- Charts Row -->
@@ -300,10 +342,15 @@
                             $('#users').text(response.users.toLocaleString());
                             $('#products').text(response.products.toLocaleString());
                             $('#blogs').text(response.blogs.toLocaleString());
+                            $('#activeData').text(response.activeUsers)
+                            $('#suspendData').text(response.suspendedUsers)
                             const currentMonth = new Date().getMonth();
                             $('#monthlySalesData').text('Rs ' + response.monthlySales[currentMonth]
                                 .toLocaleString());
-                            updateCharts(response.monthlyUsers, response.monthlySales);
+                            $('#hostedData').text(response.hostedAuctions.toLocaleString())
+                            $('#auctionsData').text(response.auctions.toLocaleString())
+                            $('#ordersData').text(response.orders.toLocaleString())
+                            updateCharts(response.monthlyUsers, response.monthlySales, response.ordersData, response.auctionsData);
                         },
                         error: function(xhr, status, error) {
                             console.error('Error fetching dashboard stats:', error);
@@ -364,7 +411,7 @@
                     data: {
                         labels: ['Pending', 'In-Progress', 'Completed'],
                         datasets: [{
-                            data: [12, 20, 40],
+                            data: [],
                             backgroundColor: ['#f6c23e', '#36b9cc', '#1cc88a', '#e74a3b'],
                             borderWidth: 1
                         }]
@@ -387,7 +434,7 @@
                     data: {
                         labels: ['Upcoming', 'Ongoing', 'Ended'],
                         datasets: [{
-                            data: [8, 14, 25],
+                            data: [],
                             backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#e74a3b'],
                             borderWidth: 1
                         }]
@@ -404,12 +451,19 @@
                 });
 
 
-                function updateCharts(usersData, salesData) {
+                function updateCharts(usersData, salesData , ordersData, auctionsData) {
                     usersChart.data.datasets[0].data = usersData;
                     usersChart.update();
 
                     salesChart.data.datasets[0].data = salesData;
                     salesChart.update();
+
+                    ordersPieChart.data.datasets[0].data= ordersData;
+                    ordersPieChart.update();
+
+                    auctionsPieChart.data.datasets[0].data= auctionsData;
+                    auctionsPieChart.update();
+
                 }
 
                 function getChartOptions() {
@@ -458,35 +512,6 @@
                 fetchDashboardStats();
 
                 setInterval(fetchDashboardStats, 120000);
-            });
-
-            // Orders
-
-            const ordersChart = document.getElementById('ordersChart').getContext('2d');
-            const ordersPieChart = new Chart(ordersChart, {
-                type: 'pie',
-                data: {
-                    labels: ['Pending', 'Processing', 'Completed'],
-                    datasets: [{
-                        label: 'Order Status',
-                        data: [10, 25, 45],
-                        backgroundColor: [
-                            '#f6c23e',
-                            '#36b9cc',
-                            '#1cc88a',
-                            '#e74a3b'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        }
-                    }
-                }
             });
         </script>
     @endpush
