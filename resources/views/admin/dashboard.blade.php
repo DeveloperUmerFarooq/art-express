@@ -14,7 +14,7 @@
                 </span>
             </div>
         </div>
-
+        <hr>
         <!-- Cards Row -->
         <div class="row justify-content-center">
             <!-- Total Sales Card -->
