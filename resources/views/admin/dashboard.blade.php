@@ -16,7 +16,7 @@
         </div>
 
         <!-- Cards Row -->
-        <div class="row">
+        <div class="row justify-content-center">
             <!-- Total Sales Card -->
             <div class="col-xl-2 col-md-4 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
@@ -142,8 +142,71 @@
                     </div>
                 </div>
             </div>
-        </div>
 
+            {{-- Orders Placed --}}
+            <div class="col-xl-2 col-md-4 mb-4">
+                <div class="card border-left-secondary shadow py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                    Order</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlySalesData">---</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-box-open fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                        <div class="mt-2 text-right">
+                            <span class="text-xs text-muted">Total Orders Placed on the Platform</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Total Auctions on the platform --}}
+            <div class="col-xl-2 col-md-4 mb-4">
+                <div class="card border-left-secondary shadow py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Auctions</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlySalesData">---</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-gavel fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                        <div class="mt-2 text-right">
+                            <span class="text-xs text-muted">Total Auctions on Platform</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Total auctions hosted by admin --}}
+            <div class="col-xl-2 col-md-4 mb-4">
+                <div class="card border-left-secondary shadow py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                                    Auctions</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlySalesData">---</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-gavel fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                        <div class="mt-2 text-right">
+                            <span class="text-xs text-muted">Total Auctions Hosted by Admin</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
         <!-- Charts Row -->
         <div class="row">
             <!-- Sales Chart -->
@@ -183,6 +246,41 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Orders Pie Chart -->
+            <div class="col-xl-6 col-lg-6">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-warning">Orders Status Pie Chart</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="ordersPieChart" width="200" height="200"></canvas>
+                        </div>
+                        <div class="mt-4 text-center small">
+                            <span class="mr-2"><i class="fas fa-circle text-warning"></i> Orders</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Auctions Pie Chart -->
+            <div class="col-xl-6 col-lg-6">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-info">Auctions Status Pie Chart</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="auctionsPieChart" width="200" height="200"></canvas>
+                        </div>
+                        <div class="mt-4 text-center small">
+                            <span class="mr-2"><i class="fas fa-circle text-info"></i> Auctions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     @push('scripts')
@@ -203,7 +301,8 @@
                             $('#products').text(response.products.toLocaleString());
                             $('#blogs').text(response.blogs.toLocaleString());
                             const currentMonth = new Date().getMonth();
-                            $('#monthlySalesData').text('Rs ' + response.monthlySales[currentMonth].toLocaleString());
+                            $('#monthlySalesData').text('Rs ' + response.monthlySales[currentMonth]
+                                .toLocaleString());
                             updateCharts(response.monthlyUsers, response.monthlySales);
                         },
                         error: function(xhr, status, error) {
@@ -258,6 +357,52 @@
                     },
                     options: getChartOptions()
                 });
+                // Orders Pie Chart - Static Data
+                const ordersPieCtx = document.getElementById('ordersPieChart').getContext('2d');
+                const ordersPieChart = new Chart(ordersPieCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Pending', 'Processing', 'Completed', 'Cancelled'],
+                        datasets: [{
+                            data: [12, 20, 40, 5], // ✅ STATIC DATA
+                            backgroundColor: ['#f6c23e', '#36b9cc', '#1cc88a', '#e74a3b'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                         maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+
+                // Auctions Pie Chart - Static Data
+                const auctionsPieCtx = document.getElementById('auctionsPieChart').getContext('2d');
+                const auctionsPieChart = new Chart(auctionsPieCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Scheduled', 'Ongoing', 'Completed', 'Cancelled'],
+                        datasets: [{
+                            data: [8, 14, 25, 3], // ✅ STATIC DATA
+                            backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#e74a3b'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                         maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+
 
                 function updateCharts(usersData, salesData) {
                     usersChart.data.datasets[0].data = usersData;
@@ -313,6 +458,35 @@
                 fetchDashboardStats();
 
                 setInterval(fetchDashboardStats, 120000);
+            });
+
+            // Orders
+
+            const ordersChart = document.getElementById('ordersChart').getContext('2d');
+            const ordersPieChart = new Chart(ordersChart, {
+                type: 'pie',
+                data: {
+                    labels: ['Pending', 'Processing', 'Completed'],
+                    datasets: [{
+                        label: 'Order Status',
+                        data: [10, 25, 45],
+                        backgroundColor: [
+                            '#f6c23e',
+                            '#36b9cc',
+                            '#1cc88a',
+                            '#e74a3b'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
             });
         </script>
     @endpush
