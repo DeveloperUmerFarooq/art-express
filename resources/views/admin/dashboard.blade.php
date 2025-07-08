@@ -362,9 +362,9 @@
                 const ordersPieChart = new Chart(ordersPieCtx, {
                     type: 'pie',
                     data: {
-                        labels: ['Pending', 'Processing', 'Completed', 'Cancelled'],
+                        labels: ['Pending', 'In-Progress', 'Completed'],
                         datasets: [{
-                            data: [12, 20, 40, 5], // ✅ STATIC DATA
+                            data: [12, 20, 40],
                             backgroundColor: ['#f6c23e', '#36b9cc', '#1cc88a', '#e74a3b'],
                             borderWidth: 1
                         }]
@@ -385,9 +385,9 @@
                 const auctionsPieChart = new Chart(auctionsPieCtx, {
                     type: 'pie',
                     data: {
-                        labels: ['Scheduled', 'Ongoing', 'Completed', 'Cancelled'],
+                        labels: ['Upcoming', 'Ongoing', 'Ended'],
                         datasets: [{
-                            data: [8, 14, 25, 3], // ✅ STATIC DATA
+                            data: [8, 14, 25],
                             backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#e74a3b'],
                             borderWidth: 1
                         }]
