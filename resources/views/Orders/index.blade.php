@@ -151,7 +151,7 @@
                                                         </td>
                                                         <td class="text-right">{{ number_format($item->price, 0) }} Rs</td>
                                                         <td class="text-center">{{ $item->quantity }}</td>
-                                                        <td class="text-right">250 Rs</td>
+                                                        <td class="text-right">{{number_format($item->total_price-($item->price*$item->quantity))}}</td>
                                                         <td class="text-right font-weight-bold">
                                                             {{ number_format($item->total_price, 0) }} Rs</td>
                                                     </tr>

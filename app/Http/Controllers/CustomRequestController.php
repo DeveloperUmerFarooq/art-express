@@ -97,11 +97,10 @@ class CustomRequestController extends Controller
                     "item_name" => $item["item_name"],
                     "price" => $item["price"],
                     "quantity" => $item["quantity"],
-                    "total_price" => ($item["price"] + $this->delivery) * $item["quantity"],
+                    "total_price" => ($item["price"] * $item["quantity"])+$this->delivery,
                     "img_src" => $imageSrc,
                 ]);
                 $this->delivery = 0;
-                DB::commit();
 
                 $artist = User::find($req->artist_id);
                 $admin = User::role('admin')->first();
@@ -109,10 +108,10 @@ class CustomRequestController extends Controller
                 Mail::to($req->customer_email)->send(new OrderMail($order, $order->customer->name));
                 Mail::to($artist->email)->send(new OrderMail($order, $artist->name));
                 Mail::to($admin->email)->send(new OrderMail($order, $admin->name));
-
-                toastr()->success('Your custom order has been placed.');
-                return redirect()->route('artist.sales');
             }
+            DB::commit();
+            toastr()->success('Your custom order has been placed.');
+            return redirect()->route('artist.sales');
         } catch (\Exception $e) {
             DB::rollBack();
             toastr()->error('Order failed: ' . $e->getMessage());
