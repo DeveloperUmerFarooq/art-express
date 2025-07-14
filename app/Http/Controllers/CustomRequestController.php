@@ -105,9 +105,9 @@ class CustomRequestController extends Controller
                 $artist = User::find($req->artist_id);
                 $admin = User::role('admin')->first();
 
-                // Mail::to($req->customer_email)->send(new OrderMail($order, $order->customer->name));
-                // Mail::to($artist->email)->send(new OrderMail($order, $artist->name));
-                // Mail::to($admin->email)->send(new OrderMail($order, $admin->name));
+                Mail::to($req->customer_email)->send(new OrderMail($order, $order->customer->name));
+                Mail::to($artist->email)->send(new OrderMail($order, $artist->name));
+                Mail::to($admin->email)->send(new OrderMail($order, $admin->name));
             }
             DB::commit();
             toastr()->success('Your custom order has been placed.');
