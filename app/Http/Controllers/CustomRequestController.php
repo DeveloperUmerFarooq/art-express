@@ -91,7 +91,7 @@ class CustomRequestController extends Controller
             foreach ($req->items as $item) {
                 $image = $item["img_src"]->store('order_items', 'public');
                 $imageSrc = asset('storage/' . $image);
-
+                $item["quantity"]<5? $this->packing= 200 : $this->packing= 250;
                 OrderItem::create([
                     "order_id" => $order->id,
                     "item_name" => $item["item_name"],
