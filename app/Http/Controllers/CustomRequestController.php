@@ -14,7 +14,7 @@ use App\Services\EmailValidator;
 
 class CustomRequestController extends Controller
 {
-    protected $emailValidator, $delivery;
+    protected $emailValidator, $delivery, $packing;
     public function __construct(EmailValidator $validate)
     {
         $this->emailValidator = $validate;
@@ -75,7 +75,7 @@ class CustomRequestController extends Controller
         $from = getCoordinates($artistCity);
         $distance = getDistanceInKm($from, $to);
         $this->delivery = deliverCharge($distance);
-
+        $this->packing  = 250;
             $order = Order::create([
                 "payment_id" => null,
                 "type" => "custom",
@@ -97,7 +97,7 @@ class CustomRequestController extends Controller
                     "item_name" => $item["item_name"],
                     "price" => $item["price"],
                     "quantity" => $item["quantity"],
-                    "total_price" => ($item["price"] * $item["quantity"])+$this->delivery,
+                    "total_price" => ($item["price"] * $item["quantity"])+($this->packing*$item["quantity"])+$this->delivery,
                     "img_src" => $imageSrc,
                 ]);
                 $this->delivery = 0;
@@ -105,9 +105,9 @@ class CustomRequestController extends Controller
                 $artist = User::find($req->artist_id);
                 $admin = User::role('admin')->first();
 
-                Mail::to($req->customer_email)->send(new OrderMail($order, $order->customer->name));
-                Mail::to($artist->email)->send(new OrderMail($order, $artist->name));
-                Mail::to($admin->email)->send(new OrderMail($order, $admin->name));
+                // Mail::to($req->customer_email)->send(new OrderMail($order, $order->customer->name));
+                // Mail::to($artist->email)->send(new OrderMail($order, $artist->name));
+                // Mail::to($admin->email)->send(new OrderMail($order, $admin->name));
             }
             DB::commit();
             toastr()->success('Your custom order has been placed.');
