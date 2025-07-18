@@ -8,6 +8,7 @@ use App\Models\Categories;
 use App\Models\SubCategories;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoriesController extends Controller
 {
@@ -27,18 +28,21 @@ class CategoriesController extends Controller
             'subcategories'=>'array',
         ]);
         try{
+            DB::beginTransaction();
             $category=Categories::create([
                 'name'=>$req->name
             ]);
             if($req->count&&$req->count>0){
-                $subcategories=array_map(function($item){
-                    return ['name'=>$item];
-                },$req->subcategories);
-                $category->subCatagories()->createMany($subcategories);
+                foreach($req->subcategories as $item){
+                    $category->subCategories()->create(["name"=>$item]);
+                }
             }
+            DB::commit();
             toastr()->success('New Category created with '.$req->count.' Subcategories');
         }
         catch(Exception $e){
+            DB::rollBack();
+            dd($e);
             toastr()->error('Operation Failed');
         }
         return redirect()->back();

@@ -84,15 +84,6 @@ class CategoriesSeeder extends Seeder
                 ],
             ],
             [
-                'name' => 'Digital Art',
-                'sub_categories' => [
-                    'Digital Painting',
-                    '3D Modeling',
-                    'Vector Art',
-                    'Pixel Art',
-                ],
-            ],
-            [
                 'name' => 'Printmaking',
                 'sub_categories' => [
                     'Lithography',
