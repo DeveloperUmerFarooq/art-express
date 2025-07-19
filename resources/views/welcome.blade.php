@@ -87,29 +87,20 @@
         </div>
         <div class="container-fluid mt-2 mt-md-5" id="art-grid">
             <h1 class="text-center res-heading pt-2 pt-md-3" id="art-grid-title">Explore Masterpieces</h1>
+            @if ($images->count()>0)
             <div class="landing-layout">
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0002.jpg')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0003.jpg')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0004.jpg')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0005.jpg')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0006.jpg')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0007.jpg')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0008.jpg')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0009.jpg')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/landscape1.png')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/landscape2.png')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/landscape1.png')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/landscape2.png')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/IMG-20241222-WA0001.jpg')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/landscape1.png')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/landscape2.png')}}" alt=""></div>
-                <div><img loading="lazy" class="layout-img" src="{{asset('assets/images/landscape2.png')}}" alt=""></div>
-
+                @foreach ($images as $image)
+                <div><img loading="lazy" class="layout-img" src="{{asset($image->image_src)}}" alt=""></div>
+                @endforeach
             </div>
+            @else
+            <div class="card shadow-sm container my-5" style="height: max-content !important">
+            <div class="card-body text-center">
+                <h5 class="card-title">No Products Added</h5>
+                <p class="card-text">It looks like there are no product images avaialable!</p>
+            </div>
+        </div>
+            @endif
         </div>
     </section>
 @endsection

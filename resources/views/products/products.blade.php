@@ -13,7 +13,7 @@
         <h1 class="mt-3 mx-2">{{ $category->name }}</h1>
         <div class="d-flex gap-2 flex-wrap mx-2">
             <h7><a class="ms-1" href="#"
-                    onclick="categoryExplain('{{ $current->name }}','{{ route('category.explain') }}')"
+                    onclick="categoryExplain('{{ $current->name}}','{{$category->name}}','{{ route('category.explain') }}')"
                     data-bs-toggle="modal" data-bs-target="#categoryExplanationModal">Ask AI about current category</a></h7>
             <form class="mt-1 mt-sm-0 ms-auto" method="GET" action="{{ route($role . '.filter', $category->id) }}"
                 id="filter" class="d-flex flex-wrap ms-auto gap-2">
@@ -50,6 +50,10 @@
                 </div>
             </div>
         @endif
+         <!-- Pagination -->
+        <div class="d-flex justify-content-center py-4">
+            {{ $products->links() }}
+        </div>
     </div>
     @include('products.modals.category-explanation-modal')
 @endsection

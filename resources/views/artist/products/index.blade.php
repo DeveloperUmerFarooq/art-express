@@ -6,7 +6,7 @@
     <div class="container-fluid mt-4">
 
         <!-- Page Header -->
-        <div class="d-flex align-items-center justify-content-between mb-4">
+        <div class="d-flex align-items-center justify-content-between">
             <h3 class="fw-bold">
                 <i class="fas fa-box-open me-2"></i>Manage Products
             </h3>
@@ -16,7 +16,7 @@
         </div>
 
         <!-- Product List -->
-        <div class="row gx-4 gy-4">
+        <div class="row gx-4">
             @if (count($products) > 0)
                 @foreach ($products as $product)
                     <div class="col-md-6 col-lg-3">
@@ -25,7 +25,7 @@
                 @endforeach
             @else
                 <!-- No Products Card -->
-                <div class="col-12">
+                <div class="col-12 py-5">
                     <div class="card border-0 shadow-sm text-center py-5">
                         <div class="card-body">
                             <h4 class="text-muted">
@@ -41,7 +41,7 @@
         </div>
 
         <!-- Pagination -->
-        <div class="d-flex justify-content-center mt-4">
+        <div class="d-flex justify-content-center py-4">
             {{ $products->links() }}
         </div>
     </div>

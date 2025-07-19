@@ -12,7 +12,7 @@
                 <!-- Product Image -->
                 <div class="col-lg-6 mb-4">
                     <div class="card h-auto rounded-0">
-                        <img style="border: 10px solid white" src="{{ asset($product->image->image_src) }}" alt="Artwork">
+                        <img style="border: 10px solid white;" src="{{ asset($product->image->image_src) }}" alt="Artwork">
                     </div>
                 </div>
 

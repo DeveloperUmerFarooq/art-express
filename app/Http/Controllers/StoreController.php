@@ -9,36 +9,43 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
-    public function index(){
-        $categories=Categories::with('products')->get();
-        return view('products.store')->with('categories',$categories);
+    public function index()
+    {
+        $categories = Categories::with(['products' => function ($query) {
+            $query->limit(20);
+        }])->get();
+        return view('products.store')->with('categories', $categories);
     }
-    public function product($id){
-        $product= Products::find($id);
-        return view('products.view')->with(['product'=>$product]);
+    public function product($id)
+    {
+        $product = Products::find($id);
+        return view('products.view')->with(['product' => $product]);
     }
-    public function products($id){
-        $category=Categories::with('subCategories.products','products')->find($id);
-        $subCategories=$category->subCategories;
-        $current=$category;
-        $products=$category->products()->latest()->get();
-        return view('products.products')->with(['category'=>$category,'subCategories'=>$subCategories,'products'=>$products,'current'=>$current]);
+    public function products($id)
+    {
+        $category = Categories::with('subCategories.products', 'products')->find($id);
+        $subCategories = $category->subCategories;
+        $current = $category;
+        $products = $category->products()->latest()->paginate(12);
+        return view('products.products')->with(['category' => $category, 'subCategories' => $subCategories, 'products' => $products, 'current' => $current]);
     }
-    public function filtered($id, Request $req){
-        $category=Categories::find($id);
-        $subCategories=$category->subCategories;
-        $current=$category;
-        if($req->subcategory){
-        $sub=SubCategories::find($req->subcategory);
-        $products=$sub->products;
-        $current=$sub;
-        }else{
-            $products=$category->products;
+    public function filtered($id, Request $req)
+    {
+        $category = Categories::find($id);
+        $subCategories = $category->subCategories;
+        $current = $category;
+        if ($req->subcategory) {
+            $sub = SubCategories::find($req->subcategory);
+            $products = $sub->products()->latest()->paginate(12);
+            $current = $sub;
+        } else {
+            $products = $category->products()->latest()->paginate(12);
         }
-        return view('products.products')->with(['category'=>$category,'subCategories'=>$subCategories,'products'=>$products,'subId'=>$sub->id??null,'current'=>$current]);
+        return view('products.products')->with(['category' => $category, 'subCategories' => $subCategories, 'products' => $products, 'subId' => $sub->id ?? null, 'current' => $current]);
     }
-    public function search(Request $req) {
+    public function search(Request $req)
+    {
         $products = Products::where('name', 'LIKE', "%{$req->name}%")->get();
-        return view('products.search')->with(['products'=>$products]);
+        return view('products.search')->with(['products' => $products]);
     }
 }

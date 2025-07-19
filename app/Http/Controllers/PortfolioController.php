@@ -22,7 +22,7 @@ class PortfolioController extends Controller
     public function addImage(Request $req)
     {
         $req->validate([
-            'image' => 'required|mimes:peg,png,jpg,gif|max:2048'
+            'image' => 'required|mimes:jpeg,png,jpg,webp|max:4096'
         ]);
         $user = User::find($req->id);
         if ($req->hasFile('image')) {

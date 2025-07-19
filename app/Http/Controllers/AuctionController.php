@@ -118,7 +118,7 @@ class AuctionController extends Controller
             'items.*.name' => 'required|string|max:255',
             'items.*.description' => 'nullable|string|max:1000',
             'items.*.starting_bid' => 'required|numeric|min:1',
-            'items.*.image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'items.*.image' => 'required|image|mimes:jpeg,png,jpg,webp|max:4096',
         ]);
         if(!auth()->user()->profile->address){
             toastr()->error("Complete Your Profile!");

@@ -1,5 +1,5 @@
 <?php
 return [
-    "base_fee"=>250,
-    "rate_per_km"=>3,
+    "base_fee"=>350,
+    "rate_per_km"=>5,
 ];

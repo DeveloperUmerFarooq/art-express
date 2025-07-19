@@ -50,7 +50,7 @@ class CustomRequestController extends Controller
             'items.*.item_name' => 'required|string|max:255',
             'items.*.quantity' => 'required|integer|min:1',
             'items.*.price' => 'required|numeric|min:0',
-            'items.*.img_src' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'items.*.img_src' => 'required|image|mimes:jpeg,png,jpg,gif|max:4096',
         ], [
             'customer_tel.phone' => 'Please enter a valid Pakistani phone number.',
         ]);

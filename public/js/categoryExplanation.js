@@ -1,13 +1,13 @@
 let cachedExplanation = null;
 
-function categoryExplain(name, url) {
+function categoryExplain(name,category , url) {
     if (cachedExplanation) {
         $("#category-explanantion").html(
             `<p class="fs-6">${cachedExplanation}</p>`
         );
         return;
     }
-    const message = `Give a short and simple definition of ${name} in 2-3 sentences.`;
+    const message = `Give a short and simple definition of ${name} ${category===name?"":category} in 2-3 sentences.`;
     $.ajax({
         type: "get",
         url: `${url}`,

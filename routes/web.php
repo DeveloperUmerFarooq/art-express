@@ -20,10 +20,14 @@ use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UserCrud;
 use App\Models\Comment;
+use App\Models\Images;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome')->name('welcome');
+Route::get('/', function(){
+    $images=Images::whereNotNull('product_id')->latest()->limit(30)->get();
+    return view('welcome',['images'=>$images]);
+})->name('welcome');
 Route::view('/terms','terms')->name('terms');
 Auth::routes();
 Route::redirect('/home','/');

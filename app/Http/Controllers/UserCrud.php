@@ -80,7 +80,7 @@ class UserCrud extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $req->id,
             'password' => 'nullable|min:8',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
         ]);
         try{
             $user=User::find($req->id);

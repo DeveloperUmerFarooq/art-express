@@ -17,7 +17,7 @@
                     <a class="browse"
                         href="{{ route($role . '.products', $category->id) }}">Browse
                         All</a>
-                    <div class="d-flex gap-1">
+                    <div class="d-none d-md-flex gap-1">
                         <div id="prev-{{ $key }}" style="cursor: pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="#131010" stroke-width="2" stroke-linecap="round"
@@ -39,7 +39,7 @@
             <div class="card shadow-sm mt-2 container" style="height: max-content !important">
                 <div class="card-body text-center">
                     <h5 class="card-title">No Products Added</h5>
-                    <p class="card-text">It looks like there are no products avaialable for the current subcategory!</p>
+                    <p class="card-text">It looks like there are no products avaialable for the current category!</p>
                 </div>
             </div>
             @else

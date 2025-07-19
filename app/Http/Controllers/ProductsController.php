@@ -15,7 +15,7 @@ class ProductsController extends Controller
     public function index()
     {
         $categories = Categories::all();
-        $products = auth()->user()->products()->paginate(12);
+        $products = auth()->user()->products()->latest()->paginate(12);
         return view('artist.products.index')->with(['categories' => $categories, 'products' => $products]);
     }
     public function getCategory($id)
@@ -32,7 +32,7 @@ class ProductsController extends Controller
             'price' => 'required',
             'category' => 'required',
             'subcategory' => 'required',
-            'image' => 'required|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'required|mimes:jpeg,png,jpg,gif,webp|max:4096'
 
         ]);
         if ($req->add_blog) {
@@ -95,7 +95,7 @@ class ProductsController extends Controller
             'title' => 'required',
             'description' => 'required',
             'price' => 'required',
-            'image' => 'nullable|mimes:peg,png,jpg,gif|max:2048'
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif,webp|max:4096'
         ]);
         try {
             $product = Products::find($req->id);

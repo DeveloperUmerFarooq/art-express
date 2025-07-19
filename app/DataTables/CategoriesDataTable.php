@@ -36,6 +36,9 @@ class CategoriesDataTable extends DataTable
                 'id'=>$query->id
             ]);
         })
+        ->addColumn('products_count',function($query){
+            return $query->products->count();
+        })
         ->addColumn('created_at',function($query){
             return $query->created_at->format('d/m/Y');
         })
@@ -83,6 +86,7 @@ class CategoriesDataTable extends DataTable
     {
         $columns=[
             Column::make('name'),
+            Column::make('products_count')->addClass('text-center'),
             Column::make('subCategories_count')->addClass('text-center'),
             Column::make('sub_categories')->addClass('text-center'),
             Column::make('created_at'),

@@ -80,7 +80,7 @@ class ProfileController extends Controller
     public function updateAvatar(Request $req)
     {
         $req->validate([
-            'avatar' => 'required|mimes:peg,png,jpg,gif|max:2048'
+            'avatar' => 'required|mimes:peg,png,jpg,gif|max:4096'
         ]);
         $user = User::find($req->id);
         if ($req->hasFile('avatar')) {
