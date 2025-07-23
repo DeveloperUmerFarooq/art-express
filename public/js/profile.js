@@ -29,7 +29,7 @@ $(document).ready(function(){
     $('#cancel').on('click',function(e){
         e.preventDefault()
         $('#edit-details').css('pointer-events','auto')
-        $('#profile input:not(input[type="hidden"]),textarea').each(function(){
+        $('#profile input:not(input[type="hidden"],#country),textarea').each(function(){
             $(this).prop('disabled',!$(this).prop('disabled'));
             $(this).val(this.defaultValue);
         })

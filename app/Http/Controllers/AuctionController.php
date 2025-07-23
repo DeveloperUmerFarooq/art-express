@@ -83,7 +83,7 @@ class AuctionController extends Controller
     {
         $item = AuctionItem::find($id);
         $auction = $item->auction->id;
-        $minBid = $item->current_bid ? $item->current_bid + 100 : $item->starting_bid + 1;
+        $minBid = $item->current_bid ? $item->current_bid + 1000 : $item->starting_bid + 1;
         $req->validate([
             'bid_amount' => 'required|numeric|min:' . $minBid,
         ]);

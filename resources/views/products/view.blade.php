@@ -148,7 +148,7 @@
                             </div>
                             <hr>
                             <h6>Delivery charges are calculated as: </h6>
-                           <small>Different City: 100 + (distanceInKm*5)</small>
+                           <small>Different City: 350 + (distanceInKm*5)</small>
                            <small>Same City: 350 Rs</small>
                            <div>
                             <small><b>Note:</b> The above formula will give you approximate value of charges</small>
