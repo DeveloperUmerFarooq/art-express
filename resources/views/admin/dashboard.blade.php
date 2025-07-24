@@ -3,7 +3,7 @@
     Dashboard-Admin | Art-Express
 @endsection
 @section('page')
-    <div class="container-fluid py-3">
+    <div class="container-fluid py-3 px-4">
         <!-- Dashboard Header -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-chart-line"></i> Dashboard Overview</h1>
