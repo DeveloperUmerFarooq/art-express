@@ -12,7 +12,7 @@
     @foreach ($categories as $key => $category)
         <div class="caontainer-fluid px-md-5 px-2 my-3">
             <div class="d-flex flex-wrap align-items-center justify-content-between">
-                <h1 class="product-title" style="color: var(--secondary);">{{ $category->name }}</h1>
+                <h1 class="product-title fs-1" style="color: var(--secondary);">{{ $category->name }}</h1>
                 <div class="ms-auto d-flex gap-3 align-items-center">
                     <a class="browse"
                         href="{{ route($role . '.products', $category->id) }}">Browse
@@ -43,7 +43,7 @@
                 </div>
             </div>
             @else
-            <div class="owl-carousel slider-{{ $key }}">
+            <div class="owl-carousel h-auto slider-{{ $key }}">
                 @foreach ($category->products()->latest()->take(10)->get() as $product)
                     <div class="slider-card">
                         <center>

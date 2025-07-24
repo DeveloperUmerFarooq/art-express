@@ -337,7 +337,7 @@
                         dataType: 'json',
                         success: function(response) {
 
-                            $('#totalSales').text('Rs ' + response.totalSales.toLocaleString());
+                            $('#totalSales').text('Rs ' + Math.floor(response.totalSales).toLocaleString());
                             $('#artists').text(response.artists.toLocaleString());
                             $('#users').text(response.users.toLocaleString());
                             $('#products').text(response.products.toLocaleString());
@@ -345,7 +345,7 @@
                             $('#activeData').text(response.activeUsers)
                             $('#suspendData').text(response.suspendedUsers)
                             const currentMonth = new Date().getMonth();
-                            $('#monthlySalesData').text('Rs ' + response.monthlySales[currentMonth]
+                            $('#monthlySalesData').text('Rs ' + Math.floor(response.monthlySales[currentMonth])
                                 .toLocaleString());
                             $('#hostedData').text(response.hostedAuctions.toLocaleString())
                             $('#auctionsData').text(response.auctions.toLocaleString())
