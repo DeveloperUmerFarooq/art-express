@@ -34,11 +34,14 @@
                         </div>
                     </div>
 
+                    @if ($role!=="admin")
                     <abbr title="Start a chatt">
                         <a href="/messenger/{{$artist->id}}" target="_blank">
                             <i class="fa-solid fa-message fs-2"></i>
                         </a>
                     </abbr>
+                    @endif
+
                 </div>
             </a>
         @endforeach
