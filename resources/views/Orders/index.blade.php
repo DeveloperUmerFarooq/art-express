@@ -176,11 +176,11 @@
                                             @else
                                                 <div class="status-form">
                                                     <form action="{{ route('admin.order.status', $order->id) }}"
-                                                        method="POST" id="status-form">
+                                                        method="POST" id="status-form-{{$order->id}}">
                                                         @csrf
                                                         <label class="d-flex gap-2 align-items-center">Status:
                                                             <select class="form-select" name="status" id="status-input"
-                                                                onchange="document.getElementById('status-form').submit()">
+                                                                onchange="document.getElementById('status-form-{{$order->id}}').submit()">
                                                                 <option value="pending"
                                                                     {{ $order->status === 'pending' ? 'selected' : '' }}>
                                                                     pending</option>
