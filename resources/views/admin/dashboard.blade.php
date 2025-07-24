@@ -23,7 +23,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-primary mb-1">
                                     Total Sales</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalSales">---</div>
                             </div>
@@ -44,7 +44,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-success  mb-1">
                                     Artists</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="artists">---</div>
                             </div>
@@ -65,7 +65,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-info  mb-1">
                                     Users</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="users">---</div>
                             </div>
@@ -86,7 +86,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-warning  mb-1">
                                     Artworks</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="products">---</div>
                             </div>
@@ -107,7 +107,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-danger  mb-1">
                                     Blog Posts</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="blogs">---</div>
                             </div>
@@ -128,7 +128,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-secondary  mb-1">
                                     Revenue</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthlySalesData">---</div>
                             </div>
@@ -149,7 +149,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-info  mb-1">
                                     Order</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="ordersData">---</div>
                             </div>
@@ -170,7 +170,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-primary  mb-1">
                                     Auctions</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="auctionsData">---</div>
                             </div>
@@ -191,7 +191,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-secondary  mb-1">
                                     Auctions</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="hostedData">---</div>
                             </div>
@@ -212,7 +212,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-success  mb-1">
                                     Active</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="activeData">---</div>
                             </div>
@@ -233,7 +233,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                <div class="text-xs font-weight-bold text-danger  mb-1">
                                     Suspended</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="suspendData">---</div>
                             </div>

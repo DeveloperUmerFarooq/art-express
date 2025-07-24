@@ -34,45 +34,45 @@
                             <div class="slider-card pb-md-2 d-flex align-items-center justify-content-center">
                                 <div class="card features-card" >
                                 <img loading="lazy" src="{{asset('assets/images/images.jpeg')}}" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                  <h5 class="card-title">Discover Art Pieces</h5>
-                                  <p class="card-text">Explore an exclusive collection of art pieces from talented artists around the globe. Find the perfect artwork to match your style and personality.</p>
+                                <div class="card-body d-flex flex-column">
+                                  <h5 class="card-title flex-1">Discover Art Pieces</h5>
+                                  <p class="card-text flex-1">Explore an exclusive collection of art pieces from talented artists around the globe. Find the perfect artwork to match your style and personality.</p>
                                 </div>
                               </div>
                             </div>
                             <div class="slider-card text-white">
                                 <div class="card features-card" >
                                     <img loading="lazy" src="{{asset('assets/images/Artist Showcase.webp')}}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                      <h5 class="card-title">Artist Showcase</h5>
-                                      <p class="card-text">Celebrate the creativity of emerging and renowned artists. Browse through curated profiles and learn the stories behind their masterpieces.</p>
+                                    <div class="card-body d-flex flex-column">
+                                      <h5 class="card-title flex-1">Artist Showcase</h5>
+                                      <p class="card-text flex-1">Celebrate the creativity of emerging and renowned artists. Browse through curated profiles and learn the stories behind their masterpieces.</p>
                                     </div>
                                   </div>
                             </div>
                             <div class="slider-card text-white">
                                 <div class="card features-card" >
                                     <img loading="lazy" src="{{asset('assets/images/shutterstock_451991974.jpg')}}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                      <h5 class="card-title">Blog for Art Enthusiasts</h5>
-                                      <p class="card-text">Dive into engaging blogs about art trends, techniques, and history. Stay inspired and connected with the art community.</p>
+                                    <div class="card-body d-flex flex-column">
+                                      <h5 class="card-title flex-1">Product Blogs</h5>
+                                      <p class="card-text flex-1">Dive into engaging blogs about art trends, techniques, and history. Stay inspired and connected with the art community.</p>
                                     </div>
                                   </div>
                             </div>
                             <div class="slider-card text-white">
                                 <div class="card features-card" >
                                     <img loading="lazy" src="{{asset('assets/images/chatGPT.jpg.webp')}}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                      <h5 class="card-title">ChatGPT- Assistance</h5>
-                                      <p class="card-text">Need help choosing art? Use our AI-powered chat tool to learn more about art categories make your selection easier.</p>
+                                    <div class="card-body d-flex flex-column">
+                                      <h5 class="card-title flex-1">ChatGPT- Assistance</h5>
+                                      <p class="card-text flex-1">Need help choosing art? Use our AI-powered chat tool to learn more about art categories make your selection easier.</p>
                                     </div>
                                   </div>
                             </div>
                             <div class="slider-card">
                                 <div class="card features-card">
                                     <img loading="lazy" src="{{asset('assets/images/online-shopping-2.jpg')}}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                      <h5 class="card-title">Secure Online Shopping</h5>
-                                      <p class="card-text">Shop for art worry-free with our secure payment system. Enjoy a seamless checkout experience and reliable delivery services.</p>
+                                    <div class="card-body d-flex flex-column">
+                                      <h5 class="card-title flex-1">Secure Shopping</h5>
+                                      <p class="card-text flex-1">Shop for art worry-free with our secure payment system. Enjoy a seamless checkout experience and reliable delivery services.</p>
                                     </div>
                                   </div>
                             </div>
@@ -95,9 +95,9 @@
             </div>
             @else
             <div class="card shadow-sm container my-5" style="height: max-content !important">
-            <div class="card-body text-center">
-                <h5 class="card-title">No Products Added</h5>
-                <p class="card-text">It looks like there are no product images avaialable!</p>
+            <div class="card-body d-flex flex-column text-center">
+                <h5 class="card-title flex-1">No Products Added</h5>
+                <p class="card-text flex-1">It looks like there are no product images avaialable!</p>
             </div>
         </div>
             @endif

@@ -16,7 +16,7 @@
         </div>
 
         <!-- Product List -->
-        <div class="row gx-4">
+        <div class="row gx-4 gy-4 mt-2">
             @if (count($products) > 0)
                 @foreach ($products as $product)
                     <div class="col-md-6 col-lg-3">

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Yrsa:ital,wght@0,300..700;1,300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cinzel:wght@400..900&family=Great+Vibes&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&display=swap');
 :root{
     --primary:#F4EBD9;
     --primary-light:#f8f9fa;
@@ -35,11 +35,15 @@
     animation-range-start: entry 5%;
     animation-range-end: entry 100%;
 }
+h1,h2,h3,h4,h5,h6,.navbar-brand{
+    font-family:"Cinzel" !important;
+    font-weight: 600;
+}
 body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Roboto";
+    font-family: "Lato" !important;
     font-weight: 400;
     font-style: normal;
     background-color: var(--primary);
