@@ -46,7 +46,7 @@
             @if (($role!=="user"&&$query->status==="upcoming")&&$startDate->toDateString() === now()->toDateString())
             <li>
                 <a class="dropdown-item" href="{{route($role.'.auction.start',$query->id)}}">
-                    <i class="fas fa-gavel me-2"></i> Start Auction
+                    <i class="fas fa-gavel me-2"></i> Start
                 </a>
             </li>
             @endif

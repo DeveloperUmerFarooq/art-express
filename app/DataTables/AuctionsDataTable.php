@@ -85,8 +85,8 @@ class AuctionsDataTable extends DataTable
             Column::make('start_date'),
             Column::make('start_time'),
             Column::make('end_time'),
+            Column::make('actions'),
             Column::make('status'),
-            Column::make('actions')
         ];
     }
 
