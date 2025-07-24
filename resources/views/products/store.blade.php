@@ -45,7 +45,7 @@
             @else
             <div class="owl-carousel slider-{{ $key }}">
                 @foreach ($category->products()->latest()->take(10)->get() as $product)
-                    <div class="slider-card mt-0">
+                    <div class="slider-card my-3">
                         <center>
                             <x-product-card :product="$product" />
                         </center>

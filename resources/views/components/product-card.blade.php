@@ -1,4 +1,4 @@
-<div class="card mt-3 product-card position-relative shadow rounded-2 border-0 overflow-hidden">
+<div class="card product-card position-relative shadow rounded-2 border-0 overflow-hidden">
     <!-- Image Section -->
     <div class="ratio ratio-4x3 bg-light rounded-top overflow-hidden">
         <img loading="lazy" src="{{ asset($product->image->image_src) }}"
