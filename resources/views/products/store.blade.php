@@ -10,7 +10,7 @@
         </form>
     </div>
     @foreach ($categories as $key => $category)
-        <div class="caontainer-fluid px-md-5 px-2 my-3">
+        <div class="caontainer-fluid px-md-5 px-2">
             <div class="d-flex flex-wrap align-items-center justify-content-between">
                 <h1 class="product-title fs-1" style="color: var(--secondary);">{{ $category->name }}</h1>
                 <div class="ms-auto d-flex gap-3 align-items-center">
@@ -43,9 +43,9 @@
                 </div>
             </div>
             @else
-            <div class="owl-carousel h-auto slider-{{ $key }}">
+            <div class="owl-carousel slider-{{ $key }}">
                 @foreach ($category->products()->latest()->take(10)->get() as $product)
-                    <div class="slider-card">
+                    <div class="slider-card mt-0">
                         <center>
                             <x-product-card :product="$product" />
                         </center>

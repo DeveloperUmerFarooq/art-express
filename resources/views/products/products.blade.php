@@ -33,10 +33,10 @@
         </div>
     </div>
 
-    <div class="row mt-4 mx-2 align-items-center justify-content-center">
+    <div class="row mt-2 mx-2 gy-2 align-items-center justify-content-center">
         @if (count($products) > 0)
             @foreach ($products as $product)
-                <div class="col-md-6 col-lg-3 mb-4">
+                <div class="col-md-6 col-lg-3">
                     <center>
                         <x-product-card :product="$product" />
                     </center>
