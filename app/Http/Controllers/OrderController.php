@@ -24,7 +24,8 @@ class OrderController extends Controller
     public function adminOrder()
     {
         $orders = Order::with(['items', 'customer', 'artist'])
-            ->latest()
+            ->orderByRaw("FIELD(status, 'pending','in-progress','completed')")
+            ->orderByDesc('created_at')
             ->paginate(10);
 
         return view('Orders.index', compact('orders'));
@@ -33,7 +34,8 @@ class OrderController extends Controller
     {
         $orders = Order::with(['items', 'customer', 'artist'])
             ->where('customer_id', auth()->id())
-            ->latest()
+            ->orderByRaw("FIELD(status, 'pending','in-progress','completed')")
+            ->orderByDesc('created_at')
             ->paginate(10);
 
         return view('Orders.index', compact('orders'));
@@ -43,7 +45,8 @@ class OrderController extends Controller
     {
         $orders = Order::with(['items', 'customer', 'artist'])
             ->where('artist_id', auth()->id())
-            ->latest()
+            ->orderByRaw("FIELD(status, 'pending', 'in-progress','completed')")
+            ->orderByDesc('created_at')
             ->paginate(10);
         return view('Orders.index', compact('orders'));
     }
