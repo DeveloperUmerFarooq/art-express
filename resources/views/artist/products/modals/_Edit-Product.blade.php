@@ -27,7 +27,7 @@
                     <!-- Image Input -->
                     <div class="mb-3">
                         <label for="image" class="form-label fw-semibold">Change Image</label>
-                        <input type="file" class="form-control" id="image" name="image" onchange="preview(event)">
+                        <input type="file" data-target="#productImage" class="form-control" id="image" name="image" onchange="preview(event)">
                     </div>
 
                     <!-- Product Title -->

@@ -60,10 +60,12 @@ function addPost(id){
 
 function preview(event){
     const file=event.target.files[0];
+    const target = event.target.dataset.target;
+    console.log(target);
     if(file){
         const reader=new FileReader();
         reader.onload=function(e){
-            $('#productImage').attr('src',e.target.result);
+            $(target).attr('src',e.target.result);
         }
         reader.readAsDataURL(file);
     }

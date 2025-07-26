@@ -11,6 +11,12 @@
                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body px-4 py-3">
+                    <!-- Product Image Preview -->
+                    <div class="mb-4 text-center">
+                        <div class="shadow-sm border rounded-3 p-2 d-inline-block">
+                            <img loading="lazy" src="" id="product-preview" width="200" class="img-fluid rounded" alt="Product Image">
+                        </div>
+                    </div>
                     <!-- Product Title -->
                     <div class="mb-3">
                         <label for="title" class="form-label fw-semibold">Product Title</label>
@@ -41,7 +47,7 @@
                     <!-- Image Input -->
                     <div class="mb-3">
                         <label for="image" class="form-label fw-semibold">Product Image</label>
-                        <input type="file" class="form-control" id="price" name="image" required>
+                        <input type="file" class="form-control" data-target="#product-preview"  id="price" name="image" required onchange="preview(event)">
                         @error('image')
                             <p class="ms-1 text-danger small">{{$message}}</p>
                         @enderror
@@ -56,7 +62,7 @@
                     <!-- Blog Content -->
                     <div class="mb-3 d-none" id="blogContent">
                         <label for="content" class="form-label fw-semibold">Blog Content</label>
-                        <textarea class="form-control" id="content" name="content" rows="3">{{old('content')}}</textarea>
+                        <textarea class="form-control" id="content" name="content" rows="6">{{old('content')}}</textarea>
                         @error('content')
                             <p class="ms-1 text-danger small">{{$message}}</p>
                         @enderror
