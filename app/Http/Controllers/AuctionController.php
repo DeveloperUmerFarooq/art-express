@@ -66,7 +66,9 @@ class AuctionController extends Controller
                 return redirect()->back();
             }
             foreach ($items as $item) {
-                Mail::to($item->winner->email)->send(new WinnerPaymentMail($item, $auction));
+                if($item->winner){
+                    Mail::to($item->winner->email)->send(new WinnerPaymentMail($item, $auction));
+                }
             }
             $auction->update([
                 "status" => "ended"
