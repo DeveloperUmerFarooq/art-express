@@ -1,6 +1,7 @@
 @php
     use Carbon\Carbon;
     $startDate = Carbon::parse($query->start_date);
+    $auctionStart = Carbon::parse($query->start_date . ' ' . $query->start_time);
 @endphp
 
 <td  style="position: relative;">
@@ -34,7 +35,7 @@
                </a>
            </li>
             @endif
-            @if ($query->status==="upcoming")
+            @if ($query->status==="upcoming" && Carbon::now()->lt($auctionStart->copy()->subHours(2)))
             <li>
                 <a class="dropdown-item" href="{{route('auction.refund',$query->id)}}">
                     <i class="fas fa-undo-alt me-2"></i> Claim Refund

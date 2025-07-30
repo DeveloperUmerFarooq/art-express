@@ -21,7 +21,7 @@
                 </div>
             </div>
         @else
-            <div class="card auctions-card shadow-sm border-0">
+            <div class="card auctions-card shadow-sm border-0 my-3">
                 <div class="card-header bg-success text-white d-flex align-items-center justify-content-between">
                     <h5 class="mb-0">
                         <i class="fas fa-gavel me-2"></i>Auctions

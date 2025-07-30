@@ -174,7 +174,7 @@ class AuctionController extends Controller
                 toastr()->info("This Auction Has Been Ended!");
                 return redirect()->back();
             }else{
-                $this->items($id);
+                return view('auction.items',["auction"=>$auction,"items"=>$auction->items]);
             }
     }
 
