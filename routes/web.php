@@ -29,7 +29,7 @@ Route::get('/', function(){
     return view('welcome',['images'=>$images]);
 })->name('welcome');
 Route::view('/terms','terms')->name('terms');
-Auth::routes();
+Auth::routes(['verify'=>true]);
 Route::redirect('/home','/');
 Route::get('/login', function(){
     return redirect('/');
@@ -37,7 +37,7 @@ Route::get('/login', function(){
 Route::get('/register',function(){
     return redirect('/');
 })->name('register');
-Route::middleware(['auth','suspend'])->group(function(){
+Route::middleware(['auth','suspend','verified'])->group(function(){
 // Route::view('/page','artist.portfolio.portfolio');
 Route::prefix('/admin')->name('admin.')->middleware(['role:admin'])->group(function () {
     Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
