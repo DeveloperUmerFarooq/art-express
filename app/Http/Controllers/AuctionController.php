@@ -282,7 +282,7 @@ class AuctionController extends Controller
             $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
             $refund = $stripe->refunds->create([
                 'charge' => $reg->payment_id,
-                'amount' => 1900 * 100,
+                'amount' => 1500 * 100,
             ]);
             if ($refund->status === 'succeeded') {
                 $reg->delete();
