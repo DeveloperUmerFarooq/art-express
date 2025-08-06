@@ -15,8 +15,8 @@
           <div>
             <label for="name" class="form-label fw-semibold">Name:
             </label>
-            <input type="text" name="name" class="form-control shadow-sm" placeholder="Enter your name"
-              value="{{ old('name') }}" required autocomplete="email" autofocus>
+            <input type="text" name="name" class="form-control shadow-sm validate" placeholder="Enter your name"
+              value="{{ old('name') }}" required min="3" max="30" autocomplete="email" autofocus>
             @error('name')
             <p class="text-danger small mt-1">{{ $message }}</p>
             @enderror
@@ -25,7 +25,7 @@
           <div>
             <label for="email" class="form-label fw-semibold">Email:
             </label>
-            <input type="email" name="reg_email" class="form-control shadow-sm" placeholder="Enter your email"
+            <input type="email" name="reg_email" class="form-control shadow-sm validate" placeholder="Enter your email"
               value="{{ old('reg_email') }}" required autocomplete="email" autofocus>
             @error('reg_email')
             <p class="text-danger small mt-1">{{ $message }}</p>
@@ -36,7 +36,7 @@
             <label for="Password" class="form-label fw-semibold">Password:
             </label>
             <input type="password" minlength="8" name="password" id="password-field"
-              class="form-control shadow-sm" placeholder="Enter password" value="{{ old('password') }}" required
+              class="form-control shadow-sm validate" placeholder="Enter password" value="{{ old('password') }}" required
               autocomplete="current-password" autofocus>
             @error('password')
             <p class="text-danger small mt-1">{{ $message }}</p>
@@ -47,7 +47,7 @@
             <label for="Confirm-Password" class="form-label fw-semibold">Confirm Password:
             </label>
             <input type="password" id="confirm-password-field" minlength="8" name="password_confirmation"
-              class="form-control shadow-sm" placeholder="Confirm password"
+              class="form-control shadow-sm validate" placeholder="Confirm password"
               value="{{ old('password_confirmation') }}" required autocomplete="current-password" autofocus>
             @error('password')
             <p class="text-danger small mt-1">{{ $message }}</p>
