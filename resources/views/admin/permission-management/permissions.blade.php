@@ -3,7 +3,7 @@
     Permissions Management | Art-Express
 @endsection
 @section('page')
-<div class="container mt-5">
+<div class="container my-5">
     <div class="card shadow-sm border-0">
         <div class="card-header bg-success text-white d-flex align-items-center justify-content-between">
             <h5 class="mb-0">
