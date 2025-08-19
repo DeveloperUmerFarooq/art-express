@@ -60,7 +60,6 @@
 ### **Frontend**
 - **Blade Templates** - Server-side rendering
 - **Bootstrap 5** - UI framework
-- **Tailwind CSS** - Utility-first CSS
 - **Vite** - Build tool and dev server
 
 ### **Key Packages**
