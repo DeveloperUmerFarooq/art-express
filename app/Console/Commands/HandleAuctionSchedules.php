@@ -22,7 +22,8 @@ class HandleAuctionSchedules extends Command
         $auctionsToStart = Auction::where('status', 'upcoming')->get();
         foreach ($auctionsToStart as $auction) {
             $auctionStart = Carbon::parse($auction->start_date . ' ' . $auction->start_time)->addMinutes(5);
-            if ($now->greaterThanOrEqualTo($auctionStart)) {
+            $auctionEnd = Carbon::parse($auction->start_date . ' ' . $auction->end_time);
+            if ($now->greaterThanOrEqualTo($auctionStart) && $now->lessThan($auctionEnd)) {
                 $auction->update(['status' => 'ongoing']);
                 foreach ($auction->registeredUsers as $user) {
                     Mail::to($user->email)->send(new AuctionStart($auction, $user));
