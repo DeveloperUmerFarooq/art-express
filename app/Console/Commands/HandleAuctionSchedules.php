@@ -51,5 +51,5 @@ class HandleAuctionSchedules extends Command
                 }
             }
         }
-}
+    }
 }
