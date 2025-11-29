@@ -28,7 +28,7 @@
             </li>
             @endif
             @else
-            @if ($query->status==="ongoing")
+            @if ($query->status==="ongoing" && $query->host_id!==auth()->id())
             <li>
                <a class="dropdown-item" href="{{route('auction.participate',$query->id)}}">
                    <i class="fas fa-running me-2"></i> Participate
