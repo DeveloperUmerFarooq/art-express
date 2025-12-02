@@ -70,11 +70,9 @@ class CheckoutController extends Controller
             $item->status="Sold";
             $item->save();
             DB::commit();
-            $artist = User::find($req->artist_id);
             $admin = User::role('admin')->first();
-
-            Mail::to($req->customer_email)->send(new OrderMail($order,$order->customer->name));
-            Mail::to($artist->email)->send(new OrderMail($order,$artist->name));
+            Mail::to($winner->email)->send(new OrderMail($order,$order->customer->name));
+            Mail::to($host->email)->send(new OrderMail($order,$host->name));
             Mail::to($admin->email)->send(new OrderMail($order,$admin->name));
             toastr()->success("Order Has Been Placed!");
         }catch(\Exception $error){
