@@ -31,8 +31,8 @@ class HandleAuctionSchedules extends Command
                     }
                     $auction->update(['status' => 'ended']);
                     $this->info("Ended auction ID: {$auction->id}");
+                    broadcast(new AuctionEndEvent($auction->id));
                 }
-                broadcast(new AuctionEndEvent($auction->id));
             }
         }
 

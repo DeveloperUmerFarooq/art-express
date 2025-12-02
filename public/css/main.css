@@ -324,6 +324,7 @@ th,td{
     margin-top: .3rem;
     break-inside: avoid;
     transition: all 0.7s ease-in;
+    cursor: pointer !important;
 }
 
 .portfolio a{
