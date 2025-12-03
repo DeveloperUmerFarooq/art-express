@@ -144,8 +144,10 @@
                                                                 <div>
                                                                     <p class="mb-0 font-weight-bold">{{ $item->item_name }}
                                                                     </p>
+                                                                    @if ($item->product_id)
                                                                     <small class="text-muted">SKU:
                                                                         {{ $item->product_id }}</small>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </td>

@@ -133,7 +133,7 @@ class ProfileController extends Controller
             'name' => $req->name ?? $user->name,
             'email' => $req->email ?? $user->email,
         ]);
-        $user->profile()->update([
+        $user->profile->update([
             'bio' => $req->bio ?? $profile->bio,
             'cnic' => $req->cnic ?? $profile->cnic,
             'city' => $city ?? $profile->city,
